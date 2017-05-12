@@ -36,13 +36,24 @@ int main() {
 
 	// Testing Squares
 	cout << "Squares" << endl;
+
 	Square square1(&rook);
 	cout << (int) square1.getPiece()->getColor() << endl;
 
 	Square square2(&knight);
 	cout << (int) square2.getPiece()->getColor() << endl;
 
+	Square square3;
+	if (square3.getPiece()) {
+		cout << (int)square2.getPiece()->getColor() << endl;
+	}
+	else {
+		cout << "No piece" << endl;
+	}
+	cout << endl;
 
+	// letting user close the application
+	cout << "Type an int and press enter to finish" << endl;
 	int input;
 	cin >> input;
 }
