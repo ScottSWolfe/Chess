@@ -7,5 +7,5 @@ private:
 	Color color;
 public:
 	Piece(Color color);
-	Color getColor();
+	virtual Color getColor();
 };
