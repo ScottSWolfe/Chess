@@ -6,29 +6,43 @@
 #include "King.h"
 #include "Queen.h"
 #include "Pawn.h"
+#include "Square.h"
 using namespace std;
 
 int main() {
 	cout << "Hello World of Chess!" << endl;
+	cout << endl;
 
+	// Testing Pieces
+	cout << "Pieces" << endl;
 	Rook rook(Color::White);
 	cout << (int) rook.getColor() << endl;
 
 	Knight knight(Color::Black);
-	cout << (int)knight.getColor() << endl;
+	cout << (int) knight.getColor() << endl;
 
 	Bishop bishop(Color::White);
-	cout << (int)bishop.getColor() << endl;
+	cout << (int) bishop.getColor() << endl;
 
 	King king(Color::Black);
-	cout << (int)king.getColor() << endl;
+	cout << (int) king.getColor() << endl;
 
 	Queen queen(Color::White);
-	cout << (int)queen.getColor() << endl;
+	cout << (int) queen.getColor() << endl;
 
 	Pawn pawn(Color::Black);
-	cout << (int)pawn.getColor() << endl;
-	
+	cout << (int) pawn.getColor() << endl;
+	cout << endl;
+
+	// Testing Squares
+	cout << "Squares" << endl;
+	Square square1(&rook);
+	cout << (int) square1.getPiece()->getColor() << endl;
+
+	Square square2(&knight);
+	cout << (int) square2.getPiece()->getColor() << endl;
+
+
 	int input;
 	cin >> input;
 }
