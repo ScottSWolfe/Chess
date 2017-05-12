@@ -1,5 +1,9 @@
 #include <iostream>
+#include "Piece.h"
+using namespace std;
 
-void main() {
-	std::cout << "Hello World of Chess!";
+int main() {
+	cout << "Hello World of Chess!" << endl;
+	Piece piece(Color::Black);
+	cout << (int) piece.getColor() << endl;
 }
