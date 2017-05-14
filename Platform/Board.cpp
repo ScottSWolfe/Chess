@@ -9,5 +9,13 @@ Board::Board(const int new_dimension) {
 }
 
 Square *Board::getSquare(const int x, const int y) {
-	return &squares[y * dimension + x];
+	return &squares[convertCoordinatesToIndex(x, y, dimension)];
+}
+
+void Board::addPieceToSquare(const int x, const int y, Piece *piece) {
+	squares[convertCoordinatesToIndex(x, y, dimension)].setPiece(piece);
+}
+
+inline int Board::convertCoordinatesToIndex(const int x, const int y, const int dimension) {
+	return y * dimension + x;
 }

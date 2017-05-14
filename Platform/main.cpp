@@ -57,6 +57,8 @@ int main() {
 	cout << "Board" << endl;
 	int board_dimension(3);
 	Board board(board_dimension);
+	Rook rook2(Color::White);
+	board.addPieceToSquare(0, 2, &rook2);
 	for (int i = 0; i < board_dimension; ++i) {
 		for (int j = 0; j < board_dimension; ++j) {
 			Square *current_square = board.getSquare(i, j);

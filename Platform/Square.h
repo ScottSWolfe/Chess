@@ -9,4 +9,5 @@ public:
 	Square();
 	Square(Piece *piece);
 	Piece *getPiece();
+	void Square::setPiece(Piece *new_piece);
 };
