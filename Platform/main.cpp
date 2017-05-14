@@ -7,6 +7,7 @@
 #include "Queen.h"
 #include "Pawn.h"
 #include "Square.h"
+#include "Board.h"
 using namespace std;
 
 int main() {
@@ -49,6 +50,24 @@ int main() {
 	}
 	else {
 		cout << "No piece" << endl;
+	}
+	cout << endl;
+
+	// Testing Board
+	cout << "Board" << endl;
+	int board_dimension(3);
+	Board board(board_dimension);
+	for (int i = 0; i < board_dimension; ++i) {
+		for (int j = 0; j < board_dimension; ++j) {
+			Square *current_square = board.getSquare(i, j);
+			if (current_square->getPiece()) {
+				cout << 1;
+			}
+			else {
+				cout << 0;
+			}
+		}
+		cout << endl;
 	}
 	cout << endl;
 
