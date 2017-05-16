@@ -31,7 +31,7 @@ void Board::printToConsole() {
 	for (int row = dimension - 1; row >= 0; --row) {
 		cout << "|";
 		for (int col = 0; col < dimension; ++col) {
-			getSquare(row, col)->printToConsole();
+			getSquare(col, row)->printToConsole();
 			cout << "|";
 		}
 		cout << endl;

@@ -57,8 +57,14 @@ int main() {
 	cout << "Board" << endl;
 	int board_dimension(8);
 	Board board(board_dimension);
-	Rook rook2(Color::White);
-	board.addPieceToSquare(0, 2, &rook2);
+
+	board.addPieceToSquare(0, 0, &rook);
+	board.addPieceToSquare(1, 7, &knight);
+	board.addPieceToSquare(3, 3, &bishop);
+	board.addPieceToSquare(3, 0, &queen);
+	board.addPieceToSquare(4, 0, &king);
+	board.addPieceToSquare(0, 1, &pawn);
+
 	board.printToConsole();
 	cout << endl;
 
