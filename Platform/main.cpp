@@ -55,22 +55,11 @@ int main() {
 
 	// Testing Board
 	cout << "Board" << endl;
-	int board_dimension(3);
+	int board_dimension(8);
 	Board board(board_dimension);
 	Rook rook2(Color::White);
 	board.addPieceToSquare(0, 2, &rook2);
-	for (int i = 0; i < board_dimension; ++i) {
-		for (int j = 0; j < board_dimension; ++j) {
-			Square *current_square = board.getSquare(i, j);
-			if (current_square->getPiece()) {
-				cout << 1;
-			}
-			else {
-				cout << 0;
-			}
-		}
-		cout << endl;
-	}
+	board.printToConsole();
 	cout << endl;
 
 	// letting user close the application

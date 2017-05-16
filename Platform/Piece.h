@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 enum class Color { White, Black };
 
@@ -8,4 +9,5 @@ private:
 public:
 	Piece(Color color);
 	virtual Color getColor();
+	virtual std::string getSymbol() = 0;
 };

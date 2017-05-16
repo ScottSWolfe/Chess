@@ -1,4 +1,8 @@
+#include "Piece.h"
 #include "Square.h"
+#include <iostream>
+#include <string>
+using namespace std;
 
 Square::Square() : piece(nullptr) {}
 
@@ -10,4 +14,17 @@ Piece *Square::getPiece() {
 
 void Square::setPiece(Piece *new_piece) {
 	piece = new_piece;
+}
+
+void Square::printToConsole() {
+	string symbol;
+	if (piece == nullptr) {
+		symbol = " ";
+	}
+	else {
+		symbol = piece->getSymbol();
+	}
+	cout << " ";
+	cout << symbol;
+	cout << " ";
 }
