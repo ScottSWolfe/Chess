@@ -8,6 +8,7 @@
 #include "Pawn.h"
 #include "Square.h"
 #include "Board.h"
+#include "ConsoleBoardPresenter.h"
 using namespace std;
 
 int main() {
@@ -38,13 +39,13 @@ int main() {
 	// Testing Squares
 	cout << "Squares" << endl;
 
-	Square square1(&rook);
+	Square square1(SquareColor::DARK, &rook);
 	cout << (int) square1.getPiece()->getColor() << endl;
 
-	Square square2(&knight);
+	Square square2(SquareColor::LIGHT, &knight);
 	cout << (int) square2.getPiece()->getColor() << endl;
 
-	Square square3;
+	Square square3(SquareColor::DARK);
 	if (square3.getPiece()) {
 		cout << (int)square2.getPiece()->getColor() << endl;
 	}
@@ -65,11 +66,11 @@ int main() {
 	board.addPieceToSquare(4, 0, &king);
 	board.addPieceToSquare(0, 1, &pawn);
 
-	board.printToConsole();
+	ConsoleBoardPresenter presenter;
+	presenter.displayBoard(board);
 	cout << endl;
+	
+	system("pause");
 
-	// letting user close the application
-	cout << "Type an int and press enter to finish" << endl;
-	int input;
-	cin >> input;
+	return 0;
 }

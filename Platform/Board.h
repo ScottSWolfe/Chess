@@ -3,13 +3,17 @@
 #include "Square.h"
 
 class Board {
-private:
-	int dimension;
-	std::vector<Square> squares;
-	inline int Board::convertCoordinatesToIndex(const int x, const int y);
+
 public:
-	Board(const int dimension);
+	Board(const int board_dimension);
 	Square *getSquare(const int x, const int y);
 	void addPieceToSquare(const int x, const int y, Piece *piece);
-	void printToConsole();
+	int getDimension();
+
+private:
+	const int dimension;
+	std::vector<Square> squares;
+	inline int convertCoordinatesToIndex(const int x, const int y);
+	SquareColor getSquareColorByIndex(const int index);
+
 };
