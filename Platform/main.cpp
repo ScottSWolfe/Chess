@@ -60,7 +60,7 @@ int main() {
 	int board_dimension(8);
 	Board board(board_dimension);
 	
-	board.addPieceToSquare(0, 0, &rook);
+	board.addPieceToSquare(1, 0, &rook);
 	board.addPieceToSquare(1, 7, &knight);
 	board.addPieceToSquare(3, 3, &bishop);
 	board.addPieceToSquare(3, 0, &queen);

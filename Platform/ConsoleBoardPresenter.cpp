@@ -9,7 +9,7 @@ using namespace std;
 void printVerticalLine(int dimension) {
 	cout << " ";
 	for (int i = 0; i < dimension; ++i) {
-		cout << "----";
+		cout << "---";
 	}
 }
 
@@ -59,15 +59,16 @@ void ConsoleBoardPresenter::displayBoard(Board board) {
 			cout << " ";
 
 			SetConsoleTextAttribute(hstdout, csbi.wAttributes);
-			cout << "|";
+			//cout << "|";
 		}
-		cout << endl;
-		printVerticalLine(dimension);
+		cout << "|";
 		cout << endl;
 
 		// Keep users happy
 		SetConsoleTextAttribute(hstdout, csbi.wAttributes);
 	}
+	printVerticalLine(dimension);
+
 }
 
 int ConsoleBoardPresenter::getConsolePieceColor(PieceColor color) {
@@ -96,4 +97,21 @@ int ConsoleBoardPresenter::getConsoleSquareColor(SquareColor color) {
 
 int ConsoleBoardPresenter::getConsoleColor(SquareColor square_color, PieceColor piece_color) {
 	return getConsoleSquareColor(square_color) | getConsolePieceColor(piece_color);
+}
+
+void ConsoleBoardPresenter::showAvailableColorCombinations() {
+	HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(hstdout, &csbi);
+
+	for (int k = 1; k < 255; k++)
+	{
+		SetConsoleTextAttribute(hstdout, k);
+		cout << k << " Color Color Color Color Color " << endl;
+	}
+
+	SetConsoleTextAttribute(hstdout, csbi.wAttributes);
+
+	system("pause");
 }
