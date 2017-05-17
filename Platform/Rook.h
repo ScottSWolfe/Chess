@@ -2,6 +2,6 @@
 
 class Rook : public Piece {
 public:
-	Rook(Color color);
+	Rook(PieceColor color);
 	std::string getSymbol() override;
 };

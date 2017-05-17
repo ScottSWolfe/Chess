@@ -1,13 +1,13 @@
 #pragma once
 #include <string>
 
-enum class Color { White, Black };
+enum class PieceColor { WHITE, BLACK };
 
 class Piece {
 private:
-	Color color;
+	PieceColor color;
 public:
-	Piece(Color color);
-	virtual Color getColor();
+	Piece(PieceColor color);
+	virtual PieceColor getColor();
 	virtual std::string getSymbol() = 0;
 };

@@ -2,6 +2,6 @@
 
 class Queen : public Piece {
 public:
-	Queen(Color color);
+	Queen(PieceColor color);
 	std::string getSymbol() override;
 };

@@ -1,9 +1,9 @@
 #include "Piece.h"
 
-Piece::Piece(Color color) {
+Piece::Piece(PieceColor color) {
 	Piece::color = color;
 }
 
-Color Piece::getColor() {
+PieceColor Piece::getColor() {
 	return Piece::color;
 }

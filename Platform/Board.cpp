@@ -27,11 +27,25 @@ inline int Board::convertCoordinatesToIndex(const int x, const int y) {
 
 SquareColor Board::getSquareColorByIndex(const int index) {
 	SquareColor color;
-	if (index % 2 == 0) {
-		color = SquareColor::LIGHT;
+
+	int x = index % dimension;
+	int y = index / dimension;
+
+	if (y % 2 == 0) {
+		if (x % 2 == 0) {
+			color = SquareColor::DARK;
+		}
+		else {
+			color = SquareColor::LIGHT;
+		}
 	}
 	else {
-		color = SquareColor::DARK;
+		if (x % 2 == 0) {
+			color = SquareColor::LIGHT;
+		}
+		else {
+			color = SquareColor::DARK;
+		}
 	}
 	return color;
 }

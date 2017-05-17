@@ -1,7 +1,7 @@
 #include "Piece.h"
 #include "King.h"
 
-King::King(Color color) : Piece(color) {}
+King::King(PieceColor color) : Piece(color) {}
 
 std::string King::getSymbol() {
 	return "K";

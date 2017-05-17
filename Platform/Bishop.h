@@ -2,6 +2,6 @@
 
 class Bishop : public Piece {
 public:
-	Bishop(Color color);
+	Bishop(PieceColor color);
 	std::string getSymbol() override;
 };

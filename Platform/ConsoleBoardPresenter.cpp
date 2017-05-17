@@ -22,9 +22,9 @@ string getPieceSymbol(Piece *piece) {
 	}
 }
 
-Color getPieceColor(Piece *piece) {
+PieceColor getPieceColor(Piece *piece) {
 	if (piece == nullptr) {
-		return Color::White;
+		return PieceColor::WHITE;
 	}
 	else {
 		return piece->getColor();
@@ -32,6 +32,14 @@ Color getPieceColor(Piece *piece) {
 }
 
 void ConsoleBoardPresenter::displayBoard(Board board) {
+
+	HANDLE hstdin = GetStdHandle(STD_INPUT_HANDLE);
+	HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	// Remember how things were when we started
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	GetConsoleScreenBufferInfo(hstdout, &csbi);
+
 	int dimension = board.getDimension();
 	printVerticalLine(dimension);
 	cout << endl;
@@ -42,46 +50,50 @@ void ConsoleBoardPresenter::displayBoard(Board board) {
 			Piece *piece = square->getPiece();
 
 			string symbol = getPieceSymbol(piece);
-			Color piece_color = getPieceColor(piece);
+			PieceColor piece_color = getPieceColor(piece);
 			SquareColor square_color = square->getColor();
 
+			SetConsoleTextAttribute(hstdout, getConsoleColor(square_color, piece_color));
 			cout << " ";
 			cout << symbol;
 			cout << " ";
+
+			SetConsoleTextAttribute(hstdout, csbi.wAttributes);
 			cout << "|";
 		}
 		cout << endl;
 		printVerticalLine(dimension);
 		cout << endl;
+
+		// Keep users happy
+		SetConsoleTextAttribute(hstdout, csbi.wAttributes);
 	}
 }
 
-void tempFunctionToHoldCode() {
-	// letting user close the application
-	const WORD colors[] =
-	{
-		0x1A, 0x2B, 0x3C, 0x4D, 0x5E, 0x6F,
-		0xA1, 0xB2, 0xC3, 0xD4, 0xE5, 0xF6
-	};
-
-	HANDLE hstdin = GetStdHandle(STD_INPUT_HANDLE);
-	HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE);
-
-
-	// Remember how things were when we started
-	CONSOLE_SCREEN_BUFFER_INFO csbi;
-	GetConsoleScreenBufferInfo(hstdout, &csbi);
-
-	// Tell the user how to stop
-	// SetConsoleTextAttribute(hstdout, 0xEC);
-
-	// Draw pretty colors
-	for (WORD index = 0; index < sizeof(colors) / sizeof(colors[0]); ++index)
-	{
-		SetConsoleTextAttribute(hstdout, colors[index]);
-		std::cout << "\t\t\t\t Hello World \t\t\t\t" << std::endl;
+int ConsoleBoardPresenter::getConsolePieceColor(PieceColor color) {
+	if (color == PieceColor::WHITE) {
+		return ConsoleBoardPresenter::WHITE;
 	}
+	else if (color == PieceColor::BLACK) {
+		return ConsoleBoardPresenter::BLACK;
+	}
+	else {
+		throw invalid_argument("incorret color argument");
+	}
+}
 
-	// Keep users happy
-	SetConsoleTextAttribute(hstdout, csbi.wAttributes);
+int ConsoleBoardPresenter::getConsoleSquareColor(SquareColor color) {
+	if (color == SquareColor::LIGHT) {
+		return ConsoleBoardPresenter::LIGHT;
+	}
+	else if (color == SquareColor::DARK) {
+		return ConsoleBoardPresenter::DARK;
+	}
+	else {
+		throw invalid_argument("incorret color argument");
+	}
+}
+
+int ConsoleBoardPresenter::getConsoleColor(SquareColor square_color, PieceColor piece_color) {
+	return getConsoleSquareColor(square_color) | getConsolePieceColor(piece_color);
 }

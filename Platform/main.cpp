@@ -9,6 +9,7 @@
 #include "Square.h"
 #include "Board.h"
 #include "ConsoleBoardPresenter.h"
+#include "windows.h"
 using namespace std;
 
 int main() {
@@ -17,22 +18,22 @@ int main() {
 
 	// Testing Pieces
 	cout << "Pieces" << endl;
-	Rook rook(Color::White);
+	Rook rook(PieceColor::WHITE);
 	cout << (int) rook.getColor() << endl;
 
-	Knight knight(Color::Black);
+	Knight knight(PieceColor::BLACK);
 	cout << (int) knight.getColor() << endl;
 
-	Bishop bishop(Color::White);
+	Bishop bishop(PieceColor::WHITE);
 	cout << (int) bishop.getColor() << endl;
 
-	King king(Color::Black);
+	King king(PieceColor::BLACK);
 	cout << (int) king.getColor() << endl;
 
-	Queen queen(Color::White);
+	Queen queen(PieceColor::WHITE);
 	cout << (int) queen.getColor() << endl;
 
-	Pawn pawn(Color::Black);
+	Pawn pawn(PieceColor::BLACK);
 	cout << (int) pawn.getColor() << endl;
 	cout << endl;
 
@@ -58,14 +59,14 @@ int main() {
 	cout << "Board" << endl;
 	int board_dimension(8);
 	Board board(board_dimension);
-
+	
 	board.addPieceToSquare(0, 0, &rook);
 	board.addPieceToSquare(1, 7, &knight);
 	board.addPieceToSquare(3, 3, &bishop);
 	board.addPieceToSquare(3, 0, &queen);
 	board.addPieceToSquare(4, 0, &king);
 	board.addPieceToSquare(0, 1, &pawn);
-
+	
 	ConsoleBoardPresenter presenter;
 	presenter.displayBoard(board);
 	cout << endl;

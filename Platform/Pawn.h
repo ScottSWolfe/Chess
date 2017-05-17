@@ -2,6 +2,6 @@
 
 class Pawn : public Piece {
 public:
-	Pawn(Color color);
+	Pawn(PieceColor color);
 	std::string getSymbol() override;
 };
