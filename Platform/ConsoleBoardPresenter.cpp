@@ -82,10 +82,9 @@ int ConsoleBoardPresenter::getConsoleSquareColor(SquareColor color) {
 }
 
 void ConsoleBoardPresenter::printVerticalBorder(const int dimension) {
-	const char letters[8] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' };
 	cout << "   ";
 	for (int i = 0; i < dimension; ++i) {
-		cout << " " << letters[i] << " ";
+		cout << " " << static_cast<char>('A' + i) << " ";
 	}
 	cout << "   ";
 }
