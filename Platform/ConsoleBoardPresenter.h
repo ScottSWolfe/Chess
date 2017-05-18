@@ -3,17 +3,25 @@
 #include "Square.h"
 #include "Piece.h"
 
+enum class ConsoleColor { BLACK = 0x0, BLUE = 0x1, RED = 0x4, YELLOW = 0xE, WHITE = 0xF };
+
 class ConsoleBoardPresenter : public BoardPresenter {
+
 public:
 	void displayBoard(Board board) override;
-	void showAvailableColorCombinations();
 
 private:
-	int getConsoleColor(SquareColor square_color, PieceColor piece_color);
-	int getConsoleSquareColor(SquareColor color);
-	int getConsolePieceColor(PieceColor color);
-	const int WHITE = 0x0F;
-	const int BLACK = 0x0E;
-	const int LIGHT = 0x40;
-	const int DARK  = 0x00;
+	void setTextColor(const ConsoleColor background_color, const ConsoleColor text_color);
+	void setTextColor(const SquareColor square_color, const PieceColor piece_color);
+	int getConsoleSquareColor(const SquareColor color);
+	int getConsolePieceColor(const PieceColor color);
+	void printVerticalBorder(const int dimension);
+
+	const int WHITE_PIECE = static_cast<int>(ConsoleColor::WHITE);
+	const int BLACK_PIECE = static_cast<int>(ConsoleColor::YELLOW);
+	const int LIGHT_SQUARE = static_cast<int>(ConsoleColor::RED);
+	const int DARK_SQUARE = static_cast<int>(ConsoleColor::BLACK);
+
+	const ConsoleColor BORDER_BACKGROUND = ConsoleColor::WHITE;
+	const ConsoleColor BORDER_TEXT = ConsoleColor::BLACK;
 };
