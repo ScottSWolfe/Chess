@@ -7,9 +7,9 @@
 using namespace std;
 
 
-void ConsoleBoardPresenter::displayBoard(Board board) {
+void ConsoleBoardPresenter::displayBoard(Board *board) {
 
-	int dimension = board.getDimension();
+	int dimension = board->getDimension();
 
 	setTextColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
 	printVerticalBorder(dimension);
@@ -21,7 +21,7 @@ void ConsoleBoardPresenter::displayBoard(Board board) {
 		cout << " " << row + 1 << " ";
 
 		for (int col = 0; col < dimension; ++col) {
-			Square *square = board.getSquare(col, row);
+			Square *square = board->getSquare(col, row);
 			Piece *piece = square->getPiece();
 
 			string symbol = getPieceSymbol(piece);
@@ -41,6 +41,7 @@ void ConsoleBoardPresenter::displayBoard(Board board) {
 	printVerticalBorder(dimension);
 
 	setTextColor(ConsoleColor::BLACK, ConsoleColor::WHITE);
+	cout << endl;
 }
 
 void ConsoleBoardPresenter::setTextColor(const ConsoleColor background_color, const ConsoleColor text_color) {

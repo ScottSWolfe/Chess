@@ -112,6 +112,7 @@
   <ItemGroup>
     <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="BoardInitializer.cpp" />
     <ClCompile Include="ConsoleBoardPresenter.cpp" />
     <ClCompile Include="King.cpp" />
     <ClCompile Include="Knight.cpp" />
@@ -125,6 +126,7 @@
   <ItemGroup>
     <ClInclude Include="Bishop.h" />
     <ClInclude Include="Board.h" />
+    <ClInclude Include="BoardInitializer.h" />
     <ClInclude Include="BoardPresenter.h" />
     <ClInclude Include="ConsoleBoardPresenter.h" />
     <ClInclude Include="King.h" />

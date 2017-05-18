@@ -8,7 +8,7 @@ enum class ConsoleColor { BLACK = 0x0, BLUE = 0x1, RED = 0x4, YELLOW = 0xE, WHIT
 class ConsoleBoardPresenter : public BoardPresenter {
 
 public:
-	void displayBoard(Board board) override;
+	void displayBoard(Board *board) override;
 
 private:
 	void setTextColor(const ConsoleColor background_color, const ConsoleColor text_color);

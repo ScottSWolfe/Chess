@@ -4,5 +4,5 @@ class Board;
 
 class BoardPresenter {
 public:
-	virtual void displayBoard(Board board) = 0;
+	virtual void displayBoard(Board *board) = 0;
 };

@@ -9,6 +9,7 @@
 #include "Square.h"
 #include "Board.h"
 #include "ConsoleBoardPresenter.h"
+#include "BoardInitializer.h"
 #include "windows.h"
 using namespace std;
 
@@ -68,7 +69,15 @@ int main() {
 	board.addPieceToSquare(0, 1, &pawn);
 	
 	ConsoleBoardPresenter presenter;
-	presenter.displayBoard(board);
+	presenter.displayBoard(&board);
+	cout << endl;
+
+	// Testing BoardInitialization
+	cout << "Board Initialization" << endl;
+	BoardInitializer initializer;
+	unique_ptr<Board> new_board = initializer.initializeStandardGame();
+	Board *copy_board = new_board.get();
+	presenter.displayBoard(copy_board);
 	cout << endl;
 	
 	system("pause");
