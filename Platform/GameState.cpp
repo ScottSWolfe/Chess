@@ -6,9 +6,9 @@ Board *GameState::getBoard() {
 
 Player *GameState::getCurrentPlayer() {
 	if (current_player == PlayerTurn::WHITE) {
-		return &white_player;
+		return white_player.get();
 	}
 	else {
-		return &black_player;
+		return black_player.get();
 	}
 }
