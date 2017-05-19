@@ -1,7 +1,9 @@
 #pragma once
-#include <vector>
 
+#include <vector>
 #include "Square.h"
+
+class Piece;
 
 
 class Board {

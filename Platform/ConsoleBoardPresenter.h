@@ -1,7 +1,10 @@
 #pragma once
 #include "BoardPresenter.h"
-#include "Square.h"
-#include "Piece.h"
+
+class Board;
+enum class PieceColor;
+enum class SquareColor;
+
 
 enum class ConsoleColor { BLACK = 0x0, BLUE = 0x1, RED = 0x4, YELLOW = 0xE, WHITE = 0xF };
 

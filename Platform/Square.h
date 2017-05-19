@@ -1,5 +1,7 @@
 #pragma once
+
 class Piece;
+
 
 enum class SquareColor { LIGHT, DARK };
 

@@ -1,9 +1,12 @@
-#include "ConsoleBoardPresenter.h"
-#include "Board.h"
-#include "Piece.h"
 #include <iostream>
 #include <string>
+
+#include "Board.h"
+#include "ConsoleBoardPresenter.h"
+#include "Piece.h"
+#include "Square.h"
 #include "windows.h"
+
 using namespace std;
 
 
