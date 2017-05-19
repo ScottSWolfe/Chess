@@ -1,6 +1,9 @@
-#include "Board.h"
 #include <iostream>
+
+#include "Board.h"
+
 using namespace std;
+
 
 Board::Board(const int board_dimension) : dimension(board_dimension) {
 	for (int i = 0; i < dimension * dimension; ++i) {

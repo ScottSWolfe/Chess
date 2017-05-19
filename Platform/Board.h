@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
+
 #include "Square.h"
+
 
 class Board {
 

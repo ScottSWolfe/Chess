@@ -1,13 +1,15 @@
-#include "BoardInitializer.h"
+#include <memory>
+
 #include "Board.h"
-#include "Piece.h"
-#include "Rook.h"
-#include "Knight.h"
+#include "BoardInitializer.h"
 #include "Bishop.h"
 #include "King.h"
-#include "Queen.h"
+#include "Knight.h"
 #include "Pawn.h"
-#include <memory>
+#include "Piece.h"
+#include "Queen.h"
+#include "Rook.h"
+
 using namespace std;
 
 

@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+
 #include "Board.h"
 #include "Piece.h"
 
