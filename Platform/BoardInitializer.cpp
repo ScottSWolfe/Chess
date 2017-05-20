@@ -13,7 +13,7 @@
 using namespace std;
 
 
-unique_ptr<Board> BoardInitializer::initializeStandardGame() {
+unique_ptr<Board> BoardInitializer::initializeStandardSetup() {
 	unique_ptr<Board> board = make_unique<Board>(8);
 	addStandardPieces(board.get());
 	return board;

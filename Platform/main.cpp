@@ -1,4 +1,5 @@
 #include <iostream>
+#include "ChessEnums.h"
 #include "Piece.h"
 #include "Rook.h"
 #include "Knight.h"
@@ -20,22 +21,22 @@ int main() {
 	// Testing Pieces
 	cout << "Pieces" << endl;
 	Rook rook(PieceColor::WHITE);
-	cout << (int) rook.getColor() << endl;
+	cout << static_cast<int>(rook.getColor()) << endl;
 
 	Knight knight(PieceColor::BLACK);
-	cout << (int) knight.getColor() << endl;
+	cout << static_cast<int>(knight.getColor()) << endl;
 
 	Bishop bishop(PieceColor::WHITE);
-	cout << (int) bishop.getColor() << endl;
+	cout << static_cast<int>(bishop.getColor()) << endl;
 
 	King king(PieceColor::BLACK);
-	cout << (int) king.getColor() << endl;
+	cout << static_cast<int>(king.getColor()) << endl;
 
 	Queen queen(PieceColor::WHITE);
-	cout << (int) queen.getColor() << endl;
+	cout << static_cast<int>(queen.getColor()) << endl;
 
 	Pawn pawn(PieceColor::BLACK);
-	cout << (int) pawn.getColor() << endl;
+	cout << static_cast<int>(pawn.getColor()) << endl;
 	cout << endl;
 
 	// Testing Squares
@@ -74,8 +75,7 @@ int main() {
 
 	// Testing BoardInitialization
 	cout << "Board Initialization" << endl;
-	BoardInitializer initializer;
-	unique_ptr<Board> new_board = initializer.initializeStandardGame();
+	unique_ptr<Board> new_board = BoardInitializer::initializeStandardSetup();
 	Board *copy_board = new_board.get();
 	presenter.displayBoard(copy_board);
 	cout << endl;

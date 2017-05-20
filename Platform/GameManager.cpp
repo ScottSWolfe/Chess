@@ -1,5 +1,23 @@
 #include "GameManager.h"
 
-void GameManager::startStandardGame() {
-	
+GameManager::GameManager() {
+
+}
+
+void GameManager::startGame() {
+	setup();
+	runGameLoop();
+	cleanup();
+}
+
+void GameManager::setup() {
+
+}
+
+void GameManager::runGameLoop() {
+
+}
+
+void GameManager::cleanup() {
+
 }

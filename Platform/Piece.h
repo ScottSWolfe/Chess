@@ -1,9 +1,8 @@
 #pragma once
 
 #include <string>
+#include "ChessEnums.h"
 
-
-enum class PieceColor { WHITE, BLACK };
 
 class Piece {
 

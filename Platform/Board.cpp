@@ -5,6 +5,10 @@
 using namespace std;
 
 
+Board::Board() : dimension(8) {
+	Board(dimension);
+}
+
 Board::Board(const int board_dimension) : dimension(board_dimension) {
 	for (int i = 0; i < dimension * dimension; ++i) {
 		Square square(getSquareColorByIndex(i));
@@ -24,7 +28,7 @@ int Board::getDimension() {
 	return dimension;
 }
 
-inline int Board::convertCoordinatesToIndex(const int x, const int y) {
+int Board::convertCoordinatesToIndex(const int x, const int y) {
 	return y * dimension + x;
 }
 

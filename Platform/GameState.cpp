@@ -1,14 +1,23 @@
 #include "GameState.h"
+#include "BoardInitializer.h"
 
-Board *GameState::getBoard() {
-	return &board;
+
+GameState::GameState() :
+	board(BoardInitializer::initializeStandardSetup()),
+	white_player(new HumanPlayer(PieceColor::WHITE)),
+	black_player(new HumanPlayer(PieceColor::BLACK)),
+	current_player(PlayerTurn::WHITE)
+{}
+
+const Board &GameState::getBoard() const {
+	return *board;
 }
 
-Player *GameState::getCurrentPlayer() {
+const Player &GameState::getCurrentPlayer() const {
 	if (current_player == PlayerTurn::WHITE) {
-		return white_player.get();
+		return *white_player;
 	}
 	else {
-		return black_player.get();
+		return *black_player;
 	}
 }

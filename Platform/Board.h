@@ -9,6 +9,7 @@ class Piece;
 class Board {
 
 public:
+	Board();
 	Board(const int board_dimension);
 	Square *getSquare(const int x, const int y);
 	void addPieceToSquare(const int x, const int y, Piece *piece);

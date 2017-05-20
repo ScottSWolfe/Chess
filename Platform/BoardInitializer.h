@@ -8,13 +8,11 @@ enum class PieceColor;
 class BoardInitializer {
 
 public:
-	std::unique_ptr<Board> initializeStandardGame();
+	static std::unique_ptr<Board> initializeStandardSetup();
 
 private:
-	void addStandardPieces(Board *board);
-	void addRowOfPawns(Board *board, const int row, const PieceColor color);
-	void addStandardRowOfPieces(Board *board, const int row, const PieceColor color);
-	Board *board;
-	int dimension;
+	static void addStandardPieces(Board *board);
+	static void addRowOfPawns(Board *board, const int row, const PieceColor color);
+	static void addStandardRowOfPieces(Board *board, const int row, const PieceColor color);
 
 };

@@ -1,12 +1,15 @@
 #pragma once
 
+#include "ChessEnums.h"
+#include "Player.h"
+
 class Board;
-enum class PieceColor;
 
 
 class Player {
 
 public:
+	Player(PieceColor color);
 	virtual Board move(Board board) = 0;
 
 private:
