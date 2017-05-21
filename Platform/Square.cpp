@@ -26,7 +26,7 @@ void Square::setPiece(unique_ptr<const Piece> &new_piece) {
 	piece.reset(new_piece.release());
 }
 
-unique_ptr<const Piece> &Square::removePiece() {
+unique_ptr<const Piece> Square::removePiece() {
 	unique_ptr<const Piece> copy_of_piece = copyPieceFactory(piece.get());
 	piece.reset();
 	return copy_of_piece;

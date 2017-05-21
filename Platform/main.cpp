@@ -76,10 +76,35 @@ int main() {
 
 	// Testing BoardInitialization
 	cout << "Board Initialization" << endl;
-	unique_ptr<Board> new_board = BoardInitializer::initializeStandardSetup();
-	presenter.displayBoard(*new_board);
+	unique_ptr<Board> initialized_board = BoardInitializer::initializeStandardSetup();
+	presenter.displayBoard(*initialized_board);
 	cout << endl;
-	
+
+	// Testing removing piece from square and moving to another
+	cout << "Moving a Piece" << endl;
+	unique_ptr<const Piece> piece_to_move = initialized_board->removePieceFromSquare(0, 1);
+	initialized_board->addPieceToSquare(0, 3, piece_to_move);
+	presenter.displayBoard(*initialized_board);
+	cout << endl;
+
+	// Test board copying
+	cout << "Copy of Board" << endl;
+	Board copy_of_board(*initialized_board);
+	presenter.displayBoard(copy_of_board);
+	cout << endl;
+
+	unique_ptr<const Piece> piece_to_move_on_copied_board = copy_of_board.removePieceFromSquare(3, 6);
+	copy_of_board.addPieceToSquare(3, 4, piece_to_move_on_copied_board);
+
+	cout << "Move piece on copied board" << endl;
+	presenter.displayBoard(copy_of_board);
+	cout << endl;
+
+	cout << "Old board remains the same" << endl;
+	presenter.displayBoard(*initialized_board);
+	cout << endl;
+
+	// wait for user to press any key
 	system("pause");
 
 	return 0;

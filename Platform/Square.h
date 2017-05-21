@@ -13,7 +13,7 @@ public:
 	Square(const Square &other_square);
 	const Piece *getPiece() const;
 	void setPiece(std::unique_ptr<const Piece> &new_piece);
-	std::unique_ptr<const Piece> &removePiece();
+	std::unique_ptr<const Piece> removePiece();
 	SquareColor getColor() const;
 
 private:

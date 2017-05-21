@@ -10,7 +10,6 @@ Board::Board() : dimension(8) {
 Board::Board(int board_dimension) : dimension(board_dimension) {
 	for (int i = 0; i < dimension * dimension; ++i) {
 		Square square(getSquareColorByIndex(i));
-		//squares.emplace_back(new Square(getSquareColorByIndex(i)));
 		squares.emplace_back(square);
 	}
 }
@@ -25,6 +24,10 @@ const Square &Board::getSquare(int x, int y) const {
 
 void Board::addPieceToSquare(int x, int y, unique_ptr<const Piece> &piece) {
 	squares[convertCoordinatesToIndex(x, y)].setPiece(piece);
+}
+
+unique_ptr<const Piece> Board::removePieceFromSquare(int x, int y) {
+	return squares[convertCoordinatesToIndex(x, y)].removePiece();
 }
 
 int Board::getDimension() const {

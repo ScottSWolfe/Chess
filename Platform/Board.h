@@ -14,6 +14,7 @@ public:
 	Square &getSquare(int x, int y);
 	const Square &getSquare(int x, int y) const;
 	void addPieceToSquare(int x, int y, std::unique_ptr<const Piece> &piece);
+	std::unique_ptr<const Piece> removePieceFromSquare(int x, int y);
 	int getDimension() const;
 
 private:
