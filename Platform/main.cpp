@@ -19,6 +19,7 @@ int main() {
 	cout << "Hello World of Chess!" << endl;
 	cout << endl;
 
+
 	// Testing Pieces
 	cout << "Pieces" << endl;
 	unique_ptr<const Piece> rook = make_unique<Rook>(PieceColor::WHITE);
@@ -40,6 +41,7 @@ int main() {
 	cout << static_cast<int>(pawn->getColor()) << endl;
 	cout << endl;
 
+
 	// Testing Squares
 	cout << "Squares" << endl;
 
@@ -58,6 +60,7 @@ int main() {
 	}
 	cout << endl;
 
+
 	// Testing Board
 	cout << "Board" << endl;
 	int board_dimension(8);
@@ -74,11 +77,13 @@ int main() {
 	presenter.displayBoard(board);
 	cout << endl;
 
+
 	// Testing BoardInitialization
 	cout << "Board Initialization" << endl;
 	unique_ptr<Board> initialized_board = BoardInitializer::initializeStandardSetup();
 	presenter.displayBoard(*initialized_board);
 	cout << endl;
+
 
 	// Testing removing piece from square and moving to another
 	cout << "Moving a Piece" << endl;
@@ -86,6 +91,7 @@ int main() {
 	initialized_board->addPieceToSquare(0, 3, piece_to_move);
 	presenter.displayBoard(*initialized_board);
 	cout << endl;
+
 
 	// Test board copying
 	cout << "Copy of Board" << endl;
@@ -103,6 +109,7 @@ int main() {
 	cout << "Old board remains the same" << endl;
 	presenter.displayBoard(*initialized_board);
 	cout << endl;
+
 
 	// wait for user to press any key
 	system("pause");

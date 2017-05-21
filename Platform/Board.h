@@ -9,7 +9,6 @@ class Piece;
 class Board {
 
 public:
-	Board();
 	Board(int board_dimension);
 	Square &getSquare(int x, int y);
 	const Square &getSquare(int x, int y) const;

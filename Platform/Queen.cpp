@@ -4,5 +4,5 @@
 Queen::Queen(PieceColor color) : Piece(color) {}
 
 const std::string Queen::getSymbol() const {
-	return "Q";
+	return QUEEN_SYMBOL;
 }

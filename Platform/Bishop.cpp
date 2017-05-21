@@ -5,5 +5,5 @@
 Bishop::Bishop(PieceColor color) : Piece(color) {}
 
 const std::string Bishop::getSymbol() const {
-	return "B";
+	return BISHOP_SYMBOL;
 }

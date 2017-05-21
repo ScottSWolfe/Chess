@@ -56,4 +56,5 @@ unique_ptr<const Piece> copyPieceFactory(const Piece *piece) {
 	if (dynamic_cast<const King*>(piece)) {
 		return make_unique<const King>(piece->getColor());
 	}
+	return nullptr;
 }

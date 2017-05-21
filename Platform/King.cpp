@@ -4,5 +4,5 @@
 King::King(PieceColor color) : Piece(color) {}
 
 const std::string King::getSymbol() const {
-	return "K";
+	return KING_SYMBOL;
 }

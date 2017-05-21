@@ -4,5 +4,5 @@
 Pawn::Pawn(PieceColor color) : Piece(color) {}
 
 const std::string Pawn::getSymbol() const {
-	return "p";
+	return PAWN_SYMBOL;
 }
