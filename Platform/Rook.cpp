@@ -1,8 +1,8 @@
-#include "Piece.h"
 #include "Rook.h"
+
 
 Rook::Rook(PieceColor color) : Piece(color) {}
 
-std::string Rook::getSymbol() {
+const std::string Rook::getSymbol() const {
 	return "R";
 }

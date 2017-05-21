@@ -6,6 +6,6 @@ class Board;
 class BoardPresenter {
 
 public:
-	virtual void displayBoard(Board *board) = 0;
+	virtual void displayBoard(const Board &board) const = 0;
 
 };

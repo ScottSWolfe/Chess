@@ -1,11 +1,14 @@
 #pragma once
 
 #include <string>
+#include "ChessEnums.h"
 #include "Piece.h"
 
 
 class Queen : public Piece {
+
 public:
 	Queen(PieceColor color);
-	std::string getSymbol() override;
+	const std::string getSymbol() const override;
+
 };

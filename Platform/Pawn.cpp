@@ -1,8 +1,8 @@
-#include "Piece.h"
 #include "Pawn.h"
+
 
 Pawn::Pawn(PieceColor color) : Piece(color) {}
 
-std::string Pawn::getSymbol() {
+const std::string Pawn::getSymbol() const {
 	return "p";
 }

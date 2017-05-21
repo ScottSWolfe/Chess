@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include "ChessEnums.h"
 #include "Piece.h"
 
 
@@ -8,6 +9,6 @@ class King : public Piece {
 
 public:
 	King(PieceColor color);
-	std::string getSymbol() override;
+	const std::string getSymbol() const override;
 
 };

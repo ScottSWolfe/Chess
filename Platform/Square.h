@@ -1,20 +1,23 @@
 #pragma once
-#include "ChessEnums.h"
 
-class Piece;
+#include <memory>
+#include "ChessEnums.h"
+#include "Piece.h"
 
 
 class Square {
 
-private:
-	const SquareColor color;
-	Piece *piece;
-
 public:
 	Square(SquareColor color);
-	Square(SquareColor color, Piece *piece);
-	Piece *getPiece();
-	void setPiece(Piece *new_piece);
-	SquareColor getColor();
+	Square(SquareColor color, std::unique_ptr<const Piece> &piece);
+	Square(const Square &other_square);
+	const Piece *getPiece() const;
+	void setPiece(std::unique_ptr<const Piece> &new_piece);
+	std::unique_ptr<const Piece> &removePiece();
+	SquareColor getColor() const;
+
+private:
+	const SquareColor color;
+	std::unique_ptr<const Piece> piece;
 
 };

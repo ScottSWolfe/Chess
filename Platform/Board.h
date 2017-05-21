@@ -1,8 +1,8 @@
 #pragma once
 
+#include <memory>
 #include <vector>
 #include "Square.h"
-
 class Piece;
 
 
@@ -10,15 +10,16 @@ class Board {
 
 public:
 	Board();
-	Board(const int board_dimension);
-	Square *getSquare(const int x, const int y);
-	void addPieceToSquare(const int x, const int y, Piece *piece);
-	int getDimension();
+	Board(int board_dimension);
+	Square &getSquare(int x, int y);
+	const Square &getSquare(int x, int y) const;
+	void addPieceToSquare(int x, int y, std::unique_ptr<const Piece> &piece);
+	int getDimension() const;
 
 private:
 	const int dimension;
 	std::vector<Square> squares;
-	inline int convertCoordinatesToIndex(const int x, const int y);
-	SquareColor getSquareColorByIndex(const int index);
+	int convertCoordinatesToIndex(int x, int y) const;
+	SquareColor getSquareColorByIndex(int index) const;
 
 };

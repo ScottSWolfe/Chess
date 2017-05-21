@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+#include "BoardPresenter.h"
 #include "GameState.h"
 
 
@@ -11,6 +13,7 @@ public:
 
 private:
 	GameState current_state;
+	std::unique_ptr<BoardPresenter> presenter;
 	void setup();
 	void runGameLoop();
 	void cleanup();

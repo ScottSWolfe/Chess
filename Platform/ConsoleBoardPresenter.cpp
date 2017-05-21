@@ -1,18 +1,16 @@
 #include <iostream>
 #include <string>
-
 #include "Board.h"
 #include "ConsoleBoardPresenter.h"
 #include "Piece.h"
 #include "Square.h"
 #include "windows.h"
-
 using namespace std;
 
 
-void ConsoleBoardPresenter::displayBoard(Board *board) {
+void ConsoleBoardPresenter::displayBoard(const Board &board) const {
 
-	int dimension = board->getDimension();
+	int dimension = board.getDimension();
 
 	setTextColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
 	printVerticalBorder(dimension);
@@ -24,12 +22,12 @@ void ConsoleBoardPresenter::displayBoard(Board *board) {
 		cout << " " << row + 1 << " ";
 
 		for (int col = 0; col < dimension; ++col) {
-			Square *square = board->getSquare(col, row);
-			Piece *piece = square->getPiece();
+			const Square &square = board.getSquare(col, row);
+			const Piece *piece = square.getPiece();
 
 			string symbol = getPieceSymbol(piece);
 			PieceColor piece_color = getPieceColor(piece);
-			SquareColor square_color = square->getColor();
+			SquareColor square_color = square.getColor();
 
 			setTextColor(square_color, piece_color);
 			cout << " ";
@@ -47,21 +45,20 @@ void ConsoleBoardPresenter::displayBoard(Board *board) {
 	cout << endl;
 }
 
-void ConsoleBoardPresenter::setTextColor(const ConsoleColor background_color, const ConsoleColor text_color) {
+void ConsoleBoardPresenter::setTextColor(ConsoleColor background_color, ConsoleColor text_color) const {
 	HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE);
 	int background = static_cast<int>(background_color) << 4;
 	int text = static_cast<int>(text_color);
 	SetConsoleTextAttribute(hstdout, background | text);
 }
 
-void ConsoleBoardPresenter::setTextColor(const SquareColor square_color, const PieceColor piece_color) {
-	HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE);
-	int background = getConsoleSquareColor(square_color) << 4;
-	int text = getConsolePieceColor(piece_color);
-	SetConsoleTextAttribute(hstdout, background | text);
+void ConsoleBoardPresenter::setTextColor(SquareColor square_color, PieceColor piece_color) const {
+	ConsoleColor background = getConsoleSquareColor(square_color);
+	ConsoleColor text = getConsolePieceColor(piece_color);
+	setTextColor(background, text);
 }
 
-int ConsoleBoardPresenter::getConsolePieceColor(PieceColor color) {
+ConsoleColor ConsoleBoardPresenter::getConsolePieceColor(PieceColor color) const {
 	if (color == PieceColor::WHITE) {
 		return ConsoleBoardPresenter::WHITE_PIECE;
 	}
@@ -73,7 +70,7 @@ int ConsoleBoardPresenter::getConsolePieceColor(PieceColor color) {
 	}
 }
 
-int ConsoleBoardPresenter::getConsoleSquareColor(SquareColor color) {
+ConsoleColor ConsoleBoardPresenter::getConsoleSquareColor(SquareColor color) const {
 	if (color == SquareColor::LIGHT) {
 		return ConsoleBoardPresenter::LIGHT_SQUARE;
 	}
@@ -85,7 +82,7 @@ int ConsoleBoardPresenter::getConsoleSquareColor(SquareColor color) {
 	}
 }
 
-void ConsoleBoardPresenter::printVerticalBorder(const int dimension) {
+void ConsoleBoardPresenter::printVerticalBorder(int dimension) const {
 	cout << "   ";
 	for (int i = 0; i < dimension; ++i) {
 		cout << " " << static_cast<char>('A' + i) << " ";

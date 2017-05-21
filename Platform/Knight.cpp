@@ -1,8 +1,9 @@
-#include "Piece.h"
 #include "Knight.h"
+#include "Piece.h"
+
 
 Knight::Knight(PieceColor color) : Piece(color) {}
 
-std::string Knight::getSymbol() {
+const std::string Knight::getSymbol() const {
 	return "N";
 }

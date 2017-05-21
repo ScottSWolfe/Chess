@@ -1,9 +1,7 @@
 #pragma once
 #include "BoardPresenter.h"
-
+#include "ChessEnums.h"
 class Board;
-enum class PieceColor;
-enum class SquareColor;
 
 
 enum class ConsoleColor { BLACK = 0x0, BLUE = 0x1, RED = 0x4, YELLOW = 0xE, WHITE = 0xF };
@@ -11,20 +9,19 @@ enum class ConsoleColor { BLACK = 0x0, BLUE = 0x1, RED = 0x4, YELLOW = 0xE, WHIT
 class ConsoleBoardPresenter : public BoardPresenter {
 
 public:
-	void displayBoard(Board *board) override;
+	void displayBoard(const Board &board) const override;
 
 private:
-	void setTextColor(const ConsoleColor background_color, const ConsoleColor text_color);
-	void setTextColor(const SquareColor square_color, const PieceColor piece_color);
-	int getConsoleSquareColor(const SquareColor color);
-	int getConsolePieceColor(const PieceColor color);
-	void printVerticalBorder(const int dimension);
+	void setTextColor(ConsoleColor background_color, ConsoleColor text_color) const;
+	void setTextColor(SquareColor square_color, PieceColor piece_color) const;
+	ConsoleColor getConsoleSquareColor(SquareColor color) const;
+	ConsoleColor getConsolePieceColor(PieceColor color) const;
+	void printVerticalBorder(int dimension) const;
 
-	const int WHITE_PIECE = static_cast<int>(ConsoleColor::WHITE);
-	const int BLACK_PIECE = static_cast<int>(ConsoleColor::YELLOW);
-	const int LIGHT_SQUARE = static_cast<int>(ConsoleColor::RED);
-	const int DARK_SQUARE = static_cast<int>(ConsoleColor::BLACK);
-
+	const ConsoleColor WHITE_PIECE = ConsoleColor::WHITE;
+	const ConsoleColor BLACK_PIECE = ConsoleColor::YELLOW;
+	const ConsoleColor LIGHT_SQUARE = ConsoleColor::RED;
+	const ConsoleColor DARK_SQUARE = ConsoleColor::BLACK;
 	const ConsoleColor BORDER_BACKGROUND = ConsoleColor::WHITE;
 	const ConsoleColor BORDER_TEXT = ConsoleColor::BLACK;
 };

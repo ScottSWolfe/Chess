@@ -1,8 +1,8 @@
-#include "Piece.h"
 #include "Queen.h"
+
 
 Queen::Queen(PieceColor color) : Piece(color) {}
 
-std::string Queen::getSymbol() {
+const std::string Queen::getSymbol() const {
 	return "Q";
 }

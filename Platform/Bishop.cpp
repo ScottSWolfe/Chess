@@ -1,8 +1,9 @@
-#include "Piece.h"
+#include <string>
 #include "Bishop.h"
+
 
 Bishop::Bishop(PieceColor color) : Piece(color) {}
 
-std::string Bishop::getSymbol() {
+const std::string Bishop::getSymbol() const {
 	return "B";
 }
