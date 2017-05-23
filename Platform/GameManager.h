@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include "Player.h"
 #include "BoardPresenter.h"
 #include "GameState.h"
 
@@ -12,10 +13,15 @@ public:
 	void startGame();
 
 private:
+	// variables
 	GameState current_state;
-	std::unique_ptr<Player> white_player;
-	std::unique_ptr<Player> black_player;
+	std::unique_ptr<const Player> white_player;
+	std::unique_ptr<const Player> black_player;
 	std::unique_ptr<BoardPresenter> presenter;
+
+	// methods
 	void runGameLoop();
+	const Player *GameManager::getCurrentPlayer() const;
+	void /*const Move*/ GameManager::getPlayerMove() const;
 
 };

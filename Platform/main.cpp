@@ -11,6 +11,7 @@
 #include "Board.h"
 #include "ConsoleBoardPresenter.h"
 #include "BoardInitializer.h"
+#include "GameManager.h"
 #include "windows.h"
 using namespace std;
 
@@ -109,6 +110,11 @@ int main() {
 	cout << "Old board remains the same" << endl;
 	presenter.displayBoard(initialized_board);
 	cout << endl;
+
+
+	// start a new game
+	GameManager manager;
+	manager.startGame();
 
 
 	// wait for user to press any key

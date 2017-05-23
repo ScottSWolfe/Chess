@@ -1,8 +1,6 @@
 #pragma once
 
 #include "ChessEnums.h"
-#include "Player.h"
-
 class Board;
 
 

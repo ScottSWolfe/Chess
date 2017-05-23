@@ -17,6 +17,32 @@ void GameManager::startGame() {
 }
 
 void GameManager::runGameLoop() {
-	cout << "Game Loop Started";
+	cout << "Game Loop Started" << endl;
 	presenter->displayBoard(current_state.getBoard());
+
+	while (true) {
+		// check if game is over
+
+		// get current player's move
+		getPlayerMove();
+
+		// make move on board
+	}
+
+}
+
+const Player *GameManager::getCurrentPlayer() const {
+	if (current_state.getPlayersTurn() == PlayerTurn::WHITE) {
+		return white_player.get();
+	}
+	else {
+		return black_player.get();
+	}
+}
+
+void /*const Move*/ GameManager::getPlayerMove() const {
+	const Player *current_player = getCurrentPlayer();
+	// get move
+	// validate move is legal
+	// return move
 }

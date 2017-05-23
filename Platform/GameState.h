@@ -12,9 +12,10 @@ class GameState {
 public:
 	GameState(Board board, PlayerTurn beginning_player);
 	Board getBoard() const;
+	PlayerTurn getPlayersTurn() const;
 
 private:
 	Board board;
-	PlayerTurn current_player;
+	PlayerTurn current_turn;
 
 };
