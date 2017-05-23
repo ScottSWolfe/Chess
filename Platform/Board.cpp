@@ -10,6 +10,14 @@ Board::Board(int board_dimension) : dimension(board_dimension) {
 	}
 }
 
+Board::Board(const Board &other_board) :
+	dimension(other_board.getDimension())
+{
+	for (int i = 0; i < dimension * dimension; ++i) {
+		squares.emplace_back(other_board.squares[i]);
+	}
+}
+
 Square &Board::getSquare(int x, int y) {
 	return squares[convertCoordinatesToIndex(x, y)];
 }

@@ -13,9 +13,9 @@ public:
 
 private:
 	GameState current_state;
+	std::unique_ptr<Player> white_player;
+	std::unique_ptr<Player> black_player;
 	std::unique_ptr<BoardPresenter> presenter;
-	void setup();
 	void runGameLoop();
-	void cleanup();
 
 };

@@ -10,9 +10,9 @@
 using namespace std;
 
 
-unique_ptr<Board> BoardInitializer::initializeStandardSetup() {
-	unique_ptr<Board> board = make_unique<Board>(8);
-	addStandardPieces(*board);
+Board BoardInitializer::initializeStandardSetup() {
+	Board board(8);
+	addStandardPieces(board);
 	return board;
 }
 

@@ -10,6 +10,7 @@ class Board {
 
 public:
 	Board(int board_dimension);
+	Board(const Board &other_board);
 	Square &getSquare(int x, int y);
 	const Square &getSquare(int x, int y) const;
 	void addPieceToSquare(int x, int y, std::unique_ptr<const Piece> &piece);

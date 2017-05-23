@@ -8,7 +8,7 @@ class Board;
 class BoardInitializer {
 
 public:
-	static std::unique_ptr<Board> initializeStandardSetup();
+	static Board initializeStandardSetup();
 
 private:
 	static void addStandardPieces(Board &board);

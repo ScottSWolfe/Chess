@@ -10,14 +10,11 @@
 class GameState {
 
 public:
-	GameState();
-	const Board &getBoard() const;
-	const Player &getCurrentPlayer() const;
+	GameState(Board board, PlayerTurn beginning_player);
+	Board getBoard() const;
 
 private:
-	std::unique_ptr<Board> board;
-	std::unique_ptr<Player> white_player;
-	std::unique_ptr<Player> black_player;
+	Board board;
 	PlayerTurn current_player;
 
 };
