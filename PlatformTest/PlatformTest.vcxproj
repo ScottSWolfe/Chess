@@ -99,7 +99,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>C:\Users\Scott\git\Chess\Platform\Debug;$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Piece.obj;Rook.obj;Bishop.obj;Knight.obj;King.obj;Queen.obj;Pawn.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Piece.obj;Rook.obj;Bishop.obj;Knight.obj;King.obj;Queen.obj;Pawn.obj;Board.obj;Square.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
