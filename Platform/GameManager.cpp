@@ -2,6 +2,8 @@
 #include "BoardInitializer.h"
 #include "ConsoleBoardPresenter.h"
 #include "GameManager.h"
+#include "Move.h"
+#include "HumanPlayer.h"
 using namespace std;
 
 
@@ -22,11 +24,10 @@ void GameManager::runGameLoop() {
 
 	while (true) {
 		// check if game is over
-
-		// get current player's move
-		getPlayerMove();
-
-		// make move on board
+		cout << static_cast<int>(current_state.getPlayersTurn()) << "'s turn" << endl;
+		Move move = getPlayerMove();
+		current_state.makeMove(move);
+		presenter->displayBoard(current_state.getBoard());
 	}
 
 }
@@ -40,9 +41,9 @@ const Player *GameManager::getCurrentPlayer() const {
 	}
 }
 
-void /*const Move*/ GameManager::getPlayerMove() const {
+const Move GameManager::getPlayerMove() const {
 	const Player *current_player = getCurrentPlayer();
-	// get move
+	Move move = current_player->move(current_state.getBoard());
 	// validate move is legal
-	// return move
+	return move;
 }
