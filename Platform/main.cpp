@@ -1,4 +1,5 @@
 #include <iostream>
+#include "MoveInputParser.h"
 #include "ChessEnums.h"
 #include "Piece.h"
 #include "Rook.h"
@@ -111,6 +112,15 @@ int main() {
 	presenter.displayBoard(initialized_board);
 	cout << endl;
 
+	// test move input parser
+	cout << "Move Input Parser Test" << endl;
+	MoveInputParser parser;
+	shared_ptr<const Move> parsed_move = parser.parseMoveInput("A3 D5");
+	cout << "A3: ";
+	cout << parsed_move->getStartSquareCoord().x << parsed_move->getStartSquareCoord().y << endl;
+	cout << "D5: ";
+	cout << parsed_move->getEndSquareCoord().x << parsed_move->getEndSquareCoord().y << endl;
+	cout << endl;
 
 	// start a new game
 	GameManager manager;

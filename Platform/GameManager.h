@@ -22,6 +22,6 @@ private:
 	// methods
 	void runGameLoop();
 	const Player *GameManager::getCurrentPlayer() const;
-	const Move GameManager::getPlayerMove() const;
+	std::shared_ptr<const Move> GameManager::getPlayerMove() const;
 
 };

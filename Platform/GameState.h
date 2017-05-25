@@ -13,7 +13,7 @@ class GameState {
 public:
 	GameState(Board board, PlayerTurn beginning_player);
 	Board getBoard() const;
-	void makeMove(Move move);
+	void makeMove(const Move &move);
 	PlayerTurn getPlayersTurn() const;
 
 private:

@@ -12,7 +12,7 @@ Board GameState::getBoard() const {
 	return board;
 }
 
-void GameState::makeMove(Move move) {
+void GameState::makeMove(const Move &move) {
 	SquareCoordinate start = move.getStartSquareCoord();
 	SquareCoordinate end = move.getEndSquareCoord();
 	unique_ptr<const Piece> piece = board.removePieceFromSquare(start.x, start.y);
