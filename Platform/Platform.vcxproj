@@ -132,6 +132,7 @@
     <ClCompile Include="Rook.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Square.cpp" />
+    <ClCompile Include="SquareCoordinate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bishop.h" />

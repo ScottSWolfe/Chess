@@ -6,50 +6,61 @@ using namespace std;
 
 
 shared_ptr<const Move> MoveInputParser::parseMoveInput(string input) const {
+	shared_ptr<const Move> move(nullptr);
 
-	// parse input into tokens
+	vector<string> tokens = parseInputIntoTokens(input, ' ');
+	if (tokens.size() < 2) {
+		return move;
+	}
+
+	array<SquareCoordinate, 2> squares;
+	for (int i = 0; i < 2; i++) {
+		squares[i] = convertCharPairToCoords(tokens[i]);
+		if (squares[i].empty()) {
+			return move;
+		}
+	}
+
+	move.reset(new Move(squares[0], squares[1]));
+	return move;
+}
+
+vector<string> MoveInputParser::parseInputIntoTokens(string input, char delimiter) const {
 	vector<string> tokens;
-	input.append(" ");
+	input += delimiter;
 	while (!input.empty()) {
-		for (int i = 0; i < input.size(); i++) {
+		for (size_t i = 0; i < input.size(); i++) {
 			char c = input[i];
-			if (c == ' ') {
+			if (c == delimiter) {
 				if (i != 0) {
-					tokens.emplace_back(input.substr(0, i));
+					tokens.push_back(input.substr(0, i));
 				}
 				input = input.erase(0, i + 1);
 			}
 		}
 	}
+	return tokens;
+}
 
-	// check that there are at least two coordinate pairs
-	if (tokens.size() < 2) {
-		return shared_ptr<const Move>(nullptr);
+SquareCoordinate MoveInputParser::convertCharPairToCoords(string input) const {
+	SquareCoordinate coords;
+
+	if (input.size() != 2) {
+		return coords;
 	}
 
-	// turn each char pair into SquareCoordinates
-	array<SquareCoordinate, 2> coords;
-	for (int i = 0; i < 2; i++) {
-		string token = tokens[i];
-		if (token.size() != 2) {
-			return shared_ptr<const Move>(nullptr);
-		}
-		char first = token[0];
-		if (first < 65 || first > 90) {
-			return shared_ptr<const Move>(nullptr);
-		}
-		int x_coord = first - 65;
-
-		char second = token[1];
-		if (second < 49 || second > 57) {
-			return shared_ptr<const Move>(nullptr);
-		}
-		int y_coord = second - 48 - 1;
-
-		SquareCoordinate coord = { x_coord, y_coord };
-		coords[i] = coord;
+	char first = input[0];
+	if (first < 'A' || first > 'Z') {
+		return coords;
 	}
+	int x_coord = first - 'A';
 
-	// create move from SquareCoordinates
-	return make_shared<const Move>(coords[0], coords[1]);
+	char second = input[1];
+	if (second < '1' || second > '9') {
+		return coords;
+	}
+	int y_coord = second - '0' - 1;
+
+	coords = { x_coord, y_coord };
+	return coords;
 }
