@@ -122,6 +122,9 @@ int main() {
 	cout << parsed_move->getEndSquareCoord().x << parsed_move->getEndSquareCoord().y << endl;
 	cout << endl;
 
+	Move temp(SquareCoordinates(0, 0), SquareCoordinates(1, 1));
+	cout << parser.parseMoveInput(" A1  B2 ") << endl;
+
 	// start a new game
 	GameManager manager;
 	manager.startGame();

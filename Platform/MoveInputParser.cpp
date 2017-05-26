@@ -28,15 +28,19 @@ shared_ptr<const Move> MoveInputParser::parseMoveInput(string input) const {
 vector<string> MoveInputParser::parseInputIntoTokens(string input, char delimiter) const {
 	vector<string> tokens;
 	input += delimiter;
+	int i = 0;
 	while (!input.empty()) {
-		for (size_t i = 0; i < input.size(); i++) {
-			char c = input[i];
-			if (c == delimiter) {
-				if (i != 0) {
-					tokens.push_back(input.substr(0, i));
-				}
-				input = input.erase(0, i + 1);
+		char c = input[i];
+		if (c == delimiter) {
+			string token = input.substr(0, i);
+			if (!token.empty()) {
+				tokens.push_back(token);
 			}
+			input = input.erase(0, i + 1);
+			i = 0;
+		}
+		else {
+			i++;
 		}
 	}
 	return tokens;

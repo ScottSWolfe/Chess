@@ -99,7 +99,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>C:\Users\Scott\git\Chess\Platform\Debug;$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Piece.obj;Rook.obj;Bishop.obj;Knight.obj;King.obj;Queen.obj;Pawn.obj;Board.obj;Square.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Move.obj;Piece.obj;Rook.obj;Bishop.obj;Knight.obj;King.obj;Queen.obj;Pawn.obj;Board.obj;Square.obj;MoveInputParser.obj;SquareCoordinates.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -157,15 +157,16 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BoardTest.cpp" />
-    <ClCompile Include="PieceTest.cpp" />
+    <ClCompile Include="Board_Test.cpp" />
+    <ClCompile Include="MoveInputParser_Test.cpp" />
+    <ClCompile Include="Piece_Test.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="RookTest.cpp" />
+    <ClCompile Include="Rook_Test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

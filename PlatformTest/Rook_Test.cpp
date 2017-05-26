@@ -8,7 +8,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace PlatformTest
 {		
-	TEST_CLASS(RookTest)
+	TEST_CLASS(Rook_Test)
 	{
 	public:
 

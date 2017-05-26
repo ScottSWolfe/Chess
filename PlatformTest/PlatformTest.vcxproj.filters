@@ -29,14 +29,17 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RookTest.cpp">
-      <Filter>Source Files\Pieces</Filter>
-    </ClCompile>
-    <ClCompile Include="PieceTest.cpp">
-      <Filter>Source Files\Pieces</Filter>
-    </ClCompile>
-    <ClCompile Include="BoardTest.cpp">
+    <ClCompile Include="MoveInputParser_Test.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Board_Test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Piece_Test.cpp">
+      <Filter>Source Files\Pieces</Filter>
+    </ClCompile>
+    <ClCompile Include="Rook_Test.cpp">
+      <Filter>Source Files\Pieces</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

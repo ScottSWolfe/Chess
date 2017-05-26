@@ -12,3 +12,12 @@ SquareCoordinates Move::getStartSquareCoord() const {
 SquareCoordinates Move::getEndSquareCoord() const {
 	return end_coordinate;
 }
+
+bool operator==(const Move &left, const Move &right) {
+	if (left.start_coordinate == right.start_coordinate &&
+		left.end_coordinate == right.end_coordinate)
+	{
+		return true;
+	}
+	return false;
+}

@@ -11,7 +11,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace PlatformTest
 {
-	TEST_CLASS(BoardTest)
+	TEST_CLASS(Board_Test)
 	{
 	public:
 		
