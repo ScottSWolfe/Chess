@@ -13,8 +13,8 @@ Board GameState::getBoard() const {
 }
 
 void GameState::makeMove(const Move &move) {
-	SquareCoordinate start = move.getStartSquareCoord();
-	SquareCoordinate end = move.getEndSquareCoord();
+	SquareCoordinates start = move.getStartSquareCoord();
+	SquareCoordinates end = move.getEndSquareCoord();
 	unique_ptr<const Piece> piece = board.removePieceFromSquare(start.x, start.y);
 	if (piece == nullptr) {
 		throw invalid_argument("Start square does not contain a piece.");

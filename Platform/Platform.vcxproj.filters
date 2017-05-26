@@ -78,7 +78,7 @@
     <ClCompile Include="MoveInputParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SquareCoordinate.cpp">
+    <ClCompile Include="SquareCoordinates.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -137,10 +137,10 @@
     <ClInclude Include="Move.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SquareCoordinate.h">
+    <ClInclude Include="MoveInputParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MoveInputParser.h">
+    <ClInclude Include="SquareCoordinates.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

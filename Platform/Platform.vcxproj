@@ -132,7 +132,7 @@
     <ClCompile Include="Rook.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Square.cpp" />
-    <ClCompile Include="SquareCoordinate.cpp" />
+    <ClCompile Include="SquareCoordinates.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bishop.h" />
@@ -154,7 +154,7 @@
     <ClInclude Include="Queen.h" />
     <ClInclude Include="Rook.h" />
     <ClInclude Include="Square.h" />
-    <ClInclude Include="SquareCoordinate.h" />
+    <ClInclude Include="SquareCoordinates.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

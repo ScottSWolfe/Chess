@@ -1,14 +1,14 @@
 #include "Move.h"
 
 
-Move::Move(SquareCoordinate start_coord, SquareCoordinate end_coord)
+Move::Move(SquareCoordinates start_coord, SquareCoordinates end_coord)
 	: start_coordinate(start_coord), end_coordinate(end_coord)
 {}
 
-SquareCoordinate Move::getStartSquareCoord() const {
+SquareCoordinates Move::getStartSquareCoord() const {
 	return start_coordinate;
 }
 
-SquareCoordinate Move::getEndSquareCoord() const {
+SquareCoordinates Move::getEndSquareCoord() const {
 	return end_coordinate;
 }

@@ -2,7 +2,7 @@
 #include "Board.h"
 #include "HumanPlayer.h"
 #include "Move.h"
-#include "SquareCoordinate.h"
+#include "SquareCoordinates.h"
 using namespace std;
 
 
@@ -32,7 +32,7 @@ shared_ptr<const Move> HumanPlayer::askUserForMove() const {
 
 	cout << endl;
 
-	SquareCoordinate start = { start_x, start_y };
-	SquareCoordinate end = { end_x, end_y };
+	SquareCoordinates start = { start_x, start_y };
+	SquareCoordinates end = { end_x, end_y };
 	return make_shared<const Move>(start, end);
 }

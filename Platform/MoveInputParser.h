@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 #include <string>
-#include "SquareCoordinate.h"
+#include "SquareCoordinates.h"
 class Move;
 
 
@@ -14,6 +14,6 @@ public:
 
 private:
 	std::vector<std::string> parseInputIntoTokens(std::string input, char delimiter) const;
-	SquareCoordinate convertCharPairToCoords(std::string input) const;
+	SquareCoordinates convertCharPairToCoords(std::string input) const;
 
 };

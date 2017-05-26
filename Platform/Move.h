@@ -1,17 +1,17 @@
 #pragma once
 
-#include "SquareCoordinate.h"
+#include "SquareCoordinates.h"
 
 
 class Move {
 
 public:
-	Move(SquareCoordinate start_coord, SquareCoordinate end_coord);
-	SquareCoordinate getStartSquareCoord() const;
-	SquareCoordinate getEndSquareCoord() const;
+	Move(SquareCoordinates start_coord, SquareCoordinates end_coord);
+	SquareCoordinates getStartSquareCoord() const;
+	SquareCoordinates getEndSquareCoord() const;
 
 private:
-	SquareCoordinate start_coordinate;
-	SquareCoordinate end_coordinate;
+	SquareCoordinates start_coordinate;
+	SquareCoordinates end_coordinate;
 
 };
