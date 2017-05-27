@@ -3,6 +3,7 @@
 #include "ConsoleBoardPresenter.h"
 #include "GameManager.h"
 #include "Move.h"
+#include "MoveValidator.h"
 #include "HumanPlayer.h"
 using namespace std;
 
@@ -32,6 +33,16 @@ void GameManager::runGameLoop() {
 
 }
 
+std::shared_ptr<const Move> GameManager::getPlayerMove() const {
+	const Player *current_player = getCurrentPlayer();
+	std::shared_ptr<const Move> move = current_player->move(current_state.getBoard());
+	MoveValidator moveValidator(current_state, *move);
+	if (!moveValidator.validateMove()) {
+		move = getPlayerMove();
+	}
+	return move;
+}
+
 const Player *GameManager::getCurrentPlayer() const {
 	if (current_state.getPlayersTurn() == PlayerTurn::WHITE) {
 		return white_player.get();
@@ -39,11 +50,4 @@ const Player *GameManager::getCurrentPlayer() const {
 	else {
 		return black_player.get();
 	}
-}
-
-std::shared_ptr<const Move> GameManager::getPlayerMove() const {
-	const Player *current_player = getCurrentPlayer();
-	std::shared_ptr<const Move> move = current_player->move(current_state.getBoard());
-	// validate move is legal
-	return move;
 }

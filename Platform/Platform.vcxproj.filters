@@ -81,6 +81,9 @@
     <ClCompile Include="SquareCoordinates.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MoveValidator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Square.h">
@@ -141,6 +144,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SquareCoordinates.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveValidator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
