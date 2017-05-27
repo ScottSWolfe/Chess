@@ -1,3 +1,4 @@
+#include "ChessDebug.h"
 #include "Board.h"
 #include "BoardInitializer.h"
 #include "Bishop.h"

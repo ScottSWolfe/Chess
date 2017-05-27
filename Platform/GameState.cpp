@@ -1,4 +1,5 @@
 #include <memory>
+#include "ChessDebug.h"
 #include "GameState.h"
 using namespace std;
 

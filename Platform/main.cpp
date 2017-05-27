@@ -1,4 +1,11 @@
 #include <iostream>
+#include "ChessDebug.h"
+#ifdef _DEBUG
+#define _CRTDBG_MAP_ALLOC  
+#include <stdlib.h>  
+#include <crtdbg.h> 
+#endif
+#include "windows.h"
 #include "MoveInputParser.h"
 #include "ChessEnums.h"
 #include "Piece.h"
@@ -13,11 +20,14 @@
 #include "ConsoleBoardPresenter.h"
 #include "BoardInitializer.h"
 #include "GameManager.h"
-#include "windows.h"
 using namespace std;
 
 
 int main() {
+	#ifdef _DEBUG
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+	#endif
+
 	cout << "Hello World of Chess!" << endl;
 	cout << endl;
 
@@ -126,8 +136,7 @@ int main() {
 
 	// start a new game
 	GameManager manager;
-	manager.startGame();
-
+	//manager.startGame();
 
 	// wait for user to press any key
 	system("pause");

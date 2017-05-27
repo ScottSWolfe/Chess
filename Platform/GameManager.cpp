@@ -1,4 +1,5 @@
 #include <iostream>
+#include "ChessDebug.h"
 #include "BoardInitializer.h"
 #include "ConsoleBoardPresenter.h"
 #include "GameManager.h"

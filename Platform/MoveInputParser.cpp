@@ -1,5 +1,6 @@
 #include <array>
 #include <vector>
+#include "ChessDebug.h"
 #include "Move.h"
 #include "MoveInputParser.h"
 using namespace std;

@@ -1,5 +1,6 @@
 #include <memory>
 #include <string>
+#include "ChessDebug.h"
 #include "Bishop.h"
 #include "Knight.h"
 #include "King.h"

@@ -1,3 +1,4 @@
+#include "ChessDebug.h"
 #include "Move.h"
 
 

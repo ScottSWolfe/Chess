@@ -1,4 +1,5 @@
 #include <iostream>
+#include "ChessDebug.h"
 #include "Board.h"
 #include "HumanPlayer.h"
 #include "Move.h"

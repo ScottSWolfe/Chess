@@ -1,4 +1,5 @@
 #include <string>
+#include "ChessDebug.h"
 #include "Bishop.h"
 
 

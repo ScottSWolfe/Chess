@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include "ChessDebug.h"
 #include "Pawn.h"
 #include "Piece.h"
 #include "Square.h"

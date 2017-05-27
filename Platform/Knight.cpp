@@ -1,5 +1,5 @@
+#include "ChessDebug.h"
 #include "Knight.h"
-#include "Piece.h"
 
 
 Knight::Knight(PieceColor color) : Piece(color) {}

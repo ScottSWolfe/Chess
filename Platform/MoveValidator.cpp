@@ -1,3 +1,4 @@
+#include "ChessDebug.h"
 #include "MoveValidator.h"
 
 MoveValidator::MoveValidator(const GameState &state, const Move &move)

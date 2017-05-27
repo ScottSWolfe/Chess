@@ -152,5 +152,8 @@
     <ClInclude Include="MoveValidator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ChessDebug.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

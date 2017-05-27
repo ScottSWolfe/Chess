@@ -1,3 +1,4 @@
+#include "ChessDebug.h"
 #include "ChessEnums.h"
 
 bool operator==(const PieceColor &piece_color, const PlayerTurn &player_turn) {

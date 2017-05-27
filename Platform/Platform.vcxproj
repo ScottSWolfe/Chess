@@ -141,6 +141,7 @@
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardInitializer.h" />
     <ClInclude Include="BoardPresenter.h" />
+    <ClInclude Include="ChessDebug.h" />
     <ClInclude Include="ChessEnums.h" />
     <ClInclude Include="ConsoleBoardPresenter.h" />
     <ClInclude Include="GameManager.h" />
