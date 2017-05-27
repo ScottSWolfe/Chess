@@ -35,7 +35,7 @@ namespace PlatformTest
 			Assert::IsFalse(move == *parser.parseMoveInput("B1 B2"));
 		}
 
-		TEST_METHOD(canParseAtoZand1to9)
+		TEST_METHOD(canParseMultipleNumbersAndLetters)
 		{
 			// can parse from A to Z and 1 to 9
 			Move move(SquareCoordinates(25, 8), SquareCoordinates(0, 0));
@@ -44,8 +44,13 @@ namespace PlatformTest
 			// cannot parse 0
 			Assert::IsNull(parser.parseMoveInput("A0 B1").get());
 
-			// cannot parse greater than 9
-			Assert::IsNull(parser.parseMoveInput("A10 B1").get());
+			// can parse greater than 9
+			move = Move(SquareCoordinates(0, 15), SquareCoordinates(0, 0));
+			Assert::IsTrue(move == *parser.parseMoveInput("A16 A1").get());
+
+			// can parse multiple letters
+			move = Move(SquareCoordinates(29, 0), SquareCoordinates(59, 0));
+			Assert::IsTrue(move == *parser.parseMoveInput("AD1 BH1").get());
 		}
 
 		TEST_METHOD(badInputReturnsNull)
