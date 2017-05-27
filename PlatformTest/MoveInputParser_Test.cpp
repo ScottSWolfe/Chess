@@ -52,9 +52,6 @@ namespace PlatformTest
 		{
 			// when only one square is given
 			Assert::IsNull(parser.parseMoveInput("A1").get());
-
-			// when lower case letters are given
-			Assert::IsNull(parser.parseMoveInput("a1 B2").get());
 		}
 
 		TEST_METHOD(canHandleSpuriousSpaces)
@@ -71,6 +68,13 @@ namespace PlatformTest
 			Assert::IsNotNull(parser.parseMoveInput("A1 B2 C3").get());
 			Move move(SquareCoordinates(0, 0), SquareCoordinates(1, 1));
 			Assert::IsTrue(move == *parser.parseMoveInput("A1 B2 C3"));
+		}
+
+		TEST_METHOD(isCaseInsensitive)
+		{
+			// accepts lower and upper case letters
+			Move move(SquareCoordinates(0, 0), SquareCoordinates(1, 1));
+			Assert::IsTrue(move == *parser.parseMoveInput("a1 B2"));
 		}
 
 	};

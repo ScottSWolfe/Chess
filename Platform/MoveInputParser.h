@@ -15,5 +15,6 @@ public:
 private:
 	std::vector<std::string> parseInputIntoTokens(std::string input, char delimiter) const;
 	SquareCoordinates convertCharPairToCoords(std::string input) const;
+	char uppercase(char c) const;
 
 };

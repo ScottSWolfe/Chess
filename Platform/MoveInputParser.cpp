@@ -55,6 +55,7 @@ SquareCoordinates MoveInputParser::convertCharPairToCoords(string input) const {
 	}
 
 	char first = input[0];
+	first = uppercase(first);
 	if (first < 'A' || first > 'Z') {
 		return coords;
 	}
@@ -68,4 +69,11 @@ SquareCoordinates MoveInputParser::convertCharPairToCoords(string input) const {
 
 	coords = { x_coord, y_coord };
 	return coords;
+}
+
+char MoveInputParser::uppercase(char c) const {
+	if (c >= 'a' && c <= 'z') {
+		c -= 32;
+	}
+	return c;
 }
