@@ -8,8 +8,8 @@ class Move {
 public:
 	Move(SquareCoordinates start_coord, SquareCoordinates end_coord);
 	friend bool operator==(const Move &left, const Move &right);
-	SquareCoordinates getStartSquareCoord() const;
-	SquareCoordinates getEndSquareCoord() const;
+	SquareCoordinates getStartCoords() const;
+	SquareCoordinates getEndCoords() const;
 
 private:
 	SquareCoordinates start_coordinate;

@@ -13,6 +13,9 @@ class GameState {
 public:
 	GameState(Board board, PlayerTurn beginning_player);
 	Board getBoard() const;
+	int getBoardDimension() const;
+	bool isPiece(int x, int y) const;
+	PieceColor getPieceColor(int x, int y) const;
 	void makeMove(const Move &move);
 	PlayerTurn getPlayersTurn() const;
 

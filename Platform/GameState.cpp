@@ -12,9 +12,21 @@ Board GameState::getBoard() const {
 	return board;
 }
 
+int GameState::getBoardDimension() const {
+	return board.getDimension();
+}
+
+bool GameState::isPiece(int x, int y) const {
+	return board.isPiece(x, y);
+}
+
+PieceColor GameState::getPieceColor(int x, int y) const {
+	return board.getPieceColor(x, y);
+}
+
 void GameState::makeMove(const Move &move) {
-	SquareCoordinates start = move.getStartSquareCoord();
-	SquareCoordinates end = move.getEndSquareCoord();
+	SquareCoordinates start = move.getStartCoords();
+	SquareCoordinates end = move.getEndCoords();
 	unique_ptr<const Piece> piece = board.removePieceFromSquare(start.x, start.y);
 	if (piece == nullptr) {
 		throw invalid_argument("Start square does not contain a piece.");

@@ -5,11 +5,11 @@ Move::Move(SquareCoordinates start_coord, SquareCoordinates end_coord)
 	: start_coordinate(start_coord), end_coordinate(end_coord)
 {}
 
-SquareCoordinates Move::getStartSquareCoord() const {
+SquareCoordinates Move::getStartCoords() const {
 	return start_coordinate;
 }
 
-SquareCoordinates Move::getEndSquareCoord() const {
+SquareCoordinates Move::getEndCoords() const {
 	return end_coordinate;
 }
 

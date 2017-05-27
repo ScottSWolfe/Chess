@@ -13,6 +13,8 @@ public:
 private:
 	const GameState &state;
 	const Move &move;
+	bool doSquaresExist() const;
+	bool doesSquareExist(int x, int y) const;
 	bool isPiece() const;
 	bool isCorrectColor() const;
 

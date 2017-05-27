@@ -19,26 +19,41 @@ Board::Board(const Board &other_board) :
 }
 
 Square &Board::getSquare(int x, int y) {
-	return squares[convertCoordinatesToIndex(x, y)];
+	return squares[convertCoordsToIndex(x, y)];
 }
 
 const Square &Board::getSquare(int x, int y) const {
-	return squares[convertCoordinatesToIndex(x, y)];
+	return squares[convertCoordsToIndex(x, y)];
 }
 
 void Board::addPieceToSquare(int x, int y, unique_ptr<const Piece> &piece) {
-	squares[convertCoordinatesToIndex(x, y)].setPiece(piece);
+	squares[convertCoordsToIndex(x, y)].setPiece(piece);
 }
 
 unique_ptr<const Piece> Board::removePieceFromSquare(int x, int y) {
-	return squares[convertCoordinatesToIndex(x, y)].removePiece();
+	return squares[convertCoordsToIndex(x, y)].removePiece();
+}
+
+bool Board::isPiece(int x, int y) const {
+	if (squares[convertCoordsToIndex(x, y)].getPiece() == nullptr) {
+		return false;
+	}
+	return true;
+}
+
+PieceColor Board::getPieceColor(int x, int y) const {
+	const Piece *piece = squares[convertCoordsToIndex(x, y)].getPiece();
+	if (piece == nullptr) {
+		throw invalid_argument("square for given coordinates does not containe a piece");
+	}
+	return piece->getColor();
 }
 
 int Board::getDimension() const {
 	return dimension;
 }
 
-int Board::convertCoordinatesToIndex(int x, int y) const {
+int Board::convertCoordsToIndex(int x, int y) const {
 	return y * dimension + x;
 }
 

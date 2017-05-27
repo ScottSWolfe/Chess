@@ -118,9 +118,9 @@ int main() {
 	MoveInputParser parser;
 	shared_ptr<const Move> parsed_move = parser.parseMoveInput("A3 D5");
 	cout << "A3: ";
-	cout << parsed_move->getStartSquareCoord().x << parsed_move->getStartSquareCoord().y << endl;
+	cout << parsed_move->getStartCoords().x << parsed_move->getStartCoords().y << endl;
 	cout << "D5: ";
-	cout << parsed_move->getEndSquareCoord().x << parsed_move->getEndSquareCoord().y << endl;
+	cout << parsed_move->getEndCoords().x << parsed_move->getEndCoords().y << endl;
 	cout << endl;
 
 
