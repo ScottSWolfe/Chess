@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <string>
 #include "Player.h"
 #include "BoardPresenter.h"
 #include "GameState.h"
@@ -23,5 +24,6 @@ private:
 	void runGameLoop();
 	const Player *GameManager::getCurrentPlayer() const;
 	std::shared_ptr<const Move> GameManager::getPlayerMove() const;
+	std::string playerTurnToString() const;
 
 };

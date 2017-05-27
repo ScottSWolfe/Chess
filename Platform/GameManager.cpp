@@ -26,7 +26,7 @@ void GameManager::runGameLoop() {
 
 	while (true) {
 		// check if game is over
-		cout << static_cast<int>(current_state.getPlayersTurn()) << "'s turn" << endl;
+		cout << playerTurnToString() << "'s Turn" << endl;
 		std::shared_ptr<const Move> move = getPlayerMove();
 		current_state.makeMove(*move);
 		presenter->displayBoard(current_state.getBoard());
@@ -39,6 +39,7 @@ std::shared_ptr<const Move> GameManager::getPlayerMove() const {
 	std::shared_ptr<const Move> move = current_player->move(current_state.getBoard());
 	MoveValidator moveValidator(current_state, *move);
 	if (!moveValidator.validateMove()) {
+		cout << "Illegal Move. Try again:" << endl;
 		move = getPlayerMove();
 	}
 	return move;
@@ -50,5 +51,14 @@ const Player *GameManager::getCurrentPlayer() const {
 	}
 	else {
 		return black_player.get();
+	}
+}
+
+string GameManager::playerTurnToString() const {
+	if (current_state.getPlayersTurn() == PlayerTurn::BLACK) {
+		return "Black";
+	}
+	else {
+		return "White";
 	}
 }

@@ -136,7 +136,7 @@ int main() {
 
 	// start a new game
 	GameManager manager;
-	//manager.startGame();
+	manager.startGame();
 
 	// wait for user to press any key
 	system("pause");
