@@ -1,4 +1,5 @@
 #include <array>
+#include <cmath>
 #include <vector>
 #include "ChessDebug.h"
 #include "Move.h"
@@ -16,7 +17,7 @@ shared_ptr<const Move> MoveInputParser::parseMoveInput(string input) const {
 
 	array<SquareCoordinates, 2> squares;
 	for (int i = 0; i < 2; i++) {
-		squares[i] = convertCharPairToCoords(tokens[i]);
+		squares[i] = convertTokensToCoords(tokens[i]);
 		if (squares[i].empty()) {
 			return move;
 		}
@@ -47,28 +48,85 @@ vector<string> MoveInputParser::parseInputIntoTokens(string input, char delimite
 	return tokens;
 }
 
-SquareCoordinates MoveInputParser::convertCharPairToCoords(string input) const {
+SquareCoordinates MoveInputParser::convertTokensToCoords(string input) const {
 	SquareCoordinates coords;
-
-	if (input.size() != 2) {
+	if (input.size() < 2) {
 		return coords;
 	}
-
-	char first = input[0];
-	first = uppercase(first);
-	if (first < 'A' || first > 'Z') {
+	string letters;
+	string numbers;
+	if (readLettersAndNumbers(input, letters, numbers) == false) {
 		return coords;
 	}
-	int x_coord = first - 'A';
-
-	char second = input[1];
-	if (second < '1' || second > '9') {
-		return coords;
-	}
-	int y_coord = second - '0' - 1;
-
+	int x_coord = convertLettersToXCoord(letters);
+	int y_coord = convertNumbersToYCoord(numbers);
 	coords = { x_coord, y_coord };
 	return coords;
+}
+
+bool MoveInputParser::readLettersAndNumbers(const string input, string &letters, string &numbers) const {
+	
+	for (size_t i = 0; i < input.size(); i++) {
+		char c = input[i];
+		if (isLetter(c)) {
+			letters += uppercase(c);
+		}
+		else if (isNumber(c)) {
+			break;
+		}
+		else {
+			return false;
+		}
+	}
+
+	for (size_t i = letters.size(); i < input.size(); i++) {
+		char c = input[i];
+		if (isNumber(c)) {
+			numbers += c;
+		}
+		else {
+			return false;
+		}
+	}
+
+	if (letters.empty() || numbers.empty()) {
+		return false;
+	}
+
+	return true;
+}
+
+int MoveInputParser::convertLettersToXCoord(string letters) const {
+	int sum = 0;
+	for (size_t i = 0; i < letters.size(); i++) {
+		char c = letters[i];
+		sum += static_cast<int>(pow(26, letters.size() - 1 - i)) * (c - 'A' + 1);
+	}
+	return sum - 1;
+}
+
+int MoveInputParser::convertNumbersToYCoord(string numbers) const {
+	int sum = 0;
+	for (size_t i = 0; i < numbers.size(); i++) {
+		char c = numbers[i];
+		sum += static_cast<int>(pow(10, numbers.size() - 1 - i)) * (c - '0');
+	}
+	return sum - 1;
+}
+
+bool MoveInputParser::isLetter(char c) const {
+	c = uppercase(c);
+	if (c >= 'A' && c <= 'Z') {
+		return true;
+	}
+	return false;
+}
+
+bool MoveInputParser::isNumber(char c) const {
+	if (c >= '0' || c <= '9') {
+		return true;
+	}
+	return false;
 }
 
 char MoveInputParser::uppercase(char c) const {

@@ -26,5 +26,5 @@ shared_ptr<const Move> HumanPlayer::askUserForMove() const {
 	string input;
 	getline(cin, input);
 	MoveInputParser parser;
-	return parser.parseMoveInput(input);;
+	return parser.parseMoveInput(input);
 }
