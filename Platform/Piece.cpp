@@ -17,7 +17,7 @@ PieceColor Piece::getColor() const {
 	return Piece::color;
 }
 
-const std::string getPieceSymbol(const Piece *piece) {
+const std::string Piece::getPieceSymbol(const Piece *piece) {
 	if (piece == nullptr) {
 		return " ";
 	}

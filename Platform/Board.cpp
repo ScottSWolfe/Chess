@@ -2,6 +2,7 @@
 #include "ChessDebug.h"
 #include "Board.h"
 #include "Move.h"
+#include "Piece.h"
 #include "Position.h"
 using namespace std;
 
@@ -34,6 +35,10 @@ const Square &Board::getSquare(Position pos) const {
 	return squares[getIndex(pos)];
 }
 
+SquareColor Board::getSquareColor(Position pos) const {
+	return getSquare(pos).getColor();
+}
+
 void Board::addPieceToSquare(Position pos, unique_ptr<const Piece> &piece) {
 	getSquare(pos).setPiece(piece);
 }
@@ -63,6 +68,10 @@ PieceColor Board::getPieceColor(Position pos) const {
 	const Piece *piece = getPiece(pos);
 	checkIfPieceIsNull(piece);
 	return piece->getColor();
+}
+
+string Board::getPieceSymbol(Position pos) const {
+	return Piece::getPieceSymbol(getPiece(pos));
 }
 
 int Board::getDimension() const {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <string>
 #include <vector>
 #include "ChessEnums.h"
 #include "Square.h"
@@ -15,12 +16,14 @@ public:
 	Board(const Board &other_board);
 	Square &getSquare(Position pos);
 	const Square &getSquare(Position pos) const;
+	SquareColor getSquareColor(Position pos) const;
 	void addPieceToSquare(Position pos, std::unique_ptr<const Piece> &piece);
 	std::unique_ptr<const Piece> removePieceFromSquare(Position pos);
 	std::vector<Move> getMoves(Position pos) const;
 	bool isPiece(Position pos) const;
 	const Piece *getPiece(Position pos) const;
 	PieceColor getPieceColor(Position pos) const;
+	std::string getPieceSymbol(Position pos) const;
 	int getDimension() const;
 
 private:

@@ -11,40 +11,40 @@ using namespace std;
 
 
 void ConsoleBoardPresenter::displayBoard(const Board &board) const {
-
 	int dimension = board.getDimension();
-
-	setTextColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
 	printHorizontalBorder(dimension);
-	cout << endl;
+	printRows(board);
+	printHorizontalBorder(dimension);
+	setTextColor(ConsoleColor::BLACK, ConsoleColor::WHITE);
+}
 
+void ConsoleBoardPresenter::printRows(const Board &board) const {
+	int dimension = board.getDimension();
 	for (int row = dimension - 1; row >= 0; --row) {
 
 		setTextColor(BORDER_BACKGROUND, BORDER_TEXT);
 		printLeftBorder(row, dimension);
 
-		for (int col = 0; col < dimension; ++col) {
-			const Square &square = board.getSquare(Position(col, row));
-			const Piece *piece = square.getPiece();
+		printRow(board, row);
 
-			string symbol = getPieceSymbol(piece);
-			PieceColor piece_color = getPieceColor(piece);
-			SquareColor square_color = square.getColor();
-
-			setTextColor(square_color, piece_color);
-			cout << " ";
-			cout << symbol;
-			cout << " ";
-		}
 		setTextColor(BORDER_BACKGROUND, BORDER_TEXT);
 		printRightBorder(row, dimension);
 		cout << endl;
 	}
-	setTextColor(BORDER_BACKGROUND, BORDER_TEXT);
-	printHorizontalBorder(dimension);
+}
 
-	setTextColor(ConsoleColor::BLACK, ConsoleColor::WHITE);
-	cout << endl;
+void ConsoleBoardPresenter::printRow(const Board &board, int row) const {
+	int dimension = board.getDimension();
+	for (int col = 0; col < dimension; ++col) {
+		Position pos(col, row);
+		string symbol = board.getPieceSymbol(pos);
+		PieceColor piece_color = getColorForPiece(board, pos);
+		SquareColor square_color = board.getSquareColor(pos);
+		setTextColor(square_color, piece_color);
+		cout << " ";
+		cout << symbol;
+		cout << " ";
+	}
 }
 
 void ConsoleBoardPresenter::setTextColor(ConsoleColor background_color, ConsoleColor text_color) const {
@@ -85,11 +85,12 @@ ConsoleColor ConsoleBoardPresenter::getConsoleSquareColor(SquareColor color) con
 }
 
 void ConsoleBoardPresenter::printHorizontalBorder(int dimension) const {
+	setTextColor(BORDER_BACKGROUND, BORDER_TEXT);
 	cout << borderSpacing(dimension);
 	for (int i = 0; i < dimension; ++i) {
 		cout << getLetterForIndex(i) << " ";
 	}
-	cout << borderSpacing(dimension);
+	cout << borderSpacing(dimension) << endl;
 }
 
 void ConsoleBoardPresenter::printLeftBorder(int row, int dimension) const {
@@ -125,4 +126,13 @@ string ConsoleBoardPresenter::borderSpacing(int dimension) const {
 		return "    ";
 	}
 	return "   ";
+}
+
+PieceColor ConsoleBoardPresenter::getColorForPiece(const Board &board, Position pos) const {
+	if (board.isPiece(pos)) {
+		return board.getPieceColor(pos);
+	}
+	else {
+		return PieceColor::WHITE;
+	}
 }

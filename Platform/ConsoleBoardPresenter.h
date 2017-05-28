@@ -3,6 +3,7 @@
 #include "BoardPresenter.h"
 #include "ChessEnums.h"
 class Board;
+struct Position;
 
 
 enum class ConsoleColor { BLACK = 0x0, BLUE = 0x1, RED = 0x4, YELLOW = 0xE, WHITE = 0xF };
@@ -13,6 +14,8 @@ public:
 	void displayBoard(const Board &board) const override;
 
 private:
+	void printRows(const Board &board) const;
+	void printRow(const Board &board, int row) const;
 	void setTextColor(ConsoleColor background_color, ConsoleColor text_color) const;
 	void setTextColor(SquareColor square_color, PieceColor piece_color) const;
 	ConsoleColor getConsoleSquareColor(SquareColor color) const;
@@ -22,6 +25,7 @@ private:
 	void printRightBorder(int row, int dimension) const;
 	std::string getLetterForIndex(int index) const;
 	std::string borderSpacing(int dimension) const;
+	PieceColor getColorForPiece(const Board &board, Position pos) const;
 
 	const ConsoleColor WHITE_PIECE = ConsoleColor::WHITE;
 	const ConsoleColor BLACK_PIECE = ConsoleColor::YELLOW;
