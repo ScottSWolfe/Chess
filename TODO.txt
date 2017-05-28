@@ -1,3 +1,0 @@
-// TODO.txt
-
-Make moves data structure a map to a map (x to y) instead of a vector?
