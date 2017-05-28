@@ -1,6 +1,7 @@
 #include <memory>
 #include "ChessDebug.h"
 #include "GameState.h"
+#include "Position.h"
 using namespace std;
 
 
@@ -17,26 +18,21 @@ int GameState::getBoardDimension() const {
 	return board.getDimension();
 }
 
-bool GameState::isPiece(int x, int y) const {
-	return board.isPiece(x, y);
+bool GameState::isPiece(Position pos) const {
+	return board.isPiece(pos);
 }
 
-const Piece *GameState::getPiece(int x, int y) const {
-	return board.getPiece(x, y);
+const Piece *GameState::getPiece(Position pos) const {
+	return board.getPiece(pos);
 }
 
-PieceColor GameState::getPieceColor(int x, int y) const {
-	return board.getPieceColor(x, y);
+PieceColor GameState::getPieceColor(Position pos) const {
+	return board.getPieceColor(pos);
 }
 
 bool GameState::isMoveAvailable(const Move &move) const {
-	int x = move.getStart().x;
-	int y = move.getStart().y;
-	const Piece *piece = board.getPiece(x, y);
-	if (piece == nullptr) {
-		throw invalid_argument("square does not contain a piece");
-	}
-	vector<Move> moves = piece->getMoves(board, x, y);
+	const Piece *piece = board.getPiece(move.getStart());
+	vector<Move> moves = piece->getMoves(board, move.getStart());
 	for (Move curr_move : moves) {
 		if (curr_move == move) {
 			return true;
@@ -48,11 +44,8 @@ bool GameState::isMoveAvailable(const Move &move) const {
 void GameState::makeMove(const Move &move) {
 	Position start = move.getStart();
 	Position end = move.getEnd();
-	unique_ptr<const Piece> piece = board.removePieceFromSquare(start.x, start.y);
-	if (piece == nullptr) {
-		throw invalid_argument("Start square does not contain a piece.");
-	}
-	board.addPieceToSquare(end.x, end.y, piece);
+	unique_ptr<const Piece> piece = board.removePieceFromSquare(start);
+	board.addPieceToSquare(end, piece);
 	changePlayersTurn();
 }
 

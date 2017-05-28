@@ -15,34 +15,33 @@ const string Pawn::getSymbol() const {
 	return PAWN_SYMBOL;
 }
 
-std::vector<Move> Pawn::getMoves(const Board &board, int x, int y) const {
+std::vector<Move> Pawn::getMoves(const Board &board, Position pos) const {
 	vector<Move> moves;
-	Position start(x, y);
+	Position start(pos);
 	Position end;
 
 	// move forward one
-	if (!board.isPiece(x, y + direction())) {
-		end = Position(x, y + direction());
+	end = start.add(0, step());
+	if (board.isPiece(end) == false) {
 		moves.push_back(Move(start, end));
 	}
 
 	// move forward two
-	if (y == startRow(board.getDimension())) {
-		if (!board.isPiece(x, y + direction()) && !board.isPiece(x, y + 2 * direction())) {
-			end = Position(x, y + 2 * direction());
-			moves.push_back(Move(start, end));
+	if (start.y == startRow(board.getDimension())) {
+		Position step_1 = start.add(0, step());
+		Position step_2 = start.add(0, 2 * step());
+		if (board.isPiece(step_1) == false && board.isPiece(step_2) == false) {
+			moves.push_back(Move(start, step_2));
 		}
 	}
 
 	// capture diagonally
-	if (board.isPiece(x - 1, y + direction()) &&
-		board.getPieceColor(x - 1, y + direction()) != getColor()) {
-		end = Position(x - 1, y + direction());
+	end = start.add(-1, step());
+	if (board.isPiece(end) && board.getPieceColor(end) != getColor()) {
 		moves.push_back(Move(start, end));
 	}
-	if (board.isPiece(x + 1, y + direction()) &&
-		board.getPieceColor(x + 1, y + direction()) != getColor()) {
-		end = Position(x + 1, y + direction());
+	end = start.add(1, step());
+	if (board.isPiece(end) && board.getPieceColor(end) != getColor()) {
 		moves.push_back(Move(start, end));
 	}
 
@@ -51,7 +50,7 @@ std::vector<Move> Pawn::getMoves(const Board &board, int x, int y) const {
 	return moves;
 }
 
-int Pawn::direction() const {
+int Pawn::step() const {
 	if (getColor() == PieceColor::BLACK) {
 		return -1;
 	}

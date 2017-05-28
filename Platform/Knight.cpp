@@ -2,6 +2,7 @@
 #include "ChessDebug.h"
 #include "Knight.h"
 #include "Move.h"
+#include "Position.h"
 using namespace std;
 
 
@@ -11,7 +12,7 @@ const string Knight::getSymbol() const {
 	return KNIGHT_SYMBOL;
 }
 
-vector<Move> Knight::getMoves(const Board &board, int x, int y) const {
+vector<Move> Knight::getMoves(const Board &board, Position pos) const {
 	vector<Move> moves;
 	return moves;
 }

@@ -1,5 +1,6 @@
 #include "ChessDebug.h"
 #include "Move.h"
+#include "Position.h"
 
 
 Move::Move(Position start_coord, Position end_coord)

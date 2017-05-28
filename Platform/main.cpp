@@ -78,12 +78,12 @@ int main() {
 	int board_dimension(8);
 	Board board(board_dimension);
 	
-	board.addPieceToSquare(1, 0, rook);
-	board.addPieceToSquare(1, 7, knight);
-	board.addPieceToSquare(3, 3, bishop);
-	board.addPieceToSquare(3, 0, queen);
-	board.addPieceToSquare(4, 0, king);
-	board.addPieceToSquare(0, 1, pawn);
+	board.addPieceToSquare(Position(1, 0), rook);
+	board.addPieceToSquare(Position(1, 7), knight);
+	board.addPieceToSquare(Position(3, 3), bishop);
+	board.addPieceToSquare(Position(3, 0), queen);
+	board.addPieceToSquare(Position(4, 0), king);
+	board.addPieceToSquare(Position(0, 1), pawn);
 	
 	ConsoleBoardPresenter presenter;
 	presenter.displayBoard(board);
@@ -99,8 +99,8 @@ int main() {
 
 	// Testing removing piece from square and moving to another
 	cout << "Moving a Piece" << endl;
-	unique_ptr<const Piece> piece_to_move = initialized_board.removePieceFromSquare(0, 1);
-	initialized_board.addPieceToSquare(0, 3, piece_to_move);
+	unique_ptr<const Piece> piece_to_move = initialized_board.removePieceFromSquare(Position(0, 1));
+	initialized_board.addPieceToSquare(Position(0, 3), piece_to_move);
 	presenter.displayBoard(initialized_board);
 	cout << endl;
 
@@ -111,8 +111,8 @@ int main() {
 	presenter.displayBoard(copy_of_board);
 	cout << endl;
 
-	unique_ptr<const Piece> piece_to_move_on_copied_board = copy_of_board.removePieceFromSquare(3, 6);
-	copy_of_board.addPieceToSquare(3, 4, piece_to_move_on_copied_board);
+	unique_ptr<const Piece> piece_to_move_on_copied_board = copy_of_board.removePieceFromSquare(Position(3, 6));
+	copy_of_board.addPieceToSquare(Position(3, 4), piece_to_move_on_copied_board);
 
 	cout << "Move piece on copied board" << endl;
 	presenter.displayBoard(copy_of_board);

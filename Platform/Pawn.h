@@ -6,6 +6,7 @@
 #include "Piece.h"
 class Board;
 class Move;
+struct Position;
 
 
 class Pawn : public Piece {
@@ -13,10 +14,10 @@ class Pawn : public Piece {
 public:
 	Pawn(PieceColor color);
 	const std::string getSymbol() const override;
-	std::vector<Move> getMoves(const Board &board, int x, int y) const override;
+	std::vector<Move> getMoves(const Board &board, Position pos) const override;
 
 private:
-	int direction() const;
+	int step() const;
 	int startRow(int dimension) const;
 
 };

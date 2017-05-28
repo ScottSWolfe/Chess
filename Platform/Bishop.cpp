@@ -2,6 +2,7 @@
 #include "ChessDebug.h"
 #include "Bishop.h"
 #include "Move.h"
+#include "Position.h"
 using namespace std;
 
 
@@ -11,7 +12,7 @@ const string Bishop::getSymbol() const {
 	return BISHOP_SYMBOL;
 }
 
-vector<Move> Bishop::getMoves(const Board &board, int x, int y) const {
+vector<Move> Bishop::getMoves(const Board &board, Position pos) const {
 	vector<Move> moves;
 	return moves;
 }

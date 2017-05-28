@@ -5,6 +5,7 @@
 #include "Piece.h"
 #include "Rook.h"
 #include "ChessEnums.h"
+#include "Position.h"
 using namespace std;
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -17,43 +18,47 @@ namespace PlatformTest
 		
 		TEST_METHOD(copyConstructorMakesAccurateCopy)
 		{
+			Position pos00(0, 0);
+			Position pos01(0, 1);
+			Position pos10(1, 0);
+			Position pos11(1, 1);
+
 			Board board(2);
 			unique_ptr<const Piece> rook = make_unique<const Rook>(PieceColor::BLACK);
-			board.addPieceToSquare(0, 1, rook);
+			board.addPieceToSquare(Position(0, 1), rook);
 			Board copy_of_board(board);
 
 			// squares are same colors
-			Assert::AreEqual(static_cast<int>(board.getSquare(0, 0).getColor()),
-				static_cast<int>(copy_of_board.getSquare(0, 0).getColor()));
-			Assert::AreEqual(static_cast<int>(board.getSquare(0, 1).getColor()),
-				static_cast<int>(copy_of_board.getSquare(0, 1).getColor()));
-			Assert::AreEqual(static_cast<int>(board.getSquare(1, 0).getColor()),
-				static_cast<int>(copy_of_board.getSquare(1, 0).getColor()));
-			Assert::AreEqual(static_cast<int>(board.getSquare(1, 1).getColor()),
-				static_cast<int>(copy_of_board.getSquare(1, 1).getColor()));
+			Assert::IsTrue(board.getSquare(pos00).getColor() ==  copy_of_board.getSquare(pos00).getColor());
+			Assert::IsTrue(board.getSquare(pos01).getColor() == copy_of_board.getSquare(pos01).getColor());
+			Assert::IsTrue(board.getSquare(pos10).getColor() == copy_of_board.getSquare(pos10).getColor());
+			Assert::IsTrue(board.getSquare(pos11).getColor() == copy_of_board.getSquare(pos11).getColor());
 
 			// square with a piece
-			Assert::IsNotNull(copy_of_board.getSquare(0, 1).getPiece());
+			Assert::IsNotNull(copy_of_board.getSquare(pos01).getPiece());
 
 			// square without a piece
-			Assert::IsNull(copy_of_board.getSquare(0, 0).getPiece());
+			Assert::IsNull(copy_of_board.getSquare(pos00).getPiece());
 		}
 
 		TEST_METHOD(copyConstructorMakesCopyAndNotReference)
 		{
+			Position pos00(0, 0);
+			Position pos11(1, 1);
+
 			Board board(4);
 			unique_ptr<const Piece> black_rook = make_unique<const Rook>(PieceColor::BLACK);
-			board.addPieceToSquare(0, 0, black_rook);
+			board.addPieceToSquare(pos00, black_rook);
 			Board copy_of_board(board);
 
 			unique_ptr<const Piece> white_rook = make_unique<const Rook>(PieceColor::WHITE);
-			copy_of_board.addPieceToSquare(1, 1, white_rook);
+			copy_of_board.addPieceToSquare(pos11, white_rook);
 
 			// square without white rook
-			Assert::IsNull(board.getSquare(1, 1).getPiece());
+			Assert::IsNull(board.getSquare(pos11).getPiece());
 
 			// square with white rook
-			Assert::IsNotNull(copy_of_board.getSquare(1, 1).getPiece());
+			Assert::IsNotNull(copy_of_board.getSquare(pos11).getPiece());
 		}
 
 	};

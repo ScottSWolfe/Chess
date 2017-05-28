@@ -1,6 +1,7 @@
 #include <vector>
 #include "ChessDebug.h"
 #include "Move.h"
+#include "Position.h"
 #include "Queen.h"
 using namespace std;
 
@@ -11,7 +12,7 @@ const string Queen::getSymbol() const {
 	return QUEEN_SYMBOL;
 }
 
-vector<Move> Queen::getMoves(const Board &board, int x, int y) const {
+vector<Move> Queen::getMoves(const Board &board, Position pos) const {
 	vector<Move> moves;
 	return moves;
 }

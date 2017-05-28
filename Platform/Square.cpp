@@ -29,6 +29,9 @@ void Square::setPiece(unique_ptr<const Piece> &new_piece) {
 
 unique_ptr<const Piece> Square::removePiece() {
 	unique_ptr<const Piece> copy_of_piece = copyPieceFactory(piece.get());
+	if (piece == nullptr) {
+		throw invalid_argument("square does not contain a piece.");
+	}
 	piece.reset();
 	return copy_of_piece;
 }

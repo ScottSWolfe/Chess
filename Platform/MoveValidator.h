@@ -2,6 +2,7 @@
 
 #include "GameState.h"
 #include "Move.h"
+struct Position;
 
 
 class MoveValidator {
@@ -14,8 +15,8 @@ private:
 	const GameState &state;
 	const Move &move;
 	bool doSquaresExist() const;
-	bool doesSquareExist(int x, int y) const;
-	bool isPiece() const;
+	bool doesSquareExist(Position pos) const;
+	bool isPieceAtStart() const;
 	bool isPieceCorrectColor() const;
 	bool isDestAvailable() const;
 	bool MoveValidator::isAvailableMove() const;

@@ -168,7 +168,7 @@
       <Filter>Header Files\Player</Filter>
     </ClInclude>
     <ClInclude Include="Position.h">
-      <Filter>Header Files\Enums</Filter>
+      <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

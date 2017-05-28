@@ -2,6 +2,7 @@
 #include "ChessDebug.h"
 #include "Board.h"
 #include "Move.h"
+#include "Position.h"
 using namespace std;
 
 
@@ -25,43 +26,43 @@ Board::Board(const Board &other_board) :
 	}
 }
 
-Square &Board::getSquare(int x, int y) {
-	return squares[convertCoordsToIndex(x, y)];
+Square &Board::getSquare(Position pos) {
+	return squares[getIndex(pos)];
 }
 
-const Square &Board::getSquare(int x, int y) const {
-	return squares[convertCoordsToIndex(x, y)];
+const Square &Board::getSquare(Position pos) const {
+	return squares[getIndex(pos)];
 }
 
-void Board::addPieceToSquare(int x, int y, unique_ptr<const Piece> &piece) {
-	getSquare(x, y).setPiece(piece);
+void Board::addPieceToSquare(Position pos, unique_ptr<const Piece> &piece) {
+	getSquare(pos).setPiece(piece);
 }
 
-unique_ptr<const Piece> Board::removePieceFromSquare(int x, int y) {
-	return getSquare(x, y).removePiece();
+unique_ptr<const Piece> Board::removePieceFromSquare(Position pos) {
+	return getSquare(pos).removePiece();
 }
 
-std::vector<Move> Board::getMoves(int x, int y) const {
-	const Piece *piece = getSquare(x, y).getPiece();
+std::vector<Move> Board::getMoves(Position pos) const {
+	const Piece *piece = getSquare(pos).getPiece();
 	if (piece == nullptr) {
 		throw invalid_argument("no piece on given square");
 	}
-	return piece->getMoves(*this, x, y);
+	return piece->getMoves(*this, pos);
 }
 
-bool Board::isPiece(int x, int y) const {
-	if (getSquare(x, y).getPiece() == nullptr) {
+bool Board::isPiece(Position pos) const {
+	if (getSquare(pos).getPiece() == nullptr) {
 		return false;
 	}
 	return true;
 }
 
-const Piece *Board::getPiece(int x, int y) const {
-	return getSquare(x, y).getPiece();
+const Piece *Board::getPiece(Position pos) const {
+	return getSquare(pos).getPiece();
 }
 
-PieceColor Board::getPieceColor(int x, int y) const {
-	const Piece *piece = getSquare(x, y).getPiece();
+PieceColor Board::getPieceColor(Position pos) const {
+	const Piece *piece = getSquare(pos).getPiece();
 	if (piece == nullptr) {
 		throw invalid_argument("square for given coordinates does not containe a piece");
 	}
@@ -72,8 +73,8 @@ int Board::getDimension() const {
 	return dimension;
 }
 
-int Board::convertCoordsToIndex(int x, int y) const {
-	return y * dimension + x;
+int Board::getIndex(Position pos) const {
+	return pos.y * dimension + pos.x;
 }
 
 SquareColor Board::getSquareColorByIndex(int index) const {

@@ -4,6 +4,7 @@
 #include "ChessDebug.h"
 #include "Move.h"
 #include "MoveInputParser.h"
+#include "Position.h"
 using namespace std;
 
 

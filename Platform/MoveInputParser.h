@@ -3,8 +3,8 @@
 #include <memory>
 #include <vector>
 #include <string>
-#include "Position.h"
 class Move;
+struct Position;
 
 
 class MoveInputParser {

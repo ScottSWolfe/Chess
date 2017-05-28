@@ -4,6 +4,7 @@
 #include "CppUnitTest.h"
 #include "Move.h"
 #include "MoveInputParser.h"
+#include "Position.h"
 using namespace std;
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
@@ -18,38 +19,38 @@ namespace PlatformTest
 		TEST_METHOD(goodInputReturnsGoodOutput)
 		{
 			// returns correct move
-			Move move(SquareCoordinates(0, 0), SquareCoordinates(1, 1));
+			Move move(Position(0, 0), Position(1, 1));
 			Assert::IsTrue(move == *parser.parseMoveInput("A1 B2"));
 
 			// does not return incorrect moves
-			move = Move(SquareCoordinates(0, 0), SquareCoordinates(1, 1));
+			move = Move(Position(0, 0), Position(1, 1));
 			Assert::IsFalse(move == *parser.parseMoveInput("A1 B1"));
 
-			move = Move(SquareCoordinates(0, 0), SquareCoordinates(1, 1));
+			move = Move(Position(0, 0), Position(1, 1));
 			Assert::IsFalse(move == *parser.parseMoveInput("A1 C1"));
 
-			move = Move(SquareCoordinates(0, 0), SquareCoordinates(1, 1));
+			move = Move(Position(0, 0), Position(1, 1));
 			Assert::IsFalse(move == *parser.parseMoveInput("A5 B2"));
 
-			move = Move(SquareCoordinates(0, 0), SquareCoordinates(1, 1));
+			move = Move(Position(0, 0), Position(1, 1));
 			Assert::IsFalse(move == *parser.parseMoveInput("B1 B2"));
 		}
 
 		TEST_METHOD(canParseMultipleNumbersAndLetters)
 		{
 			// can parse from A to Z and 1 to 9
-			Move move(SquareCoordinates(25, 8), SquareCoordinates(0, 0));
+			Move move(Position(25, 8), Position(0, 0));
 			Assert::IsTrue(move == *parser.parseMoveInput("Z9 A1"));
 
 			// cannot parse 0
 			Assert::IsNull(parser.parseMoveInput("A0 B1").get());
 
 			// can parse greater than 9
-			move = Move(SquareCoordinates(0, 15), SquareCoordinates(0, 0));
+			move = Move(Position(0, 15), Position(0, 0));
 			Assert::IsTrue(move == *parser.parseMoveInput("A16 A1").get());
 
 			// can parse multiple letters
-			move = Move(SquareCoordinates(29, 0), SquareCoordinates(59, 0));
+			move = Move(Position(29, 0), Position(59, 0));
 			Assert::IsTrue(move == *parser.parseMoveInput("AD1 BH1").get());
 		}
 
@@ -63,7 +64,7 @@ namespace PlatformTest
 		{
 			// when only one square is given
 			Assert::IsNotNull(parser.parseMoveInput(" A1  B2  ").get());
-			Move move(SquareCoordinates(0, 0), SquareCoordinates(1, 1));
+			Move move(Position(0, 0), Position(1, 1));
 			Assert::IsTrue(move == *parser.parseMoveInput(" A1  B2  "));
 		}
 
@@ -71,14 +72,14 @@ namespace PlatformTest
 		{
 			// when a third square is given
 			Assert::IsNotNull(parser.parseMoveInput("A1 B2 C3").get());
-			Move move(SquareCoordinates(0, 0), SquareCoordinates(1, 1));
+			Move move(Position(0, 0), Position(1, 1));
 			Assert::IsTrue(move == *parser.parseMoveInput("A1 B2 C3"));
 		}
 
 		TEST_METHOD(isCaseInsensitive)
 		{
 			// accepts lower and upper case letters
-			Move move(SquareCoordinates(0, 0), SquareCoordinates(1, 1));
+			Move move(Position(0, 0), Position(1, 1));
 			Assert::IsTrue(move == *parser.parseMoveInput("a1 B2"));
 		}
 

@@ -4,6 +4,7 @@
 #include "Board.h"
 #include "ConsoleBoardPresenter.h"
 #include "Piece.h"
+#include "Position.h"
 #include "Square.h"
 #include "windows.h"
 using namespace std;
@@ -23,7 +24,7 @@ void ConsoleBoardPresenter::displayBoard(const Board &board) const {
 		printLeftBorder(row, dimension);
 
 		for (int col = 0; col < dimension; ++col) {
-			const Square &square = board.getSquare(col, row);
+			const Square &square = board.getSquare(Position(col, row));
 			const Piece *piece = square.getPiece();
 
 			string symbol = getPieceSymbol(piece);

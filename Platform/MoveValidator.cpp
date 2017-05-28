@@ -1,6 +1,7 @@
 #include "ChessDebug.h"
 #include "MoveValidator.h"
 #include "Pawn.h"
+#include "Position.h"
 
 
 MoveValidator::MoveValidator(const GameState &state, const Move &move)
@@ -11,7 +12,7 @@ bool MoveValidator::validateMove() const {
 	if (!doSquaresExist()) {
 		return false;
 	}
-	if (!isPiece()) {
+	if (!isPieceAtStart()) {
 		return false;
 	}
 	if (!isPieceCorrectColor()) {
@@ -27,53 +28,40 @@ bool MoveValidator::validateMove() const {
 }
 
 bool MoveValidator::doSquaresExist() const {
-	int x = move.getStart().x;
-	int y = move.getStart().y;
-	if (!doesSquareExist(x, y)) {
+	if (doesSquareExist(move.getStart()) == false) {
 		return false;
 	}
-
-	x = move.getEnd().x;
-	y = move.getEnd().y;
-	if (!doesSquareExist(x, y)) {
-		return false;
-	}
-
-	return true;
-}
-
-bool MoveValidator::doesSquareExist(int x, int y) const {
-	if (x < 0 || x >= state.getBoardDimension()) {
-		return false;
-	}
-	if (y < 0 || y >= state.getBoardDimension()) {
+	if (doesSquareExist(move.getEnd()) == false) {
 		return false;
 	}
 	return true;
 }
 
-bool MoveValidator::isPiece() const {
-	int x = move.getStart().x;
-	int y = move.getStart().y;
-	return state.isPiece(x, y);
+bool MoveValidator::doesSquareExist(Position pos) const {
+	if (pos.x < 0 || pos.x >= state.getBoardDimension()) {
+		return false;
+	}
+	if (pos.y < 0 || pos.y >= state.getBoardDimension()) {
+		return false;
+	}
+	return true;
+}
+
+bool MoveValidator::isPieceAtStart() const {
+	return state.isPiece(move.getStart());
 }
 
 bool MoveValidator::isPieceCorrectColor() const {
-	int x = move.getStart().x;
-	int y = move.getStart().y;
-	PieceColor color = state.getPieceColor(x, y);
+	PieceColor color = state.getPieceColor(move.getStart());
 	PlayerTurn turn = state.getPlayersTurn();
 	return color == turn;
 }
 
 bool MoveValidator::isDestAvailable() const {
-	int x = move.getEnd().x;
-	int y = move.getEnd().y;
-
-	if (!state.isPiece(x, y)) {
+	if (state.isPiece(move.getEnd()) == false) {
 		return true;
 	}
-	if (state.getPieceColor(x, y) != state.getPlayersTurn()) {
+	if (state.getPieceColor(move.getEnd()) != state.getPlayersTurn()) {
 		return true;
 	}
 	return false;
@@ -81,7 +69,7 @@ bool MoveValidator::isDestAvailable() const {
 
 bool MoveValidator::isAvailableMove() const {
 	// temp
-	const Piece *piece = state.getPiece(move.getStart().x, move.getStart().y);
+	const Piece *piece = state.getPiece(move.getStart());
 	if (dynamic_cast<const Pawn*>(piece)) {
 		if (state.isMoveAvailable(move)) {
 			return true;

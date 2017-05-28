@@ -6,6 +6,7 @@
 #include "Knight.h"
 #include "Pawn.h"
 #include "Piece.h"
+#include "Position.h"
 #include "Queen.h"
 #include "Rook.h"
 using namespace std;
@@ -28,7 +29,8 @@ void BoardInitializer::addRowOfPawns(Board &board, int row, PieceColor color) {
 	int dimension = board.getDimension();
 	for (int i = 0; i < dimension; ++i) {
 		unique_ptr<const Piece> pawn = make_unique<Pawn>(color);
-		board.addPieceToSquare(i, row, pawn);
+		Position pos(i, row);
+		board.addPieceToSquare(pos, pawn);
 	}
 }
 
@@ -42,12 +44,12 @@ void BoardInitializer::addStandardRowOfPieces(Board &board, int row, PieceColor 
 	unique_ptr<const Piece> queen = make_unique<Queen>(color);
 	unique_ptr<const Piece> king = make_unique<King>(color);
 
-	board.addPieceToSquare(0, row, rook_a);
-	board.addPieceToSquare(7, row, rook_b);
-	board.addPieceToSquare(1, row, knight_a);
-	board.addPieceToSquare(6, row, knight_b);
-	board.addPieceToSquare(2, row, bishop_a);
-	board.addPieceToSquare(5, row, bishop_b);
-	board.addPieceToSquare(3, row, queen);
-	board.addPieceToSquare(4, row, king);
+	board.addPieceToSquare(Position(0, row), rook_a);
+	board.addPieceToSquare(Position(7, row), rook_b);
+	board.addPieceToSquare(Position(1, row), knight_a);
+	board.addPieceToSquare(Position(6, row), knight_b);
+	board.addPieceToSquare(Position(2, row), bishop_a);
+	board.addPieceToSquare(Position(5, row), bishop_b);
+	board.addPieceToSquare(Position(3, row), queen);
+	board.addPieceToSquare(Position(4, row), king);
 }
