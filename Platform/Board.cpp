@@ -43,15 +43,13 @@ unique_ptr<const Piece> Board::removePieceFromSquare(Position pos) {
 }
 
 std::vector<Move> Board::getMoves(Position pos) const {
-	const Piece *piece = getSquare(pos).getPiece();
-	if (piece == nullptr) {
-		throw invalid_argument("no piece on given square");
-	}
+	const Piece *piece = getPiece(pos);
+	checkIfPieceIsNull(piece);
 	return piece->getMoves(*this, pos);
 }
 
 bool Board::isPiece(Position pos) const {
-	if (getSquare(pos).getPiece() == nullptr) {
+	if (getPiece(pos) == nullptr) {
 		return false;
 	}
 	return true;
@@ -62,10 +60,8 @@ const Piece *Board::getPiece(Position pos) const {
 }
 
 PieceColor Board::getPieceColor(Position pos) const {
-	const Piece *piece = getSquare(pos).getPiece();
-	if (piece == nullptr) {
-		throw invalid_argument("square for given coordinates does not containe a piece");
-	}
+	const Piece *piece = getPiece(pos);
+	checkIfPieceIsNull(piece);
 	return piece->getColor();
 }
 
@@ -92,4 +88,10 @@ SquareColor Board::getSquareColorByIndex(int index) const {
 	}
 
 	return color;
+}
+
+void Board::checkIfPieceIsNull(const Piece *piece) const {
+	if (piece == nullptr) {
+		throw invalid_argument("square does not contain a piece");
+	}
 }

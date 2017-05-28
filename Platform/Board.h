@@ -28,5 +28,6 @@ private:
 	std::vector<Square> squares;
 	int getIndex(Position pos) const;
 	SquareColor getSquareColorByIndex(int index) const;
+	void checkIfPieceIsNull(const Piece *piece) const;
 
 };

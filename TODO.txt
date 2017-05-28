@@ -1,6 +1,3 @@
 // TODO.txt
 
-Replace all x,y with new SquareCoordiantes
-getMovesForPiece function in board
-
 Make moves data structure a map to a map (x to y) instead of a vector?
