@@ -65,9 +65,7 @@ const Piece *Board::getPiece(Position pos) const {
 }
 
 PieceColor Board::getPieceColor(Position pos) const {
-	const Piece *piece = getPiece(pos);
-	checkIfPieceIsNull(piece);
-	return piece->getColor();
+	return Piece::getPieceColor(getPiece(pos));
 }
 
 string Board::getPieceSymbol(Position pos) const {

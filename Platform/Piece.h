@@ -17,10 +17,10 @@ public:
 	virtual const std::string getSymbol() const = 0;
 	virtual std::vector<Move> getMoves(const Board &board, Position pos) const = 0;
 	static const std::string getPieceSymbol(const Piece *piece);
+	static PieceColor getPieceColor(const Piece *piece);
 
 private:
 	const PieceColor color;
-	const int x = 3;
 
 protected:
 	const std::string PAWN_SYMBOL = "p";
@@ -32,5 +32,4 @@ protected:
 
 };
 
-PieceColor getPieceColor(const Piece *piece);
 std::unique_ptr<const Piece> copyPieceFactory(const Piece *piece);

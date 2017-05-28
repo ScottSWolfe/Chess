@@ -26,7 +26,7 @@ const std::string Piece::getPieceSymbol(const Piece *piece) {
 	}
 }
 
-PieceColor getPieceColor(const Piece *piece) {
+PieceColor Piece::getPieceColor(const Piece *piece) {
 	if (piece == nullptr) {
 		return PieceColor::WHITE;
 	}

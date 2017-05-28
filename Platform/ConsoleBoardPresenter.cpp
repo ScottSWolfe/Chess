@@ -21,13 +21,8 @@ void ConsoleBoardPresenter::displayBoard(const Board &board) const {
 void ConsoleBoardPresenter::printRows(const Board &board) const {
 	int dimension = board.getDimension();
 	for (int row = dimension - 1; row >= 0; --row) {
-
-		setTextColor(BORDER_BACKGROUND, BORDER_TEXT);
 		printLeftBorder(row, dimension);
-
 		printRow(board, row);
-
-		setTextColor(BORDER_BACKGROUND, BORDER_TEXT);
 		printRightBorder(row, dimension);
 		cout << endl;
 	}
@@ -38,12 +33,10 @@ void ConsoleBoardPresenter::printRow(const Board &board, int row) const {
 	for (int col = 0; col < dimension; ++col) {
 		Position pos(col, row);
 		string symbol = board.getPieceSymbol(pos);
-		PieceColor piece_color = getColorForPiece(board, pos);
+		PieceColor piece_color = board.getPieceColor(pos);
 		SquareColor square_color = board.getSquareColor(pos);
 		setTextColor(square_color, piece_color);
-		cout << " ";
-		cout << symbol;
-		cout << " ";
+		cout << " " << symbol << " ";
 	}
 }
 
@@ -94,6 +87,7 @@ void ConsoleBoardPresenter::printHorizontalBorder(int dimension) const {
 }
 
 void ConsoleBoardPresenter::printLeftBorder(int row, int dimension) const {
+	setTextColor(BORDER_BACKGROUND, BORDER_TEXT);
 	if (dimension < 10 || row >= 9) {
 		cout << " " << row + 1 << " ";
 		return;
@@ -102,6 +96,7 @@ void ConsoleBoardPresenter::printLeftBorder(int row, int dimension) const {
 }
 
 void ConsoleBoardPresenter::printRightBorder(int row, int dimension) const {
+	setTextColor(BORDER_BACKGROUND, BORDER_TEXT);
 	if (dimension < 10 || row >= 9) {
 		cout << " " << row + 1 << " ";
 		return;
@@ -126,13 +121,4 @@ string ConsoleBoardPresenter::borderSpacing(int dimension) const {
 		return "    ";
 	}
 	return "   ";
-}
-
-PieceColor ConsoleBoardPresenter::getColorForPiece(const Board &board, Position pos) const {
-	if (board.isPiece(pos)) {
-		return board.getPieceColor(pos);
-	}
-	else {
-		return PieceColor::WHITE;
-	}
 }

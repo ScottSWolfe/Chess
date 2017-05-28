@@ -25,7 +25,6 @@ private:
 	void printRightBorder(int row, int dimension) const;
 	std::string getLetterForIndex(int index) const;
 	std::string borderSpacing(int dimension) const;
-	PieceColor getColorForPiece(const Board &board, Position pos) const;
 
 	const ConsoleColor WHITE_PIECE = ConsoleColor::WHITE;
 	const ConsoleColor BLACK_PIECE = ConsoleColor::YELLOW;
