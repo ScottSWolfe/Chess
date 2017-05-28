@@ -21,8 +21,28 @@ bool GameState::isPiece(int x, int y) const {
 	return board.isPiece(x, y);
 }
 
+const Piece *GameState::getPiece(int x, int y) const {
+	return board.getPiece(x, y);
+}
+
 PieceColor GameState::getPieceColor(int x, int y) const {
 	return board.getPieceColor(x, y);
+}
+
+bool GameState::isMoveAvailable(const Move &move) const {
+	int x = move.getStartCoords().x;
+	int y = move.getStartCoords().y;
+	const Piece *piece = board.getPiece(x, y);
+	if (piece == nullptr) {
+		throw invalid_argument("square does not contain a piece");
+	}
+	vector<Move> moves = piece->getMoves(board, x, y);
+	for (Move curr_move : moves) {
+		if (curr_move == move) {
+			return true;
+		}
+	}
+	return false;
 }
 
 void GameState::makeMove(const Move &move) {

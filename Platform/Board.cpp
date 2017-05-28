@@ -1,6 +1,7 @@
 #include <iostream>
 #include "ChessDebug.h"
 #include "Board.h"
+#include "Move.h"
 using namespace std;
 
 
@@ -33,22 +34,34 @@ const Square &Board::getSquare(int x, int y) const {
 }
 
 void Board::addPieceToSquare(int x, int y, unique_ptr<const Piece> &piece) {
-	squares[convertCoordsToIndex(x, y)].setPiece(piece);
+	getSquare(x, y).setPiece(piece);
 }
 
 unique_ptr<const Piece> Board::removePieceFromSquare(int x, int y) {
-	return squares[convertCoordsToIndex(x, y)].removePiece();
+	return getSquare(x, y).removePiece();
+}
+
+std::vector<Move> Board::getMoves(int x, int y) const {
+	const Piece *piece = getSquare(x, y).getPiece();
+	if (piece == nullptr) {
+		throw invalid_argument("no piece on given square");
+	}
+	return piece->getMoves(*this, x, y);
 }
 
 bool Board::isPiece(int x, int y) const {
-	if (squares[convertCoordsToIndex(x, y)].getPiece() == nullptr) {
+	if (getSquare(x, y).getPiece() == nullptr) {
 		return false;
 	}
 	return true;
 }
 
+const Piece *Board::getPiece(int x, int y) const {
+	return getSquare(x, y).getPiece();
+}
+
 PieceColor Board::getPieceColor(int x, int y) const {
-	const Piece *piece = squares[convertCoordsToIndex(x, y)].getPiece();
+	const Piece *piece = getSquare(x, y).getPiece();
 	if (piece == nullptr) {
 		throw invalid_argument("square for given coordinates does not containe a piece");
 	}

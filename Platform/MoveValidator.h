@@ -18,5 +18,6 @@ private:
 	bool isPiece() const;
 	bool isPieceCorrectColor() const;
 	bool isDestAvailable() const;
+	bool MoveValidator::isAvailableMove() const;
 
 };

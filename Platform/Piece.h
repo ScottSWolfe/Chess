@@ -2,15 +2,19 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 #include "ChessEnums.h"
+class Board;
+class Move;
 
 
 class Piece {
 
 public:
 	Piece(PieceColor color);
-	virtual PieceColor getColor() const;
+	PieceColor getColor() const;
 	virtual const std::string getSymbol() const = 0;
+	virtual std::vector<Move> getMoves(const Board &board, int x, int y) const = 0;
 		
 private:
 	const PieceColor color;

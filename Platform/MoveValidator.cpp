@@ -1,5 +1,7 @@
 #include "ChessDebug.h"
 #include "MoveValidator.h"
+#include "Pawn.h"
+
 
 MoveValidator::MoveValidator(const GameState &state, const Move &move)
 	: state(state), move(move)
@@ -16,6 +18,9 @@ bool MoveValidator::validateMove() const {
 		return false;
 	}
 	if (!isDestAvailable()) {
+		return false;
+	}
+	if (!isAvailableMove()) {
 		return false;
 	}
 	return true;
@@ -72,4 +77,17 @@ bool MoveValidator::isDestAvailable() const {
 		return true;
 	}
 	return false;
+}
+
+bool MoveValidator::isAvailableMove() const {
+	// temp
+	const Piece *piece = state.getPiece(move.getStartCoords().x, move.getStartCoords().y);
+	if (dynamic_cast<const Pawn*>(piece)) {
+		if (state.isMoveAvailable(move)) {
+			return true;
+		}
+		return false;
+	}
+	// end temp
+	return true;
 }
