@@ -1,5 +1,4 @@
 // TODO.txt
 
-Make a function in GameState for checking if move is available
 Make shorter name for SquareCoordinates (Spot, Position)
 Replace all x,y with new SquareCoordiantes

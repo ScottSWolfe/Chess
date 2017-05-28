@@ -15,7 +15,7 @@ shared_ptr<const Move> MoveInputParser::parseMoveInput(string input) const {
 		return move;
 	}
 
-	array<SquareCoordinates, 2> squares;
+	array<Position, 2> squares;
 	for (int i = 0; i < 2; i++) {
 		squares[i] = convertTokensToCoords(tokens[i]);
 		if (squares[i].empty()) {
@@ -48,8 +48,8 @@ vector<string> MoveInputParser::parseInputIntoTokens(string input, char delimite
 	return tokens;
 }
 
-SquareCoordinates MoveInputParser::convertTokensToCoords(string input) const {
-	SquareCoordinates coords;
+Position MoveInputParser::convertTokensToCoords(string input) const {
+	Position coords;
 	if (input.size() < 2) {
 		return coords;
 	}

@@ -30,8 +30,8 @@ PieceColor GameState::getPieceColor(int x, int y) const {
 }
 
 bool GameState::isMoveAvailable(const Move &move) const {
-	int x = move.getStartCoords().x;
-	int y = move.getStartCoords().y;
+	int x = move.getStart().x;
+	int y = move.getStart().y;
 	const Piece *piece = board.getPiece(x, y);
 	if (piece == nullptr) {
 		throw invalid_argument("square does not contain a piece");
@@ -46,8 +46,8 @@ bool GameState::isMoveAvailable(const Move &move) const {
 }
 
 void GameState::makeMove(const Move &move) {
-	SquareCoordinates start = move.getStartCoords();
-	SquareCoordinates end = move.getEndCoords();
+	Position start = move.getStart();
+	Position end = move.getEnd();
 	unique_ptr<const Piece> piece = board.removePieceFromSquare(start.x, start.y);
 	if (piece == nullptr) {
 		throw invalid_argument("Start square does not contain a piece.");

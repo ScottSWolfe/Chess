@@ -27,14 +27,14 @@ bool MoveValidator::validateMove() const {
 }
 
 bool MoveValidator::doSquaresExist() const {
-	int x = move.getStartCoords().x;
-	int y = move.getStartCoords().y;
+	int x = move.getStart().x;
+	int y = move.getStart().y;
 	if (!doesSquareExist(x, y)) {
 		return false;
 	}
 
-	x = move.getEndCoords().x;
-	y = move.getEndCoords().y;
+	x = move.getEnd().x;
+	y = move.getEnd().y;
 	if (!doesSquareExist(x, y)) {
 		return false;
 	}
@@ -53,22 +53,22 @@ bool MoveValidator::doesSquareExist(int x, int y) const {
 }
 
 bool MoveValidator::isPiece() const {
-	int x = move.getStartCoords().x;
-	int y = move.getStartCoords().y;
+	int x = move.getStart().x;
+	int y = move.getStart().y;
 	return state.isPiece(x, y);
 }
 
 bool MoveValidator::isPieceCorrectColor() const {
-	int x = move.getStartCoords().x;
-	int y = move.getStartCoords().y;
+	int x = move.getStart().x;
+	int y = move.getStart().y;
 	PieceColor color = state.getPieceColor(x, y);
 	PlayerTurn turn = state.getPlayersTurn();
 	return color == turn;
 }
 
 bool MoveValidator::isDestAvailable() const {
-	int x = move.getEndCoords().x;
-	int y = move.getEndCoords().y;
+	int x = move.getEnd().x;
+	int y = move.getEnd().y;
 
 	if (!state.isPiece(x, y)) {
 		return true;
@@ -81,7 +81,7 @@ bool MoveValidator::isDestAvailable() const {
 
 bool MoveValidator::isAvailableMove() const {
 	// temp
-	const Piece *piece = state.getPiece(move.getStartCoords().x, move.getStartCoords().y);
+	const Piece *piece = state.getPiece(move.getStart().x, move.getStart().y);
 	if (dynamic_cast<const Pawn*>(piece)) {
 		if (state.isMoveAvailable(move)) {
 			return true;

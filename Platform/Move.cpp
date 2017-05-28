@@ -2,21 +2,21 @@
 #include "Move.h"
 
 
-Move::Move(SquareCoordinates start_coord, SquareCoordinates end_coord)
-	: start_coordinate(start_coord), end_coordinate(end_coord)
+Move::Move(Position start_coord, Position end_coord)
+	: start(start_coord), end(end_coord)
 {}
 
-SquareCoordinates Move::getStartCoords() const {
-	return start_coordinate;
+Position Move::getStart() const {
+	return start;
 }
 
-SquareCoordinates Move::getEndCoords() const {
-	return end_coordinate;
+Position Move::getEnd() const {
+	return end;
 }
 
 bool operator==(const Move &left, const Move &right) {
-	if (left.start_coordinate == right.start_coordinate &&
-		left.end_coordinate == right.end_coordinate)
+	if (left.start == right.start &&
+		left.end == right.end)
 	{
 		return true;
 	}

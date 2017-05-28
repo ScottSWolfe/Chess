@@ -3,7 +3,7 @@
 #include "Board.h"
 #include "Pawn.h"
 #include "Move.h"
-#include "SquareCoordinates.h"
+#include "Position.h"
 using namespace std;
 
 
@@ -17,19 +17,19 @@ const string Pawn::getSymbol() const {
 
 std::vector<Move> Pawn::getMoves(const Board &board, int x, int y) const {
 	vector<Move> moves;
-	SquareCoordinates start(x, y);
-	SquareCoordinates end;
+	Position start(x, y);
+	Position end;
 
 	// move forward one
 	if (!board.isPiece(x, y + direction())) {
-		end = SquareCoordinates(x, y + direction());
+		end = Position(x, y + direction());
 		moves.push_back(Move(start, end));
 	}
 
 	// move forward two
 	if (y == startRow(board.getDimension())) {
 		if (!board.isPiece(x, y + direction()) && !board.isPiece(x, y + 2 * direction())) {
-			end = SquareCoordinates(x, y + 2 * direction());
+			end = Position(x, y + 2 * direction());
 			moves.push_back(Move(start, end));
 		}
 	}
@@ -37,12 +37,12 @@ std::vector<Move> Pawn::getMoves(const Board &board, int x, int y) const {
 	// capture diagonally
 	if (board.isPiece(x - 1, y + direction()) &&
 		board.getPieceColor(x - 1, y + direction()) != getColor()) {
-		end = SquareCoordinates(x - 1, y + direction());
+		end = Position(x - 1, y + direction());
 		moves.push_back(Move(start, end));
 	}
 	if (board.isPiece(x + 1, y + direction()) &&
 		board.getPieceColor(x + 1, y + direction()) != getColor()) {
-		end = SquareCoordinates(x + 1, y + direction());
+		end = Position(x + 1, y + direction());
 		moves.push_back(Move(start, end));
 	}
 

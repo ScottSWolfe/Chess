@@ -4,7 +4,7 @@
 #include "HumanPlayer.h"
 #include "Move.h"
 #include "MoveInputParser.h"
-#include "SquareCoordinates.h"
+#include "Position.h"
 using namespace std;
 
 
