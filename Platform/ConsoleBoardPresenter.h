@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 #include "BoardPresenter.h"
 #include "ChessEnums.h"
 class Board;
@@ -16,7 +17,11 @@ private:
 	void setTextColor(SquareColor square_color, PieceColor piece_color) const;
 	ConsoleColor getConsoleSquareColor(SquareColor color) const;
 	ConsoleColor getConsolePieceColor(PieceColor color) const;
-	void printVerticalBorder(int dimension) const;
+	void printHorizontalBorder(int dimension) const;
+	void printLeftBorder(int row, int dimension) const;
+	void printRightBorder(int row, int dimension) const;
+	std::string getLetterForIndex(int index) const;
+	std::string borderSpacing(int dimension) const;
 
 	const ConsoleColor WHITE_PIECE = ConsoleColor::WHITE;
 	const ConsoleColor BLACK_PIECE = ConsoleColor::YELLOW;

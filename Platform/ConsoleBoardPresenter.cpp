@@ -14,13 +14,13 @@ void ConsoleBoardPresenter::displayBoard(const Board &board) const {
 	int dimension = board.getDimension();
 
 	setTextColor(ConsoleColor::WHITE, ConsoleColor::BLACK);
-	printVerticalBorder(dimension);
+	printHorizontalBorder(dimension);
 	cout << endl;
 
 	for (int row = dimension - 1; row >= 0; --row) {
 
 		setTextColor(BORDER_BACKGROUND, BORDER_TEXT);
-		cout << " " << row + 1 << " ";
+		printLeftBorder(row, dimension);
 
 		for (int col = 0; col < dimension; ++col) {
 			const Square &square = board.getSquare(col, row);
@@ -36,11 +36,11 @@ void ConsoleBoardPresenter::displayBoard(const Board &board) const {
 			cout << " ";
 		}
 		setTextColor(BORDER_BACKGROUND, BORDER_TEXT);
-		cout << " " << row + 1 << " ";
+		printRightBorder(row, dimension);
 		cout << endl;
 	}
 	setTextColor(BORDER_BACKGROUND, BORDER_TEXT);
-	printVerticalBorder(dimension);
+	printHorizontalBorder(dimension);
 
 	setTextColor(ConsoleColor::BLACK, ConsoleColor::WHITE);
 	cout << endl;
@@ -83,10 +83,45 @@ ConsoleColor ConsoleBoardPresenter::getConsoleSquareColor(SquareColor color) con
 	}
 }
 
-void ConsoleBoardPresenter::printVerticalBorder(int dimension) const {
-	cout << "   ";
+void ConsoleBoardPresenter::printHorizontalBorder(int dimension) const {
+	cout << borderSpacing(dimension);
 	for (int i = 0; i < dimension; ++i) {
-		cout << " " << static_cast<char>('A' + i) << " ";
+		cout << getLetterForIndex(i) << " ";
 	}
-	cout << "   ";
+	cout << borderSpacing(dimension);
+}
+
+void ConsoleBoardPresenter::printLeftBorder(int row, int dimension) const {
+	if (dimension < 10 || row >= 9) {
+		cout << " " << row + 1 << " ";
+		return;
+	}	
+	cout << "  " << row + 1 << " ";	
+}
+
+void ConsoleBoardPresenter::printRightBorder(int row, int dimension) const {
+	if (dimension < 10 || row >= 9) {
+		cout << " " << row + 1 << " ";
+		return;
+	}
+	cout << " " << row + 1 << "  ";
+}
+
+string ConsoleBoardPresenter::getLetterForIndex(int index) const {
+	string letters;
+	if (index > 25) {
+		letters += index / 26 + 'A' - 1;
+	}
+	else {
+		letters += ' ';
+	}
+	letters += index % 26 + 'A';
+	return letters;
+}
+
+string ConsoleBoardPresenter::borderSpacing(int dimension) const {
+	if (dimension > 9) {
+		return "    ";
+	}
+	return "   ";
 }

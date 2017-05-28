@@ -4,7 +4,12 @@
 using namespace std;
 
 
-Board::Board(int board_dimension) : dimension(board_dimension) {
+Board::Board(int board_dimension)
+	: dimension(board_dimension)
+{
+	if (board_dimension > 99) {
+		throw invalid_argument("board dimension is too large");
+	}
 	for (int i = 0; i < dimension * dimension; ++i) {
 		Square square(getSquareColorByIndex(i));
 		squares.emplace_back(square);
