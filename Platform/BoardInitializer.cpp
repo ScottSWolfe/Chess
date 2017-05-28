@@ -12,7 +12,7 @@ using namespace std;
 
 
 Board BoardInitializer::initializeStandardSetup() {
-	Board board(30);
+	Board board(8);
 	addStandardPieces(board);
 	return board;
 }

@@ -14,3 +14,14 @@ bool operator==(const PieceColor &piece_color, const PlayerTurn &player_turn) {
 bool operator==(const PlayerTurn &player_turn, const PieceColor &piece_color) {
 	return piece_color == player_turn;
 }
+
+bool operator!=(const PieceColor &piece_color, const PlayerTurn &player_turn) {
+	if (piece_color == player_turn) {
+		return false;
+	}
+	return true;
+}
+
+bool operator!=(const PlayerTurn &player_turn, const PieceColor &piece_color) {
+	return piece_color != player_turn;
+}

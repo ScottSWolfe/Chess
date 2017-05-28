@@ -12,7 +12,10 @@ bool MoveValidator::validateMove() const {
 	if (!isPiece()) {
 		return false;
 	}
-	if (!isCorrectColor()) {
+	if (!isPieceCorrectColor()) {
+		return false;
+	}
+	if (!isDestAvailable()) {
 		return false;
 	}
 	return true;
@@ -50,10 +53,23 @@ bool MoveValidator::isPiece() const {
 	return state.isPiece(x, y);
 }
 
-bool MoveValidator::isCorrectColor() const {
+bool MoveValidator::isPieceCorrectColor() const {
 	int x = move.getStartCoords().x;
 	int y = move.getStartCoords().y;
 	PieceColor color = state.getPieceColor(x, y);
 	PlayerTurn turn = state.getPlayersTurn();
 	return color == turn;
+}
+
+bool MoveValidator::isDestAvailable() const {
+	int x = move.getEndCoords().x;
+	int y = move.getEndCoords().y;
+
+	if (!state.isPiece(x, y)) {
+		return true;
+	}
+	if (state.getPieceColor(x, y) != state.getPlayersTurn()) {
+		return true;
+	}
+	return false;
 }
