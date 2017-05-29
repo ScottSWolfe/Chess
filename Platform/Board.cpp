@@ -39,6 +39,16 @@ SquareColor Board::getSquareColor(Position pos) const {
 	return getSquare(pos).getColor();
 }
 
+bool Board::inBounds(Position pos) const {
+	if (pos.x < 0 || pos.x >= dimension) {
+		return false;
+	}
+	if (pos.y < 0 || pos.y >= dimension) {
+		return false;
+	}
+	return true;
+}
+
 void Board::addPieceToSquare(Position pos, unique_ptr<const Piece> &piece) {
 	getSquare(pos).setPiece(piece);
 }

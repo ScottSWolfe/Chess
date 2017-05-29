@@ -14,5 +14,6 @@ const string Bishop::getSymbol() const {
 
 vector<Move> Bishop::getMoves(const Board &board, Position pos) const {
 	vector<Move> moves;
+	getDiagonalMoves(moves, board, pos);
 	return moves;
 }

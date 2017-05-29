@@ -14,5 +14,7 @@ const string Queen::getSymbol() const {
 
 vector<Move> Queen::getMoves(const Board &board, Position pos) const {
 	vector<Move> moves;
+	getStraightMoves(moves, board, pos);
+	getDiagonalMoves(moves, board, pos);
 	return moves;
 }

@@ -16,7 +16,7 @@ Square::Square(SquareColor square_color, unique_ptr<const Piece> &new_piece)
 {}
 
 Square::Square(const Square &other_square)
-	: color(other_square.color), piece(copyPieceFactory(other_square.getPiece()))
+	: color(other_square.color), piece(Piece::copyPieceFactory(other_square.getPiece()))
 {}
 
 const Piece *Square::getPiece() const {
@@ -28,7 +28,7 @@ void Square::setPiece(unique_ptr<const Piece> &new_piece) {
 }
 
 unique_ptr<const Piece> Square::removePiece() {
-	unique_ptr<const Piece> copy_of_piece = copyPieceFactory(piece.get());
+	unique_ptr<const Piece> copy_of_piece = Piece::copyPieceFactory(piece.get());
 	checkIfPieceIsNull(copy_of_piece.get());
 	piece.reset();
 	return copy_of_piece;

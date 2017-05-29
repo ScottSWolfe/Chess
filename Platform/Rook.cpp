@@ -14,5 +14,6 @@ const string Rook::getSymbol() const {
 
 vector<Move> Rook::getMoves(const Board &board, Position pos) const {
 	vector<Move> moves;
+	getStraightMoves(moves, board, pos);
 	return moves;
 }

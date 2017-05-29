@@ -2,9 +2,12 @@
 #include <string>
 #include "ChessDebug.h"
 #include "Bishop.h"
+#include "Board.h"
 #include "Knight.h"
 #include "King.h"
+#include "Move.h"
 #include "Pawn.h"
+#include "Position.h"
 #include "Piece.h"
 #include "Queen.h"
 #include "Rook.h"
@@ -35,7 +38,7 @@ PieceColor Piece::getPieceColor(const Piece *piece) {
 	}
 }
 
-unique_ptr<const Piece> copyPieceFactory(const Piece *piece) {
+unique_ptr<const Piece> Piece::copyPieceFactory(const Piece *piece) {
 	if (!piece) {
 		return nullptr;
 	}
@@ -58,4 +61,29 @@ unique_ptr<const Piece> copyPieceFactory(const Piece *piece) {
 		return make_unique<const King>(piece->getColor());
 	}
 	return nullptr;
+}
+
+void Piece::getStraightMoves(vector<Move> &moves, const Board &board, Position start) const {
+	getMovesInLine(moves, board, start,  1,  0);
+	getMovesInLine(moves, board, start, -1,  0);
+	getMovesInLine(moves, board, start,  0,  1);
+	getMovesInLine(moves, board, start,  0, -1);
+}
+
+void Piece::getDiagonalMoves(vector<Move> &moves, const Board &board, Position start) const {
+	getMovesInLine(moves, board, start,  1,  1);
+	getMovesInLine(moves, board, start,  1, -1);
+	getMovesInLine(moves, board, start, -1,  1);
+	getMovesInLine(moves, board, start, -1, -1);
+}
+
+void Piece::getMovesInLine(vector<Move> &moves, const Board &board, Position start, int delta_x, int delta_y) const {
+	Position end = start.add(delta_x, delta_y);
+	while (board.inBounds(end) && board.isPiece(end) == false) {
+		moves.push_back(Move(start, end));
+		end = end.add(delta_x, delta_y);
+	}
+	if (board.inBounds(end) && board.getPieceColor(end) != color) {
+		moves.push_back(Move(start, end));
+	}
 }

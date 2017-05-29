@@ -1,6 +1,7 @@
 #include "ChessDebug.h"
 #include "MoveValidator.h"
 #include "Pawn.h"
+#include "Rook.h"
 #include "Position.h"
 
 
@@ -68,14 +69,8 @@ bool MoveValidator::isDestAvailable() const {
 }
 
 bool MoveValidator::isAvailableMove() const {
-	// temp
-	const Piece *piece = state.getPiece(move.getStart());
-	if (dynamic_cast<const Pawn*>(piece)) {
-		if (state.isMoveAvailable(move)) {
-			return true;
-		}
-		return false;
+	if (state.isMoveAvailable(move)) {
+		return true;
 	}
-	// end temp
-	return true;
+	return false;
 }
