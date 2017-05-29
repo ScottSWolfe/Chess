@@ -1,5 +1,6 @@
 #include <vector>
 #include "ChessDebug.h"
+#include "GameState.h"
 #include "Move.h"
 #include "Position.h"
 #include "Rook.h"
@@ -12,8 +13,8 @@ const string Rook::getSymbol() const {
 	return ROOK_SYMBOL;
 }
 
-vector<Move> Rook::getMoves(const Board &board, Position pos) const {
+vector<Move> Rook::getMoves(const GameState &state, Position pos) const {
 	vector<Move> moves;
-	getStraightMoves(moves, board, pos);
+	getStraightMoves(moves, state, pos);
 	return moves;
 }

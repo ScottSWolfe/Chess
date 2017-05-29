@@ -1,5 +1,6 @@
 #include <vector>
 #include "ChessDebug.h"
+#include "GameState.h"
 #include "Move.h"
 #include "Position.h"
 #include "Queen.h"
@@ -12,9 +13,9 @@ const string Queen::getSymbol() const {
 	return QUEEN_SYMBOL;
 }
 
-vector<Move> Queen::getMoves(const Board &board, Position pos) const {
+vector<Move> Queen::getMoves(const GameState &state, Position pos) const {
 	vector<Move> moves;
-	getStraightMoves(moves, board, pos);
-	getDiagonalMoves(moves, board, pos);
+	getStraightMoves(moves, state, pos);
+	getDiagonalMoves(moves, state, pos);
 	return moves;
 }

@@ -2,7 +2,7 @@
 #include <string>
 #include "ChessDebug.h"
 #include "Bishop.h"
-#include "Board.h"
+#include "GameState.h"
 #include "Knight.h"
 #include "King.h"
 #include "Move.h"
@@ -63,27 +63,27 @@ unique_ptr<const Piece> Piece::copyPieceFactory(const Piece *piece) {
 	return nullptr;
 }
 
-void Piece::getStraightMoves(vector<Move> &moves, const Board &board, Position start) const {
-	getMovesInLine(moves, board, start,  1,  0);
-	getMovesInLine(moves, board, start, -1,  0);
-	getMovesInLine(moves, board, start,  0,  1);
-	getMovesInLine(moves, board, start,  0, -1);
+void Piece::getStraightMoves(vector<Move> &moves, const GameState &state, Position start) const {
+	getMovesInLine(moves, state, start,  1,  0);
+	getMovesInLine(moves, state, start, -1,  0);
+	getMovesInLine(moves, state, start,  0,  1);
+	getMovesInLine(moves, state, start,  0, -1);
 }
 
-void Piece::getDiagonalMoves(vector<Move> &moves, const Board &board, Position start) const {
-	getMovesInLine(moves, board, start,  1,  1);
-	getMovesInLine(moves, board, start,  1, -1);
-	getMovesInLine(moves, board, start, -1,  1);
-	getMovesInLine(moves, board, start, -1, -1);
+void Piece::getDiagonalMoves(vector<Move> &moves, const GameState &state, Position start) const {
+	getMovesInLine(moves, state, start,  1,  1);
+	getMovesInLine(moves, state, start,  1, -1);
+	getMovesInLine(moves, state, start, -1,  1);
+	getMovesInLine(moves, state, start, -1, -1);
 }
 
-void Piece::getMovesInLine(vector<Move> &moves, const Board &board, Position start, int delta_x, int delta_y) const {
+void Piece::getMovesInLine(vector<Move> &moves, const GameState &state, Position start, int delta_x, int delta_y) const {
 	Position end = start.add(delta_x, delta_y);
-	while (board.inBounds(end) && board.isPiece(end) == false) {
+	while (state.inBounds(end) && state.isPiece(end) == false) {
 		moves.push_back(Move(start, end));
 		end = end.add(delta_x, delta_y);
 	}
-	if (board.inBounds(end) && board.isOppPieceColor(end, color)) {
+	if (state.inBounds(end) && state.isOppPieceColor(end, color)) {
 		moves.push_back(Move(start, end));
 	}
 }

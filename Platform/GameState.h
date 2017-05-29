@@ -20,11 +20,15 @@ public:
 	PieceColor getPieceColor(Position pos) const;
 	bool isMoveAvailable(const Move &move) const;
 	void makeMove(const Move &move);
+	bool isOppPieceColor(Position pos, PieceColor color) const;
+	bool inBounds(Position pos) const;
 	PlayerTurn getPlayersTurn() const;
+	const Move *getLastMove() const;
 
 private:
 	Board board;
 	PlayerTurn current_turn;
+	std::vector<Move> move_history;
 	void GameState::changePlayersTurn();
 
 };

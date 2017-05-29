@@ -5,6 +5,7 @@
 #include "ChessEnums.h"
 #include "Piece.h"
 struct Position;
+class GameState;
 
 
 class Bishop : public Piece {
@@ -12,6 +13,6 @@ class Bishop : public Piece {
 public:
 	Bishop(PieceColor color);
 	const std::string getSymbol() const override;
-	std::vector<Move> getMoves(const Board &board, Position pos) const override;
+	std::vector<Move> getMoves(const GameState &state, Position pos) const override;
 
 };

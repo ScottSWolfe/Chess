@@ -57,12 +57,6 @@ unique_ptr<const Piece> Board::removePieceFromSquare(Position pos) {
 	return getSquare(pos).removePiece();
 }
 
-std::vector<Move> Board::getMoves(Position pos) const {
-	const Piece *piece = getPiece(pos);
-	checkIfPieceIsNull(piece);
-	return piece->getMoves(*this, pos);
-}
-
 bool Board::isPiece(Position pos) const {
 	if (getPiece(pos) == nullptr) {
 		return false;

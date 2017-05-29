@@ -20,7 +20,6 @@ public:
 	bool inBounds(Position pos) const;
 	void addPieceToSquare(Position pos, std::unique_ptr<const Piece> &piece);
 	std::unique_ptr<const Piece> removePieceFromSquare(Position pos);
-	std::vector<Move> getMoves(Position pos) const;
 	bool isPiece(Position pos) const;
 	const Piece *getPiece(Position pos) const;
 	PieceColor getPieceColor(Position pos) const;

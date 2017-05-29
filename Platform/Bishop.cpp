@@ -1,6 +1,7 @@
 #include <vector>
 #include "ChessDebug.h"
 #include "Bishop.h"
+#include "GameState.h"
 #include "Move.h"
 #include "Position.h"
 using namespace std;
@@ -12,8 +13,8 @@ const string Bishop::getSymbol() const {
 	return BISHOP_SYMBOL;
 }
 
-vector<Move> Bishop::getMoves(const Board &board, Position pos) const {
+vector<Move> Bishop::getMoves(const GameState &state, Position pos) const {
 	vector<Move> moves;
-	getDiagonalMoves(moves, board, pos);
+	getDiagonalMoves(moves, state, pos);
 	return moves;
 }
