@@ -31,7 +31,7 @@ const std::string Piece::getPieceSymbol(const Piece *piece) {
 
 PieceColor Piece::getPieceColor(const Piece *piece) {
 	if (piece == nullptr) {
-		return PieceColor::WHITE;
+		return PieceColor::NO_PIECE;
 	}
 	else {
 		return piece->getColor();
@@ -83,7 +83,7 @@ void Piece::getMovesInLine(vector<Move> &moves, const Board &board, Position sta
 		moves.push_back(Move(start, end));
 		end = end.add(delta_x, delta_y);
 	}
-	if (board.inBounds(end) && board.getPieceColor(end) != color) {
+	if (board.inBounds(end) && board.isOppPieceColor(end, color)) {
 		moves.push_back(Move(start, end));
 	}
 }

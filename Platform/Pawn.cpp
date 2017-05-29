@@ -37,11 +37,11 @@ std::vector<Move> Pawn::getMoves(const Board &board, Position pos) const {
 
 	// capture diagonally
 	end = start.add(-1, step());
-	if (board.isPiece(end) && board.getPieceColor(end) != getColor()) {
+	if (board.isPiece(end) && board.isOppPieceColor(end, color)) {
 		moves.push_back(Move(start, end));
 	}
 	end = start.add(1, step());
-	if (board.isPiece(end) && board.getPieceColor(end) != getColor()) {
+	if (board.isPiece(end) && board.isOppPieceColor(end, color)) {
 		moves.push_back(Move(start, end));
 	}
 
@@ -51,7 +51,7 @@ std::vector<Move> Pawn::getMoves(const Board &board, Position pos) const {
 }
 
 int Pawn::step() const {
-	if (getColor() == PieceColor::BLACK) {
+	if (color == PieceColor::BLACK) {
 		return -1;
 	}
 	return 1;

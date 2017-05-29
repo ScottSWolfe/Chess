@@ -61,7 +61,7 @@ ConsoleColor ConsoleBoardPresenter::getConsolePieceColor(PieceColor color) const
 		return ConsoleBoardPresenter::BLACK_PIECE;
 	}
 	else {
-		throw invalid_argument("incorret color argument");
+		return ConsoleBoardPresenter::NO_PIECE;
 	}
 }
 

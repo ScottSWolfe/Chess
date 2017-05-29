@@ -28,6 +28,7 @@ private:
 
 	const ConsoleColor WHITE_PIECE = ConsoleColor::WHITE;
 	const ConsoleColor BLACK_PIECE = ConsoleColor::YELLOW;
+	const ConsoleColor NO_PIECE = ConsoleColor::WHITE;
 	const ConsoleColor LIGHT_SQUARE = ConsoleColor::RED;
 	const ConsoleColor DARK_SQUARE = ConsoleColor::BLACK;
 	const ConsoleColor BORDER_BACKGROUND = ConsoleColor::WHITE;

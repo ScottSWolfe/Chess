@@ -82,6 +82,13 @@ string Board::getPieceSymbol(Position pos) const {
 	return Piece::getPieceSymbol(getPiece(pos));
 }
 
+bool Board::isOppPieceColor(Position pos, PieceColor color) const {
+	if (getPieceColor(pos) == PieceColor::NO_PIECE) {
+		return false;
+	}
+	return getPieceColor(pos) != color;
+}
+
 int Board::getDimension() const {
 	return dimension;
 }
