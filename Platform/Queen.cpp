@@ -19,3 +19,7 @@ vector<Move> Queen::getMoves(const GameState &state, Position pos) const {
 	getDiagonalMoves(moves, state, pos);
 	return moves;
 }
+
+void Queen::checkForAndAddMoveEffect(const GameState &state, Move &move) const {
+	return;
+}

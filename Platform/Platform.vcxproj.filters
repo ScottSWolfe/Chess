@@ -19,9 +19,6 @@
     <Filter Include="Source Files\Pieces">
       <UniqueIdentifier>{dbb777bc-f264-4c80-bcd7-de01535418a0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\tests">
-      <UniqueIdentifier>{7dfedc18-a660-4898-83ea-d9bda0d1c53d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\UI">
       <UniqueIdentifier>{c6a51eb0-aa42-4ff4-b343-ab8f520718ff}</UniqueIdentifier>
     </Filter>
@@ -102,6 +99,9 @@
     <ClCompile Include="Position.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MoveEffect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bishop.h">
@@ -168,6 +168,9 @@
       <Filter>Header Files\Player</Filter>
     </ClInclude>
     <ClInclude Include="Position.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEffect.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>

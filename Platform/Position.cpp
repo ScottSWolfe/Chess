@@ -14,13 +14,20 @@ Position::Position(const Position &pos)
 	: x(pos.x), y(pos.y)
 {}
 
-bool Position::operator==(const Position &other_coordinates) const {
-	if (this->x == other_coordinates.x &&
-		this->y == other_coordinates.y)
+bool Position::operator==(const Position &other) const {
+	if (this->x == other.x &&
+		this->y == other.y)
 	{
 		return true;
 	}
 	return false;
+}
+
+bool Position::operator!=(const Position &other) const {
+	if (*this == other) {
+		return false;
+	}
+	return true;
 }
 
 Position Position::add(int delta_x, int delta_y) const {

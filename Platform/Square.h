@@ -19,6 +19,7 @@ public:
 private:
 	const SquareColor color;
 	std::unique_ptr<const Piece> piece;
+	std::unique_ptr<const Piece> getCopyOfPiece() const;
 	void checkIfPieceIsNull(const Piece *piece) const;
 
 };

@@ -18,3 +18,7 @@ vector<Move> Bishop::getMoves(const GameState &state, Position pos) const {
 	getDiagonalMoves(moves, state, pos);
 	return moves;
 }
+
+void Bishop::checkForAndAddMoveEffect(const GameState &state, Move &move) const {
+	return;
+}

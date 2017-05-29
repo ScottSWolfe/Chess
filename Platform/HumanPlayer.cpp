@@ -12,9 +12,9 @@ HumanPlayer::HumanPlayer(PieceColor color)
 	: Player(color)
 {}
 
-shared_ptr<const Move> HumanPlayer::move(Board board) const {
+shared_ptr<Move> HumanPlayer::move(Board board) const {
 	cout << "Enter a move: ";
-	shared_ptr<const Move> move = askUserForMove();
+	shared_ptr<Move> move = askUserForMove();
 	while (move == nullptr) {
 		cout << "Move not entered correctly. Try again:" << endl;
 		move = askUserForMove();
@@ -22,7 +22,7 @@ shared_ptr<const Move> HumanPlayer::move(Board board) const {
 	return move;
 }
 
-shared_ptr<const Move> HumanPlayer::askUserForMove() const {
+shared_ptr<Move> HumanPlayer::askUserForMove() const {
 	string input;
 	getline(cin, input);
 	MoveInputParser parser;

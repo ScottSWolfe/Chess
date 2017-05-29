@@ -8,8 +8,8 @@
 using namespace std;
 
 
-shared_ptr<const Move> MoveInputParser::parseMoveInput(string input) const {
-	shared_ptr<const Move> move(nullptr);
+shared_ptr<Move> MoveInputParser::parseMoveInput(string input) const {
+	shared_ptr<Move> move(nullptr);
 
 	vector<string> tokens = parseInputIntoTokens(input, ' ');
 	if (tokens.size() < 2) {

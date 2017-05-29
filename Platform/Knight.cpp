@@ -29,3 +29,7 @@ vector<Move> Knight::getMoves(const GameState &state, Position start) const {
 	}
 	return moves;
 }
+
+void Knight::checkForAndAddMoveEffect(const GameState &state, Move &move) const {
+	return;
+}

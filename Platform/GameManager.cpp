@@ -34,9 +34,10 @@ void GameManager::runGameLoop() {
 
 }
 
-std::shared_ptr<const Move> GameManager::getPlayerMove() const {
+std::shared_ptr<Move> GameManager::getPlayerMove() const {
 	const Player *current_player = getCurrentPlayer();
-	std::shared_ptr<const Move> move = current_player->move(current_state.getBoard());
+	std::shared_ptr<Move> move = current_player->move(current_state.getBoard());
+	current_state.checkForAndAddMoveEffect(*move);
 	MoveValidator moveValidator(current_state, *move);
 	if (!moveValidator.validateMove()) {
 		cout << "Illegal Move. Try again:" << endl;

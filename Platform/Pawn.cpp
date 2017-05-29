@@ -3,6 +3,7 @@
 #include "GameState.h"
 #include "Pawn.h"
 #include "Move.h"
+#include "MoveEffect.h"
 #include "Position.h"
 using namespace std;
 
@@ -58,6 +59,31 @@ std::vector<Move> Pawn::getMoves(const GameState &state, Position pos) const {
 	return moves;
 }
 
+void Pawn::checkForAndAddMoveEffect(const GameState &state, Move &move) const {
+	// check for en passant
+	if (move.getStart().y == enPassantRow(state.getBoardDimension())) {
+		const Move *last_move = state.getLastMove();
+		if (last_move != nullptr) {
+			Position last_move_start = last_move->getStart();
+			Position last_move_end = last_move->getEnd();
+			Position start = move.getStart();
+			if (last_move_end == start.add(1, 0) || last_move_end == start.add(-1, 0)) {
+				if (dynamic_cast<const Pawn*>(state.getPiece(last_move_end))) {
+					int delta_x = last_move->getEnd().x - move.getStart().x;
+					if (last_move_start == start.add(delta_x, 2 * step())) {
+						Position end = start.add(delta_x, step());
+						auto effect = make_unique<const MoveEffect>(last_move_end);
+						move = (Move(start, end, effect));
+						return;
+					}
+				}
+			}
+		}
+	}
+
+	// check for promotion
+}
+
 bool Pawn::addMoveIfEnPassantAvailable(vector<Move> &moves, const GameState &state,
 										Position start, const Move &last_move, int delta_x) const
 {
@@ -67,7 +93,8 @@ bool Pawn::addMoveIfEnPassantAvailable(vector<Move> &moves, const GameState &sta
 		if (dynamic_cast<const Pawn*>(state.getPiece(last_move_end))) {
 			if (last_move_start == start.add(delta_x, 2 * step())) {
 				Position end = start.add(delta_x, step());
-				moves.push_back(Move(start, end));
+				auto effect = make_unique<const MoveEffect>(last_move_end);
+				moves.push_back(Move(start, end, effect));
 				return true;
 			}
 		}

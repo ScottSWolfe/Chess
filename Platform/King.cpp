@@ -27,3 +27,8 @@ vector<Move> King::getMoves(const GameState &state, Position start) const {
 	}
 	return moves;
 }
+
+void King::checkForAndAddMoveEffect(const GameState &state, Move &move) const {
+	// check for castle
+	return;
+}

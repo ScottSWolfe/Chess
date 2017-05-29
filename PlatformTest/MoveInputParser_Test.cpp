@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "CppUnitTest.h"
 #include "Move.h"
+#include "MoveEffect.h"
 #include "MoveInputParser.h"
 #include "Position.h"
 using namespace std;

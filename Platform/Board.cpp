@@ -83,6 +83,10 @@ bool Board::isOppPieceColor(Position pos, PieceColor color) const {
 	return getPieceColor(pos) != color;
 }
 
+void Board::setPiece(Position pos, std::unique_ptr<const Piece> &piece) {
+	getSquare(pos).setPiece(piece);
+}
+
 int Board::getDimension() const {
 	return dimension;
 }

@@ -25,6 +25,7 @@ public:
 	PieceColor getPieceColor(Position pos) const;
 	std::string getPieceSymbol(Position pos) const;
 	bool isOppPieceColor(Position pos, PieceColor color) const;
+	void setPiece(Position pos, std::unique_ptr<const Piece> &piece);
 	int getDimension() const;
 
 private:

@@ -10,7 +10,7 @@ struct Position;
 class MoveInputParser {
 
 public:
-	std::shared_ptr<const Move> parseMoveInput(std::string input) const;
+	std::shared_ptr<Move> parseMoveInput(std::string input) const;
 
 private:
 	std::vector<std::string> parseInputIntoTokens(std::string input, char delimiter) const;

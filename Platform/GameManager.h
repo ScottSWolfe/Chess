@@ -23,7 +23,7 @@ private:
 	// methods
 	void runGameLoop();
 	const Player *GameManager::getCurrentPlayer() const;
-	std::shared_ptr<const Move> GameManager::getPlayerMove() const;
+	std::shared_ptr<Move> GameManager::getPlayerMove() const;
 	std::string playerTurnToString() const;
 
 };

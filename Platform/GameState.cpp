@@ -1,6 +1,10 @@
 #include <memory>
 #include "ChessDebug.h"
 #include "GameState.h"
+#include "King.h"
+#include "MoveEffect.h"
+#include "Pawn.h"
+#include "Piece.h"
 #include "Position.h"
 using namespace std;
 
@@ -44,10 +48,29 @@ bool GameState::isMoveAvailable(const Move &move) const {
 void GameState::makeMove(const Move &move) {
 	Position start = move.getStart();
 	Position end = move.getEnd();
+	const MoveEffect *effect = move.getEffect();
 	unique_ptr<const Piece> piece = board.removePieceFromSquare(start);
 	board.addPieceToSquare(end, piece);
+	applyMoveEffect(effect);
 	move_history.push_back(move);
 	changePlayersTurn();
+}
+
+void GameState::checkForAndAddMoveEffect(Move &move) const {
+	if (move.getEffect() != nullptr) {
+		return;
+	}
+	const Piece *piece = getPiece(move.getStart());
+	piece->checkForAndAddMoveEffect(*this, move);
+}
+
+void GameState::applyMoveEffect(const MoveEffect *effect) {
+	if (effect == nullptr) {
+		return;
+	}
+	Position pos = effect->getPosition();
+	unique_ptr<const Piece> piece = effect->getCopyOfPiece();
+	board.setPiece(pos, piece);
 }
 
 const Move *GameState::getLastMove() const {

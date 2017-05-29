@@ -2,6 +2,7 @@
 #include "ChessDebug.h"
 #include "GameState.h"
 #include "Move.h"
+#include "Piece.h"
 #include "Position.h"
 #include "Rook.h"
 using namespace std;
@@ -17,4 +18,8 @@ vector<Move> Rook::getMoves(const GameState &state, Position pos) const {
 	vector<Move> moves;
 	getStraightMoves(moves, state, pos);
 	return moves;
+}
+
+void Rook::checkForAndAddMoveEffect(const GameState &state, Move &move) const {
+	return;
 }
