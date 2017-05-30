@@ -1,9 +1,7 @@
 #include <memory>
 #include "ChessDebug.h"
 #include "GameState.h"
-#include "King.h"
 #include "MoveEffect.h"
-#include "Pawn.h"
 #include "Piece.h"
 #include "Position.h"
 using namespace std;
