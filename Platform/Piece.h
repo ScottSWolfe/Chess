@@ -28,11 +28,11 @@ protected:
 	void getDiagonalMoves(std::vector<Move> &moves, const GameState &state, Position start) const;
 	void getMovesInLine(std::vector<Move> &moves, const GameState &state, Position start, int delta_x, int delta_y) const;
 
-	const std::string PAWN_SYMBOL = "p";
-	const std::string ROOK_SYMBOL = "R";
-	const std::string BISHOP_SYMBOL = "B";
-	const std::string KNIGHT_SYMBOL = "N";
-	const std::string QUEEN_SYMBOL = "Q";
-	const std::string KING_SYMBOL = "K";
+	static const std::string PAWN_SYMBOL;
+	static const std::string ROOK_SYMBOL;
+	static const std::string BISHOP_SYMBOL;
+	static const std::string KNIGHT_SYMBOL;
+	static const std::string QUEEN_SYMBOL;
+	static const std::string KING_SYMBOL;
 
 };

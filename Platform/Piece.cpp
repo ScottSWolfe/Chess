@@ -14,6 +14,13 @@
 using namespace std;
 
 
+const std::string Piece::PAWN_SYMBOL = "p";
+const std::string Piece::ROOK_SYMBOL = "R";
+const std::string Piece::BISHOP_SYMBOL = "B";
+const std::string Piece::KNIGHT_SYMBOL = "N";
+const std::string Piece::QUEEN_SYMBOL = "Q";
+const std::string Piece::KING_SYMBOL = "K";
+
 Piece::Piece(PieceColor piece_color) : color(piece_color) {}
 
 PieceColor Piece::getColor() const {
