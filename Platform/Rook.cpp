@@ -10,6 +10,10 @@ using namespace std;
 
 Rook::Rook(PieceColor color) : Piece(color) {}
 
+std::unique_ptr<const Piece> Rook::getCopy() const {
+	return make_unique<const Rook>(color);
+}
+
 const string Rook::getSymbol() const {
 	return ROOK_SYMBOL;
 }

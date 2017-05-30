@@ -12,6 +12,10 @@ Pawn::Pawn(PieceColor color)
 	: Piece(color)
 {}
 
+std::unique_ptr<const Piece> Pawn::getCopy() const {
+	return make_unique<const Pawn>(color);
+}
+
 const string Pawn::getSymbol() const {
 	return PAWN_SYMBOL;
 }

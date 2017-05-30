@@ -9,6 +9,10 @@ using namespace std;
 
 King::King(PieceColor color) : Piece(color) {}
 
+std::unique_ptr<const Piece> King::getCopy() const {
+	return make_unique<const King>(color);
+}
+
 const string King::getSymbol() const {
 	return KING_SYMBOL;
 }

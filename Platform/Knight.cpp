@@ -9,6 +9,10 @@ using namespace std;
 
 Knight::Knight(PieceColor color) : Piece(color) {}
 
+std::unique_ptr<const Piece> Knight::getCopy() const {
+	return make_unique<const Knight>(color);
+}
+
 const string Knight::getSymbol() const {
 	return KNIGHT_SYMBOL;
 }

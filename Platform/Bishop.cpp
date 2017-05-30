@@ -9,6 +9,10 @@ using namespace std;
 
 Bishop::Bishop(PieceColor color) : Piece(color) {}
 
+std::unique_ptr<const Piece> Bishop::getCopy() const {
+	return make_unique<const Bishop>(color);
+}
+
 const string Bishop::getSymbol() const {
 	return BISHOP_SYMBOL;
 }

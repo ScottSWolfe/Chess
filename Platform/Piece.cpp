@@ -45,29 +45,11 @@ PieceColor Piece::getPieceColor(const Piece *piece) {
 	}
 }
 
-unique_ptr<const Piece> Piece::copyPieceFactory(const Piece *piece) {
-	if (!piece) {
+unique_ptr<const Piece> Piece::copyPiece(const Piece *piece) {
+	if (piece == nullptr) {
 		return nullptr;
 	}
-	if (dynamic_cast<const Pawn*>(piece)) {
-		return make_unique<const Pawn>(piece->getColor());
-	}
-	if (dynamic_cast<const Bishop*>(piece)) {
-		return make_unique<const Bishop>(piece->getColor());
-	}
-	if (dynamic_cast<const Knight*>(piece)) {
-		return make_unique<const Knight>(piece->getColor());
-	}
-	if (dynamic_cast<const Rook*>(piece)) {
-		return make_unique<const Rook>(piece->getColor());
-	}
-	if (dynamic_cast<const Queen*>(piece)) {
-		return make_unique<const Queen>(piece->getColor());
-	}
-	if (dynamic_cast<const King*>(piece)) {
-		return make_unique<const King>(piece->getColor());
-	}
-	return nullptr;
+	return piece->getCopy();
 }
 
 void Piece::getStraightMoves(vector<Move> &moves, const GameState &state, Position start) const {

@@ -30,12 +30,9 @@ Position MoveEffect::getPosition() const {
 }
 
 unique_ptr<const Piece> MoveEffect::getCopyOfPiece() const {
-	return Piece::copyPieceFactory(piece.get());
+	return Piece::copyPiece(piece.get());
 }
 
 unique_ptr<const MoveEffect> MoveEffect::getCopy() const {
-	if (piece == nullptr) {
-		return make_unique<const MoveEffect>(position);
-	}
 	return make_unique<const MoveEffect>(position, getCopyOfPiece());
 }

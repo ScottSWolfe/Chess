@@ -9,6 +9,10 @@ using namespace std;
 
 Queen::Queen(PieceColor color) : Piece(color) {}
 
+std::unique_ptr<const Piece> Queen::getCopy() const {
+	return make_unique<const Queen>(color);
+}
+
 const string Queen::getSymbol() const {
 	return QUEEN_SYMBOL;
 }

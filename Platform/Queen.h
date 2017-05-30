@@ -13,6 +13,7 @@ class Queen : public Piece {
 
 public:
 	Queen(PieceColor color);
+	std::unique_ptr<const Piece> getCopy() const override;
 	const std::string getSymbol() const override;
 	std::vector<Move> getMoves(const GameState &state, Position pos) const override;
 	void checkForAndAddMoveEffect(const GameState &state, Move &move) const override;

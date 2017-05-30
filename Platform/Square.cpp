@@ -28,14 +28,13 @@ void Square::setPiece(unique_ptr<const Piece> &new_piece) {
 }
 
 unique_ptr<const Piece> Square::removePiece() {
-	unique_ptr<const Piece> copy_of_piece = Piece::copyPieceFactory(piece.get());
-	checkIfPieceIsNull(copy_of_piece.get());
+	unique_ptr<const Piece> copy_of_piece = piece->getCopy();
 	piece.reset();
 	return copy_of_piece;
 }
 
 unique_ptr<const Piece> Square::getCopyOfPiece() const {
-	return Piece::copyPieceFactory(piece.get());
+	return Piece::copyPiece(piece.get());
 }
 
 SquareColor Square::getColor() const {
