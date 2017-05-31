@@ -22,8 +22,11 @@ private:
 
 	// methods
 	void runGameLoop();
-	const Player *GameManager::getCurrentPlayer() const;
-	std::shared_ptr<Move> GameManager::getPlayerMove() const;
+	const Player *getCurrentPlayer() const;
+	std::shared_ptr<Move> getPlayerMove() const;
+	bool validateMoveIsLegal(const Move &move) const;
+	bool validateMoveIsSafe(const Move &move) const;
+	std::shared_ptr<Move> getAnotherMove() const;
 	std::string playerTurnToString() const;
 
 };

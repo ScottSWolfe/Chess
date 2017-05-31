@@ -26,7 +26,7 @@ std::vector<Move> Pawn::getMoves(const GameState &state, Position start) const {
 
 	// move forward one
 	end = start.add(0, step());
-	if (state.isPiece(end) == false) {
+	if (state.inBounds(end) == true && state.isPiece(end) == false) {
 		moves.push_back(Move(start, end));
 	}
 
@@ -34,18 +34,20 @@ std::vector<Move> Pawn::getMoves(const GameState &state, Position start) const {
 	if (start.y == startRow(state.getBoardDimension())) {
 		Position step_1 = start.add(0, step());
 		Position step_2 = start.add(0, 2 * step());
-		if (state.isPiece(step_1) == false && state.isPiece(step_2) == false) {
+		if (state.inBounds(step_1) && state.inBounds(step_2) &&
+			state.isPiece(step_1) == false && state.isPiece(step_2) == false)
+		{
 			moves.push_back(Move(start, step_2));
 		}
 	}
 
 	// capture diagonally
 	end = start.add(-1, step());
-	if (state.isPiece(end) && state.isOppPieceColor(end, color)) {
+	if (state.inBounds(end) && state.isPiece(end) && state.isOppPieceColor(end, color)) {
 		moves.push_back(Move(start, end));
 	}
 	end = start.add(1, step());
-	if (state.isPiece(end) && state.isOppPieceColor(end, color)) {
+	if (state.inBounds(end) && state.isPiece(end) && state.isOppPieceColor(end, color)) {
 		moves.push_back(Move(start, end));
 	}
 

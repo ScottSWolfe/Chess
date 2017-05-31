@@ -9,13 +9,17 @@ MoveValidator::MoveValidator(const GameState &state, const Move &move)
 	: state(state), move(move)
 {}
 
-bool MoveValidator::validateMove() const {
+bool MoveValidator::validateMoveIsSafe() const {
 	if (doSquaresExist() == false) {
 		return false;
 	}
 	if (isPieceAtStart() == false) {
 		return false;
 	}
+	return true;
+}
+
+bool MoveValidator::validateMoveIsLegal() const {
 	if (isPieceCorrectColor() == false) {
 		return false;
 	}

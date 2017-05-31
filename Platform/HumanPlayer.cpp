@@ -12,9 +12,9 @@ HumanPlayer::HumanPlayer(PieceColor color)
 	: Player(color)
 {}
 
-shared_ptr<Move> HumanPlayer::move(Board board) const {
+shared_ptr<Move> HumanPlayer::makeMove(const GameState &state) const {
 	cout << "Enter a move: ";
-	shared_ptr<Move> move = askUserForMove();
+	auto move = askUserForMove();
 	while (move == nullptr) {
 		cout << "Move not entered correctly. Try again:" << endl;
 		move = askUserForMove();

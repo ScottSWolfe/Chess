@@ -9,7 +9,8 @@ class MoveValidator {
 
 public:
 	MoveValidator(const GameState &state, const Move &move);
-	bool validateMove() const;
+	bool validateMoveIsSafe() const;
+	bool validateMoveIsLegal() const;
 
 private:
 	const GameState &state;

@@ -12,8 +12,8 @@ using namespace std;
 Board::Board(int board_dimension)
 	: dimension(board_dimension)
 {
-	if (board_dimension > 99) {
-		throw invalid_argument("board dimension is too large");
+	if (board_dimension < 6 || board_dimension > 99) {
+		throw invalid_argument("board dimension is out of range");
 	}
 	for (int i = 0; i < dimension * dimension; ++i) {
 		Square square(getSquareColorByIndex(i));
@@ -121,6 +121,7 @@ Position Board::getKingPosition(PlayerTurn current_player) const {
 			return getPosition(i);
 		}
 	}
+	throw runtime_error("no king found for given color");
 }
 
 bool Board::canPieceCaptureKing(const GameState state, PlayerTurn current_player, Position king_position) const {

@@ -3,16 +3,17 @@
 #include <memory>
 #include <string>
 #include "ChessEnums.h"
-#include "Move.h"
+//#include "Move.h"
 #include "Player.h"
 class Board;
+class Move;
 
 
 class HumanPlayer : public Player {
 
 public:
 	HumanPlayer(PieceColor color);
-	std::shared_ptr<Move> move(Board board) const override;
+	std::shared_ptr<Move> makeMove(const GameState &state) const override;
 
 private:
 	std::shared_ptr<Move> askUserForMove() const;
