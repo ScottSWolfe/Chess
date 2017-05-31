@@ -1,6 +1,8 @@
 #include <iostream>
+#include <vector>
 #include "ChessDebug.h"
 #include "Board.h"
+#include "GameState.h"
 #include "Move.h"
 #include "Piece.h"
 #include "Position.h"
@@ -27,6 +29,10 @@ Board::Board(const Board &other_board) :
 	}
 }
 
+std::shared_ptr<Board> Board::getCopy() const {
+	return make_shared<Board>(*this);
+}
+
 Square &Board::getSquare(Position pos) {
 	return squares[getIndex(pos)];
 }
@@ -49,12 +55,27 @@ bool Board::inBounds(Position pos) const {
 	return true;
 }
 
+void Board::makeMove(const Move &move) {
+	unique_ptr<const Piece> piece = removePieceFromSquare(move.getStart());
+	addPieceToSquare(move.getEnd(), piece);
+	applyMoveEffect(move.getEffect());
+}
+
 void Board::addPieceToSquare(Position pos, unique_ptr<const Piece> &piece) {
 	getSquare(pos).setPiece(piece);
 }
 
 unique_ptr<const Piece> Board::removePieceFromSquare(Position pos) {
 	return getSquare(pos).removePiece();
+}
+
+void Board::applyMoveEffect(const MoveEffect *effect) {
+	if (effect == nullptr) {
+		return;
+	}
+	Position pos = effect->getPosition();
+	unique_ptr<const Piece> piece = effect->getCopyOfPiece();
+	setPiece(pos, piece);
 }
 
 bool Board::isPiece(Position pos) const {
@@ -87,6 +108,37 @@ void Board::setPiece(Position pos, std::unique_ptr<const Piece> &piece) {
 	getSquare(pos).setPiece(piece);
 }
 
+bool Board::willKingBeInCheck(GameState &state, const Move &move) const {
+	PlayerTurn turn_before_move = state.getPlayersTurn();
+	state.makeMove(move);
+	Position king_position = getKingPosition(turn_before_move);
+	return canPieceCaptureKing(state, turn_before_move, king_position);
+}
+
+Position Board::getKingPosition(PlayerTurn current_player) const {
+	for (int i = 0; i < dimension * dimension; i++) {
+		if (squares[i].containsKing(current_player)) {
+			return getPosition(i);
+		}
+	}
+}
+
+bool Board::canPieceCaptureKing(const GameState state, PlayerTurn current_player, Position king_position) const {
+	for (int i = 0; i < dimension * dimension; i++) {
+		const Piece *piece = squares[i].getPiece();
+		if (piece != nullptr && piece->getColor() != current_player) {
+			vector<Move> moves = piece->getMoves(state, getPosition(i));
+			for (Move move : moves) {
+				if (move.getEnd() == king_position) {
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
+
 int Board::getDimension() const {
 	return dimension;
 }
@@ -95,20 +147,19 @@ int Board::getIndex(Position pos) const {
 	return pos.y * dimension + pos.x;
 }
 
-SquareColor Board::getSquareColorByIndex(int index) const {
-	
-	SquareColor color;
-	
-	int x = index % dimension;
-	int y = index / dimension;
+Position Board::getPosition(int index) const {
+	return Position(index % dimension, index / dimension);
+}
 
-	if ((y + x) % 2 == 0) {
+SquareColor Board::getSquareColorByIndex(int index) const {
+	SquareColor color;
+	Position pos = getPosition(index);
+	if ((pos.x + pos.y) % 2 == 0) {
 		color = SquareColor::DARK;
 	}
 	else {
 		color = SquareColor::LIGHT;
 	}
-
 	return color;
 }
 

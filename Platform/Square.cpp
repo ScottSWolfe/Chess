@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include "ChessDebug.h"
-#include "Pawn.h"
+#include "King.h"
 #include "Piece.h"
 #include "Square.h"
 using namespace std;
@@ -31,6 +31,19 @@ unique_ptr<const Piece> Square::removePiece() {
 	unique_ptr<const Piece> copy_of_piece = piece->getCopy();
 	piece.reset();
 	return copy_of_piece;
+}
+
+bool Square::containsKing(PlayerTurn current_turn) const {
+	if (piece == nullptr) {
+		return false;
+	}
+	if (current_turn != piece->getColor()) {
+		return false;
+	}
+	if (dynamic_cast<const King*>(piece.get())) {
+		return true;
+	}
+	return false;
 }
 
 unique_ptr<const Piece> Square::getCopyOfPiece() const {

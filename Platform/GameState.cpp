@@ -12,7 +12,19 @@ GameState::GameState(Board board, PlayerTurn beginning_player) :
 	current_turn(beginning_player)
 {}
 
-Board GameState::getBoard() const {
+GameState::GameState(const GameState &other)
+	: board(other.board), current_turn(other.current_turn)
+{
+	for (Move move : other.move_history) {
+		move_history.push_back(move);
+	}
+}
+
+shared_ptr<GameState> GameState::getCopy() const {
+	return make_shared<GameState>(*this);
+}
+
+const Board &GameState::getBoard() const {
 	return board;
 }
 
@@ -43,13 +55,13 @@ bool GameState::isMoveAvailable(const Move &move) const {
 	return false;
 }
 
+bool GameState::willKingBeInCheck(const Move &move) const {
+	shared_ptr<GameState> copy_of_state = this->getCopy();
+	return copy_of_state->board.willKingBeInCheck(*copy_of_state, move);
+}
+
 void GameState::makeMove(const Move &move) {
-	Position start = move.getStart();
-	Position end = move.getEnd();
-	const MoveEffect *effect = move.getEffect();
-	unique_ptr<const Piece> piece = board.removePieceFromSquare(start);
-	board.addPieceToSquare(end, piece);
-	applyMoveEffect(effect);
+	board.makeMove(move);
 	move_history.push_back(move);
 	changePlayersTurn();
 }
@@ -60,15 +72,6 @@ void GameState::checkForAndAddMoveEffect(Move &move) const {
 	}
 	const Piece *piece = getPiece(move.getStart());
 	piece->checkForAndAddMoveEffect(*this, move);
-}
-
-void GameState::applyMoveEffect(const MoveEffect *effect) {
-	if (effect == nullptr) {
-		return;
-	}
-	Position pos = effect->getPosition();
-	unique_ptr<const Piece> piece = effect->getCopyOfPiece();
-	board.setPiece(pos, piece);
 }
 
 const Move *GameState::getLastMove() const {

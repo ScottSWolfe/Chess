@@ -10,19 +10,22 @@ MoveValidator::MoveValidator(const GameState &state, const Move &move)
 {}
 
 bool MoveValidator::validateMove() const {
-	if (!doSquaresExist()) {
+	if (doSquaresExist() == false) {
 		return false;
 	}
-	if (!isPieceAtStart()) {
+	if (isPieceAtStart() == false) {
 		return false;
 	}
-	if (!isPieceCorrectColor()) {
+	if (isPieceCorrectColor() == false) {
 		return false;
 	}
-	if (!isDestAvailable()) {
+	if (isDestAvailable() == false) {
 		return false;
 	}
-	if (!isAvailableMove()) {
+	if (isAvailableMove() == false) {
+		return false;
+	}
+	if (willKingBeInCheck() == true) {
 		return false;
 	}
 	return true;
@@ -73,4 +76,8 @@ bool MoveValidator::isAvailableMove() const {
 		return true;
 	}
 	return false;
+}
+
+bool MoveValidator::willKingBeInCheck() const {
+	return state.willKingBeInCheck(move);
 }
