@@ -12,7 +12,7 @@ struct Position;
 class GameState {
 
 public:
-	GameState(Board board, PlayerTurn beginning_player);
+	GameState(Board board, PieceColor beginning_player);
 	GameState(const GameState &other);
 	std::shared_ptr<GameState> getCopy() const;
 	const Board &getBoard() const;
@@ -26,12 +26,12 @@ public:
 	void checkForAndAddMoveEffect(Move &move) const;
 	bool isOppPieceColor(Position pos, PieceColor color) const;
 	bool inBounds(Position pos) const;
-	PlayerTurn getPlayersTurn() const;
+	PieceColor getPlayersTurn() const;
 	const Move *getLastMove() const;
 
 private:
 	Board board;
-	PlayerTurn current_turn;
+	PieceColor current_turn;
 	std::vector<Move> move_history;
 	void changePlayersTurn();
 

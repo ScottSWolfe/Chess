@@ -14,7 +14,7 @@ public:
 	const Piece *getPiece() const;
 	void setPiece(std::unique_ptr<const Piece> &new_piece);
 	std::unique_ptr<const Piece> removePiece();
-	bool containsKing(PlayerTurn current_turn) const;
+	bool containsKing(PieceColor color) const;
 	SquareColor getColor() const;
 
 private:

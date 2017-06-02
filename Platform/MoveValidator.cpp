@@ -61,7 +61,7 @@ bool MoveValidator::isPieceAtStart() const {
 
 bool MoveValidator::isPieceCorrectColor() const {
 	PieceColor color = state.getPieceColor(move.getStart());
-	PlayerTurn turn = state.getPlayersTurn();
+	PieceColor turn = state.getPlayersTurn();
 	return color == turn;
 }
 

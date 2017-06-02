@@ -7,7 +7,7 @@
 using namespace std;
 
 
-GameState::GameState(Board board, PlayerTurn beginning_player) : 
+GameState::GameState(Board board, PieceColor beginning_player) : 
 	board(board),
 	current_turn(beginning_player)
 {}
@@ -89,15 +89,15 @@ bool GameState::inBounds(Position pos) const {
 	return board.inBounds(pos);
 }
 
-PlayerTurn GameState::getPlayersTurn() const {
+PieceColor GameState::getPlayersTurn() const {
 	return current_turn;
 }
 
 void GameState::changePlayersTurn() {
-	if (current_turn == PlayerTurn::WHITE) {
-		current_turn = PlayerTurn::BLACK;
+	if (current_turn == PieceColor::WHITE) {
+		current_turn = PieceColor::BLACK;
 	}
 	else {
-		current_turn = PlayerTurn::WHITE;
+		current_turn = PieceColor::WHITE;
 	}
 }

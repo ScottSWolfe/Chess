@@ -33,7 +33,7 @@ unique_ptr<const Piece> Square::removePiece() {
 	return copy_of_piece;
 }
 
-bool Square::containsKing(PlayerTurn current_turn) const {
+bool Square::containsKing(PieceColor current_turn) const {
 	if (piece == nullptr) {
 		return false;
 	}

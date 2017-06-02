@@ -11,7 +11,7 @@ using namespace std;
 
 GameManager::GameManager() :
 	presenter(new ConsoleBoardPresenter),
-	current_state(BoardInitializer::initializeStandardSetup(), PlayerTurn::WHITE),
+	current_state(BoardInitializer::initializeStandardSetup(), PieceColor::WHITE),
 	white_player(new HumanPlayer(PieceColor::WHITE)),
 	black_player(new HumanPlayer(PieceColor::BLACK))
 {}
@@ -63,7 +63,7 @@ std::shared_ptr<Move> GameManager::getAnotherMove() const {
 }
 
 const Player *GameManager::getCurrentPlayer() const {
-	if (current_state.getPlayersTurn() == PlayerTurn::WHITE) {
+	if (current_state.getPlayersTurn() == PieceColor::WHITE) {
 		return white_player.get();
 	}
 	else {
@@ -72,7 +72,7 @@ const Player *GameManager::getCurrentPlayer() const {
 }
 
 string GameManager::playerTurnToString() const {
-	if (current_state.getPlayersTurn() == PlayerTurn::BLACK) {
+	if (current_state.getPlayersTurn() == PieceColor::BLACK) {
 		return "Black";
 	}
 	else {

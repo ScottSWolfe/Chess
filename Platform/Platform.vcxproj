@@ -117,7 +117,6 @@
     <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="BoardInitializer.cpp" />
-    <ClCompile Include="ChessEnums.cpp" />
     <ClCompile Include="ConsoleBoardPresenter.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameState.cpp" />
