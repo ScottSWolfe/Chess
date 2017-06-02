@@ -38,7 +38,7 @@ private:
 	int getIndex(Position pos) const;
 	Position getPosition(int index) const;
 	SquareColor getSquareColorByIndex(int index) const;
-	void checkIfPieceIsNull(const Piece *piece) const;
+	void throwExceptionIfPieceIsNull(const Piece *piece) const;
 	void applyMoveEffect(const MoveEffect *effect);
 	bool canPieceCaptureKing(const GameState state, PieceColor current_player, Position king_position) const;
 	Position getKingPosition(PieceColor current_player) const;

@@ -23,25 +23,31 @@ void GameManager::startGame() {
 void GameManager::runGameLoop() {
 	cout << "Game Loop Started" << endl;
 	presenter->displayBoard(current_state.getBoard());
-
 	while (true) {
 		// check if game is over
 		cout << playerTurnToString() << "'s Turn" << endl;
-		auto move = getPlayerMove();
+		shared_ptr<Move> move = getMove();
 		current_state.makeMove(*move);
 		presenter->displayBoard(current_state.getBoard());
 	}
-
 }
 
-std::shared_ptr<Move> GameManager::getPlayerMove() const {
-	const Player *current_player = getCurrentPlayer();
-	auto move = current_player->makeMove(current_state);
+std::shared_ptr<Move> GameManager::getMove() const {
+	auto move = getCurrentPlayersMove();
 	if (validateMoveIsSafe(*move) == false) {
 		move = getAnotherMove();
 	}
 	current_state.addMoveEffect(*move);
 	if (validateMoveIsLegal(*move) == false) {
+		move = getAnotherMove();
+	}
+	return move;
+}
+
+std::shared_ptr<Move> GameManager::getCurrentPlayersMove() const {
+	const Player *current_player = getCurrentPlayer();
+	auto move = current_player->makeMove(current_state);
+	if (validateMoveIsSafe(*move) == false) {
 		move = getAnotherMove();
 	}
 	return move;
@@ -59,7 +65,7 @@ bool GameManager::validateMoveIsLegal(const Move &move) const {
 
 std::shared_ptr<Move> GameManager::getAnotherMove() const {
 	cout << "Illegal Move. Try again:" << endl;
-	return getPlayerMove();
+	return getMove();
 }
 
 const Player *GameManager::getCurrentPlayer() const {

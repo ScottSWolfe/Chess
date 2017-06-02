@@ -164,7 +164,7 @@ SquareColor Board::getSquareColorByIndex(int index) const {
 	return color;
 }
 
-void Board::checkIfPieceIsNull(const Piece *piece) const {
+void Board::throwExceptionIfPieceIsNull(const Piece *piece) const {
 	if (piece == nullptr) {
 		throw invalid_argument("square does not contain a piece");
 	}

@@ -37,8 +37,8 @@ bool Square::containsKing(PieceColor color) const {
 	if (piece == nullptr) {
 		return false;
 	}
-	if (piece->getSymbol != Piece::KING_SYMBOL) {
-		return false
+	if (piece->getSymbol() != Piece::KING_SYMBOL) {
+		return false;
 	}
 	if (color != piece->getColor()) {
 		return false;
@@ -54,7 +54,7 @@ SquareColor Square::getColor() const {
 	return color;
 }
 
-void Square::checkIfPieceIsNull(const Piece *piece) const {
+void Square::throwExceptionIfPieceIsNull(const Piece *piece) const {
 	if (piece == nullptr) {
 		throw invalid_argument("square does not contain a piece");
 	}
