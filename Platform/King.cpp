@@ -17,7 +17,7 @@ const string King::getSymbol() const {
 	return KING_SYMBOL;
 }
 
-vector<Move> King::getMoves(const GameState &state, Position start) const {
+vector<Move> King::getAvailableMoves(const GameState &state, Position start) const {
 	vector<Move> moves;
 	for (int delta_y = -1; delta_y <= 1; delta_y++) {
 		for (int delta_x = -1; delta_x <= 1; delta_x++) {
@@ -32,7 +32,7 @@ vector<Move> King::getMoves(const GameState &state, Position start) const {
 	return moves;
 }
 
-void King::checkForAndAddMoveEffect(const GameState &state, Move &move) const {
+void King::addMoveEffect(const GameState &state, Move &move) const {
 	// check for castle
 	return;
 }

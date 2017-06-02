@@ -40,7 +40,7 @@ std::shared_ptr<Move> GameManager::getPlayerMove() const {
 	if (validateMoveIsSafe(*move) == false) {
 		move = getAnotherMove();
 	}
-	current_state.checkForAndAddMoveEffect(*move);
+	current_state.addMoveEffect(*move);
 	if (validateMoveIsLegal(*move) == false) {
 		move = getAnotherMove();
 	}

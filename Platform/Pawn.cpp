@@ -21,7 +21,7 @@ const string Pawn::getSymbol() const {
 	return PAWN_SYMBOL;
 }
 
-std::vector<Move> Pawn::getMoves(const GameState &state, Position start) const {
+std::vector<Move> Pawn::getAvailableMoves(const GameState &state, Position start) const {
 	vector<Move> moves;
 	Position end;
 
@@ -61,7 +61,7 @@ std::vector<Move> Pawn::getMoves(const GameState &state, Position start) const {
 	return moves;
 }
 
-void Pawn::checkForAndAddMoveEffect(const GameState &state, Move &move) const {
+void Pawn::addMoveEffect(const GameState &state, Move &move) const {
 	// check for en passant
 	int delta_x = 0;
 	if (isEnPassantAvailable(state, move.getStart(), delta_x)) {

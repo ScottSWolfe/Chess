@@ -128,7 +128,7 @@ bool Board::canPieceCaptureKing(const GameState state, PieceColor current_player
 	for (int i = 0; i < dimension * dimension; i++) {
 		const Piece *piece = squares[i].getPiece();
 		if (piece != nullptr && piece->getColor() != current_player) {
-			vector<Move> moves = piece->getMoves(state, getPosition(i));
+			vector<Move> moves = piece->getAvailableMoves(state, getPosition(i));
 			for (Move move : moves) {
 				if (move.getEnd() == king_position) {
 					return true;

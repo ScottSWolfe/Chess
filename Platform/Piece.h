@@ -16,8 +16,8 @@ public:
 	virtual std::unique_ptr<const Piece> getCopy() const = 0;
 	PieceColor getColor() const;
 	virtual const std::string getSymbol() const = 0;
-	virtual std::vector<Move> getMoves(const GameState &state, Position pos) const = 0;
-	virtual void checkForAndAddMoveEffect(const GameState &state, Move &move) const = 0;
+	virtual std::vector<Move> getAvailableMoves(const GameState &state, Position pos) const = 0;
+	virtual void addMoveEffect(const GameState &state, Move &move) const = 0;
 
 	static std::unique_ptr<const Piece> copyPiece(const Piece *piece);
 	static const std::string getPieceSymbol(const Piece *piece);

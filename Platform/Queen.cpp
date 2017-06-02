@@ -17,13 +17,13 @@ const string Queen::getSymbol() const {
 	return QUEEN_SYMBOL;
 }
 
-vector<Move> Queen::getMoves(const GameState &state, Position pos) const {
+vector<Move> Queen::getAvailableMoves(const GameState &state, Position pos) const {
 	vector<Move> moves;
 	getStraightMoves(moves, state, pos);
 	getDiagonalMoves(moves, state, pos);
 	return moves;
 }
 
-void Queen::checkForAndAddMoveEffect(const GameState &state, Move &move) const {
+void Queen::addMoveEffect(const GameState &state, Move &move) const {
 	return;
 }

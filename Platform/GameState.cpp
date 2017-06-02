@@ -46,7 +46,7 @@ PieceColor GameState::getPieceColor(Position pos) const {
 
 bool GameState::isMoveAvailable(const Move &move) const {
 	const Piece *piece = board.getPiece(move.getStart());
-	vector<Move> moves = piece->getMoves(*this, move.getStart());
+	vector<Move> moves = piece->getAvailableMoves(*this, move.getStart());
 	for (Move curr_move : moves) {
 		if (curr_move == move) {
 			return true;
@@ -66,12 +66,12 @@ void GameState::makeMove(const Move &move) {
 	changePlayersTurn();
 }
 
-void GameState::checkForAndAddMoveEffect(Move &move) const {
+void GameState::addMoveEffect(Move &move) const {
 	if (move.getEffect() != nullptr) {
 		return;
 	}
 	const Piece *piece = getPiece(move.getStart());
-	piece->checkForAndAddMoveEffect(*this, move);
+	piece->addMoveEffect(*this, move);
 }
 
 const Move *GameState::getLastMove() const {

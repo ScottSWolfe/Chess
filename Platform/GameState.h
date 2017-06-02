@@ -23,7 +23,7 @@ public:
 	bool isMoveAvailable(const Move &move) const;
 	bool willKingBeInCheck(const Move &move) const;
 	void makeMove(const Move &move);
-	void checkForAndAddMoveEffect(Move &move) const;
+	void addMoveEffect(Move &move) const;
 	bool isOppPieceColor(Position pos, PieceColor color) const;
 	bool inBounds(Position pos) const;
 	PieceColor getPlayersTurn() const;

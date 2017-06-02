@@ -17,12 +17,12 @@ const string Bishop::getSymbol() const {
 	return BISHOP_SYMBOL;
 }
 
-vector<Move> Bishop::getMoves(const GameState &state, Position pos) const {
+vector<Move> Bishop::getAvailableMoves(const GameState &state, Position pos) const {
 	vector<Move> moves;
 	getDiagonalMoves(moves, state, pos);
 	return moves;
 }
 
-void Bishop::checkForAndAddMoveEffect(const GameState &state, Move &move) const {
+void Bishop::addMoveEffect(const GameState &state, Move &move) const {
 	return;
 }

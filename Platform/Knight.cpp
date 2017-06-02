@@ -17,7 +17,7 @@ const string Knight::getSymbol() const {
 	return KNIGHT_SYMBOL;
 }
 
-vector<Move> Knight::getMoves(const GameState &state, Position start) const {
+vector<Move> Knight::getAvailableMoves(const GameState &state, Position start) const {
 	vector<Move> moves;
 	for (int delta_y = -2; delta_y <= 2; delta_y++) {
 		for (int delta_x = -2; delta_x <= 2; delta_x++) {
@@ -34,6 +34,6 @@ vector<Move> Knight::getMoves(const GameState &state, Position start) const {
 	return moves;
 }
 
-void Knight::checkForAndAddMoveEffect(const GameState &state, Move &move) const {
+void Knight::addMoveEffect(const GameState &state, Move &move) const {
 	return;
 }

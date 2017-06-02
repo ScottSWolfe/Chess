@@ -18,12 +18,12 @@ const string Rook::getSymbol() const {
 	return ROOK_SYMBOL;
 }
 
-vector<Move> Rook::getMoves(const GameState &state, Position pos) const {
+vector<Move> Rook::getAvailableMoves(const GameState &state, Position pos) const {
 	vector<Move> moves;
 	getStraightMoves(moves, state, pos);
 	return moves;
 }
 
-void Rook::checkForAndAddMoveEffect(const GameState &state, Move &move) const {
+void Rook::addMoveEffect(const GameState &state, Move &move) const {
 	return;
 }
