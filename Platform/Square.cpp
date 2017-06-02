@@ -37,13 +37,13 @@ bool Square::containsKing(PieceColor color) const {
 	if (piece == nullptr) {
 		return false;
 	}
+	if (piece->getSymbol != Piece::KING_SYMBOL) {
+		return false
+	}
 	if (color != piece->getColor()) {
 		return false;
 	}
-	if (dynamic_cast<const King*>(piece.get())) {
-		return true;
-	}
-	return false;
+	return true;
 }
 
 unique_ptr<const Piece> Square::getCopyOfPiece() const {
