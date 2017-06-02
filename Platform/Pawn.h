@@ -22,6 +22,7 @@ private:
 	int step() const;
 	int startRow(int dimension) const;
 	int enPassantRow(int dimension) const;
+	int promotionRow(int dimension) const;
 	bool isEnPassantAvailable(const GameState &state, Position start, int &dst_delta_x) const;
 	void addEnPassantMove(std::vector<Move> &moves, Position start, int delta_x) const;
 	void modifyEnPassantMove(Move &move, int delta_x) const;

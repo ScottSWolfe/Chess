@@ -3,7 +3,6 @@
 #include <memory>
 #include <string>
 #include "ChessEnums.h"
-//#include "Move.h"
 #include "Player.h"
 class Board;
 class Move;

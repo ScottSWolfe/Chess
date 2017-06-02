@@ -5,6 +5,7 @@
 #include "Move.h"
 #include "MoveEffect.h"
 #include "Position.h"
+#include "Queen.h"
 using namespace std;
 
 
@@ -69,6 +70,14 @@ void Pawn::checkForAndAddMoveEffect(const GameState &state, Move &move) const {
 	}
 
 	// check for promotion
+	if (move.getEnd().y == promotionRow(state.getBoardDimension())) {
+		if (state.inBounds(move.getEnd())) {
+			unique_ptr<const Piece> queen = make_unique<const Queen>(state.getPieceColor(move.getStart()));
+			unique_ptr<const MoveEffect> effect = make_unique<const MoveEffect>(move.getEnd(), queen);
+			move = Move(move.getStart(), move.getEnd(), effect);
+			return;
+		}
+	}
 }
 
 bool Pawn::isEnPassantAvailable(const GameState &state, Position start, int &dst_delta_x) const {
@@ -124,4 +133,11 @@ int Pawn::enPassantRow(int dimension) const {
 		return 3;
 	}
 	return dimension - 4;
+}
+
+int Pawn::promotionRow(int dimension) const {
+	if (getColor() == PieceColor::BLACK) {
+		return 0;
+	}
+	return dimension - 1;
 }

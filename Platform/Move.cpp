@@ -28,9 +28,21 @@ bool Move::operator==(const Move &other) const {
 	if (start != other.start || end != other.end) {
 		return false;
 	}
-	if (effect == nullptr && other.effect == nullptr) {
-		return true;
+
+	if (effect == nullptr) {
+		if (other.effect == nullptr) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
+	else {
+		if (other.effect == nullptr) {
+			return false;
+		}
+	}
+
 	if (*effect == *other.effect) {
 		return true;
 	}
