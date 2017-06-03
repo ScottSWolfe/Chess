@@ -1,15 +1,18 @@
 #pragma once
 
 #include <memory>
+#include <vector>
 #include "ChessEnums.h"
 #include "Board.h"
 #include "Move.h"
 #include "Player.h"
 #include "HumanPlayer.h"
+#include "StateSubject.h"
 struct Position;
+class StateObserver;
 
 
-class GameState {
+class GameState : StateSubject {
 
 public:
 	GameState(Board board, PieceColor beginning_player);
@@ -28,11 +31,15 @@ public:
 	bool inBounds(Position pos) const;
 	PieceColor getPlayersTurn() const;
 	const Move *getLastMove() const;
+	void registerObserver(StateObserver *observer);
 
 private:
 	Board board;
 	PieceColor current_turn;
 	std::vector<Move> move_history;
+	std::vector<StateObserver*> observers;
+
 	void changePlayersTurn();
+	void GameState::notifyObservers() const;
 
 };

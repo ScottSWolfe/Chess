@@ -1,11 +1,12 @@
 #include <iostream>
-#include "ChessDebug.h"
 #include "BoardInitializer.h"
+#include "ChessDebug.h"
 #include "ConsoleBoardPresenter.h"
 #include "GameManager.h"
+#include "HumanPlayer.h"
 #include "Move.h"
 #include "MoveValidator.h"
-#include "HumanPlayer.h"
+#include "StateObserver.h"
 using namespace std;
 
 
@@ -20,16 +21,22 @@ void GameManager::startGame() {
 	runGameLoop();
 }
 
+void GameManager::registerStateObserver(StateObserver *observer) {
+	current_state.registerObserver(observer);
+}
+
 void GameManager::runGameLoop() {
-	cout << "Game Loop Started" << endl;
-	presenter->displayBoard(current_state.getBoard());
 	while (true) {
-		// check if game is over
-		cout << playerTurnToString() << "'s Turn" << endl;
+		if (isGameOver()) {
+			break;
+		}
 		shared_ptr<Move> move = getMove();
 		current_state.makeMove(*move);
-		presenter->displayBoard(current_state.getBoard());
 	}
+}
+
+bool GameManager::isGameOver() const {
+	return false;
 }
 
 std::shared_ptr<Move> GameManager::getMove() const {
@@ -74,14 +81,5 @@ const Player *GameManager::getCurrentPlayer() const {
 	}
 	else {
 		return black_player.get();
-	}
-}
-
-string GameManager::playerTurnToString() const {
-	if (current_state.getPlayersTurn() == PieceColor::BLACK) {
-		return "Black";
-	}
-	else {
-		return "White";
 	}
 }

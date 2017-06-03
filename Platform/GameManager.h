@@ -6,12 +6,15 @@
 #include "BoardPresenter.h"
 #include "GameState.h"
 
+class StateObserver;
+
 
 class GameManager {
 	
 public:
 	GameManager();
 	void startGame();
+	void registerStateObserver(StateObserver *observer);
 
 private:
 	// variables
@@ -22,13 +25,12 @@ private:
 
 	// methods
 	void runGameLoop();
+	bool isGameOver() const;
 	std::shared_ptr<Move> getMove() const;
 	const Player *getCurrentPlayer() const;
 	std::shared_ptr<Move> getCurrentPlayersMove() const;
-	std::shared_ptr<Move> addMoveEffect() const;
 	bool validateMoveIsLegal(const Move &move) const;
 	bool validateMoveIsSafe(const Move &move) const;
 	std::shared_ptr<Move> getAnotherMove() const;
-	std::string playerTurnToString() const;
 
 };

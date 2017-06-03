@@ -4,6 +4,7 @@
 #include "MoveEffect.h"
 #include "Piece.h"
 #include "Position.h"
+#include "StateObserver.h"
 using namespace std;
 
 
@@ -64,6 +65,7 @@ void GameState::makeMove(const Move &move) {
 	board.makeMove(move);
 	move_history.push_back(move);
 	changePlayersTurn();
+	notifyObservers();
 }
 
 void GameState::addMoveEffect(Move &move) const {
@@ -99,5 +101,16 @@ void GameState::changePlayersTurn() {
 	}
 	else {
 		current_turn = PieceColor::WHITE;
+	}
+}
+
+void GameState::registerObserver(StateObserver *observer) {
+	observer->stateChanged(*this);
+	observers.push_back(observer);
+}
+
+void GameState::notifyObservers() const {
+	for (auto observer : observers) {
+		observer->stateChanged(*this);
 	}
 }

@@ -2,6 +2,7 @@
 #include <string>
 #include "BoardPresenter.h"
 #include "ChessEnums.h"
+#include "StateObserver.h"
 class Board;
 struct Position;
 

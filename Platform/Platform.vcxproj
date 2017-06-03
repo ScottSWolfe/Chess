@@ -118,6 +118,7 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="BoardInitializer.cpp" />
     <ClCompile Include="ConsoleBoardPresenter.cpp" />
+    <ClCompile Include="ConsoleUI.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="HumanPlayer.cpp" />
@@ -144,8 +145,10 @@
     <ClInclude Include="ChessDebug.h" />
     <ClInclude Include="ChessEnums.h" />
     <ClInclude Include="ConsoleBoardPresenter.h" />
+    <ClInclude Include="ConsoleUI.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="StateObserver.h" />
     <ClInclude Include="HumanPlayer.h" />
     <ClInclude Include="King.h" />
     <ClInclude Include="Knight.h" />
@@ -160,6 +163,7 @@
     <ClInclude Include="Rook.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="Position.h" />
+    <ClInclude Include="StateSubject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
