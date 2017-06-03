@@ -9,7 +9,7 @@ using namespace std;
 GameEndType GameOverChecker::isGameOver(const GameState &state) const {
 	GameEndType end_type = GameEndType::NOT_OVER;
 
-	end_type = isCheckMate(state);
+	end_type = isMate(state);
 	if (end_type != GameEndType::NOT_OVER) {
 		return end_type;
 	}
@@ -17,12 +17,12 @@ GameEndType GameOverChecker::isGameOver(const GameState &state) const {
 	return end_type;
 }
 
-GameEndType GameOverChecker::isCheckMate(const GameState &state) const {
+GameEndType GameOverChecker::isMate(const GameState &state) const {
 	if (state.canCurrentPlayerMakeMove() == true) {
 		return GameEndType::NOT_OVER;
 	}
 	if (state.isKingInCheck() == false) {
-		return GameEndType::NOT_OVER;
+		return GameEndType::STALEMATE;
 	}
 	return getCheckmateType(state.getCurrentPlayersTurn());
 }

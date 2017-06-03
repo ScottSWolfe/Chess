@@ -5,9 +5,6 @@
 #include "ChessEnums.h"
 #include "Board.h"
 #include "Move.h"
-#include "Player.h"
-#include "HumanPlayer.h"
-#include "GameSubject.h"
 struct Position;
 class GameObserver;
 
