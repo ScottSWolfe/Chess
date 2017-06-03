@@ -61,6 +61,14 @@ bool GameState::willKingBeInCheck(const Move &move) const {
 	return copy_of_state->board.willKingBeInCheck(*copy_of_state, move);
 }
 
+bool GameState::isKingInCheck() const {
+	return board.isKingInCheck(*this);
+}
+
+Position GameState::getKingPosition(PieceColor king_color) const {
+	return board.getKingPosition(king_color);
+}
+
 void GameState::makeMove(const Move &move) {
 	board.makeMove(move);
 	move_history.push_back(move);
@@ -83,6 +91,36 @@ const Move *GameState::getLastMove() const {
 	return &move_history.back();
 }
 
+vector<Move> GameState::getAvailableMoves() const {
+	vector<Move> moves;
+	PieceColor current_color = getCurrentPlayersTurn();
+	int dimension = getBoardDimension();
+	for (int j = 0; j < dimension; j++) {
+		for (int i = 0; i < dimension; i++) {
+			Position pos(i, j);
+			if (board.isPiece(pos) && board.getPieceColor(pos) == current_color) {
+				board.getPiece(pos)->getAvailableMoves(*this, pos);
+			}
+		}
+	}
+	return moves;
+}
+
+bool GameState::canCurrentPlayerMakeMove() const {
+	int dimension = getBoardDimension();
+	for (int j = 0; j < dimension; j++) {
+		for (int i = 0; i < dimension; i++) {
+			Position pos(i, j);
+			if (board.isPiece(pos) && board.getPieceColor(pos) == current_turn) {
+				if (board.getPiece(pos)->canPieceMakeMove(*this, pos) == true) {
+					return true;
+				}
+			}
+		}
+	}
+	return false;
+}
+
 bool GameState::isOppPieceColor(Position pos, PieceColor color) const {
 	return board.isOppPieceColor(pos, color);
 }
@@ -91,7 +129,7 @@ bool GameState::inBounds(Position pos) const {
 	return board.inBounds(pos);
 }
 
-PieceColor GameState::getPlayersTurn() const {
+PieceColor GameState::getCurrentPlayersTurn() const {
 	return current_turn;
 }
 

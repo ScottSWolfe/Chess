@@ -109,25 +109,31 @@ void Board::setPiece(Position pos, std::unique_ptr<const Piece> &piece) {
 }
 
 bool Board::willKingBeInCheck(GameState &state, const Move &move) const {
-	PieceColor turn_before_move = state.getPlayersTurn();
+	PieceColor turn_before_move = state.getCurrentPlayersTurn();
 	state.makeMove(move);
 	Position king_position = getKingPosition(turn_before_move);
 	return canPieceCaptureKing(state, turn_before_move, king_position);
 }
 
-Position Board::getKingPosition(PieceColor current_player) const {
+bool Board::isKingInCheck(const GameState &state) const {
+	PieceColor king_color = state.getCurrentPlayersTurn();
+	Position king_position = getKingPosition(king_color);
+	return canPieceCaptureKing(state, king_color, king_position);
+}
+
+Position Board::getKingPosition(PieceColor king_color) const {
 	for (int i = 0; i < dimension * dimension; i++) {
-		if (squares[i].containsKing(current_player)) {
+		if (squares[i].containsKing(king_color)) {
 			return getPosition(i);
 		}
 	}
 	throw runtime_error("no king found for given color");
 }
 
-bool Board::canPieceCaptureKing(const GameState state, PieceColor current_player, Position king_position) const {
+bool Board::canPieceCaptureKing(const GameState state, PieceColor king_color, Position king_position) const {
 	for (int i = 0; i < dimension * dimension; i++) {
 		const Piece *piece = squares[i].getPiece();
-		if (piece != nullptr && piece->getColor() != current_player) {
+		if (piece != nullptr && piece->getColor() != king_color) {
 			vector<Move> moves = piece->getAvailableMoves(state, getPosition(i));
 			for (Move move : moves) {
 				if (move.getEnd() == king_position) {
@@ -138,7 +144,6 @@ bool Board::canPieceCaptureKing(const GameState state, PieceColor current_player
 	}
 	return false;
 }
-
 
 int Board::getDimension() const {
 	return dimension;

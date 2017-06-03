@@ -17,6 +17,7 @@ public:
 	PieceColor getColor() const;
 	virtual const std::string getSymbol() const = 0;
 	virtual std::vector<Move> getAvailableMoves(const GameState &state, Position pos) const = 0;
+	bool canPieceMakeMove(const GameState &state, Position pos) const;
 	virtual void addMoveEffect(const GameState &state, Move &move) const = 0;
 
 	static std::unique_ptr<const Piece> copyPiece(const Piece *piece);

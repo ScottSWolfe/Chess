@@ -1,11 +1,13 @@
 #include <memory>
 #include <string>
+#include <vector>
 #include "ChessDebug.h"
 #include "Bishop.h"
 #include "GameState.h"
 #include "Knight.h"
 #include "King.h"
 #include "Move.h"
+#include "MoveValidator.h"
 #include "Pawn.h"
 #include "Position.h"
 #include "Piece.h"
@@ -21,7 +23,9 @@ const std::string Piece::KNIGHT_SYMBOL = "N";
 const std::string Piece::QUEEN_SYMBOL = "Q";
 const std::string Piece::KING_SYMBOL = "K";
 
-Piece::Piece(PieceColor piece_color) : color(piece_color) {}
+Piece::Piece(PieceColor piece_color)
+	: color(piece_color)
+{}
 
 PieceColor Piece::getColor() const {
 	return Piece::color;
@@ -34,6 +38,16 @@ const std::string Piece::getPieceSymbol(const Piece *piece) {
 	else {
 		return piece->getSymbol();
 	}
+}
+
+bool Piece::canPieceMakeMove(const GameState &state, Position pos) const {
+	vector<Move> moves = this->getAvailableMoves(state, pos);
+	for (Move move : moves) {
+		if (state.willKingBeInCheck(move) == false) {
+			return true;
+		}
+	}
+	return false;
 }
 
 PieceColor Piece::getPieceColor(const Piece *piece) {

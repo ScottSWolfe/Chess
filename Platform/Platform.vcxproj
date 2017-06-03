@@ -120,6 +120,7 @@
     <ClCompile Include="ConsoleBoardPresenter.cpp" />
     <ClCompile Include="ConsoleUI.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameOverChecker.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="HumanPlayer.cpp" />
     <ClCompile Include="King.cpp" />
@@ -147,6 +148,7 @@
     <ClInclude Include="ConsoleBoardPresenter.h" />
     <ClInclude Include="ConsoleUI.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameOverChecker.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="StateObserver.h" />
     <ClInclude Include="HumanPlayer.h" />

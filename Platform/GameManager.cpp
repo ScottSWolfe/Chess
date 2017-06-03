@@ -27,7 +27,7 @@ void GameManager::registerStateObserver(StateObserver *observer) {
 
 void GameManager::runGameLoop() {
 	while (true) {
-		if (isGameOver()) {
+		if (isGameOver().empty() == false) {
 			break;
 		}
 		shared_ptr<Move> move = getMove();
@@ -35,8 +35,8 @@ void GameManager::runGameLoop() {
 	}
 }
 
-bool GameManager::isGameOver() const {
-	return false;
+string GameManager::isGameOver() const {
+	return gameOverChecker.isGameOver(current_state);
 }
 
 std::shared_ptr<Move> GameManager::getMove() const {
@@ -76,7 +76,7 @@ std::shared_ptr<Move> GameManager::getAnotherMove() const {
 }
 
 const Player *GameManager::getCurrentPlayer() const {
-	if (current_state.getPlayersTurn() == PieceColor::WHITE) {
+	if (current_state.getCurrentPlayersTurn() == PieceColor::WHITE) {
 		return white_player.get();
 	}
 	else {

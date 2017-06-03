@@ -19,7 +19,7 @@ bool ConsoleUI::isStartOfGame(const GameState &newState) const {
 }
 
 string ConsoleUI::currentTurnToString(const GameState &newState) const {
-	if (newState.getPlayersTurn() == PieceColor::BLACK) {
+	if (newState.getCurrentPlayersTurn() == PieceColor::BLACK) {
 		return "Black";
 	}
 	else {
