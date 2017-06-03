@@ -138,7 +138,7 @@ int main() {
 	// start a new game
 	GameManager manager;
 	auto ui = make_unique<ConsoleUI>();
-	manager.registerGameObserver(ui.get());
+	manager.registerObserver(ui.get());
 	manager.startGame();
 
 	// wait for user to press any key

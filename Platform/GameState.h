@@ -12,7 +12,7 @@ struct Position;
 class GameObserver;
 
 
-class GameState : GameSubject {
+class GameState {
 
 public:
 	GameState(Board board, PieceColor beginning_player);
@@ -35,17 +35,11 @@ public:
 	const Move *getLastMove() const;
 	bool canCurrentPlayerMakeMove() const;
 	std::vector<Move> getAvailableMoves() const;
-	void registerObserver(GameObserver *observer);
-	void notifyObserversGameStarted() const;
-	void notifyObserversGameEnded(GameEndType end_type) const;
-	void notifyObserversTurnStarted() const;
-	void notifyObserversTurnEnded() const;
 
 private:
 	Board board;
 	PieceColor current_turn;
 	std::vector<Move> move_history;
-	std::vector<GameObserver*> observers;
 
 	void changePlayersTurn();
 

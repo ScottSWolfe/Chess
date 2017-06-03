@@ -1,6 +1,7 @@
 #include <iostream>
 #include "BoardInitializer.h"
 #include "ChessDebug.h"
+#include "ChessEnums.h"
 #include "ConsoleBoardPresenter.h"
 #include "GameManager.h"
 #include "HumanPlayer.h"
@@ -18,34 +19,33 @@ GameManager::GameManager() :
 {}
 
 void GameManager::startGame() {
-	current_state.notifyObserversGameStarted();
+	notifyObserversGameStarted();
 	runGameLoop();
-}
-
-void GameManager::registerGameObserver(GameObserver *observer) {
-	current_state.registerObserver(observer);
 }
 
 void GameManager::runGameLoop() {
 	while (true) {
-		GameEndType end_type = isGameOver();
-		if (end_type != GameEndType::NOT_OVER) {
+		if (isGameOver()) {
 			break;
 		}
-		shared_ptr<Move> move = getMove();
-		current_state.makeMove(*move);
+		makeMove();
 	}
 }
 
-GameEndType GameManager::isGameOver() const {
+bool GameManager::isGameOver() const {
 	GameEndType end_type = gameOverChecker.isGameOver(current_state);
-	if (end_type == GameEndType::NOT_OVER) {
-		current_state.notifyObserversTurnStarted();
+	if (end_type != GameEndType::NOT_OVER) {
+		notifyObserversGameEnded(end_type);
+		return true;
 	}
-	else {
-		current_state.notifyObserversGameEnded(end_type);
-	}
-	return end_type;
+	return false;
+}
+
+void GameManager::makeMove() {
+	notifyObserversTurnStarted();
+	shared_ptr<Move> move = getMove();
+	current_state.makeMove(*move);
+	notifyObserversTurnEnded();
 }
 
 std::shared_ptr<Move> GameManager::getMove() const {
@@ -90,5 +90,33 @@ const Player *GameManager::getCurrentPlayer() const {
 	}
 	else {
 		return black_player.get();
+	}
+}
+
+void GameManager::registerObserver(GameObserver *observer) {
+	observers.push_back(observer);
+}
+
+void GameManager::notifyObserversGameStarted() const {
+	for (auto observer : observers) {
+		observer->gameStarted(current_state);
+	}
+}
+
+void GameManager::notifyObserversGameEnded(GameEndType end_type) const {
+	for (auto observer : observers) {
+		observer->gameEnded(current_state, end_type);
+	}
+}
+
+void GameManager::notifyObserversTurnStarted() const {
+	for (auto observer : observers) {
+		observer->turnStarted(current_state);
+	}
+}
+
+void GameManager::notifyObserversTurnEnded() const {
+	for (auto observer : observers) {
+		observer->turnEnded(current_state);
 	}
 }

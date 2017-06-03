@@ -139,33 +139,4 @@ void GameState::changePlayersTurn() {
 	else {
 		current_turn = PieceColor::WHITE;
 	}
-	notifyObserversTurnEnded();
-}
-
-void GameState::registerObserver(GameObserver *observer) {
-	observers.push_back(observer);
-}
-
-void GameState::notifyObserversGameStarted() const {
-	for (auto observer : observers) {
-		observer->gameStarted(*this);
-	}
-}
-
-void GameState::notifyObserversGameEnded(GameEndType end_type) const {
-	for (auto observer : observers) {
-		observer->gameEnded(*this, end_type);
-	}
-}
-
-void GameState::notifyObserversTurnStarted() const {
-	for (auto observer : observers) {
-		observer->turnStarted(*this);
-	}
-}
-
-void GameState::notifyObserversTurnEnded() const {
-	for (auto observer : observers) {
-		observer->turnEnded(*this);
-	}
 }
