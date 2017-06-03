@@ -6,7 +6,7 @@
 #include "BoardPresenter.h"
 #include "GameOverChecker.h"
 #include "GameState.h"
-class StateObserver;
+class GameObserver;
 
 
 class GameManager {
@@ -14,7 +14,7 @@ class GameManager {
 public:
 	GameManager();
 	void startGame();
-	void registerStateObserver(StateObserver *observer);
+	void registerGameObserver(GameObserver *observer);
 
 private:
 	// state
@@ -28,7 +28,7 @@ private:
 
 	// methods
 	void runGameLoop();
-	std::string isGameOver() const;
+	GameEndType isGameOver() const;
 	std::shared_ptr<Move> getMove() const;
 	const Player *getCurrentPlayer() const;
 	std::shared_ptr<Move> getCurrentPlayersMove() const;

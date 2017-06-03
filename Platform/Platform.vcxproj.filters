@@ -176,17 +176,17 @@
     <ClInclude Include="MoveEffect.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="StateObserver.h">
-      <Filter>Header Files\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="StateSubject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ConsoleUI.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="GameOverChecker.h">
       <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObserver.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSubject.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

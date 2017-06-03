@@ -7,12 +7,12 @@
 #include "Move.h"
 #include "Player.h"
 #include "HumanPlayer.h"
-#include "StateSubject.h"
+#include "GameSubject.h"
 struct Position;
-class StateObserver;
+class GameObserver;
 
 
-class GameState : StateSubject {
+class GameState : GameSubject {
 
 public:
 	GameState(Board board, PieceColor beginning_player);
@@ -35,15 +35,18 @@ public:
 	const Move *getLastMove() const;
 	bool canCurrentPlayerMakeMove() const;
 	std::vector<Move> getAvailableMoves() const;
-	void registerObserver(StateObserver *observer);
+	void registerObserver(GameObserver *observer);
+	void notifyObserversGameStarted() const;
+	void notifyObserversGameEnded(GameEndType end_type) const;
+	void notifyObserversTurnStarted() const;
+	void notifyObserversTurnEnded() const;
 
 private:
 	Board board;
 	PieceColor current_turn;
 	std::vector<Move> move_history;
-	std::vector<StateObserver*> observers;
+	std::vector<GameObserver*> observers;
 
 	void changePlayersTurn();
-	void GameState::notifyObservers() const;
 
 };

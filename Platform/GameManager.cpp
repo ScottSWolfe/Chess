@@ -6,7 +6,7 @@
 #include "HumanPlayer.h"
 #include "Move.h"
 #include "MoveValidator.h"
-#include "StateObserver.h"
+#include "GameObserver.h"
 using namespace std;
 
 
@@ -18,16 +18,18 @@ GameManager::GameManager() :
 {}
 
 void GameManager::startGame() {
+	current_state.notifyObserversGameStarted();
 	runGameLoop();
 }
 
-void GameManager::registerStateObserver(StateObserver *observer) {
+void GameManager::registerGameObserver(GameObserver *observer) {
 	current_state.registerObserver(observer);
 }
 
 void GameManager::runGameLoop() {
 	while (true) {
-		if (isGameOver().empty() == false) {
+		GameEndType end_type = isGameOver();
+		if (end_type != GameEndType::NOT_OVER) {
 			break;
 		}
 		shared_ptr<Move> move = getMove();
@@ -35,8 +37,15 @@ void GameManager::runGameLoop() {
 	}
 }
 
-string GameManager::isGameOver() const {
-	return gameOverChecker.isGameOver(current_state);
+GameEndType GameManager::isGameOver() const {
+	GameEndType end_type = gameOverChecker.isGameOver(current_state);
+	if (end_type == GameEndType::NOT_OVER) {
+		current_state.notifyObserversTurnStarted();
+	}
+	else {
+		current_state.notifyObserversGameEnded(end_type);
+	}
+	return end_type;
 }
 
 std::shared_ptr<Move> GameManager::getMove() const {

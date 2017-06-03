@@ -150,7 +150,7 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameOverChecker.h" />
     <ClInclude Include="GameState.h" />
-    <ClInclude Include="StateObserver.h" />
+    <ClInclude Include="GameObserver.h" />
     <ClInclude Include="HumanPlayer.h" />
     <ClInclude Include="King.h" />
     <ClInclude Include="Knight.h" />
@@ -165,7 +165,7 @@
     <ClInclude Include="Rook.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="Position.h" />
-    <ClInclude Include="StateSubject.h" />
+    <ClInclude Include="GameSubject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

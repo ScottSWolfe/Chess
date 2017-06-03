@@ -5,6 +5,7 @@
 #include <vector>
 #include "ChessEnums.h"
 #include "Square.h"
+class GameState;
 class MoveEffect;
 class Piece;
 struct Position;

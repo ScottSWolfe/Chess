@@ -1,15 +1,16 @@
 #pragma once
 
-#include <string>
+enum class GameEndType;
 class GameState;
 
 
 class GameOverChecker {
 
 public:
-	std::string isGameOver(const GameState &state) const;
+	GameEndType isGameOver(const GameState &state) const;
 
 private:
-	bool isCheckMate(const GameState &state) const;
+	GameEndType isCheckMate(const GameState &state) const;
+	GameEndType getCheckmateType(PieceColor current_color) const;
 
 };

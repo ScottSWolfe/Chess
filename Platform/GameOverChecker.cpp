@@ -1,23 +1,35 @@
 #include <string>
+#include "ChessEnums.h"
 #include "GameOverChecker.h"
 #include "GameState.h"
 #include "Move.h"
 using namespace std;
 
 
-string GameOverChecker::isGameOver(const GameState &state) const {
-	if (isCheckMate(state) == true) {
-		return "Check Mate";
+GameEndType GameOverChecker::isGameOver(const GameState &state) const {
+	GameEndType end_type = GameEndType::NOT_OVER;
+
+	end_type = isCheckMate(state);
+	if (end_type != GameEndType::NOT_OVER) {
+		return end_type;
 	}
-	return "";
+
+	return end_type;
 }
 
-bool GameOverChecker::isCheckMate(const GameState &state) const {
+GameEndType GameOverChecker::isCheckMate(const GameState &state) const {
 	if (state.canCurrentPlayerMakeMove() == true) {
-		return false;
+		return GameEndType::NOT_OVER;
 	}
 	if (state.isKingInCheck() == false) {
-		return false;
+		return GameEndType::NOT_OVER;
 	}
-	return true;
+	return getCheckmateType(state.getCurrentPlayersTurn());
+}
+
+GameEndType GameOverChecker::getCheckmateType(PieceColor current_color) const {
+	if (current_color == PieceColor::WHITE) {
+		return GameEndType::BLACK_CHECKMATE;
+	}
+	return GameEndType::WHITE_CHECKMATE;
 }

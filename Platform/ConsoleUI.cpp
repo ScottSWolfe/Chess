@@ -1,21 +1,28 @@
 #include <iostream>
+#include "ChessDebug.h"
+#include "ChessEnums.h"
 #include "ConsoleUI.h"
 #include "GameState.h"
 using namespace std;
 
 
-void ConsoleUI::stateChanged(const GameState &newState) {
-	isStartOfGame(newState);
-	presenter.displayBoard(newState.getBoard());
+void ConsoleUI::gameStarted(const GameState &state) {
+	cout << "====  Game Started  ====" << endl << endl;
+	presenter.displayBoard(state.getBoard());
+	cout << endl;
+}
+
+void ConsoleUI::gameEnded(const GameState &state, GameEndType end_type) {
+	cout << "====  Game Over  ====" << endl;
+	cout << getGameEndMessage(end_type) << endl << endl;
+}
+
+void ConsoleUI::turnStarted(const GameState &newState) {
 	cout << currentTurnToString(newState) << "'s Turn" << endl;
 }
 
-bool ConsoleUI::isStartOfGame(const GameState &newState) const {
-	if (newState.getLastMove() == nullptr) {
-		cout << "Start Game" << endl;
-		return true;
-	}
-	return false;
+void ConsoleUI::turnEnded(const GameState &newState) {
+	presenter.displayBoard(newState.getBoard());
 }
 
 string ConsoleUI::currentTurnToString(const GameState &newState) const {
@@ -24,5 +31,37 @@ string ConsoleUI::currentTurnToString(const GameState &newState) const {
 	}
 	else {
 		return "White";
+	}
+}
+
+string ConsoleUI::getGameEndMessage(GameEndType end_type) const {
+	switch (end_type)
+	{
+	case GameEndType::WHITE_CHECKMATE:
+		return string("White wins by checkmate.");
+
+	case GameEndType::BLACK_CHECKMATE:
+		return string("Black wins by checkmate.");
+
+	case GameEndType::WHITE_RESIGN:
+		return string("Black wins by resignation.");
+
+	case GameEndType::BLACK_RESIGN:
+		return string("White wins by resignation.");
+
+	case GameEndType::DRAW_AGREEMENT:
+		return string("The players agreed to a draw.");
+
+	case GameEndType::DRAW_50_MOVES:
+		return string("Draw: 50 moves passed without a capture or pawn move.");
+
+	case GameEndType::DRAW_3_REPITITIONS:
+		return string("Draw: The same position appeared 3 times.");
+
+	case GameEndType::STALEMATE:
+		return string("Stalemate.");
+
+	default:
+		throw invalid_argument("invalid GameEndType");
 	}
 }
