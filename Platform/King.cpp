@@ -33,6 +33,6 @@ vector<Move> King::getAvailableMoves(const GameState &state, Position start) con
 }
 
 void King::addMoveEffect(const GameState &state, Move &move) const {
-	// check for castle
+	// TODO check for castle
 	return;
 }

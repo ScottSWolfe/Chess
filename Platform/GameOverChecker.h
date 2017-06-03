@@ -11,6 +11,7 @@ public:
 
 private:
 	GameEndType isMate(const GameState &state) const;
+	GameEndType have50MovesPassed(const GameState &state) const;
 	GameEndType getCheckmateType(PieceColor current_color) const;
 
 };

@@ -32,12 +32,15 @@ public:
 	const Move *getLastMove() const;
 	bool canCurrentPlayerMakeMove() const;
 	std::vector<Move> getAvailableMoves() const;
+	int get50MoveDrawCount() const;
 
 private:
 	Board board;
 	PieceColor current_turn;
 	std::vector<Move> move_history;
+	int turns_since_capture_or_pawn_push;
 
 	void changePlayersTurn();
+	void incrementCaptureAndPawnCounter(const Move &move);
 
 };

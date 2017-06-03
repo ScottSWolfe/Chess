@@ -72,8 +72,9 @@ void Pawn::addMoveEffect(const GameState &state, Move &move) const {
 	// check for promotion
 	if (move.getEnd().y == promotionRow(state.getBoardDimension())) {
 		if (state.inBounds(move.getEnd())) {
+			// TODO add request to player for choice of piece
 			unique_ptr<const Piece> queen = make_unique<const Queen>(state.getPieceColor(move.getStart()));
-			unique_ptr<const MoveEffect> effect = make_unique<const MoveEffect>(move.getEnd(), queen);
+			unique_ptr<const MoveEffect> effect = make_unique<const MoveEffect>(move.getEnd(), queen, MoveEffectType::PROMOTION);
 			move = Move(move.getStart(), move.getEnd(), effect);
 			return;
 		}
@@ -102,7 +103,7 @@ bool Pawn::isEnPassantAvailable(const GameState &state, Position start, int &dst
 void Pawn::addEnPassantMove(vector<Move> &moves, Position start, int delta_x) const {
 	Position end = start.add(delta_x, step());
 	Position pos_piece_to_remove = start.add(delta_x, 0);
-	auto effect = make_unique<const MoveEffect>(pos_piece_to_remove);
+	auto effect = make_unique<const MoveEffect>(pos_piece_to_remove, MoveEffectType::EN_PASSANT);
 	moves.push_back(Move(start, end, effect));
 }
 
@@ -110,7 +111,7 @@ void Pawn::modifyEnPassantMove(Move &move, int delta_x) const {
 	Position start = move.getStart();
 	Position end = start.add(delta_x, step());
 	Position piece_to_remove = start.add(delta_x, 0);
-	auto effect = make_unique<const MoveEffect>(piece_to_remove);
+	auto effect = make_unique<const MoveEffect>(piece_to_remove, MoveEffectType::EN_PASSANT);
 	move = (Move(start, end, effect));
 }
 

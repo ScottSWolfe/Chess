@@ -10,11 +10,13 @@ using namespace std;
 
 GameState::GameState(Board board, PieceColor beginning_player) : 
 	board(board),
-	current_turn(beginning_player)
+	current_turn(beginning_player),
+	turns_since_capture_or_pawn_push(0)
 {}
 
 GameState::GameState(const GameState &other)
-	: board(other.board), current_turn(other.current_turn)
+	: board(other.board), current_turn(other.current_turn),
+	turns_since_capture_or_pawn_push(other.turns_since_capture_or_pawn_push)
 {
 	for (Move move : other.move_history) {
 		move_history.push_back(move);
@@ -70,6 +72,7 @@ Position GameState::getKingPosition(PieceColor king_color) const {
 }
 
 void GameState::makeMove(const Move &move) {
+	incrementCaptureAndPawnCounter(move);
 	board.makeMove(move);
 	move_history.push_back(move);
 	changePlayersTurn();
@@ -132,6 +135,10 @@ PieceColor GameState::getCurrentPlayersTurn() const {
 	return current_turn;
 }
 
+int GameState::get50MoveDrawCount() const {
+	return turns_since_capture_or_pawn_push;
+}
+
 void GameState::changePlayersTurn() {
 	if (current_turn == PieceColor::WHITE) {
 		current_turn = PieceColor::BLACK;
@@ -139,4 +146,23 @@ void GameState::changePlayersTurn() {
 	else {
 		current_turn = PieceColor::WHITE;
 	}
+}
+
+void GameState::incrementCaptureAndPawnCounter(const Move &move) {
+	// if pawn is being moved
+	Position start = move.getStart();
+	if (board.isPiece(start) && board.getPieceSymbol(start) == Piece::PAWN_SYMBOL) {
+		turns_since_capture_or_pawn_push = 0;
+		return;
+	}
+
+	// if piece is being captured
+	Position end = move.getEnd();
+	const MoveEffect *effect = move.getEffect();
+	if (board.isPiece(end) && effect && effect->getType() != MoveEffectType::CASTLE) {
+		turns_since_capture_or_pawn_push = 0;
+		return;
+	}
+
+	turns_since_capture_or_pawn_push++;
 }

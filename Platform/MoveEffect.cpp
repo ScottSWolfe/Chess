@@ -3,16 +3,16 @@
 using namespace std;
 
 
-MoveEffect::MoveEffect(Position pos) 
-	: position(pos), piece(nullptr)
+MoveEffect::MoveEffect(Position pos, MoveEffectType type)
+	: position(pos), piece(nullptr), type(type)
 {}
 
-MoveEffect::MoveEffect(Position pos, unique_ptr<const Piece> &piece)
-	: position(pos), piece(piece.release())
+MoveEffect::MoveEffect(Position pos, unique_ptr<const Piece> &piece, MoveEffectType type)
+	: position(pos), piece(piece.release()), type(type)
 {}
 
 MoveEffect::MoveEffect(const MoveEffect &other)
-	: position(other.position), piece(other.getCopyOfPiece())
+	: position(other.position), piece(other.getCopyOfPiece()), type(other.type)
 {}
 
 bool MoveEffect::operator==(const MoveEffect &other) const {
@@ -20,6 +20,9 @@ bool MoveEffect::operator==(const MoveEffect &other) const {
 		return false;
 	}
 	if (Piece::getPieceSymbol(piece.get()) != Piece::getPieceSymbol(other.piece.get())) {
+		return false;
+	}
+	if (type != other.type) {
 		return false;
 	}
 	return true;
@@ -33,6 +36,10 @@ unique_ptr<const Piece> MoveEffect::getCopyOfPiece() const {
 	return Piece::copyPiece(piece.get());
 }
 
+MoveEffectType MoveEffect::getType() const {
+	return type;
+}
+
 unique_ptr<const MoveEffect> MoveEffect::getCopy() const {
-	return make_unique<const MoveEffect>(position, getCopyOfPiece());
+	return make_unique<const MoveEffect>(position, getCopyOfPiece(), type);
 }
