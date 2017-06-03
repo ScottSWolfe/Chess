@@ -10,10 +10,6 @@
 using namespace std;
 
 
-void stateChanged() {
-
-}
-
 void ConsoleBoardPresenter::displayBoard(const Board &board) const {
 	int dimension = board.getDimension();
 	printHorizontalBorder(dimension);
