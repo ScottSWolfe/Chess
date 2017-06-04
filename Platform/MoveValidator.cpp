@@ -6,82 +6,82 @@
 
 
 MoveValidator::MoveValidator(const GameState &state, const Move &move)
-	: state(state), move(move)
+    : state(state), move(move)
 {}
 
 bool MoveValidator::validateMoveIsSafe() const {
-	if (doSquaresExist() == false) {
-		return false;
-	}
-	if (isPieceAtStart() == false) {
-		return false;
-	}
-	return true;
+    if (doSquaresExist() == false) {
+        return false;
+    }
+    if (isPieceAtStart() == false) {
+        return false;
+    }
+    return true;
 }
 
 bool MoveValidator::validateMoveIsLegal() const {
-	if (isPieceCorrectColor() == false) {
-		return false;
-	}
-	if (isDestAvailable() == false) {
-		return false;
-	}
-	if (isAvailableMove() == false) {
-		return false;
-	}
-	if (willKingBeInCheck() == true) {
-		return false;
-	}
-	return true;
+    if (isPieceCorrectColor() == false) {
+        return false;
+    }
+    if (isDestAvailable() == false) {
+        return false;
+    }
+    if (isAvailableMove() == false) {
+        return false;
+    }
+    if (willKingBeInCheck() == true) {
+        return false;
+    }
+    return true;
 }
 
 bool MoveValidator::doSquaresExist() const {
-	if (doesSquareExist(move.getStart()) == false) {
-		return false;
-	}
-	if (doesSquareExist(move.getEnd()) == false) {
-		return false;
-	}
-	return true;
+    if (doesSquareExist(move.getStart()) == false) {
+        return false;
+    }
+    if (doesSquareExist(move.getEnd()) == false) {
+        return false;
+    }
+    return true;
 }
 
 bool MoveValidator::doesSquareExist(Position pos) const {
-	if (pos.x < 0 || pos.x >= state.getBoardDimension()) {
-		return false;
-	}
-	if (pos.y < 0 || pos.y >= state.getBoardDimension()) {
-		return false;
-	}
-	return true;
+    if (pos.x < 0 || pos.x >= state.getBoardDimension()) {
+        return false;
+    }
+    if (pos.y < 0 || pos.y >= state.getBoardDimension()) {
+        return false;
+    }
+    return true;
 }
 
 bool MoveValidator::isPieceAtStart() const {
-	return state.isPiece(move.getStart());
+    return state.isPiece(move.getStart());
 }
 
 bool MoveValidator::isPieceCorrectColor() const {
-	PieceColor color = state.getPieceColor(move.getStart());
-	PieceColor turn = state.getCurrentPlayersTurn();
-	return color == turn;
+    PieceColor color = state.getPieceColor(move.getStart());
+    PieceColor turn = state.getCurrentPlayersTurn();
+    return color == turn;
 }
 
 bool MoveValidator::isDestAvailable() const {
-	if (state.isPiece(move.getEnd()) == false) {
-		return true;
-	}
-	if (state.getPieceColor(move.getEnd()) != state.getCurrentPlayersTurn()) {
-		return true;
-	}
-	return false;
+    if (state.isPiece(move.getEnd()) == false) {
+        return true;
+    }
+    if (state.getPieceColor(move.getEnd()) != state.getCurrentPlayersTurn()) {
+        return true;
+    }
+    return false;
 }
 
 bool MoveValidator::isAvailableMove() const {
-	if (state.isMoveAvailable(move)) {
-		return true;
-	}
-	return false;
+    if (state.isMoveAvailable(move)) {
+        return true;
+    }
+    return false;
 }
 
 bool MoveValidator::willKingBeInCheck() const {
-	return state.willKingBeInCheck(move);
+    return state.willKingBeInCheck(move);
 }

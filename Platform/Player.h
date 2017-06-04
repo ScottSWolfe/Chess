@@ -10,10 +10,10 @@ class Move;
 class Player {
 
 public:
-	Player(PieceColor color);
-	virtual std::shared_ptr<Move> makeMove(const GameState &state) const = 0;
+    Player(PieceColor color);
+    virtual std::shared_ptr<Move> makeMove(const GameState &state) const = 0;
 
 protected:
-	const PieceColor color;
+    const PieceColor color;
 
 };

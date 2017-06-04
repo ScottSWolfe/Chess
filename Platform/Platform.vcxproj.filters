@@ -186,7 +186,7 @@
       <Filter>Header Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="GameSubject.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

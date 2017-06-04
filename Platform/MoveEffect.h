@@ -11,18 +11,18 @@ enum class MoveEffectType { EN_PASSANT, PROMOTION, CASTLE };
 class MoveEffect {
 
 public:
-	MoveEffect(Position pos, MoveEffectType type);
-	MoveEffect(Position pos, std::unique_ptr<const Piece> &piece, MoveEffectType type);
-	MoveEffect(const MoveEffect &other);
-	bool operator==(const MoveEffect &other) const;
-	Position getPosition() const;
-	std::unique_ptr<const Piece> getCopyOfPiece() const;
-	MoveEffectType getType() const;
-	std::unique_ptr<const MoveEffect> getCopy() const;
+    MoveEffect(Position pos, MoveEffectType type);
+    MoveEffect(Position pos, std::unique_ptr<const Piece> &piece, MoveEffectType type);
+    MoveEffect(const MoveEffect &other);
+    bool operator==(const MoveEffect &other) const;
+    Position getPosition() const;
+    std::unique_ptr<const Piece> getCopyOfPiece() const;
+    MoveEffectType getType() const;
+    std::unique_ptr<const MoveEffect> getCopy() const;
 
 private:
-	const Position position;
-	const std::unique_ptr<const Piece> piece;
-	const MoveEffectType type;
+    const Position position;
+    const std::unique_ptr<const Piece> piece;
+    const MoveEffectType type;
 
 };

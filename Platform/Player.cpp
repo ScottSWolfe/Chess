@@ -3,5 +3,5 @@
 
 
 Player::Player(PieceColor piece_color)
-	: color(piece_color)
+    : color(piece_color)
 {}
