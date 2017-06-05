@@ -99,3 +99,29 @@ void Piece::getMovesInLine(vector<Move> &moves, const GameState &state, Position
         moves.push_back(Move(start, end));
     }
 }
+
+std::unique_ptr<Piece> Piece::createPiece(PieceType type, PieceColor color) {
+    switch (type)
+    {
+    case PieceType::PAWN:
+        return make_unique<Pawn>(color);
+
+    case PieceType::KNIGHT:
+        return make_unique<Knight>(color);
+
+    case PieceType::BISHOP:
+        return make_unique<Bishop>(color);
+
+    case PieceType::ROOK:
+        return make_unique<Rook>(color);
+
+    case PieceType::QUEEN:
+        return make_unique<Queen>(color);
+
+    case PieceType::KING:
+        return make_unique<King>(color);
+
+    default:
+        throw invalid_argument("invalid PieceType");
+    }
+}
