@@ -33,6 +33,13 @@ unique_ptr<Piece> Square::removePiece() {
     return copy_of_piece;
 }
 
+bool Square::isPiece() const {
+    if (piece == nullptr) {
+        return false;
+    }
+    return true;
+}
+
 bool Square::containsKing(PieceColor color) const {
     if (piece == nullptr) {
         return false;
@@ -46,6 +53,13 @@ bool Square::containsKing(PieceColor color) const {
     return true;
 }
 
+bool Square::hasPieceMoved() const {
+    if (piece == nullptr) {
+        return false;
+    }
+    return piece->hasMoved();
+}
+
 unique_ptr<Piece> Square::getCopyOfPiece() const {
     return Piece::copyPiece(piece.get());
 }
@@ -54,7 +68,12 @@ SquareColor Square::getColor() const {
     return color;
 }
 
-void Square::throwExceptionIfPieceIsNull(const Piece *piece) const {
+PieceType Square::getPieceType() const {
+    throwExceptionIfPieceIsNull();
+    return piece->getType();
+}
+
+void Square::throwExceptionIfPieceIsNull() const {
     if (piece == nullptr) {
         throw invalid_argument("square does not contain a piece");
     }

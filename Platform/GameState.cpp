@@ -47,6 +47,10 @@ PieceColor GameState::getPieceColor(Position pos) const {
     return board.getPieceColor(pos);
 }
 
+PieceType GameState::getPieceType(Position pos) const {
+    return board.getPieceType(pos);
+}
+
 bool GameState::isMoveAvailable(const Move &move) const {
     const Piece *piece = board.getPiece(move.getStart());
     vector<Move> moves = piece->getAvailableMoves(*this, move.getStart());
@@ -137,6 +141,10 @@ bool GameState::isOppPieceColor(Position pos, PieceColor color) const {
 
 bool GameState::inBounds(Position pos) const {
     return board.inBounds(pos);
+}
+
+bool GameState::hasPieceMoved(Position pos) const {
+    return board.hasPieceMoved(pos);
 }
 
 PieceColor GameState::getCurrentPlayersTurn() const {

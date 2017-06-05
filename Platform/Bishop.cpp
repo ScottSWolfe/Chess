@@ -13,6 +13,10 @@ std::unique_ptr<Piece> Bishop::getCopy() const {
     return make_unique<Bishop>(*this);
 }
 
+PieceType Bishop::getType() const {
+    return PieceType::BISHOP;
+}
+
 const string Bishop::getSymbol() const {
     return BISHOP_SYMBOL;
 }

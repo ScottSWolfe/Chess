@@ -13,6 +13,10 @@ std::unique_ptr<Piece> Knight::getCopy() const {
     return make_unique<Knight>(*this);
 }
 
+PieceType Knight::getType() const {
+    return PieceType::KNIGHT;
+}
+
 const string Knight::getSymbol() const {
     return KNIGHT_SYMBOL;
 }

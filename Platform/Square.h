@@ -14,13 +14,16 @@ public:
     const Piece *getPiece() const;
     void setPiece(std::unique_ptr<Piece> &new_piece);
     std::unique_ptr<Piece> removePiece();
+    bool isPiece() const;
     bool containsKing(PieceColor color) const;
+    bool hasPieceMoved() const;
     SquareColor getColor() const;
+    PieceType getPieceType() const;
 
 private:
     const SquareColor color;
     std::unique_ptr<Piece> piece;
     std::unique_ptr<Piece> getCopyOfPiece() const;
-    void throwExceptionIfPieceIsNull(const Piece *piece) const;
+    void throwExceptionIfPieceIsNull() const;
 
 };

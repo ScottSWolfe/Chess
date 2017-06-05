@@ -55,6 +55,10 @@ bool Board::inBounds(Position pos) const {
     return true;
 }
 
+bool Board::hasPieceMoved(Position pos) const {
+    return getSquare(pos).hasPieceMoved();
+}
+
 void Board::makeMove(const Move &move) {
     unique_ptr<Piece> piece = removePieceFromSquare(move.getStart());
     addPieceToSquare(move.getEnd(), piece);
@@ -95,6 +99,10 @@ PieceColor Board::getPieceColor(Position pos) const {
 
 string Board::getPieceSymbol(Position pos) const {
     return Piece::getPieceSymbol(getPiece(pos));
+}
+
+PieceType Board::getPieceType(Position pos) const {
+    return getSquare(pos).getPieceType();
 }
 
 bool Board::isOppPieceColor(Position pos, PieceColor color) const {

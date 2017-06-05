@@ -13,6 +13,10 @@ std::unique_ptr<Piece> Queen::getCopy() const {
     return make_unique<Queen>(*this);
 }
 
+PieceType Queen::getType() const {
+    return PieceType::QUEEN;
+}
+
 const string Queen::getSymbol() const {
     return QUEEN_SYMBOL;
 }

@@ -21,6 +21,7 @@ public:
     const Square &getSquare(Position pos) const;
     SquareColor getSquareColor(Position pos) const;
     bool inBounds(Position pos) const;
+    bool hasPieceMoved(Position pos) const;
     void makeMove(const Move &move);
     void addPieceToSquare(Position pos, std::unique_ptr<Piece> &piece);
     std::unique_ptr<Piece> removePieceFromSquare(Position pos);
@@ -28,6 +29,7 @@ public:
     const Piece *getPiece(Position pos) const;
     PieceColor getPieceColor(Position pos) const;
     std::string getPieceSymbol(Position pos) const;
+    PieceType getPieceType(Position pos) const;
     bool isOppPieceColor(Position pos, PieceColor color) const;
     void setPiece(Position pos, std::unique_ptr<Piece> &piece);
     bool willKingBeInCheck(GameState &state, const Move &move) const;

@@ -20,6 +20,7 @@ public:
     bool isPiece(Position pos) const;
     const Piece *getPiece(Position pos) const;
     PieceColor getPieceColor(Position pos) const;
+    PieceType getPieceType(Position pos) const;
     bool isMoveAvailable(const Move &move) const;
     bool willKingBeInCheck(const Move &move) const;
     bool isKingInCheck() const;
@@ -30,6 +31,7 @@ public:
     void addMoveEffect(Move &move) const;
     bool isOppPieceColor(Position pos, PieceColor color) const;
     bool inBounds(Position pos) const;
+    bool hasPieceMoved(Position pos) const;
     PieceColor getCurrentPlayersTurn() const;
     const Move *getLastMove() const;
     bool canCurrentPlayerMakeMove() const;

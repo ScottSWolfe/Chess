@@ -15,6 +15,10 @@ std::unique_ptr<Piece> King::getCopy() const {
     return make_unique<King>(*this);
 }
 
+PieceType King::getType() const {
+    return PieceType::KING;
+}
+
 const string King::getSymbol() const {
     return KING_SYMBOL;
 }

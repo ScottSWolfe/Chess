@@ -17,6 +17,10 @@ unique_ptr<Piece> Pawn::getCopy() const {
     return make_unique<Pawn>(*this);
 }
 
+PieceType Pawn::getType() const {
+    return PieceType::PAWN;
+}
+
 const string Pawn::getSymbol() const {
     return PAWN_SYMBOL;
 }

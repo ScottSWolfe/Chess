@@ -14,6 +14,7 @@ public:
     King(PieceColor color);
     std::unique_ptr<Piece> getCopy() const override;
     const std::string getSymbol() const override;
+    PieceType getType() const override;
     std::vector<Move> getAvailableMoves(const GameState &state, Position pos) const override;
     void addAdjacentMoves(std::vector<Move> &moves, const GameState &state, Position start) const;
     void addCastleMoves(std::vector<Move> &moves, const GameState &state, Position start) const;

@@ -14,6 +14,10 @@ std::unique_ptr<Piece> Rook::getCopy() const {
     return make_unique<Rook>(*this);
 }
 
+PieceType Rook::getType() const {
+    return PieceType::ROOK;
+}
+
 const string Rook::getSymbol() const {
     return ROOK_SYMBOL;
 }
