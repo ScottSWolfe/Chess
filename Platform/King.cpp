@@ -53,38 +53,64 @@ void King::addCastleMoves(vector<Move> &moves, const GameState &state, Position 
 }
 
 void King::addCastleMove(vector<Move> &moves, const GameState &state, Position start, int delta_x) const {
-    return;
-    /*
     int dimension = state.getBoardDimension();
     int castle_column = castleColumn(delta_x, dimension);
-    Position rook_pos;
-    Position pos = start.add(delta_x, 0);
-    int distance = abs(pos.x - castle_column);
-    while (distance >= 0) {
-        if (state.isPiece(pos)) {
-            if (state.getPieceType(pos) != PieceType::ROOK) {
-                return;
-            }
-            else if (state.hasPieceMoved(pos)) {
-                return;
-            }
-            else if (rook_pos.empty() == false) {
-                return;
-            }
-            rook_pos = pos;
-        }
-        pos = pos.add(delta_x, 0);
+    Position rook_position;
+    if (canCastle(state, start, delta_x, rook_position)) {
+        Position end(castle_column, start.y);
+        // TODO add castle move effect
+        Move move(start, end);
+        moves.push_back(move);
     }
-    // continue checking squares until out of bounds or rook_pos is not empty
-    Position end(castle_column, start.y);
-    MoveEffect effect(rook_pos, MoveEffectType::CASTLE);
-    Move move(start, end, effect);
-    */
 }
 
 void King::addMoveEffect(const GameState &state, Move &move) const {
-    // TODO check for castle
-    return;
+    if (hasMoved() == true) {
+        return;
+    }
+    Position start = move.getStart();
+    Position end = move.getEnd();
+    int delta_x;
+    if (start.x - end.x == 0) {
+        return;
+    }
+    if (start.x - end.x < 0) {
+        delta_x = 1;
+    }
+    if (start.x - end.x > 0) {
+        delta_x = -1;
+    }
+    Position rook_position;
+    if (canCastle(state, start, delta_x, rook_position)) {
+        // add move effect to move
+    }
+}
+
+bool King::canCastle(const GameState &state, Position start, int delta_x, Position &rook_position) const {
+    int dimension = state.getBoardDimension();
+    int castle_column = castleColumn(delta_x, dimension);
+    Position pos = start.add(delta_x, 0);
+    int distance = abs(pos.x - castle_column);
+    while (distance >= 0 && rook_position.empty()) {
+        if (state.isPiece(pos)) {
+            if (state.getPieceType(pos) != PieceType::ROOK) {
+                return false;
+            }
+            else if (state.hasPieceMoved(pos)) {
+                return false;
+            }
+            else if (rook_position.empty() == false) {
+                return false;
+            }
+            rook_position = pos;
+        }
+        pos = pos.add(delta_x, 0);
+        distance = abs(pos.x - castle_column);
+    }
+    if (rook_position.empty()) {
+        return false;
+    }
+    return true;
 }
 
 int King::castleColumn(int direction, int dimension) const {
