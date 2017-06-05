@@ -25,6 +25,8 @@ public:
     bool isKingInCheck() const;
     Position getKingPosition(PieceColor king_color) const;
     void makeMove(const Move &move);
+    std::unique_ptr<Piece> removePieceFromSquare(Position pos);
+    void addPieceToSquare(Position pos, std::unique_ptr<Piece> &piece);
     void addMoveEffect(Move &move) const;
     bool isOppPieceColor(Position pos, PieceColor color) const;
     bool inBounds(Position pos) const;

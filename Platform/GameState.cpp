@@ -78,6 +78,14 @@ void GameState::makeMove(const Move &move) {
     changePlayersTurn();
 }
 
+std::unique_ptr<Piece> GameState::removePieceFromSquare(Position pos) {
+    return board.removePieceFromSquare(pos);
+}
+
+void GameState::addPieceToSquare(Position pos, std::unique_ptr<Piece> &piece) {
+    board.addPieceToSquare(pos, piece);
+}
+
 void GameState::addMoveEffect(Move &move) const {
     if (move.getEffect() != nullptr) {
         return;

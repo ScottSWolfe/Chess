@@ -19,6 +19,8 @@ public:
     virtual std::vector<Move> getAvailableMoves(const GameState &state, Position pos) const = 0;
     bool canPieceMakeMove(const GameState &state, Position pos) const;
     virtual void addMoveEffect(const GameState &state, Move &move) const = 0;
+    void setHasMoved(bool has_moved);
+    bool hasMoved() const;
 
     static std::unique_ptr<Piece> copyPiece(const Piece *piece);
     static const std::string getPieceSymbol(const Piece *piece);
@@ -33,6 +35,8 @@ public:
 
 protected:
     const PieceColor color;
+    bool has_moved;
+
     void getStraightMoves(std::vector<Move> &moves, const GameState &state, Position start) const;
     void getDiagonalMoves(std::vector<Move> &moves, const GameState &state, Position start) const;
     void getMovesInLine(std::vector<Move> &moves, const GameState &state, Position start, int delta_x, int delta_y) const;

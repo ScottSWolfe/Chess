@@ -24,7 +24,7 @@ const std::string Piece::QUEEN_SYMBOL = "Q";
 const std::string Piece::KING_SYMBOL = "K";
 
 Piece::Piece(PieceColor piece_color)
-    : color(piece_color)
+    : color(piece_color), has_moved(false)
 {}
 
 PieceColor Piece::getColor() const {
@@ -49,6 +49,15 @@ bool Piece::canPieceMakeMove(const GameState &state, Position pos) const {
     }
     return false;
 }
+
+void Piece::setHasMoved(bool has_moved) {
+    this->has_moved = has_moved;
+}
+
+bool Piece::hasMoved() const {
+    return has_moved;
+}
+
 
 PieceColor Piece::getPieceColor(const Piece *piece) {
     if (piece == nullptr) {
