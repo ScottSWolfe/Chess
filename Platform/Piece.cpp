@@ -59,7 +59,7 @@ PieceColor Piece::getPieceColor(const Piece *piece) {
     }
 }
 
-unique_ptr<const Piece> Piece::copyPiece(const Piece *piece) {
+unique_ptr<Piece> Piece::copyPiece(const Piece *piece) {
     if (piece == nullptr) {
         return nullptr;
     }

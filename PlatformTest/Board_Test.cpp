@@ -24,7 +24,7 @@ namespace PlatformTest
 			Position pos11(1, 1);
 
 			Board board(2);
-			unique_ptr<const Piece> rook = make_unique<const Rook>(PieceColor::BLACK);
+			unique_ptr<Piece> rook = make_unique<Rook>(PieceColor::BLACK);
 			board.addPieceToSquare(Position(0, 1), rook);
 			Board copy_of_board(board);
 
@@ -47,11 +47,11 @@ namespace PlatformTest
 			Position pos11(1, 1);
 
 			Board board(4);
-			unique_ptr<const Piece> black_rook = make_unique<const Rook>(PieceColor::BLACK);
+			unique_ptr<Piece> black_rook = make_unique<Rook>(PieceColor::BLACK);
 			board.addPieceToSquare(pos00, black_rook);
 			Board copy_of_board(board);
 
-			unique_ptr<const Piece> white_rook = make_unique<const Rook>(PieceColor::WHITE);
+			unique_ptr<Piece> white_rook = make_unique<Rook>(PieceColor::WHITE);
 			copy_of_board.addPieceToSquare(pos11, white_rook);
 
 			// square without white rook

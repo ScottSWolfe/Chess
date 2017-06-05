@@ -11,7 +11,7 @@ Square::Square(SquareColor square_color)
     : piece(nullptr), color(square_color)
 {}
 
-Square::Square(SquareColor square_color, unique_ptr<const Piece> &new_piece)
+Square::Square(SquareColor square_color, unique_ptr<Piece> &new_piece)
     : color(square_color), piece(new_piece.release())
 {}
 
@@ -23,12 +23,12 @@ const Piece *Square::getPiece() const {
     return piece.get();
 }
 
-void Square::setPiece(unique_ptr<const Piece> &new_piece) {
+void Square::setPiece(unique_ptr<Piece> &new_piece) {
     piece.reset(new_piece.release());
 }
 
-unique_ptr<const Piece> Square::removePiece() {
-    unique_ptr<const Piece> copy_of_piece = piece->getCopy();
+unique_ptr<Piece> Square::removePiece() {
+    unique_ptr<Piece> copy_of_piece = piece->getCopy();
     piece.reset();
     return copy_of_piece;
 }
@@ -46,7 +46,7 @@ bool Square::containsKing(PieceColor color) const {
     return true;
 }
 
-unique_ptr<const Piece> Square::getCopyOfPiece() const {
+unique_ptr<Piece> Square::getCopyOfPiece() const {
     return Piece::copyPiece(piece.get());
 }
 

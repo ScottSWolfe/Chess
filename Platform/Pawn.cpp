@@ -13,8 +13,8 @@ Pawn::Pawn(PieceColor color)
     : Piece(color)
 {}
 
-unique_ptr<const Piece> Pawn::getCopy() const {
-    return make_unique<const Pawn>(color);
+unique_ptr<Piece> Pawn::getCopy() const {
+    return make_unique<Pawn>(*this);
 }
 
 const string Pawn::getSymbol() const {
@@ -116,7 +116,7 @@ bool Pawn::addPromotionMoveEffect(const GameState &state, Move &move) const {
     if (move.getEnd().y == promotionRow(state.getBoardDimension())) {
         if (state.inBounds(move.getEnd())) {
             // TODO add request to player for choice of piece
-            unique_ptr<const Piece> queen = make_unique<const Queen>(state.getPieceColor(move.getStart()));
+            unique_ptr<Piece> queen = make_unique<Queen>(state.getPieceColor(move.getStart()));
             unique_ptr<const MoveEffect> effect = make_unique<const MoveEffect>(move.getEnd(), queen, MoveEffectType::PROMOTION);
             move = Move(move.getStart(), move.getEnd(), effect);
             return true;

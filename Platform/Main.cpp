@@ -35,22 +35,22 @@ int main() {
 
     // Testing Pieces
     cout << "Pieces" << endl;
-    unique_ptr<const Piece> rook = make_unique<Rook>(PieceColor::WHITE);
+    unique_ptr<Piece> rook = make_unique<Rook>(PieceColor::WHITE);
     cout << static_cast<int>(rook->getColor()) << endl;
 
-    unique_ptr<const Piece> knight(new Knight(PieceColor::BLACK));
+    unique_ptr<Piece> knight(new Knight(PieceColor::BLACK));
     cout << static_cast<int>(knight->getColor()) << endl;
 
-    unique_ptr<const Piece> bishop(new Bishop(PieceColor::WHITE));
+    unique_ptr<Piece> bishop(new Bishop(PieceColor::WHITE));
     cout << static_cast<int>(bishop->getColor()) << endl;
 
-    unique_ptr<const Piece> king(new King(PieceColor::BLACK));
+    unique_ptr<Piece> king(new King(PieceColor::BLACK));
     cout << static_cast<int>(king->getColor()) << endl;
 
-    unique_ptr<const Piece> queen(new Queen(PieceColor::WHITE));
+    unique_ptr<Piece> queen(new Queen(PieceColor::WHITE));
     cout << static_cast<int>(queen->getColor()) << endl;
 
-    unique_ptr<const Piece> pawn(new Pawn(PieceColor::BLACK));
+    unique_ptr<Piece> pawn(new Pawn(PieceColor::BLACK));
     cout << static_cast<int>(pawn->getColor()) << endl;
     cout << endl;
 
@@ -100,7 +100,7 @@ int main() {
 
     // Testing removing piece from square and moving to another
     cout << "Moving a Piece" << endl;
-    unique_ptr<const Piece> piece_to_move = initialized_board.removePieceFromSquare(Position(0, 1));
+    unique_ptr<Piece> piece_to_move = initialized_board.removePieceFromSquare(Position(0, 1));
     initialized_board.addPieceToSquare(Position(0, 3), piece_to_move);
     presenter.displayBoard(initialized_board);
     cout << endl;
@@ -112,7 +112,7 @@ int main() {
     presenter.displayBoard(copy_of_board);
     cout << endl;
 
-    unique_ptr<const Piece> piece_to_move_on_copied_board = copy_of_board.removePieceFromSquare(Position(3, 6));
+    unique_ptr<Piece> piece_to_move_on_copied_board = copy_of_board.removePieceFromSquare(Position(3, 6));
     copy_of_board.addPieceToSquare(Position(3, 4), piece_to_move_on_copied_board);
 
     cout << "Move piece on copied board" << endl;

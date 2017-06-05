@@ -7,7 +7,7 @@ MoveEffect::MoveEffect(Position pos, MoveEffectType type)
     : position(pos), piece(nullptr), type(type)
 {}
 
-MoveEffect::MoveEffect(Position pos, unique_ptr<const Piece> &piece, MoveEffectType type)
+MoveEffect::MoveEffect(Position pos, unique_ptr<Piece> &piece, MoveEffectType type)
     : position(pos), piece(piece.release()), type(type)
 {}
 
@@ -32,7 +32,7 @@ Position MoveEffect::getPosition() const {
     return position;
 }
 
-unique_ptr<const Piece> MoveEffect::getCopyOfPiece() const {
+unique_ptr<Piece> MoveEffect::getCopyOfPiece() const {
     return Piece::copyPiece(piece.get());
 }
 

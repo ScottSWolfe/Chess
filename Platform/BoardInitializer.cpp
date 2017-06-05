@@ -28,21 +28,21 @@ void BoardInitializer::addStandardPieces(Board &board) {
 void BoardInitializer::addRowOfPawns(Board &board, int row, PieceColor color) {
     int dimension = board.getDimension();
     for (int i = 0; i < dimension; ++i) {
-        unique_ptr<const Piece> pawn = make_unique<Pawn>(color);
+        unique_ptr<Piece> pawn = make_unique<Pawn>(color);
         Position pos(i, row);
         board.addPieceToSquare(pos, pawn);
     }
 }
 
 void BoardInitializer::addStandardRowOfPieces(Board &board, int row, PieceColor color) {
-    unique_ptr<const Piece> rook_a = make_unique<Rook>(color);
-    unique_ptr<const Piece> rook_b = make_unique<Rook>(color);
-    unique_ptr<const Piece> knight_a = make_unique<Knight>(color);
-    unique_ptr<const Piece> knight_b = make_unique<Knight>(color);
-    unique_ptr<const Piece> bishop_a = make_unique<Bishop>(color);
-    unique_ptr<const Piece> bishop_b = make_unique<Bishop>(color);
-    unique_ptr<const Piece> queen = make_unique<Queen>(color);
-    unique_ptr<const Piece> king = make_unique<King>(color);
+    unique_ptr<Piece> rook_a = make_unique<Rook>(color);
+    unique_ptr<Piece> rook_b = make_unique<Rook>(color);
+    unique_ptr<Piece> knight_a = make_unique<Knight>(color);
+    unique_ptr<Piece> knight_b = make_unique<Knight>(color);
+    unique_ptr<Piece> bishop_a = make_unique<Bishop>(color);
+    unique_ptr<Piece> bishop_b = make_unique<Bishop>(color);
+    unique_ptr<Piece> queen = make_unique<Queen>(color);
+    unique_ptr<Piece> king = make_unique<King>(color);
 
     board.addPieceToSquare(Position(0, row), rook_a);
     board.addPieceToSquare(Position(7, row), rook_b);

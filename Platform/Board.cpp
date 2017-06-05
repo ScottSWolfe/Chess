@@ -56,16 +56,16 @@ bool Board::inBounds(Position pos) const {
 }
 
 void Board::makeMove(const Move &move) {
-    unique_ptr<const Piece> piece = removePieceFromSquare(move.getStart());
+    unique_ptr<Piece> piece = removePieceFromSquare(move.getStart());
     addPieceToSquare(move.getEnd(), piece);
     applyMoveEffect(move.getEffect());
 }
 
-void Board::addPieceToSquare(Position pos, unique_ptr<const Piece> &piece) {
+void Board::addPieceToSquare(Position pos, unique_ptr<Piece> &piece) {
     getSquare(pos).setPiece(piece);
 }
 
-unique_ptr<const Piece> Board::removePieceFromSquare(Position pos) {
+unique_ptr<Piece> Board::removePieceFromSquare(Position pos) {
     return getSquare(pos).removePiece();
 }
 
@@ -74,7 +74,7 @@ void Board::applyMoveEffect(const MoveEffect *effect) {
         return;
     }
     Position pos = effect->getPosition();
-    unique_ptr<const Piece> piece = effect->getCopyOfPiece();
+    unique_ptr<Piece> piece = effect->getCopyOfPiece();
     setPiece(pos, piece);
 }
 
@@ -104,7 +104,7 @@ bool Board::isOppPieceColor(Position pos, PieceColor color) const {
     return getPieceColor(pos) != color;
 }
 
-void Board::setPiece(Position pos, std::unique_ptr<const Piece> &piece) {
+void Board::setPiece(Position pos, std::unique_ptr<Piece> &piece) {
     getSquare(pos).setPiece(piece);
 }
 
