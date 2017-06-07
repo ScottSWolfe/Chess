@@ -22,8 +22,9 @@ private:
     void addAdjacentMoves(std::vector<Move> &moves, const GameState &state, Position start) const;
     void addCastleMoves(std::vector<Move> &moves, const GameState &state, Position start) const;
     void addCastleMove(std::vector<Move> &moves, const GameState &state, Position start, int delta_x) const;
-    std::unique_ptr<const MoveEffect> King::createCastleEffect(Position king_end, Position rook_start, int delta_x) const;
+    Move King::createMoveWithCastleEffect(Position king_start, Position king_end, Position rook_start, int delta_x) const;
     bool canCastle(const GameState &state, Position start, int delta_x, Position &rook_position) const;
     int castleColumn(int direction, int dimension) const;
+    int King::castleDirection(int start, int end) const;
 
 };

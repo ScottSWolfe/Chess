@@ -129,7 +129,6 @@
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Move.cpp" />
-    <ClCompile Include="MoveEffect.cpp" />
     <ClCompile Include="MoveInputParser.cpp" />
     <ClCompile Include="MoveValidator.cpp" />
     <ClCompile Include="Piece.cpp" />

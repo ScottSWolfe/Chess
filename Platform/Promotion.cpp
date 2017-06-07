@@ -1,6 +1,6 @@
 #include "Piece.h"
 #include "Promotion.h"
-#include "GameState.h"
+#include "Board.h"
 using namespace std;
 
 

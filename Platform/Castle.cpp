@@ -1,5 +1,5 @@
 #include "Castle.h"
-#include "GameState.h"
+#include "Board.h"
 using namespace std;
 
 

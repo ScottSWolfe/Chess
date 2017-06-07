@@ -99,9 +99,6 @@
     <ClCompile Include="Position.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MoveEffect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ConsoleUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

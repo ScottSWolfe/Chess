@@ -59,8 +59,7 @@ void King::addCastleMove(vector<Move> &moves, const GameState &state, Position s
     Position rook_position;
     if (canCastle(state, start, delta_x, rook_position)) {
         Position end(castle_column, start.y);
-        auto effect = createCastleEffect(end, rook_position, delta_x);
-        Move move(start, end, effect);
+        Move move = createMoveWithCastleEffect(start, end, rook_position, delta_x);
         moves.push_back(move);
     }
 }
@@ -71,26 +70,20 @@ void King::addMoveEffect(const GameState &state, Move &move) const {
     }
     Position start = move.getStart();
     Position end = move.getEnd();
-    int delta_x;
-    if (start.x - end.x == 0) {
+    int delta_x = castleDirection(start.x, end.x);
+    if (delta_x == 0) {
         return;
-    }
-    else if (start.x - end.x < 0) {
-        delta_x = 1;
-    }
-    else if (start.x - end.x > 0) {
-        delta_x = -1;
     }
     Position rook_position;
     if (canCastle(state, start, delta_x, rook_position)) {
-        auto effect = createCastleEffect(end, rook_position, delta_x);
-        move = Move(move.getStart(), move.getEnd(), effect);
+        move = createMoveWithCastleEffect(start, end, rook_position, delta_x);
     }
 }
 
-unique_ptr<const MoveEffect> King::createCastleEffect(Position king_end, Position rook_start, int delta_x) const {
+Move King::createMoveWithCastleEffect(Position king_start, Position king_end, Position rook_start, int delta_x) const {
     Position rook_end = king_end.add(-delta_x, 0);
-    return make_unique<const Castle>(rook_start, rook_end);
+    unique_ptr<const MoveEffect> effect = make_unique<const Castle>(rook_start, rook_end);
+    return Move(king_start, king_end, effect);
 }
 
 bool King::canCastle(const GameState &state, Position start, int delta_x, Position &rook_position) const {
@@ -127,4 +120,14 @@ int King::castleColumn(int direction, int dimension) const {
     else {
         return 2;
     }
+}
+
+int King::castleDirection(int start, int end) const {
+    if (start - end < 0) {
+        return 1;
+    }
+    if (start - end > 0) {
+        return -1;
+    }
+    return 0;
 }
