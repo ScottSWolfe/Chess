@@ -34,6 +34,9 @@
     <Filter Include="Header Files\Player">
       <UniqueIdentifier>{7d9fa0b1-4c69-4b2a-a609-fc3c15eefe23}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Move">
+      <UniqueIdentifier>{002d2a98-4f8a-4321-b16d-cdf4e1bea6de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -105,6 +108,15 @@
     <ClCompile Include="GameOverChecker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="EnPassant.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Promotion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Castle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bishop.h">
@@ -155,26 +167,14 @@
     <ClInclude Include="GameManager.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Move.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
     <ClInclude Include="MoveInputParser.h">
       <Filter>Header Files\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveValidator.h">
-      <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="HumanPlayer.h">
       <Filter>Header Files\Player</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Header Files\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Position.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveEffect.h">
-      <Filter>Header Files\Game</Filter>
     </ClInclude>
     <ClInclude Include="ConsoleUI.h">
       <Filter>Header Files\UI</Filter>
@@ -187,6 +187,27 @@
     </ClInclude>
     <ClInclude Include="GameSubject.h">
       <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Move.h">
+      <Filter>Header Files\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEffect.h">
+      <Filter>Header Files\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="Position.h">
+      <Filter>Header Files\State</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveValidator.h">
+      <Filter>Header Files\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="EnPassant.h">
+      <Filter>Header Files\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="Castle.h">
+      <Filter>Header Files\Move</Filter>
+    </ClInclude>
+    <ClInclude Include="Promotion.h">
+      <Filter>Header Files\Move</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

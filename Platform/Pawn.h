@@ -28,6 +28,7 @@ private:
     bool isEnPassantAvailable(const GameState &state, Position start, int &dst_delta_x) const;
     bool addEnPassantMoveEffect(const GameState &state, Move &move) const;
     bool addPromotionMoveEffect(const GameState &state, Move &move) const;
+    Move Pawn::createMoveWithEnPassant(Position start, int delta_x) const;
     int step() const;
     int startRow(int dimension) const;
     int enPassantRow(int dimension) const;

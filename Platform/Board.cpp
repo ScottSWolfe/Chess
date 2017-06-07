@@ -77,9 +77,7 @@ void Board::applyMoveEffect(const MoveEffect *effect) {
     if (effect == nullptr) {
         return;
     }
-    Position pos = effect->getPosition();
-    unique_ptr<Piece> piece = effect->getCopyOfPiece();
-    setPiece(pos, piece);
+    effect->applyEffect(*this);
 }
 
 bool Board::isPiece(Position pos) const {

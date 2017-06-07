@@ -1,11 +1,12 @@
 #include <vector>
 #include "ChessDebug.h"
+#include "EnPassant.h"
 #include "GameState.h"
 #include "Pawn.h"
 #include "Move.h"
 #include "MoveEffect.h"
 #include "Position.h"
-#include "Queen.h"
+#include "Promotion.h"
 using namespace std;
 
 
@@ -72,10 +73,8 @@ void Pawn::addDiagonalMove(vector<Move> &moves, const GameState &state, Position
 void Pawn::addEnPassantMove(vector<Move> &moves, const GameState state, Position start) const {
     int delta_x = 0;
     if (isEnPassantAvailable(state, start, delta_x)) {
-        Position end = start.add(delta_x, step());
-        Position pos_piece_to_remove = start.add(delta_x, 0);
-        auto effect = make_unique<const MoveEffect>(pos_piece_to_remove, MoveEffectType::EN_PASSANT);
-        moves.push_back(Move(start, end, effect));
+        Move move = createMoveWithEnPassant(start, delta_x);
+        moves.push_back(move);
     }
 }
 
@@ -107,21 +106,24 @@ bool Pawn::addEnPassantMoveEffect(const GameState &state, Move &move) const {
     Position start = move.getStart();
     int delta_x = 0;
     if (isEnPassantAvailable(state, start, delta_x)) {
-        Position end = start.add(delta_x, step());
-        Position piece_to_remove = start.add(delta_x, 0);
-        auto effect = make_unique<const MoveEffect>(piece_to_remove, MoveEffectType::EN_PASSANT);
-        move = Move(start, end, effect);
+        move = createMoveWithEnPassant(start, delta_x);
         return true;
     }
     return false;
+}
+
+Move Pawn::createMoveWithEnPassant(Position start, int delta_x) const {
+    Position end = start.add(delta_x, step());
+    Position piece_to_remove = start.add(delta_x, 0);
+    unique_ptr<const MoveEffect> effect = make_unique<const EnPassant>(piece_to_remove);
+    return Move(start, end, effect);
 }
 
 bool Pawn::addPromotionMoveEffect(const GameState &state, Move &move) const {
     if (move.getEnd().y == promotionRow(state.getBoardDimension())) {
         if (state.inBounds(move.getEnd())) {
             // TODO add request to player for choice of piece
-            unique_ptr<Piece> queen = make_unique<Queen>(state.getPieceColor(move.getStart()));
-            unique_ptr<const MoveEffect> effect = make_unique<const MoveEffect>(move.getEnd(), queen, MoveEffectType::PROMOTION);
+            unique_ptr<const MoveEffect> effect = make_unique<const Promotion>(move.getEnd(), PieceType::QUEEN);
             move = Move(move.getStart(), move.getEnd(), effect);
             return true;
         }

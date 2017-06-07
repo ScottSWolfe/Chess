@@ -3,6 +3,7 @@
 using namespace std;
 
 
+/*
 MoveEffect::MoveEffect(Position pos, MoveEffectType type)
     : position(pos), piece(nullptr), type(type)
 {}
@@ -43,3 +44,4 @@ MoveEffectType MoveEffect::getType() const {
 unique_ptr<const MoveEffect> MoveEffect::getCopy() const {
     return make_unique<const MoveEffect>(position, getCopyOfPiece(), type);
 }
+*/

@@ -175,7 +175,7 @@ void GameState::incrementCaptureAndPawnCounter(const Move &move) {
     // if piece is being captured
     Position end = move.getEnd();
     const MoveEffect *effect = move.getEffect();
-    if (board.isPiece(end) && effect && effect->getType() != MoveEffectType::CASTLE) {
+    if (board.isPiece(end) && (effect == nullptr || effect->getType() != MoveEffectType::CASTLE)) {
         turns_since_capture_or_pawn_push = 0;
         return;
     }

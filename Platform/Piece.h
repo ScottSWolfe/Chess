@@ -14,7 +14,6 @@ class Piece {
 public:
     Piece(PieceColor color);
     virtual std::unique_ptr<Piece> getCopy() const = 0;
-    std::unique_ptr<Piece> createPiece(PieceType type, PieceColor color);
     PieceColor getColor() const;
     virtual PieceType getType() const = 0;
     virtual const std::string getSymbol() const = 0;
@@ -24,6 +23,7 @@ public:
     void setHasMoved(bool has_moved);
     bool hasMoved() const;
 
+    static std::unique_ptr<Piece> createPiece(PieceType type, PieceColor color);
     static std::unique_ptr<Piece> copyPiece(const Piece *piece);
     static const std::string getPieceSymbol(const Piece *piece);
     static PieceColor getPieceColor(const Piece *piece);

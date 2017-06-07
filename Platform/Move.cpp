@@ -9,7 +9,7 @@ Move::Move(Position start_coord, Position end_coord)
     : start(start_coord), end(end_coord), effect(nullptr)
 {}
 
-Move::Move(Position start, Position end, unique_ptr<const MoveEffect> &effect) 
+Move::Move(Position start, Position end, unique_ptr<const MoveEffect> &effect)
     : start(start), end(end), effect(effect.release())
 {}
 

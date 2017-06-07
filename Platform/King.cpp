@@ -1,4 +1,5 @@
 #include <vector>
+#include "Castle.h"
 #include "ChessDebug.h"
 #include "GameState.h"
 #include "King.h"
@@ -58,8 +59,8 @@ void King::addCastleMove(vector<Move> &moves, const GameState &state, Position s
     Position rook_position;
     if (canCastle(state, start, delta_x, rook_position)) {
         Position end(castle_column, start.y);
-        // TODO add castle move effect
-        Move move(start, end);
+        auto effect = createCastleEffect(end, rook_position, delta_x);
+        Move move(start, end, effect);
         moves.push_back(move);
     }
 }
@@ -74,24 +75,30 @@ void King::addMoveEffect(const GameState &state, Move &move) const {
     if (start.x - end.x == 0) {
         return;
     }
-    if (start.x - end.x < 0) {
+    else if (start.x - end.x < 0) {
         delta_x = 1;
     }
-    if (start.x - end.x > 0) {
+    else if (start.x - end.x > 0) {
         delta_x = -1;
     }
     Position rook_position;
     if (canCastle(state, start, delta_x, rook_position)) {
-        // add move effect to move
+        auto effect = createCastleEffect(end, rook_position, delta_x);
+        move = Move(move.getStart(), move.getEnd(), effect);
     }
+}
+
+unique_ptr<const MoveEffect> King::createCastleEffect(Position king_end, Position rook_start, int delta_x) const {
+    Position rook_end = king_end.add(-delta_x, 0);
+    return make_unique<const Castle>(rook_start, rook_end);
 }
 
 bool King::canCastle(const GameState &state, Position start, int delta_x, Position &rook_position) const {
     int dimension = state.getBoardDimension();
     int castle_column = castleColumn(delta_x, dimension);
     Position pos = start.add(delta_x, 0);
-    int distance = abs(pos.x - castle_column);
-    while (distance >= 0 && rook_position.empty()) {
+    int dist = (castle_column - pos.x) * delta_x;
+    while ((dist >= 0 || rook_position.empty()) && state.inBounds(pos)) {
         if (state.isPiece(pos)) {
             if (state.getPieceType(pos) != PieceType::ROOK) {
                 return false;
@@ -105,7 +112,7 @@ bool King::canCastle(const GameState &state, Position start, int delta_x, Positi
             rook_position = pos;
         }
         pos = pos.add(delta_x, 0);
-        distance = abs(pos.x - castle_column);
+        dist = (castle_column - pos.x) * delta_x;
     }
     if (rook_position.empty()) {
         return false;
