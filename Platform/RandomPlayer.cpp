@@ -14,6 +14,9 @@ RandomPlayer::RandomPlayer(PieceColor color)
 shared_ptr<Move> RandomPlayer::makeMove(const GameState &state) const {
     vector<Move> moves = state.getAvailableMoves();
     eliminateIllegalMoves(state, moves);
+    if (moves.size() <= 0) {
+        return nullptr;
+    }
     int rand_num = randomInteger(moves.size() - 1);
     return make_shared<Move>(moves[rand_num]);
 }
