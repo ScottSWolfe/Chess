@@ -135,6 +135,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Promotion.cpp" />
     <ClCompile Include="Queen.cpp" />
+    <ClCompile Include="RandomPlayer.cpp" />
     <ClCompile Include="Rook.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Square.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Promotion.h" />
     <ClInclude Include="Queen.h" />
+    <ClInclude Include="RandomPlayer.h" />
     <ClInclude Include="Rook.h" />
     <ClInclude Include="Square.h" />
     <ClInclude Include="Position.h" />

@@ -4,10 +4,11 @@
 #include "ChessEnums.h"
 #include "ConsoleBoardPresenter.h"
 #include "GameManager.h"
+#include "GameObserver.h"
 #include "HumanPlayer.h"
 #include "Move.h"
 #include "MoveValidator.h"
-#include "GameObserver.h"
+#include "RandomPlayer.h"
 using namespace std;
 
 
@@ -15,7 +16,7 @@ GameManager::GameManager() :
     presenter(new ConsoleBoardPresenter),
     current_state(BoardInitializer::initializeStandardSetup(), PieceColor::WHITE),
     white_player(new HumanPlayer(PieceColor::WHITE)),
-    black_player(new HumanPlayer(PieceColor::BLACK))
+    black_player(new RandomPlayer(PieceColor::BLACK))
 {}
 
 void GameManager::startGame() {

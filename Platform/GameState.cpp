@@ -113,7 +113,8 @@ vector<Move> GameState::getAvailableMoves() const {
         for (int i = 0; i < dimension; i++) {
             Position pos(i, j);
             if (board.isPiece(pos) && board.getPieceColor(pos) == current_color) {
-                board.getPiece(pos)->getAvailableMoves(*this, pos);
+                vector<Move> pieces_moves = board.getPiece(pos)->getAvailableMoves(*this, pos);
+                moves.insert(moves.end(), pieces_moves.begin(), pieces_moves.end());
             }
         }
     }
