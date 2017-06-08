@@ -75,28 +75,37 @@ unique_ptr<Piece> Piece::copyPiece(const Piece *piece) {
     return piece->getCopy();
 }
 
-void Piece::getStraightMoves(vector<Move> &moves, const GameState &state, Position start) const {
-    getMovesInLine(moves, state, start,  1,  0);
-    getMovesInLine(moves, state, start, -1,  0);
-    getMovesInLine(moves, state, start,  0,  1);
-    getMovesInLine(moves, state, start,  0, -1);
+vector<Move> Piece::getAvailableMoves(const GameState &state, Position start) const {
+    vector<Move> moves;
+    vector<Position> positions = getSquaresAttacked(state, start);
+    for (Position end : positions) {
+        moves.push_back(Move(start, end));
+    }
+    return moves;
 }
 
-void Piece::getDiagonalMoves(vector<Move> &moves, const GameState &state, Position start) const {
-    getMovesInLine(moves, state, start,  1,  1);
-    getMovesInLine(moves, state, start,  1, -1);
-    getMovesInLine(moves, state, start, -1,  1);
-    getMovesInLine(moves, state, start, -1, -1);
+void Piece::getStraightSquaresAttacked(vector<Position> &positions, const GameState &state, Position start) const {
+    getSquaresAttackedInLine(positions, state, start,  1,  0);
+    getSquaresAttackedInLine(positions, state, start, -1,  0);
+    getSquaresAttackedInLine(positions, state, start,  0,  1);
+    getSquaresAttackedInLine(positions, state, start,  0, -1);
 }
 
-void Piece::getMovesInLine(vector<Move> &moves, const GameState &state, Position start, int delta_x, int delta_y) const {
+void Piece::getDiagonalSquaresAttacked(vector<Position> &positions, const GameState &state, Position start) const {
+    getSquaresAttackedInLine(positions, state, start,  1,  1);
+    getSquaresAttackedInLine(positions, state, start,  1, -1);
+    getSquaresAttackedInLine(positions, state, start, -1,  1);
+    getSquaresAttackedInLine(positions, state, start, -1, -1);
+}
+
+void Piece::getSquaresAttackedInLine(vector<Position> &positions, const GameState &state, Position start, int delta_x, int delta_y) const {
     Position end = start.add(delta_x, delta_y);
     while (state.inBounds(end) && state.isPiece(end) == false) {
-        moves.push_back(Move(start, end));
+        positions.push_back(end);
         end = end.add(delta_x, delta_y);
     }
     if (state.inBounds(end) && state.isOppPieceColor(end, color)) {
-        moves.push_back(Move(start, end));
+        positions.push_back(end);
     }
 }
 

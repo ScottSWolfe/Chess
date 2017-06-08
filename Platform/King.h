@@ -15,16 +15,18 @@ public:
     std::unique_ptr<Piece> getCopy() const override;
     PieceType getType() const override; 
     const std::string getSymbol() const override;
-    std::vector<Move> getAvailableMoves(const GameState &state, Position pos) const override;
+    std::vector<Move> getAvailableMoves(const GameState &state, Position start) const override;
+    std::vector<Position> getSquaresAttacked(const GameState &state, Position start) const override;
     void addMoveEffect(const GameState &state, Move &move) const override;
 
 private:
+    std::vector<Position> getAdjacentSquaresAttacked(const GameState &state, Position start) const;
     void addAdjacentMoves(std::vector<Move> &moves, const GameState &state, Position start) const;
     void addCastleMoves(std::vector<Move> &moves, const GameState &state, Position start) const;
     void addCastleMove(std::vector<Move> &moves, const GameState &state, Position start, int delta_x) const;
-    Move King::createMoveWithCastleEffect(Position king_start, Position king_end, Position rook_start, int delta_x) const;
+    Move createMoveWithCastleEffect(Position king_start, Position king_end, Position rook_start, int delta_x) const;
     bool canCastle(const GameState &state, Position start, int delta_x, Position &rook_position) const;
     int castleColumn(int direction, int dimension) const;
-    int King::castleDirection(int start, int end) const;
+    int castleDirection(int start, int end) const;
 
 };

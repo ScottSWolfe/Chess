@@ -21,10 +21,10 @@ const string Bishop::getSymbol() const {
     return BISHOP_SYMBOL;
 }
 
-vector<Move> Bishop::getAvailableMoves(const GameState &state, Position pos) const {
-    vector<Move> moves;
-    getDiagonalMoves(moves, state, pos);
-    return moves;
+std::vector<Position> Bishop::getSquaresAttacked(const GameState &state, Position start) const {
+    vector<Position> positions;
+    getDiagonalSquaresAttacked(positions, state, start);
+    return positions;
 }
 
 void Bishop::addMoveEffect(const GameState &state, Move &move) const {

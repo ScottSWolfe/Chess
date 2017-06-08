@@ -21,21 +21,21 @@ const string Knight::getSymbol() const {
     return KNIGHT_SYMBOL;
 }
 
-vector<Move> Knight::getAvailableMoves(const GameState &state, Position start) const {
-    vector<Move> moves;
+vector<Position> Knight::getSquaresAttacked(const GameState &state, Position start) const {
+    vector<Position> positions;
     for (int delta_y = -2; delta_y <= 2; delta_y++) {
         for (int delta_x = -2; delta_x <= 2; delta_x++) {
             if (abs(delta_y) + abs(delta_x) == 3) {
                 Position end = start.add(delta_x, delta_y);
-                if (state.inBounds(end) && 
-                    (state.isPiece(end) == false || state.isOppPieceColor(end, color)))
+                if (state.inBounds(end) &&
+                   (state.isPiece(end) == false || state.isOppPieceColor(end, color)))
                 {
-                    moves.push_back(Move(start, end));
+                    positions.push_back(end);
                 }
             }
         }
     }
-    return moves;
+    return positions;
 }
 
 void Knight::addMoveEffect(const GameState &state, Move &move) const {

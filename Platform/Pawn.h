@@ -17,6 +17,7 @@ public:
     PieceType getType() const override;
     const std::string getSymbol() const override;
     std::vector<Move> getAvailableMoves(const GameState &state, Position start) const override;
+    std::vector<Position> getSquaresAttacked(const GameState &state, Position start) const override;
     void addMoveEffect(const GameState &state, Move &move) const override;
 
 private:

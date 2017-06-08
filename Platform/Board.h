@@ -34,6 +34,7 @@ public:
     void setPiece(Position pos, std::unique_ptr<Piece> &piece);
     bool willKingBeInCheck(GameState &state, const Move &move) const;
     bool isKingInCheck(const GameState &state) const;
+    bool canPieceAttackSquare(const GameState &state, Position pos, PieceColor color) const;
     Position getKingPosition(PieceColor king_color) const;
     int getDimension() const;
 
@@ -45,6 +46,5 @@ private:
     SquareColor getSquareColorByIndex(int index) const;
     void throwExceptionIfPieceIsNull(const Piece *piece) const;
     void applyMoveEffect(const MoveEffect *effect);
-    bool canPieceCaptureKing(const GameState state, PieceColor king_color, Position king_position) const;
 
 };

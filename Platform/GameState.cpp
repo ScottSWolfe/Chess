@@ -71,6 +71,10 @@ bool GameState::isKingInCheck() const {
     return board.isKingInCheck(*this);
 }
 
+bool GameState::isSquareAttacked(Position pos, PieceColor color) const {
+    return board.canPieceAttackSquare(*this, pos, color);
+}
+
 Position GameState::getKingPosition(PieceColor king_color) const {
     return board.getKingPosition(king_color);
 }

@@ -16,7 +16,7 @@ GameManager::GameManager() :
     presenter(new ConsoleBoardPresenter),
     current_state(BoardInitializer::initializeStandardSetup(), PieceColor::WHITE),
     white_player(new HumanPlayer(PieceColor::WHITE)),
-    black_player(new RandomPlayer(PieceColor::BLACK))
+    black_player(new HumanPlayer(PieceColor::BLACK))
 {}
 
 void GameManager::startGame() {

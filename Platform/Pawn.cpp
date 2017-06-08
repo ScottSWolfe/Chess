@@ -35,6 +35,19 @@ vector<Move> Pawn::getAvailableMoves(const GameState &state, Position start) con
     return moves;
 }
 
+std::vector<Position> Pawn::getSquaresAttacked(const GameState &state, Position start) const {
+    vector<Position> positions;
+    Position end = start.add(1, step());
+    if (state.inBounds(end)) {
+        positions.push_back(end);
+    }
+    end = start.add(-1, step());
+    if (state.inBounds(end)) {
+        positions.push_back(end);
+    }
+    return positions;
+}
+
 void Pawn::addOneSquareMove(vector<Move> &moves, const GameState &state, Position start) const {
     Position end = start.add(0, step());
     if (state.inBounds(end) == true && state.isPiece(end) == false) {

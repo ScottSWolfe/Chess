@@ -21,11 +21,11 @@ const string Queen::getSymbol() const {
     return QUEEN_SYMBOL;
 }
 
-vector<Move> Queen::getAvailableMoves(const GameState &state, Position pos) const {
-    vector<Move> moves;
-    getStraightMoves(moves, state, pos);
-    getDiagonalMoves(moves, state, pos);
-    return moves;
+vector<Position> Queen::getSquaresAttacked(const GameState &state, Position start) const {
+    vector<Position> positions;
+    getStraightSquaresAttacked(positions, state, start);
+    getDiagonalSquaresAttacked(positions, state, start);
+    return positions;
 }
 
 void Queen::addMoveEffect(const GameState &state, Move &move) const {

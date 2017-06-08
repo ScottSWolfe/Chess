@@ -22,10 +22,10 @@ const string Rook::getSymbol() const {
     return ROOK_SYMBOL;
 }
 
-vector<Move> Rook::getAvailableMoves(const GameState &state, Position pos) const {
-    vector<Move> moves;
-    getStraightMoves(moves, state, pos);
-    return moves;
+vector<Position> Rook::getSquaresAttacked(const GameState &state, Position start) const {
+    vector<Position> positions;
+    getStraightSquaresAttacked(positions, state, start);
+    return positions;
 }
 
 void Rook::addMoveEffect(const GameState &state, Move &move) const {
