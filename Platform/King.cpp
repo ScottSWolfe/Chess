@@ -117,7 +117,7 @@ bool King::canCastle(const GameState &state, Position start, int delta_x, Positi
             }
             rook_position = pos;
         }
-        if (state.isSquareAttacked(pos, color)) {
+        if (dist >= 0 && state.isSquareAttacked(pos, color)) {
             return false;
         }
         pos = pos.add(delta_x, 0);
