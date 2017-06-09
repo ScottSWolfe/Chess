@@ -7,8 +7,8 @@ Castle::Castle(Position rook_start, Position rook_end)
     : rook_start(rook_start), rook_end(rook_end)
 {}
 
-unique_ptr<const MoveEffect> Castle::getCopy() const {
-    return make_unique<const Castle>(*this);
+unique_ptr<MoveEffect> Castle::getCopy() const {
+    return make_unique<Castle>(*this);
 }
 
 bool Castle::operator==(const MoveEffect &other) const {

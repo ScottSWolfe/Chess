@@ -7,8 +7,8 @@ EnPassant::EnPassant(Position remove_position)
     : remove_position(remove_position)
 {}
 
-unique_ptr<const MoveEffect> EnPassant::getCopy() const {
-    return make_unique<const EnPassant>(*this);
+unique_ptr<MoveEffect> EnPassant::getCopy() const {
+    return make_unique<EnPassant>(*this);
 }
 
 bool EnPassant::operator==(const MoveEffect &other) const {

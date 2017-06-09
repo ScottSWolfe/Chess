@@ -1,7 +1,9 @@
 #include "ChessDebug.h"
+#include "ChessEnums.h"
 #include "Move.h"
 #include "MoveEffect.h"
 #include "Position.h"
+#include "Promotion.h"
 using namespace std;
 
 
@@ -9,7 +11,7 @@ Move::Move(Position start_coord, Position end_coord)
     : start(start_coord), end(end_coord), effect(nullptr)
 {}
 
-Move::Move(Position start, Position end, unique_ptr<const MoveEffect> &effect)
+Move::Move(Position start, Position end, unique_ptr<MoveEffect> &effect)
     : start(start), end(end), effect(effect.release())
 {}
 
@@ -57,11 +59,28 @@ Position Move::getEnd() const {
     return end;
 }
 
+bool Move::hasEffect() const {
+    return effect != nullptr;
+}
+
 const MoveEffect *Move::getEffect() const {
     return effect.get();
 }
 
-unique_ptr<const MoveEffect> Move::getCopyOfEffect() const {
+MoveEffectType Move::getEffectType() const {
+    return effect->getType();
+}
+
+void Move::setPromotionPiece(PieceType type) {
+    if (effect == nullptr) {
+        return;
+    }
+    if (effect->getType() == MoveEffectType::PROMOTION) {
+        dynamic_cast<Promotion*>(effect.get())->setPromotionPiece(type);
+    }
+}
+
+unique_ptr<MoveEffect> Move::getCopyOfEffect() const {
     if (effect == nullptr) {
         return nullptr;
     }

@@ -21,6 +21,16 @@ shared_ptr<Move> RandomPlayer::makeMove(const GameState &state) const {
     return make_shared<Move>(moves[rand_num]);
 }
 
+PieceType RandomPlayer::getPromotionPiece(const GameState &state, const Move &move) const {
+    const int num_piece_types = 6;
+    int piece_type_num = randomInteger(num_piece_types - 1);
+    PieceType piece_type = static_cast<PieceType>(piece_type_num);
+    if (piece_type == PieceType::PAWN || piece_type == PieceType::KING) {
+        piece_type = getPromotionPiece(state, move);
+    }
+    return piece_type;
+}
+
 void RandomPlayer::eliminateIllegalMoves(const GameState &state, vector<Move> &moves) const {
     for (size_t i = 0; i < moves.size(); i++) {
         Move move = moves[i];

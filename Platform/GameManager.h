@@ -37,6 +37,8 @@ private:
     std::shared_ptr<Move> getCurrentPlayersMove() const;
     bool validateMoveIsLegal(const Move &move) const;
     bool validateMoveIsSafe(const Move &move) const;
+    void addMoveEffect(Move &move) const;
+    PieceType askPlayerForPromotionPiece(const Move &move) const;
     std::shared_ptr<Move> getAnotherMove() const;
     void notifyObserversGameStarted() const;
     void notifyObserversGameEnded(GameEndType end_type) const;

@@ -128,15 +128,14 @@ bool Pawn::addEnPassantMoveEffect(const GameState &state, Move &move) const {
 Move Pawn::createMoveWithEnPassant(Position start, int delta_x) const {
     Position end = start.add(delta_x, step());
     Position piece_to_remove = start.add(delta_x, 0);
-    unique_ptr<const MoveEffect> effect = make_unique<const EnPassant>(piece_to_remove);
+    unique_ptr<MoveEffect> effect = make_unique<EnPassant>(piece_to_remove);
     return Move(start, end, effect);
 }
 
 bool Pawn::addPromotionMoveEffect(const GameState &state, Move &move) const {
     if (move.getEnd().y == promotionRow(state.getBoardDimension())) {
         if (state.inBounds(move.getEnd())) {
-            // TODO add request to player for choice of piece
-            unique_ptr<const MoveEffect> effect = make_unique<const Promotion>(move.getEnd(), PieceType::QUEEN);
+            unique_ptr<MoveEffect> effect = make_unique<Promotion>(move.getEnd(), PieceType::QUEEN);
             move = Move(move.getStart(), move.getEnd(), effect);
             return true;
         }

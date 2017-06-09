@@ -51,10 +51,7 @@ void GameManager::makeMove() {
 
 std::shared_ptr<Move> GameManager::getMove() const {
     auto move = getCurrentPlayersMove();
-    if (validateMoveIsSafe(*move) == false) {
-        move = getAnotherMove();
-    }
-    current_state.addMoveEffect(*move);
+    addMoveEffect(*move);
     if (validateMoveIsLegal(*move) == false) {
         move = getAnotherMove();
     }
@@ -62,8 +59,7 @@ std::shared_ptr<Move> GameManager::getMove() const {
 }
 
 std::shared_ptr<Move> GameManager::getCurrentPlayersMove() const {
-    const Player *current_player = getCurrentPlayer();
-    auto move = current_player->makeMove(current_state);
+    auto move = getCurrentPlayer()->makeMove(current_state);
     if (validateMoveIsSafe(*move) == false) {
         move = getAnotherMove();
     }
@@ -78,6 +74,18 @@ bool GameManager::validateMoveIsSafe(const Move &move) const {
 bool GameManager::validateMoveIsLegal(const Move &move) const {
     MoveValidator moveValidator(current_state, move);
     return moveValidator.validateMoveIsLegal();
+}
+
+void GameManager::addMoveEffect(Move &move) const {
+    current_state.addMoveEffect(move);
+    if (move.hasEffect() && move.getEffectType() == MoveEffectType::PROMOTION) {
+        PieceType type = askPlayerForPromotionPiece(move);
+        move.setPromotionPiece(type);
+    }
+}
+
+PieceType GameManager::askPlayerForPromotionPiece(const Move &move) const {
+    return getCurrentPlayer()->getPromotionPiece(current_state, move);
 }
 
 std::shared_ptr<Move> GameManager::getAnotherMove() const {

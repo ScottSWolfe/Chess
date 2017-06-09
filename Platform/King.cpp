@@ -95,7 +95,7 @@ void King::addMoveEffect(const GameState &state, Move &move) const {
 
 Move King::createMoveWithCastleEffect(Position king_start, Position king_end, Position rook_start, int delta_x) const {
     Position rook_end = king_end.add(-delta_x, 0);
-    unique_ptr<const MoveEffect> effect = make_unique<const Castle>(rook_start, rook_end);
+    unique_ptr<MoveEffect> effect = make_unique<Castle>(rook_start, rook_end);
     return Move(king_start, king_end, effect);
 }
 

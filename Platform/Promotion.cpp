@@ -8,14 +8,14 @@ Promotion::Promotion(Position promotion_position, PieceType piece_type)
     : promotion_position(promotion_position), piece_type(piece_type)
 {}
 
-unique_ptr<const MoveEffect> Promotion::getCopy() const {
-    return make_unique<const Promotion>(*this);
+unique_ptr<MoveEffect> Promotion::getCopy() const {
+    return make_unique<Promotion>(*this);
 }
 
 bool Promotion::operator==(const MoveEffect &other) const {
     try {
         auto other_casted = dynamic_cast<const Promotion&>(other);
-        if (promotion_position == other_casted.promotion_position && piece_type == other_casted.piece_type) {
+        if (promotion_position == other_casted.promotion_position) {
             return true;
         }
         return false;
@@ -33,4 +33,8 @@ void Promotion::applyEffect(Board &board) const {
 
 MoveEffectType Promotion::getType() const {
     return MoveEffectType::PROMOTION;
+}
+
+void Promotion::setPromotionPiece(PieceType type) {
+    piece_type = type;
 }
