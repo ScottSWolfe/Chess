@@ -33,7 +33,7 @@ private:
     bool isGameOver() const;
     void makeMove();
     std::shared_ptr<Move> getMove() const;
-    const Player *getCurrentPlayer() const;
+    const Player *currentPlayer() const;
     std::shared_ptr<Move> getCurrentPlayersMove() const;
     bool validateMoveIsLegal(const Move &move) const;
     bool validateMoveIsSafe(const Move &move) const;

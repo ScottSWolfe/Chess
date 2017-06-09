@@ -59,7 +59,7 @@ std::shared_ptr<Move> GameManager::getMove() const {
 }
 
 std::shared_ptr<Move> GameManager::getCurrentPlayersMove() const {
-    auto move = getCurrentPlayer()->makeMove(current_state);
+    auto move = currentPlayer()->makeMove(current_state);
     if (validateMoveIsSafe(*move) == false) {
         move = getAnotherMove();
     }
@@ -85,7 +85,7 @@ void GameManager::addMoveEffect(Move &move) const {
 }
 
 PieceType GameManager::askPlayerForPromotionPiece(const Move &move) const {
-    return getCurrentPlayer()->getPromotionPiece(current_state, move);
+    return currentPlayer()->getPromotionPiece(current_state, move);
 }
 
 std::shared_ptr<Move> GameManager::getAnotherMove() const {
@@ -93,7 +93,7 @@ std::shared_ptr<Move> GameManager::getAnotherMove() const {
     return getMove();
 }
 
-const Player *GameManager::getCurrentPlayer() const {
+const Player *GameManager::currentPlayer() const {
     if (current_state.getCurrentPlayersTurn() == PieceColor::WHITE) {
         return white_player.get();
     }
