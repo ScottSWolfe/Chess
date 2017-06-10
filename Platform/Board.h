@@ -19,7 +19,6 @@ public:
     std::shared_ptr<Board> getCopy() const;
     Square &getSquare(Position pos);
     const Square &getSquare(Position pos) const;
-    SquareColor getSquareColor(Position pos) const;
     bool inBounds(Position pos) const;
     bool hasPieceMoved(Position pos) const;
     void makeMove(const Move &move);
@@ -43,7 +42,6 @@ private:
     std::vector<Square> squares;
     int getIndex(Position pos) const;
     Position getPosition(int index) const;
-    SquareColor getSquareColorByIndex(int index) const;
     void throwExceptionIfPieceIsNull(const Piece *piece) const;
     void applyMoveEffect(const MoveEffect *effect);
 

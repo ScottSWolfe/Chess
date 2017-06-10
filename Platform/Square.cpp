@@ -7,16 +7,16 @@
 using namespace std;
 
 
-Square::Square(SquareColor square_color)
-    : piece(nullptr), color(square_color)
+Square::Square()
+    : piece(nullptr)
 {}
 
-Square::Square(SquareColor square_color, unique_ptr<Piece> &new_piece)
-    : color(square_color), piece(new_piece.release())
+Square::Square(unique_ptr<Piece> &piece)
+    : piece(piece.release())
 {}
 
 Square::Square(const Square &other_square)
-    : color(other_square.color), piece(other_square.getCopyOfPiece())
+    : piece(other_square.getCopyOfPiece())
 {}
 
 const Piece *Square::getPiece() const {
@@ -44,7 +44,7 @@ bool Square::containsKing(PieceColor color) const {
     if (piece == nullptr) {
         return false;
     }
-    if (piece->getSymbol() != Piece::KING_SYMBOL) {
+    if (piece->getType() != PieceType::KING) {
         return false;
     }
     if (color != piece->getColor()) {
@@ -62,10 +62,6 @@ bool Square::hasPieceMoved() const {
 
 unique_ptr<Piece> Square::getCopyOfPiece() const {
     return Piece::copyPiece(piece.get());
-}
-
-SquareColor Square::getColor() const {
-    return color;
 }
 
 PieceType Square::getPieceType() const {

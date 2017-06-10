@@ -34,9 +34,18 @@ void ConsoleBoardPresenter::printRow(const Board &board, int row) const {
         Position pos(col, row);
         string symbol = board.getPieceSymbol(pos);
         PieceColor piece_color = board.getPieceColor(pos);
-        SquareColor square_color = board.getSquareColor(pos);
+        SquareColor square_color = getSquareColor(pos);
         setTextColor(square_color, piece_color);
         cout << " " << symbol << " ";
+    }
+}
+
+SquareColor ConsoleBoardPresenter::getSquareColor(Position pos) const {
+    if ((pos.x + pos.y) % 2 == 0) {
+        return SquareColor::DARK;
+    }
+    else {
+        return SquareColor::LIGHT;
     }
 }
 

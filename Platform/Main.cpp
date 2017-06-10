@@ -58,13 +58,13 @@ int main() {
     // Testing Squares
     cout << "Squares" << endl;
 
-    Square square1(SquareColor::DARK, rook);
+    Square square1(rook);
     cout << (int) square1.getPiece()->getColor() << endl;
 
-    Square square2(SquareColor::LIGHT, knight);
+    Square square2(knight);
     cout << (int) square2.getPiece()->getColor() << endl;
 
-    Square square3(SquareColor::DARK);
+    Square square3;
     if (square3.getPiece()) {
         cout << (int) square3.getPiece()->getColor() << endl;
     }

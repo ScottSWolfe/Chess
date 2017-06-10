@@ -16,6 +16,7 @@ public:
 private:
     void printRows(const Board &board) const;
     void printRow(const Board &board, int row) const;
+    SquareColor getSquareColor(Position pos) const;
     void setTextColor(ConsoleColor background_color, ConsoleColor text_color) const;
     void setTextColor(SquareColor square_color, PieceColor piece_color) const;
     ConsoleColor getConsoleSquareColor(SquareColor color) const;

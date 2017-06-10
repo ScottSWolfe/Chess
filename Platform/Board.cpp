@@ -15,9 +15,10 @@ Board::Board(int board_dimension)
     if (board_dimension < 6 || board_dimension > 99) {
         throw invalid_argument("board dimension is out of range");
     }
+    squares.reserve(dimension * dimension);
     for (int i = 0; i < dimension * dimension; ++i) {
-        Square square(getSquareColorByIndex(i));
-        squares.emplace_back(square);
+        Square square;
+        squares.push_back(square);
     }
 }
 
@@ -39,10 +40,6 @@ Square &Board::getSquare(Position pos) {
 
 const Square &Board::getSquare(Position pos) const {
     return squares[getIndex(pos)];
-}
-
-SquareColor Board::getSquareColor(Position pos) const {
-    return getSquare(pos).getColor();
 }
 
 bool Board::inBounds(Position pos) const {
@@ -161,18 +158,6 @@ int Board::getIndex(Position pos) const {
 
 Position Board::getPosition(int index) const {
     return Position(index % dimension, index / dimension);
-}
-
-SquareColor Board::getSquareColorByIndex(int index) const {
-    SquareColor color;
-    Position pos = getPosition(index);
-    if ((pos.x + pos.y) % 2 == 0) {
-        color = SquareColor::DARK;
-    }
-    else {
-        color = SquareColor::LIGHT;
-    }
-    return color;
 }
 
 void Board::throwExceptionIfPieceIsNull(const Piece *piece) const {
