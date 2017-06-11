@@ -156,6 +156,7 @@
     <ClInclude Include="GameOverChecker.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="GameObserver.h" />
+    <ClInclude Include="PlayerAction.h" />
     <ClInclude Include="HumanPlayer.h" />
     <ClInclude Include="King.h" />
     <ClInclude Include="Knight.h" />

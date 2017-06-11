@@ -4,6 +4,7 @@
 #include "HumanPlayer.h"
 #include "Move.h"
 #include "MoveInputParser.h"
+#include "PlayerAction.h"
 #include "Position.h"
 using namespace std;
 
@@ -12,7 +13,7 @@ HumanPlayer::HumanPlayer(PieceColor color)
     : Player(color)
 {}
 
-shared_ptr<Move> HumanPlayer::makeMove(const GameState &state) const {
+shared_ptr<PlayerAction> HumanPlayer::getAction(const GameState &state) const {
     cout << "Enter a move: ";
     auto move = askUserForMove();
     while (move == nullptr) {

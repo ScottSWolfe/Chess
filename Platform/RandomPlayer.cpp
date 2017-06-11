@@ -3,6 +3,7 @@
 #include "GameState.h"
 #include "Move.h"
 #include "MoveValidator.h"
+#include "PlayerAction.h"
 #include "RandomPlayer.h"
 using namespace std;
 
@@ -11,7 +12,7 @@ RandomPlayer::RandomPlayer(PieceColor color)
     : Player(color)
 {}
 
-shared_ptr<Move> RandomPlayer::makeMove(const GameState &state) const {
+shared_ptr<PlayerAction> RandomPlayer::getAction(const GameState &state) const {
     vector<Move> moves = state.getAvailableMoves();
     eliminateIllegalMoves(state, moves);
     if (moves.size() <= 0) {

@@ -29,7 +29,7 @@ void GameManager::runGameLoop() {
         if (isGameOver()) {
             break;
         }
-        makeMove();
+        runPlayersTurn();
     }
 }
 
@@ -42,28 +42,30 @@ bool GameManager::isGameOver() const {
     return false;
 }
 
-void GameManager::makeMove() {
+void GameManager::runPlayersTurn() {
     notifyObserversTurnStarted();
-    shared_ptr<Move> move = getMove();
-    current_state.makeMove(*move);
+    shared_ptr<PlayerAction> action = getPlayerAction();
+    while (action->enactAction(*this) == false) {
+        // TODO notify observer that action was illegal
+        action = getPlayerAction();
+    }
     notifyObserversTurnEnded();
 }
 
-std::shared_ptr<Move> GameManager::getMove() const {
-    auto move = getCurrentPlayersMove();
-    addMoveEffect(*move);
-    if (validateMoveIsLegal(*move) == false) {
-        move = getAnotherMove();
-    }
-    return move;
+shared_ptr<PlayerAction> GameManager::getPlayerAction() const {
+    return currentPlayer()->getAction(current_state);
 }
 
-std::shared_ptr<Move> GameManager::getCurrentPlayersMove() const {
-    auto move = currentPlayer()->makeMove(current_state);
-    if (validateMoveIsSafe(*move) == false) {
-        move = getAnotherMove();
+bool GameManager::makeMove(Move move) {
+    if (validateMoveIsSafe(move) == false) {
+        return false;
     }
-    return move;
+    addMoveEffect(move);
+    if (validateMoveIsLegal(move) == false) {
+        return false;
+    }
+    current_state.makeMove(move);
+    return true;
 }
 
 bool GameManager::validateMoveIsSafe(const Move &move) const {
@@ -86,11 +88,6 @@ void GameManager::addMoveEffect(Move &move) const {
 
 PieceType GameManager::askPlayerForPromotionPiece(const Move &move) const {
     return currentPlayer()->getPromotionPiece(current_state, move);
-}
-
-std::shared_ptr<Move> GameManager::getAnotherMove() const {
-    cout << "Illegal Move. Try again:" << endl;
-    return getMove();
 }
 
 const Player *GameManager::currentPlayer() const {

@@ -1,5 +1,6 @@
 #include "ChessDebug.h"
 #include "ChessEnums.h"
+#include "GameManager.h"
 #include "Move.h"
 #include "MoveEffect.h"
 #include "Position.h"
@@ -18,6 +19,10 @@ Move::Move(Position start, Position end, unique_ptr<MoveEffect> &effect)
 Move::Move(const Move &other) 
     : start(other.start), end(other.end), effect(other.getCopyOfEffect())
 {}
+
+bool Move::enactAction(GameManager &manager) const {
+    return manager.makeMove(*this);
+}
 
 Move &Move::operator=(const Move &other) {
     start = other.start;

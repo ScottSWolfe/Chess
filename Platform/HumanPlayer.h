@@ -12,7 +12,7 @@ class HumanPlayer : public Player {
 
 public:
     HumanPlayer(PieceColor color);
-    std::shared_ptr<Move> makeMove(const GameState &state) const override;
+    std::shared_ptr<PlayerAction> getAction(const GameState &state) const override;
     PieceType getPromotionPiece(const GameState &state, const Move &move) const override;
 
 private:

@@ -9,7 +9,7 @@ class RandomPlayer : public Player {
     
 public:
     RandomPlayer(PieceColor color);
-    std::shared_ptr<Move> makeMove(const GameState &state) const;
+    std::shared_ptr<PlayerAction> getAction(const GameState &state) const;
     PieceType getPromotionPiece(const GameState &state, const Move &move) const override;
 
 private:
