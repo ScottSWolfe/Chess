@@ -14,20 +14,36 @@ HumanPlayer::HumanPlayer(PieceColor color)
 {}
 
 shared_ptr<PlayerAction> HumanPlayer::getAction(const GameState &state) const {
-    cout << "Enter a move: ";
-    auto move = askUserForMove();
-    while (move == nullptr) {
-        cout << "Move not entered correctly. Try again:" << endl;
-        move = askUserForMove();
+    shared_ptr<PlayerAction> action;
+    while (action == nullptr) {
+        action = getUserAction();
     }
-    return move;
+    return action;
 }
 
-shared_ptr<Move> HumanPlayer::askUserForMove() const {
+shared_ptr<PlayerAction> HumanPlayer::getUserAction() const {
+    cout << "Enter a move (O for other): ";
     string input;
     getline(cin, input);
-    MoveInputParser parser;
-    return parser.parseMoveInput(input);
+
+    if (input == "O") {
+        return getOther(input);
+    }
+    else {
+        return getMove(input);
+    }
+}
+
+shared_ptr<PlayerAction> HumanPlayer::getOther(string input) const {
+    return selector.selectAction(input);
+}
+
+shared_ptr<Move> HumanPlayer::getMove(string input) const {
+    auto move = parser.parseMoveInput(input);
+    if (move == nullptr) {
+        cout << "Move not entered correctly." << endl;
+    }
+    return move;
 }
 
 PieceType HumanPlayer::getPromotionPiece(const GameState &state, const Move &move) const {

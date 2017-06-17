@@ -1,4 +1,5 @@
 #include <vector>
+#include "Board.h"
 #include "ChessDebug.h"
 #include "GameState.h"
 #include "Move.h"
@@ -21,10 +22,10 @@ const string Queen::getSymbol() const {
     return QUEEN_SYMBOL;
 }
 
-vector<Position> Queen::getSquaresAttacked(const GameState &state, Position start) const {
+vector<Position> Queen::getSquaresAttacked(const Board &board, Position start) const {
     vector<Position> positions;
-    getStraightSquaresAttacked(positions, state, start);
-    getDiagonalSquaresAttacked(positions, state, start);
+    getStraightSquaresAttacked(positions, board, start);
+    getDiagonalSquaresAttacked(positions, board, start);
     return positions;
 }
 

@@ -4,6 +4,7 @@
 #include <vector>
 #include "ChessEnums.h"
 #include "Piece.h"
+class Board;
 class GameState;
 struct Position;
 
@@ -16,11 +17,11 @@ public:
     PieceType getType() const override; 
     const std::string getSymbol() const override;
     std::vector<Move> getAvailableMoves(const GameState &state, Position start) const override;
-    std::vector<Position> getSquaresAttacked(const GameState &state, Position start) const override;
+    std::vector<Position> getSquaresAttacked(const Board &board, Position start) const override;
     void addMoveEffect(const GameState &state, Move &move) const override;
 
 private:
-    std::vector<Position> getAdjacentSquaresAttacked(const GameState &state, Position start) const;
+    std::vector<Position> getAdjacentSquaresAttacked(const Board &board, Position start) const;
     void addAdjacentMoves(std::vector<Move> &moves, const GameState &state, Position start) const;
     void addCastleMoves(std::vector<Move> &moves, const GameState &state, Position start) const;
     void addCastleMove(std::vector<Move> &moves, const GameState &state, Position start, int delta_x) const;

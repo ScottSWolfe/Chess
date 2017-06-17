@@ -2,13 +2,15 @@
 
 #include <memory>
 #include <string>
-#include "BoardPresenter.h"
 #include "GameObserver.h"
-#include "GameOverChecker.h"
 #include "GameState.h"
 #include "GameSubject.h"
 #include "Player.h"
+class BoardPresenter;
+class GameObserver;
+class Move;
 class PlayerAction;
+enum class PieceType;
 
 
 class GameManager : public GameSubject {
@@ -17,6 +19,9 @@ public:
     GameManager();
     void startGame();
     bool makeMove(Move move);
+    bool resign();
+    bool offerDraw();
+    bool claimDraw();
     void registerObserver(GameObserver *observer);
 
 private:
@@ -26,7 +31,6 @@ private:
     std::unique_ptr<const Player> black_player;
     std::vector<GameObserver*> observers;
     std::unique_ptr<BoardPresenter> presenter;
-    GameOverChecker gameOverChecker;
 
     // methods
     void runGameLoop();
@@ -39,7 +43,7 @@ private:
     void addMoveEffect(Move &move) const;
     PieceType askPlayerForPromotionPiece(const Move &move) const;
     void notifyObserversGameStarted() const;
-    void notifyObserversGameEnded(GameEndType end_type) const;
+    void notifyObserversGameEnded() const;
     void notifyObserversTurnStarted() const;
     void notifyObserversTurnEnded() const;
 

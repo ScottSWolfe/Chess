@@ -77,34 +77,34 @@ unique_ptr<Piece> Piece::copyPiece(const Piece *piece) {
 
 vector<Move> Piece::getAvailableMoves(const GameState &state, Position start) const {
     vector<Move> moves;
-    vector<Position> positions = getSquaresAttacked(state, start);
+    vector<Position> positions = getSquaresAttacked(state.getBoard(), start);
     for (Position end : positions) {
         moves.push_back(Move(start, end));
     }
     return moves;
 }
 
-void Piece::getStraightSquaresAttacked(vector<Position> &positions, const GameState &state, Position start) const {
-    getSquaresAttackedInLine(positions, state, start,  1,  0);
-    getSquaresAttackedInLine(positions, state, start, -1,  0);
-    getSquaresAttackedInLine(positions, state, start,  0,  1);
-    getSquaresAttackedInLine(positions, state, start,  0, -1);
+void Piece::getStraightSquaresAttacked(vector<Position> &positions, const Board &board, Position start) const {
+    getSquaresAttackedInLine(positions, board, start,  1,  0);
+    getSquaresAttackedInLine(positions, board, start, -1,  0);
+    getSquaresAttackedInLine(positions, board, start,  0,  1);
+    getSquaresAttackedInLine(positions, board, start,  0, -1);
 }
 
-void Piece::getDiagonalSquaresAttacked(vector<Position> &positions, const GameState &state, Position start) const {
-    getSquaresAttackedInLine(positions, state, start,  1,  1);
-    getSquaresAttackedInLine(positions, state, start,  1, -1);
-    getSquaresAttackedInLine(positions, state, start, -1,  1);
-    getSquaresAttackedInLine(positions, state, start, -1, -1);
+void Piece::getDiagonalSquaresAttacked(vector<Position> &positions, const Board &board, Position start) const {
+    getSquaresAttackedInLine(positions, board, start,  1,  1);
+    getSquaresAttackedInLine(positions, board, start,  1, -1);
+    getSquaresAttackedInLine(positions, board, start, -1,  1);
+    getSquaresAttackedInLine(positions, board, start, -1, -1);
 }
 
-void Piece::getSquaresAttackedInLine(vector<Position> &positions, const GameState &state, Position start, int delta_x, int delta_y) const {
+void Piece::getSquaresAttackedInLine(vector<Position> &positions, const Board &board, Position start, int delta_x, int delta_y) const {
     Position end = start.add(delta_x, delta_y);
-    while (state.inBounds(end) && state.isPiece(end) == false) {
+    while (board.inBounds(end) && board.isPiece(end) == false) {
         positions.push_back(end);
         end = end.add(delta_x, delta_y);
     }
-    if (state.inBounds(end) && state.isOppPieceColor(end, color)) {
+    if (board.inBounds(end) && board.isOppPieceColor(end, color)) {
         positions.push_back(end);
     }
 }

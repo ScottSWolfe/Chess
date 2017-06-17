@@ -6,6 +6,7 @@
 #include <crtdbg.h> 
 #endif
 #include "windows.h"
+#include "Move.h"
 #include "MoveInputParser.h"
 #include "ChessEnums.h"
 #include "Piece.h"

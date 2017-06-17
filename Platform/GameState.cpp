@@ -1,6 +1,7 @@
 #include <memory>
 #include "ChessDebug.h"
 #include "GameState.h"
+#include "Move.h"
 #include "MoveEffect.h"
 #include "Piece.h"
 #include "Position.h"
@@ -11,11 +12,12 @@ using namespace std;
 GameState::GameState(Board board, PieceColor beginning_player) : 
     board(board),
     current_turn(beginning_player),
+    game_over_state(GameEndType::NOT_OVER),
     turns_since_capture_or_pawn_push(0)
 {}
 
 GameState::GameState(const GameState &other)
-    : board(other.board), current_turn(other.current_turn),
+    : board(other.board), current_turn(other.current_turn), game_over_state(other.game_over_state),
     turns_since_capture_or_pawn_push(other.turns_since_capture_or_pawn_push)
 {
     for (Move move : other.move_history) {
@@ -72,7 +74,7 @@ bool GameState::isKingInCheck() const {
 }
 
 bool GameState::isSquareAttacked(Position pos, PieceColor color) const {
-    return board.canPieceAttackSquare(*this, pos, color);
+    return board.canPieceAttackSquare(pos, color);
 }
 
 Position GameState::getKingPosition(PieceColor king_color) const {
@@ -84,6 +86,7 @@ void GameState::makeMove(const Move &move) {
     board.makeMove(move);
     move_history.push_back(move);
     changePlayersTurn();
+    updateGameOverState();
 }
 
 std::unique_ptr<Piece> GameState::removePieceFromSquare(Position pos) {
@@ -156,8 +159,69 @@ PieceColor GameState::getCurrentPlayersTurn() const {
     return current_turn;
 }
 
-int GameState::get50MoveDrawCount() const {
-    return turns_since_capture_or_pawn_push;
+bool GameState::isGameOver() const {
+    if (game_over_state != GameEndType::NOT_OVER) {
+        return true;
+    }
+    return false;
+}
+
+void GameState::updateGameOverState() {
+    if (game_over_state != GameEndType::NOT_OVER) {
+        return;
+    }
+    if (isMate()) {
+        mate();
+    }
+}
+
+bool GameState::isMate() const {
+    return !canCurrentPlayerMakeMove();
+}
+
+bool GameState::have50MovesPassed() const {
+    if (turns_since_capture_or_pawn_push >= 50 * 2) {
+        return true;
+    }
+    return false;
+}
+
+void GameState::mate() {
+    if (isKingInCheck() == false) {
+        game_over_state = GameEndType::STALEMATE;
+    }
+
+    if (current_turn == PieceColor::WHITE) {
+        game_over_state = GameEndType::BLACK_CHECKMATE;
+    }
+    else {
+        game_over_state = GameEndType::WHITE_CHECKMATE;
+    }
+}
+
+void GameState::resignation() {
+    if (current_turn == PieceColor::WHITE) {
+        game_over_state = GameEndType::WHITE_RESIGN;
+    }
+    else {
+        game_over_state = GameEndType::BLACK_RESIGN;
+    }
+}
+
+void GameState::drawByAgreement() {
+    game_over_state = GameEndType::DRAW_AGREEMENT;
+}
+
+void GameState::drawBy50Moves() {
+    game_over_state = GameEndType::DRAW_50_MOVES;
+}
+
+void GameState::drawByRepetition() {
+    game_over_state = GameEndType::DRAW_3_REPITITIONS;
+}
+
+GameEndType GameState::getGameOverState() const {
+    return game_over_state;
 }
 
 void GameState::changePlayersTurn() {

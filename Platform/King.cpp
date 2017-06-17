@@ -31,17 +31,17 @@ vector<Move> King::getAvailableMoves(const GameState &state, Position start) con
     return moves;
 }
 
-vector<Position> King::getSquaresAttacked(const GameState &state, Position start) const {
-    return getAdjacentSquaresAttacked(state, start);
+vector<Position> King::getSquaresAttacked(const Board &board, Position start) const {
+    return getAdjacentSquaresAttacked(board, start);
 }
 
-vector<Position> King::getAdjacentSquaresAttacked(const GameState &state, Position start) const {
+vector<Position> King::getAdjacentSquaresAttacked(const Board &board, Position start) const {
     vector<Position> positions;
     for (int delta_y = -1; delta_y <= 1; delta_y++) {
         for (int delta_x = -1; delta_x <= 1; delta_x++) {
             Position end = start.add(delta_x, delta_y);
-            if (state.inBounds(end) &&
-                (state.isPiece(end) == false || state.isOppPieceColor(end, color)))
+            if (board.inBounds(end) &&
+                (board.isPiece(end) == false || board.isOppPieceColor(end, color)))
             {
                 positions.push_back(end);
             }
@@ -51,7 +51,7 @@ vector<Position> King::getAdjacentSquaresAttacked(const GameState &state, Positi
 }
 
 void King::addAdjacentMoves(vector<Move> &moves, const GameState &state, Position start) const {
-    vector<Position> positions = getAdjacentSquaresAttacked(state, start);
+    vector<Position> positions = getAdjacentSquaresAttacked(state.getBoard(), start);
     for (Position end : positions) {
         moves.push_back(Move(start, end));
     }

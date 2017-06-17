@@ -4,7 +4,6 @@
 #include "ChessEnums.h"
 #include "ConsoleBoardPresenter.h"
 #include "GameManager.h"
-#include "GameObserver.h"
 #include "HumanPlayer.h"
 #include "Move.h"
 #include "MoveValidator.h"
@@ -34,9 +33,8 @@ void GameManager::runGameLoop() {
 }
 
 bool GameManager::isGameOver() const {
-    GameEndType end_type = gameOverChecker.isGameOver(current_state);
-    if (end_type != GameEndType::NOT_OVER) {
-        notifyObserversGameEnded(end_type);
+    if (current_state.isGameOver() == true) {
+        notifyObserversGameEnded();
         return true;
     }
     return false;
@@ -46,7 +44,7 @@ void GameManager::runPlayersTurn() {
     notifyObserversTurnStarted();
     shared_ptr<PlayerAction> action = getPlayerAction();
     while (action->enactAction(*this) == false) {
-        // TODO notify observer that action was illegal
+        // TODO notify observer that action failed
         action = getPlayerAction();
     }
     notifyObserversTurnEnded();
@@ -66,6 +64,19 @@ bool GameManager::makeMove(Move move) {
     }
     current_state.makeMove(move);
     return true;
+}
+
+bool GameManager::resign() {
+    current_state.resignation();
+    return true;
+}
+
+bool GameManager::offerDraw() {
+    return false;
+}
+
+bool GameManager::claimDraw() {
+    return false;
 }
 
 bool GameManager::validateMoveIsSafe(const Move &move) const {
@@ -109,9 +120,9 @@ void GameManager::notifyObserversGameStarted() const {
     }
 }
 
-void GameManager::notifyObserversGameEnded(GameEndType end_type) const {
+void GameManager::notifyObserversGameEnded() const {
     for (auto observer : observers) {
-        observer->gameEnded(current_state, end_type);
+        observer->gameEnded(current_state);
     }
 }
 

@@ -1,5 +1,6 @@
 #include <vector>
 #include "ChessDebug.h"
+#include "Board.h"
 #include "GameState.h"
 #include "Move.h"
 #include "Piece.h"
@@ -22,9 +23,9 @@ const string Rook::getSymbol() const {
     return ROOK_SYMBOL;
 }
 
-vector<Position> Rook::getSquaresAttacked(const GameState &state, Position start) const {
+vector<Position> Rook::getSquaresAttacked(const Board &board, Position start) const {
     vector<Position> positions;
-    getStraightSquaresAttacked(positions, state, start);
+    getStraightSquaresAttacked(positions, board, start);
     return positions;
 }
 

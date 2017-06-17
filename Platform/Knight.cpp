@@ -1,4 +1,5 @@
 #include <vector>
+#include "Board.h"
 #include "ChessDebug.h"
 #include "GameState.h"
 #include "Knight.h"
@@ -21,14 +22,14 @@ const string Knight::getSymbol() const {
     return KNIGHT_SYMBOL;
 }
 
-vector<Position> Knight::getSquaresAttacked(const GameState &state, Position start) const {
+vector<Position> Knight::getSquaresAttacked(const Board &board, Position start) const {
     vector<Position> positions;
     for (int delta_y = -2; delta_y <= 2; delta_y++) {
         for (int delta_x = -2; delta_x <= 2; delta_x++) {
             if (abs(delta_y) + abs(delta_x) == 3) {
                 Position end = start.add(delta_x, delta_y);
-                if (state.inBounds(end) &&
-                   (state.isPiece(end) == false || state.isOppPieceColor(end, color)))
+                if (board.inBounds(end) &&
+                   (board.isPiece(end) == false || board.isOppPieceColor(end, color)))
                 {
                     positions.push_back(end);
                 }

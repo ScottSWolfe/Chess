@@ -31,9 +31,9 @@ public:
     PieceType getPieceType(Position pos) const;
     bool isOppPieceColor(Position pos, PieceColor color) const;
     void setPiece(Position pos, std::unique_ptr<Piece> &piece);
-    bool willKingBeInCheck(GameState &state, const Move &move) const;
+    bool willKingBeInCheck(GameState &state, const Move &move);
     bool isKingInCheck(const GameState &state) const;
-    bool canPieceAttackSquare(const GameState &state, Position pos, PieceColor color) const;
+    bool canPieceAttackSquare(Position pos, PieceColor color) const;
     Position getKingPosition(PieceColor king_color) const;
     int getDimension() const;
 

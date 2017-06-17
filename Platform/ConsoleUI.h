@@ -11,7 +11,7 @@ class ConsoleUI : public GameObserver {
 
 public:
     void gameStarted(const GameState &state) override;
-    void gameEnded(const GameState &state, GameEndType end_type) override;
+    void gameEnded(const GameState &state) override;
     void turnStarted(const GameState &state) override;
     void turnEnded(const GameState &state) override;
 

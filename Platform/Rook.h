@@ -16,7 +16,7 @@ public:
     std::unique_ptr<Piece> getCopy() const override;
     PieceType getType() const override;
     const std::string getSymbol() const override;
-    std::vector<Position> getSquaresAttacked(const GameState &state, Position start) const override;
+    std::vector<Position> getSquaresAttacked(const Board &board, Position start) const override;
     void addMoveEffect(const GameState &state, Move &move) const override;
 
 };

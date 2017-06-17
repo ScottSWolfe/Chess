@@ -12,9 +12,9 @@ void ConsoleUI::gameStarted(const GameState &state) {
     cout << endl;
 }
 
-void ConsoleUI::gameEnded(const GameState &state, GameEndType end_type) {
+void ConsoleUI::gameEnded(const GameState &state) {
     cout << "====  Game Over  ====" << endl;
-    cout << getGameEndMessage(end_type) << endl << endl;
+    cout << getGameEndMessage(state.getGameOverState()) << endl << endl;
 }
 
 void ConsoleUI::turnStarted(const GameState &newState) {

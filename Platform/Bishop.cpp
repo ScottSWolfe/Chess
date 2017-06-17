@@ -21,9 +21,9 @@ const string Bishop::getSymbol() const {
     return BISHOP_SYMBOL;
 }
 
-std::vector<Position> Bishop::getSquaresAttacked(const GameState &state, Position start) const {
+std::vector<Position> Bishop::getSquaresAttacked(const Board &board, Position start) const {
     vector<Position> positions;
-    getDiagonalSquaresAttacked(positions, state, start);
+    getDiagonalSquaresAttacked(positions, board, start);
     return positions;
 }
 

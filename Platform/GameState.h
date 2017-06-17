@@ -4,7 +4,7 @@
 #include <vector>
 #include "ChessEnums.h"
 #include "Board.h"
-#include "Move.h"
+class Move;
 struct Position;
 class GameObserver;
 
@@ -37,15 +37,26 @@ public:
     const Move *getLastMove() const;
     bool canCurrentPlayerMakeMove() const;
     std::vector<Move> getAvailableMoves() const;
-    int get50MoveDrawCount() const;
+    bool isGameOver() const;
+    void resignation();
+    void drawByAgreement();
+    void drawBy50Moves();
+    void drawByRepetition();
+    GameEndType getGameOverState() const;
 
 private:
     Board board;
     PieceColor current_turn;
+    GameEndType game_over_state;
     std::vector<Move> move_history;
     int turns_since_capture_or_pawn_push;
 
     void changePlayersTurn();
     void incrementCaptureAndPawnCounter(const Move &move);
+    void updateGameOverState();
+
+    bool isMate() const;
+    bool have50MovesPassed() const;
+    void mate();
 
 };
