@@ -1,5 +1,6 @@
-#include "EnPassant.h"
 #include "Board.h"
+#include "ChessDebug.h"
+#include "EnPassant.h"
 using namespace std;
 
 

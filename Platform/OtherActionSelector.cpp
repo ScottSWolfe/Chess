@@ -1,30 +1,40 @@
 #include <iostream>
+#include "ChessDebug.h"
+#include "Claim50MoveDraw.h"
 #include "OtherActionSelector.h"
 #include "PlayerAction.h"
 #include "Resignation.h"
 using namespace std;
 
 
+const string OtherActionSelector::resign = "A";
+const string OtherActionSelector::offer_draw = "B";
+const string OtherActionSelector::claim_50_move_draw = "C";
+const string OtherActionSelector::claim_3_repetition_draw = "D";
+const string OtherActionSelector::return_to_move = "E";
+
 shared_ptr<PlayerAction> OtherActionSelector::selectAction(string input) const {
     if (input.empty() || input == "O") {
         input = getInput();
     }
 
-    if (input == "A") {
+    if (input == resign) {
         if (areYouSure() == true) {
             return make_shared<Resignation>();
         }
     }
-    else if (input == "B") {
+    else if (input == offer_draw) {
         return nullptr;
     }
-    else if (input == "C") {
+    else if (input == claim_50_move_draw) {
+        if (areYouSure() == true) {
+            return make_shared<Claim50MoveDraw>();
+        }
+    }
+    else if (input == claim_3_repetition_draw) {
         return nullptr;
     }
-    else if (input == "D") {
-        return nullptr;
-    }
-    else if (input == "E") {
+    else if (input == return_to_move) {
         return nullptr;
     }
     else {

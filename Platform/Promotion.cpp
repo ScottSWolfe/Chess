@@ -1,3 +1,4 @@
+#include "ChessDebug.h"
 #include "Piece.h"
 #include "Promotion.h"
 #include "Board.h"

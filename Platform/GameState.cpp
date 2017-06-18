@@ -209,8 +209,12 @@ void GameState::drawByAgreement() {
     game_over_state = GameEndType::DRAW_AGREEMENT;
 }
 
-void GameState::drawBy50Moves() {
-    game_over_state = GameEndType::DRAW_50_MOVES;
+bool GameState::drawBy50Moves() {
+    if (have50MovesPassed() == true) {
+        game_over_state = GameEndType::DRAW_50_MOVES;
+        return true;
+    }
+    return false;
 }
 
 void GameState::drawByRepetition() {

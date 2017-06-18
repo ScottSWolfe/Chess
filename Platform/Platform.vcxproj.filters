@@ -120,6 +120,9 @@
     <ClCompile Include="OtherActionSelector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Claim50MoveDraw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bishop.h">
@@ -220,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="OtherActionSelector.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Claim50MoveDraw.h">
+      <Filter>Header Files\PlayerAction</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

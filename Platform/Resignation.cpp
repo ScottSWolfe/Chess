@@ -1,3 +1,4 @@
+#include "ChessDebug.h"
 #include "GameManager.h"
 #include "Resignation.h"
 

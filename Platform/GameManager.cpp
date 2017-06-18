@@ -75,7 +75,11 @@ bool GameManager::offerDraw() {
     return false;
 }
 
-bool GameManager::claimDraw() {
+bool GameManager::claim50MoveDraw() {
+    return current_state.drawBy50Moves();
+}
+
+bool GameManager::claim3RepetionDraw() {
     return false;
 }
 

@@ -1,5 +1,6 @@
-#include "Castle.h"
 #include "Board.h"
+#include "Castle.h"
+#include "ChessDebug.h"
 using namespace std;
 
 

@@ -1,7 +1,7 @@
-#include "ChessDebug.h"
 #include "Board.h"
 #include "BoardInitializer.h"
 #include "Bishop.h"
+#include "ChessDebug.h"
 #include "King.h"
 #include "Knight.h"
 #include "Pawn.h"

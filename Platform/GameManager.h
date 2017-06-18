@@ -21,7 +21,8 @@ public:
     bool makeMove(Move move);
     bool resign();
     bool offerDraw();
-    bool claimDraw();
+    bool claim50MoveDraw();
+    bool claim3RepetionDraw();
     void registerObserver(GameObserver *observer);
 
 private:

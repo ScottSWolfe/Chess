@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
-#include "ChessDebug.h"
 #include "Board.h"
+#include "ChessDebug.h"
 #include "GameState.h"
 #include "Move.h"
 #include "Piece.h"

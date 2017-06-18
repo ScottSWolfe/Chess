@@ -1,4 +1,5 @@
 #include <random>
+#include "ChessDebug.h"
 #include "ChessEnums.h"
 #include "GameState.h"
 #include "Move.h"

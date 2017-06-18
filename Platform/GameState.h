@@ -39,7 +39,7 @@ public:
     bool isGameOver() const;
     void resignation();
     void drawByAgreement();
-    void drawBy50Moves();
+    bool drawBy50Moves();
     void drawByRepetition();
     GameEndType getGameOverState() const;
 
