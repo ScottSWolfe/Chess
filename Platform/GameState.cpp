@@ -65,20 +65,17 @@ bool GameState::isMoveAvailable(const Move &move) const {
 }
 
 bool GameState::willKingBeInCheck(const Move &move) const {
-    shared_ptr<GameState> copy_of_state = this->getCopy();
-    return copy_of_state->board.willKingBeInCheck(*copy_of_state, move);
+    auto board_after_move = board.getCopy();
+    board_after_move->makeMove(move);
+    return board_after_move->isKingInCheck(current_turn);
 }
 
 bool GameState::isKingInCheck() const {
-    return board.isKingInCheck(*this);
+    return board.isKingInCheck(current_turn);
 }
 
 bool GameState::isSquareAttacked(Position pos, PieceColor color) const {
     return board.canPieceAttackSquare(pos, color);
-}
-
-Position GameState::getKingPosition(PieceColor king_color) const {
-    return board.getKingPosition(king_color);
 }
 
 void GameState::makeMove(const Move &move) {

@@ -111,15 +111,7 @@ void Board::setPiece(Position pos, std::unique_ptr<Piece> &piece) {
     getSquare(pos).setPiece(piece);
 }
 
-bool Board::willKingBeInCheck(GameState &state, const Move &move) {
-    PieceColor turn_before_move_color = state.getCurrentPlayersTurn();
-    makeMove(move);
-    Position king_position = getKingPosition(turn_before_move_color);
-    return canPieceAttackSquare(king_position, turn_before_move_color);
-}
-
-bool Board::isKingInCheck(const GameState &state) const {
-    PieceColor king_color = state.getCurrentPlayersTurn();
+bool Board::isKingInCheck(PieceColor king_color) const {
     Position king_position = getKingPosition(king_color);
     return canPieceAttackSquare(king_position, king_color);
 }

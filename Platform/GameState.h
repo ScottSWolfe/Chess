@@ -25,7 +25,6 @@ public:
     bool willKingBeInCheck(const Move &move) const;
     bool isKingInCheck() const;
     bool isSquareAttacked(Position pos, PieceColor color) const;
-    Position getKingPosition(PieceColor king_color) const;
     void makeMove(const Move &move);
     std::unique_ptr<Piece> removePieceFromSquare(Position pos);
     void addPieceToSquare(Position pos, std::unique_ptr<Piece> &piece);
