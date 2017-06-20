@@ -31,7 +31,6 @@ private:
     std::unique_ptr<const Player> white_player;
     std::unique_ptr<const Player> black_player;
     std::vector<GameObserver*> observers;
-    std::unique_ptr<BoardPresenter> presenter;
 
     // methods
     void runGameLoop();
@@ -39,6 +38,7 @@ private:
     void runPlayersTurn();
     std::shared_ptr<PlayerAction> getPlayerAction() const;
     const Player *currentPlayer() const;
+    const Player *otherPlayer() const;
     bool validateMoveIsLegal(const Move &move) const;
     bool validateMoveIsSafe(const Move &move) const;
     void addMoveEffect(Move &move) const;

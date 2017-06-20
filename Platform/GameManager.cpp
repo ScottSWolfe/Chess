@@ -12,7 +12,6 @@ using namespace std;
 
 
 GameManager::GameManager() :
-    presenter(new ConsoleBoardPresenter),
     current_state(BoardInitializer::initializeStandardSetup(), PieceColor::WHITE),
     white_player(new HumanPlayer(PieceColor::WHITE)),
     black_player(new HumanPlayer(PieceColor::BLACK))
@@ -72,6 +71,11 @@ bool GameManager::resign() {
 }
 
 bool GameManager::offerDraw() {
+    bool accepted = otherPlayer()->drawOffered(current_state);
+    if (accepted == true) {
+        current_state.drawByAgreement();
+        return true;
+    }
     return false;
 }
 
@@ -111,6 +115,15 @@ const Player *GameManager::currentPlayer() const {
     }
     else {
         return black_player.get();
+    }
+}
+
+const Player *GameManager::otherPlayer() const {
+    if (current_state.getCurrentPlayersTurn() == PieceColor::WHITE) {
+        return black_player.get();
+    }
+    else {
+        return white_player.get();
     }
 }
 

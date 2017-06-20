@@ -1,6 +1,7 @@
 #include <iostream>
 #include "ChessDebug.h"
 #include "Claim50MoveDraw.h"
+#include "DrawOffer.h"
 #include "OtherActionSelector.h"
 #include "PlayerAction.h"
 #include "Resignation.h"
@@ -24,7 +25,9 @@ shared_ptr<PlayerAction> OtherActionSelector::selectAction(string input) const {
         }
     }
     else if (input == offer_draw) {
-        return nullptr;
+        if (areYouSure() == true) {
+            return make_shared<DrawOffer>();
+        }
     }
     else if (input == claim_50_move_draw) {
         if (areYouSure() == true) {

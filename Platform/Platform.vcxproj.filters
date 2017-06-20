@@ -123,6 +123,9 @@
     <ClCompile Include="Claim50MoveDraw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DrawOffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bishop.h">
@@ -225,6 +228,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Claim50MoveDraw.h">
+      <Filter>Header Files\PlayerAction</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawOffer.h">
       <Filter>Header Files\PlayerAction</Filter>
     </ClInclude>
   </ItemGroup>

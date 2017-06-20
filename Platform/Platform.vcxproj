@@ -115,6 +115,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Claim50MoveDraw.cpp" />
+    <ClCompile Include="DrawOffer.cpp" />
     <ClCompile Include="OtherActionSelector.cpp" />
     <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="Board.cpp" />
@@ -145,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Claim50MoveDraw.h" />
+    <ClInclude Include="DrawOffer.h" />
     <ClInclude Include="OtherActionSelector.h" />
     <ClInclude Include="Bishop.h" />
     <ClInclude Include="Board.h" />

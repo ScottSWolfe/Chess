@@ -9,3 +9,7 @@ Player::Player(PieceColor piece_color)
 PieceType Player::getPromotionPiece(const GameState &state, const Move &move) const {
     return PieceType::QUEEN;
 }
+
+bool Player::drawOffered(const GameState &state) const {
+    return false;
+}
