@@ -28,17 +28,13 @@ namespace PlatformTest
 			board.addPieceToSquare(Position(0, 1), rook);
 			Board copy_of_board(board);
 
-			// squares are same colors
-			Assert::IsTrue(board.getSquare(pos00).getColor() ==  copy_of_board.getSquare(pos00).getColor());
-			Assert::IsTrue(board.getSquare(pos01).getColor() == copy_of_board.getSquare(pos01).getColor());
-			Assert::IsTrue(board.getSquare(pos10).getColor() == copy_of_board.getSquare(pos10).getColor());
-			Assert::IsTrue(board.getSquare(pos11).getColor() == copy_of_board.getSquare(pos11).getColor());
-
 			// square with a piece
 			Assert::IsNotNull(copy_of_board.getSquare(pos01).getPiece());
 
-			// square without a piece
+			// squares without a piece
 			Assert::IsNull(copy_of_board.getSquare(pos00).getPiece());
+            Assert::IsNull(copy_of_board.getSquare(pos10).getPiece());
+            Assert::IsNull(copy_of_board.getSquare(pos11).getPiece());
 		}
 
 		TEST_METHOD(copyConstructorMakesCopyAndNotReference)

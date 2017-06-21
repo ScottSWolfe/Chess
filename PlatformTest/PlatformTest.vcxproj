@@ -99,7 +99,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>C:\Users\Scott\git\Chess\Platform\Debug;$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Move.obj;Piece.obj;Rook.obj;Bishop.obj;Knight.obj;King.obj;Queen.obj;Pawn.obj;Board.obj;Square.obj;MoveInputParser.obj;Position.obj;MoveEffect.obj;GameState.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Bishop.obj;Board.obj;BoardInitializer.obj;Castle.obj;Claim50MoveDraw.obj;ConsoleBoardPresenter.obj;ConsoleUI.obj;DrawOffer.obj;EnPassant.obj;GameManager.obj;GameState.obj;HumanPlayer.obj;King.obj;Knight.obj;Main.obj;Move.obj;MoveInputParser.obj;MoveValidator.obj;OtherActionSelector.obj;Pawn.obj;Piece.obj;Player.obj;Position.obj;Promotion.obj;Queen.obj;RandomPlayer.obj;Resignation.obj;Rook.obj;Square.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
