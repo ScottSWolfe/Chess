@@ -23,13 +23,13 @@ namespace PlatformTest
 			Position pos10(1, 0);
 			Position pos11(1, 1);
 
-			Board board(2);
+			Board board(6);
 			unique_ptr<Piece> rook = make_unique<Rook>(PieceColor::BLACK);
 			board.addPieceToSquare(Position(0, 1), rook);
 			Board copy_of_board(board);
 
 			// square with a piece
-			Assert::IsNotNull(copy_of_board.getSquare(pos01).getPiece());
+			Assert::IsNotNull(copy_of_board.getSquare(pos01).getPiece(), L"message", LINE_INFO());
 
 			// squares without a piece
 			Assert::IsNull(copy_of_board.getSquare(pos00).getPiece());
@@ -42,7 +42,7 @@ namespace PlatformTest
 			Position pos00(0, 0);
 			Position pos11(1, 1);
 
-			Board board(4);
+			Board board(6);
 			unique_ptr<Piece> black_rook = make_unique<Rook>(PieceColor::BLACK);
 			board.addPieceToSquare(pos00, black_rook);
 			Board copy_of_board(board);
