@@ -151,9 +151,3 @@ int Board::getIndex(Position pos) const {
 Position Board::getPosition(int index) const {
     return Position(index % dimension, index / dimension);
 }
-
-void Board::throwExceptionIfPieceIsNull(const Piece *piece) const {
-    if (piece == nullptr) {
-        throw invalid_argument("square does not contain a piece");
-    }
-}

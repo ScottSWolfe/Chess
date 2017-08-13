@@ -28,6 +28,7 @@ void Square::setPiece(unique_ptr<Piece> &new_piece) {
 }
 
 unique_ptr<Piece> Square::removePiece() {
+    throwExceptionIfPieceIsNull();
     return std::move(piece);
 }
 

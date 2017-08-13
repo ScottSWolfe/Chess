@@ -41,7 +41,6 @@ private:
 
     int getIndex(Position pos) const;
     Position getPosition(int index) const;
-    void throwExceptionIfPieceIsNull(const Piece *piece) const;
     void applyMoveEffect(const MoveEffect *effect);
     Position getKingPosition(PieceColor king_color) const;
 
