@@ -28,9 +28,7 @@ void Square::setPiece(unique_ptr<Piece> &new_piece) {
 }
 
 unique_ptr<Piece> Square::removePiece() {
-    unique_ptr<Piece> copy_of_piece = piece->getCopy();
-    piece.reset();
-    return copy_of_piece;
+    return std::move(piece);
 }
 
 bool Square::isPiece() const {
