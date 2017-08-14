@@ -14,6 +14,65 @@ namespace PlatformTest
     {
     public:
 
+        TEST_METHOD(Square_constructor_noParamCreatesSquareWithoutPiece)
+        {
+            Square square;
+            Assert::IsFalse(square.isPiece(), L"square constructed with no param should not contain piece", LINE_INFO());
+        }
+
+        TEST_METHOD(Square_constructor_withPieceParamCreatesSquareWithPiece)
+        {
+            auto piece = createPiece();
+            Square square(piece);
+            Assert::IsTrue(square.isPiece(), L"square constructed with piece param should contain piece", LINE_INFO());
+        }
+
+        TEST_METHOD(Square_constructor_withPieceParamTransfersOwnershipToSquare)
+        {
+            auto piece = createPiece();
+            Square square(piece);
+            Assert::IsNull(piece.get(), L"ownership should be transferred to square constructed with piece param", LINE_INFO());
+        }
+
+        TEST_METHOD(Square_constructor_withPieceParamSquareHasPointerToPiece)
+        {
+            auto piece = createPiece();
+            auto piece_address = piece.get();
+            Square square(piece);
+            Assert::IsTrue(piece_address == square.getPiece(), L"square should contain piece that was passed to it", LINE_INFO());
+        }
+
+        TEST_METHOD(Square_copyConstructor_newSquareContainsCopyOfPiece)
+        {
+            Square original_square = createSquareWithPiece();
+            auto original_piece = original_square.getPiece();
+
+            Square copied_square(original_square);
+            auto copied_piece = copied_square.getPiece();
+
+            Assert::IsTrue(original_piece->getColor() == copied_piece->getColor(), L"original and copied pieces should be same color", LINE_INFO());
+            Assert::IsTrue(original_piece->getType() == copied_piece->getType(), L"original and copied pieces should be same type", LINE_INFO());
+        }
+
+        TEST_METHOD(Square_copyConstructor_newSquareIsDeepCopy)
+        {
+            Square original_square = createSquareWithPiece();
+            auto original_piece = original_square.getPiece();
+
+            Square copied_square(original_square);
+            auto copied_piece = copied_square.getPiece();
+
+            Assert::IsTrue(&original_square != &copied_square, L"original and copied squares should not have same address", LINE_INFO());
+            Assert::IsTrue(original_piece != copied_piece, L"original and copied pieces should not have same address", LINE_INFO());
+        }
+
+        TEST_METHOD(Square_copyConstructor_ifNoPieceNewSquareHasNoPiece)
+        {
+            Square original_square = createSquareWithoutPiece();
+            Square copied_square(original_square);
+            Assert::IsFalse(copied_square.isPiece(), L"copied square should not have piece if original did not have piece", LINE_INFO());
+        }
+
         TEST_METHOD(Square_isPiece_returnsTrueIfPiece)
         {
             Square square = createSquareWithPiece();
