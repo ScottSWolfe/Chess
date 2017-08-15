@@ -39,14 +39,14 @@ bool Square::isPiece() const {
     return true;
 }
 
-bool Square::containsKing(PieceColor color) const {
+bool Square::containsKing(PieceColor king_color) const {
     if (piece == nullptr) {
         return false;
     }
     if (piece->getType() != PieceType::KING) {
         return false;
     }
-    if (color != piece->getColor()) {
+    if (king_color != piece->getColor()) {
         return false;
     }
     return true;

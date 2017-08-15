@@ -15,7 +15,7 @@ public:
     const Piece *getPiece() const;
     void setPiece(std::unique_ptr<Piece> &new_piece);
     std::unique_ptr<Piece> removePiece();
-    bool containsKing(PieceColor color) const;
+    bool containsKing(PieceColor king_color) const;
     bool hasPieceMoved() const;
     PieceType getPieceType() const;
 

@@ -139,6 +139,74 @@ namespace PlatformTest
             Assert::IsTrue(piece == removed_piece.get(), L"removePiece() should return the piece", LINE_INFO());
         }
 
+        TEST_METHOD(Square_containsKing_returnsFalseIfNoPiece)
+        {
+            Square square;
+            Assert::IsFalse(square.containsKing(PieceColor::WHITE), L"containsKing() should return false when square contains no piece", LINE_INFO());
+        }
+
+        TEST_METHOD(Square_containsKing_returnsFalseIfAnotherPiece)
+        {
+            auto piece = Piece::createPiece(PieceType::ROOK, PieceColor::WHITE);
+            Square square(piece);
+            Assert::IsFalse(square.containsKing(PieceColor::WHITE), L"containsKing() should return false when square contains a piece that is not a king", LINE_INFO());
+        }
+
+        TEST_METHOD(Square_containsKing_returnsFalseIfKingIsNotGivenColor)
+        {
+            auto piece = Piece::createPiece(PieceType::KING, PieceColor::WHITE);
+            Square square(piece);
+            Assert::IsFalse(square.containsKing(PieceColor::BLACK), L"containsKing() should return false when square's king is incorrect color", LINE_INFO());
+        }
+
+        TEST_METHOD(Square_containsKing_returnsTrueIfKingOfGivenColor)
+        {
+            auto piece = Piece::createPiece(PieceType::KING, PieceColor::WHITE);
+            Square square(piece);
+            Assert::IsTrue(square.containsKing(PieceColor::WHITE), L"containsKing() should return true when square contains a king of given color", LINE_INFO());
+        }
+
+        TEST_METHOD(Square_hasPieceMoved_returnsFalseIfNoPiece)
+        {
+            Square square;
+            Assert::IsFalse(square.hasPieceMoved(), L"hasPieceMoved() should return false when no piece", LINE_INFO());
+        }
+
+        TEST_METHOD(Square_hasPieceMoved_returnsFalseIfPieceHasNotMoved)
+        {
+            auto piece = createPiece();
+            piece->setHasMoved(false);
+            Square square(piece);
+            Assert::IsFalse(square.hasPieceMoved(), L"hasPieceMoved() should return false when piece has not moved", LINE_INFO());
+        }
+
+        TEST_METHOD(Square_hasPieceMoved_returnsFalseIfPieceHasMoved)
+        {
+            auto piece = createPiece();
+            piece->setHasMoved(true);
+            Square square(piece);
+            Assert::IsTrue(square.hasPieceMoved(), L"hasPieceMoved() should return true when piece has moved", LINE_INFO());
+        }
+
+        TEST_METHOD(Square_getPieceType_throwsErrorWhenNoPiece)
+        {
+            Square square;
+            auto function = [square] { square.getPieceType(); };
+            Assert::ExpectException<invalid_argument>(function, L"getPieceType() should throw error when no piece", LINE_INFO());
+        }
+
+        TEST_METHOD(Square_getPieceType_returnsCorrectPieceType)
+        {
+            auto rook = Piece::createPiece(PieceType::ROOK, PieceColor::WHITE);
+            Square rook_square(rook);
+
+            auto queen = Piece::createPiece(PieceType::QUEEN, PieceColor::BLACK);
+            Square queen_square(queen);
+            
+            Assert::IsTrue(rook_square.getPieceType() == PieceType::ROOK, L"getPieceType() returns correct piece type", LINE_INFO());
+            Assert::IsTrue(queen_square.getPieceType() == PieceType::QUEEN, L"getPieceType() returns correct piece type", LINE_INFO());
+        }
+
         
     private:
 
