@@ -13,29 +13,8 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\Pieces">
-      <UniqueIdentifier>{5f586941-c65e-4fad-9d22-937a2b08312c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Pieces">
       <UniqueIdentifier>{dbb777bc-f264-4c80-bcd7-de01535418a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\UI">
-      <UniqueIdentifier>{c6a51eb0-aa42-4ff4-b343-ab8f520718ff}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\State">
-      <UniqueIdentifier>{3ec4994c-d5a2-4b38-bbad-89915b44d326}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Enums">
-      <UniqueIdentifier>{c212e737-391d-424e-a8b6-7ef68494765c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Game">
-      <UniqueIdentifier>{d4a1bbef-6ab0-4724-8eb6-b42e56ee9737}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Player">
-      <UniqueIdentifier>{7d9fa0b1-4c69-4b2a-a609-fc3c15eefe23}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\PlayerAction">
-      <UniqueIdentifier>{002d2a98-4f8a-4321-b16d-cdf4e1bea6de}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -128,110 +107,110 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bishop.h">
-      <Filter>Header Files\Pieces</Filter>
-    </ClInclude>
-    <ClInclude Include="Rook.h">
-      <Filter>Header Files\Pieces</Filter>
-    </ClInclude>
-    <ClInclude Include="King.h">
-      <Filter>Header Files\Pieces</Filter>
-    </ClInclude>
-    <ClInclude Include="Knight.h">
-      <Filter>Header Files\Pieces</Filter>
-    </ClInclude>
-    <ClInclude Include="Pawn.h">
-      <Filter>Header Files\Pieces</Filter>
-    </ClInclude>
-    <ClInclude Include="Piece.h">
-      <Filter>Header Files\Pieces</Filter>
-    </ClInclude>
-    <ClInclude Include="Queen.h">
-      <Filter>Header Files\Pieces</Filter>
-    </ClInclude>
     <ClInclude Include="ChessDebug.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BoardPresenter.h">
-      <Filter>Header Files\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleBoardPresenter.h">
-      <Filter>Header Files\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="Board.h">
-      <Filter>Header Files\State</Filter>
-    </ClInclude>
-    <ClInclude Include="BoardInitializer.h">
-      <Filter>Header Files\State</Filter>
-    </ClInclude>
-    <ClInclude Include="Square.h">
-      <Filter>Header Files\State</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Header Files\State</Filter>
-    </ClInclude>
-    <ClInclude Include="ChessEnums.h">
-      <Filter>Header Files\Enums</Filter>
-    </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveInputParser.h">
-      <Filter>Header Files\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="HumanPlayer.h">
-      <Filter>Header Files\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleUI.h">
-      <Filter>Header Files\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObserver.h">
-      <Filter>Header Files\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="GameSubject.h">
-      <Filter>Header Files\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Move.h">
-      <Filter>Header Files\PlayerAction</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveEffect.h">
-      <Filter>Header Files\PlayerAction</Filter>
-    </ClInclude>
-    <ClInclude Include="Position.h">
-      <Filter>Header Files\State</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveValidator.h">
-      <Filter>Header Files\PlayerAction</Filter>
-    </ClInclude>
-    <ClInclude Include="EnPassant.h">
-      <Filter>Header Files\PlayerAction</Filter>
-    </ClInclude>
-    <ClInclude Include="Castle.h">
-      <Filter>Header Files\PlayerAction</Filter>
-    </ClInclude>
-    <ClInclude Include="Promotion.h">
-      <Filter>Header Files\PlayerAction</Filter>
-    </ClInclude>
-    <ClInclude Include="RandomPlayer.h">
-      <Filter>Header Files\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerAction.h">
-      <Filter>Header Files\PlayerAction</Filter>
-    </ClInclude>
-    <ClInclude Include="Resignation.h">
-      <Filter>Header Files\PlayerAction</Filter>
     </ClInclude>
     <ClInclude Include="OtherActionSelector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ChessEnums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameSubject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bishop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="King.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Knight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Pawn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Piece.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Queen.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Rook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HumanPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Castle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Claim50MoveDraw.h">
-      <Filter>Header Files\PlayerAction</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DrawOffer.h">
-      <Filter>Header Files\PlayerAction</Filter>
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnPassant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Move.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveValidator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerAction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Promotion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Resignation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardInitializer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Position.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Square.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardPresenter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleBoardPresenter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConsoleUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObserver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveInputParser.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
