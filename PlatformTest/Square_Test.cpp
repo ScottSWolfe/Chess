@@ -192,7 +192,7 @@ namespace PlatformTest
         {
             Square square;
             auto function = [square] { square.getPieceType(); };
-            Assert::ExpectException<invalid_argument>(function, L"getPieceType() should throw error when no piece", LINE_INFO());
+            Assert::ExpectException<runtime_error>(function, L"getPieceType() should throw error when no piece", LINE_INFO());
         }
 
         TEST_METHOD(Square_getPieceType_returnsCorrectPieceType)

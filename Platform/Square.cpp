@@ -70,6 +70,6 @@ PieceType Square::getPieceType() const {
 
 void Square::throwExceptionIfPieceIsNull() const {
     if (piece == nullptr) {
-        throw invalid_argument("square does not contain a piece");
+        throw runtime_error("square does not contain a piece");
     }
 }
