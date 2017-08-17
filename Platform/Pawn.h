@@ -9,6 +9,8 @@ class GameState;
 class Move;
 struct Position;
 
+namespace chess {
+
 
 class Pawn : public Piece {
 
@@ -37,3 +39,6 @@ private:
     int promotionRow(int dimension) const;
 
 };
+
+
+}

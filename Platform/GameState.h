@@ -8,6 +8,8 @@ class Move;
 struct Position;
 class GameObserver;
 
+namespace chess {
+
 
 class GameState {
 
@@ -59,3 +61,6 @@ private:
     void mate();
 
 };
+
+
+}

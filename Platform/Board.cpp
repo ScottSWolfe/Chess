@@ -8,6 +8,8 @@
 #include "Position.h"
 using namespace std;
 
+namespace chess {
+
 
 Board::Board(int board_dimension)
     : dimension(board_dimension)
@@ -150,4 +152,7 @@ int Board::getIndex(Position pos) const {
 
 Position Board::getPosition(int index) const {
     return Position(index % dimension, index / dimension);
+}
+
+
 }

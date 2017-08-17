@@ -7,6 +7,8 @@
 class Board;
 enum class MoveEffectType;
 
+namespace chess {
+
 
 class Promotion : public MoveEffect {
 
@@ -23,3 +25,6 @@ private:
     PieceType piece_type;
 
 };
+
+
+}

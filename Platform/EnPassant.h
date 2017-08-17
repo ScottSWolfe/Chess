@@ -6,6 +6,8 @@
 class Board;
 enum class MoveEffectType;
 
+namespace chess {
+
 
 class EnPassant : public MoveEffect {
 
@@ -20,3 +22,6 @@ private:
     Position remove_position;
 
 };
+
+
+}

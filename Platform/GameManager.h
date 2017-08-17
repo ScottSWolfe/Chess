@@ -12,6 +12,8 @@ class Move;
 class PlayerAction;
 enum class PieceType;
 
+namespace chess {
+
 
 class GameManager : public GameSubject {
     
@@ -49,3 +51,6 @@ private:
     void notifyObserversTurnEnded() const;
 
 };
+
+
+}

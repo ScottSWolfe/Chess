@@ -6,6 +6,8 @@
 class Board;
 enum class MoveEffectType;
 
+namespace chess {
+
 
 class Castle : public MoveEffect {
 
@@ -21,3 +23,6 @@ private:
     Position rook_end;
 
 };
+
+
+}

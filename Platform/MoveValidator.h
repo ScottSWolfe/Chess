@@ -4,6 +4,8 @@
 #include "Move.h"
 struct Position;
 
+namespace chess {
+
 
 class MoveValidator {
 
@@ -24,3 +26,6 @@ private:
     bool willKingBeInCheck() const;
 
 };
+
+
+}

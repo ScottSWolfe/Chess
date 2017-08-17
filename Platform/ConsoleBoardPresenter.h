@@ -5,6 +5,8 @@
 class Board;
 struct Position;
 
+namespace chess {
+
 
 enum class ConsoleColor { BLACK = 0x0, BLUE = 0x1, RED = 0x4, YELLOW = 0xE, WHITE = 0xF };
 
@@ -35,3 +37,6 @@ private:
     const ConsoleColor BORDER_BACKGROUND = ConsoleColor::WHITE;
     const ConsoleColor BORDER_TEXT = ConsoleColor::BLACK;
 };
+
+
+}

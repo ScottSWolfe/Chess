@@ -10,6 +10,8 @@ class MoveEffect;
 class Piece;
 struct Position;
 
+namespace chess {
+
 
 class Board {
 
@@ -45,3 +47,6 @@ private:
     Position getKingPosition(PieceColor king_color) const;
 
 };
+
+
+}

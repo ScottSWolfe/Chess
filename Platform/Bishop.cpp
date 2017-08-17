@@ -7,6 +7,9 @@
 using namespace std;
 
 
+namespace chess {
+
+
 Bishop::Bishop(PieceColor color) : Piece(color) {}
 
 std::unique_ptr<Piece> Bishop::getCopy() const {
@@ -29,4 +32,7 @@ std::vector<Position> Bishop::getSquaresAttacked(const Board &board, Position st
 
 void Bishop::addMoveEffect(const GameState &state, Move &move) const {
     return;
+}
+
+
 }

@@ -8,6 +8,8 @@ class Board;
 class GameState;
 struct Position;
 
+namespace chess {
+
 
 class Bishop : public Piece {
 
@@ -20,3 +22,6 @@ public:
     void addMoveEffect(const GameState &state, Move &move) const override;
 
 };
+
+
+}

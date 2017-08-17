@@ -4,6 +4,8 @@
 #include "ChessEnums.h"
 class Board;
 
+namespace chess {
+
 
 class BoardInitializer {
 
@@ -16,3 +18,6 @@ private:
     static void addStandardRowOfPieces(Board &board, int row, PieceColor color);
 
 };
+
+
+}

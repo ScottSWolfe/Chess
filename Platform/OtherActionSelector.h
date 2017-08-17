@@ -5,6 +5,8 @@
 #include "MoveInputParser.h"
 class PlayerAction;
 
+namespace chess {
+
 
 class OtherActionSelector {
 
@@ -23,3 +25,6 @@ private:
     static const std::string return_to_move;
     
 };
+
+
+}

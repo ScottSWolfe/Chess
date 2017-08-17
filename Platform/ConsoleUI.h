@@ -6,6 +6,8 @@
 enum class GameEndType;
 class GameState;
 
+namespace chess {
+
 
 class ConsoleUI : public GameObserver {
 
@@ -21,3 +23,7 @@ private:
     std::string currentTurnToString(const GameState &newState) const;
 
 };
+
+
+
+}

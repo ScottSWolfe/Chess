@@ -8,6 +8,8 @@ class Board;
 class GameState;
 struct Position;
 
+namespace chess {
+
 
 class King : public Piece {
 
@@ -31,3 +33,6 @@ private:
     int castleDirection(int start, int end) const;
 
 };
+
+
+}

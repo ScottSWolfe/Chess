@@ -7,6 +7,8 @@
 class GameManager;
 enum class PieceType;
 
+namespace chess {
+
 
 class Move : public PlayerAction {
 
@@ -31,3 +33,6 @@ private:
     std::unique_ptr<MoveEffect> effect;
 
 };
+
+
+}

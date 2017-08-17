@@ -4,6 +4,8 @@
 class Board;
 struct Position;
 
+namespace chess {
+
 
 enum class MoveEffectType { EN_PASSANT, PROMOTION, CASTLE };
 
@@ -16,3 +18,6 @@ public:
     virtual bool operator==(const MoveEffect &other) const = 0;
 
 };
+
+
+}

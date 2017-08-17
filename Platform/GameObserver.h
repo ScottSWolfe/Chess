@@ -2,6 +2,9 @@
 
 class GameState;
 
+namespace chess {
+
+
 class GameObserver {
 
 public:
@@ -11,3 +14,6 @@ public:
     virtual void turnEnded(const GameState &state) = 0;
 
 };
+
+
+}

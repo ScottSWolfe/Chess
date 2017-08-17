@@ -4,6 +4,8 @@
 #include "ChessEnums.h"
 #include "Piece.h"
 
+namespace chess {
+
 
 class Square {
 
@@ -25,3 +27,6 @@ private:
     void throwExceptionIfPieceIsNull() const;
 
 };
+
+
+}

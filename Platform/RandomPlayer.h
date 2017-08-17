@@ -4,6 +4,8 @@
 #include <vector>
 #include "Player.h"
 
+namespace chess {
+
 
 class RandomPlayer : public Player {
     
@@ -17,3 +19,6 @@ private:
     int randomInteger(int max_int) const;
 
 };
+
+
+}

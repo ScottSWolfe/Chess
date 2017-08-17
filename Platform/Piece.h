@@ -9,6 +9,8 @@ class GameState;
 class Move;
 struct Position;
 
+namespace chess {
+
 
 class Piece {
 
@@ -46,3 +48,6 @@ protected:
     void getSquaresAttackedInLine(std::vector<Position> &positions, const Board &board, Position start, int delta_x, int delta_y) const;
 
 };
+
+
+}

@@ -9,6 +9,8 @@
 class Board;
 class Move;
 
+namespace chess {
+
 
 class HumanPlayer : public Player {
 
@@ -28,3 +30,6 @@ private:
     OtherActionSelector selector;
 
 };
+
+
+}

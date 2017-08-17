@@ -6,6 +6,8 @@
 class Move;
 struct Position;
 
+namespace chess {
+
 
 class MoveInputParser {
 
@@ -23,3 +25,6 @@ private:
     char uppercase(char c) const;
 
 };
+
+
+}

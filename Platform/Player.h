@@ -7,6 +7,8 @@ class GameState;
 class PlayerAction;
 class Move;
 
+namespace chess {
+
 
 class Player {
 
@@ -20,3 +22,6 @@ protected:
     const PieceColor color;
 
 };
+
+
+}
