@@ -1,10 +1,11 @@
 #pragma once
 
 #include <memory>
-class Board;
-struct Position;
 
 namespace chess {
+
+class Board;
+struct Position;
 
 
 enum class MoveEffectType { EN_PASSANT, PROMOTION, CASTLE };

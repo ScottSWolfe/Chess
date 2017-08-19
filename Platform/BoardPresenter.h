@@ -1,8 +1,8 @@
 #pragma once
 
-class Board;
-
 namespace chess {
+
+class Board;
 
 
 class BoardPresenter {

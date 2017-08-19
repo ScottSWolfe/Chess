@@ -2,9 +2,10 @@
 
 #include "GameState.h"
 #include "Move.h"
-struct Position;
 
 namespace chess {
+
+struct Position;
 
 
 class MoveValidator {

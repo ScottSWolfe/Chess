@@ -4,10 +4,11 @@
 #include "PlayerAction.h"
 #include "Position.h"
 #include "MoveEffect.h"
-class GameManager;
-enum class PieceType;
 
 namespace chess {
+
+class GameManager;
+enum class PieceType;
 
 
 class Move : public PlayerAction {

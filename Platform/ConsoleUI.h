@@ -3,10 +3,11 @@
 #include <string>
 #include "ConsoleBoardPresenter.h"
 #include "GameObserver.h"
-enum class GameEndType;
-class GameState;
 
 namespace chess {
+
+enum class GameEndType;
+class GameState;
 
 
 class ConsoleUI : public GameObserver {

@@ -1,9 +1,10 @@
 #pragma once
 
 #include "PlayerAction.h"
-class GameManager;
 
 namespace chess {
+
+class GameManager;
 
 
 class Resignation : public PlayerAction {

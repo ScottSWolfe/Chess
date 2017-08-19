@@ -3,9 +3,10 @@
 #include <memory>
 #include <string>
 #include "MoveInputParser.h"
-class PlayerAction;
 
 namespace chess {
+
+class PlayerAction;
 
 
 class OtherActionSelector {

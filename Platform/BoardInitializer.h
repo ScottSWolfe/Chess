@@ -2,9 +2,10 @@
 
 #include <memory>
 #include "ChessEnums.h"
-class Board;
 
 namespace chess {
+
+class Board;
 
 
 class BoardInitializer {

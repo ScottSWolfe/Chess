@@ -5,12 +5,13 @@
 #include <vector>
 #include "ChessEnums.h"
 #include "Square.h"
+
+namespace chess {
+
 class GameState;
 class MoveEffect;
 class Piece;
 struct Position;
-
-namespace chess {
 
 
 class Board {

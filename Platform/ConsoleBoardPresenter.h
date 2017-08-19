@@ -2,10 +2,11 @@
 #include <string>
 #include "BoardPresenter.h"
 #include "ChessEnums.h"
-class Board;
-struct Position;
 
 namespace chess {
+
+class Board;
+struct Position;
 
 
 enum class ConsoleColor { BLACK = 0x0, BLUE = 0x1, RED = 0x4, YELLOW = 0xE, WHITE = 0xF };

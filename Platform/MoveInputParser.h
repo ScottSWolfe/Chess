@@ -3,10 +3,11 @@
 #include <memory>
 #include <vector>
 #include <string>
-class Move;
-struct Position;
 
 namespace chess {
+
+class Move;
+struct Position;
 
 
 class MoveInputParser {

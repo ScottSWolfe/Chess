@@ -2,13 +2,14 @@
 
 #include <memory>
 #include <vector>
-#include "ChessEnums.h"
 #include "Board.h"
-class Move;
-struct Position;
-class GameObserver;
+#include "ChessEnums.h"
+#include "Move.h"
 
 namespace chess {
+
+struct Position;
+class GameObserver;
 
 
 class GameState {

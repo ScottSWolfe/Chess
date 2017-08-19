@@ -4,10 +4,11 @@
 #include "ChessEnums.h"
 #include "MoveEffect.h"
 #include "Position.h"
-class Board;
-enum class MoveEffectType;
 
 namespace chess {
+
+class Board;
+enum class MoveEffectType;
 
 
 class Promotion : public MoveEffect {

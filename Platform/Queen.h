@@ -5,11 +5,12 @@
 #include "Board.h"
 #include "ChessEnums.h"
 #include "Piece.h"
+
+namespace chess {
+
 class GameState;
 class Move;
 struct Position;
-
-namespace chess {
 
 
 class Queen : public Piece {

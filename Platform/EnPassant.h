@@ -3,10 +3,11 @@
 #include <memory>
 #include "MoveEffect.h"
 #include "Position.h"
-class Board;
-enum class MoveEffectType;
 
 namespace chess {
+
+class Board;
+enum class MoveEffectType;
 
 
 class EnPassant : public MoveEffect {

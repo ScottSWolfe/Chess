@@ -1,8 +1,9 @@
 #pragma once
 
-class GameManager;
 
 namespace chess {
+
+class GameManager;
 
 
 class PlayerAction {

@@ -6,13 +6,14 @@
 #include "GameState.h"
 #include "GameSubject.h"
 #include "Player.h"
+
+namespace chess {
+
 class BoardPresenter;
 class GameObserver;
 class Move;
 class PlayerAction;
 enum class PieceType;
-
-namespace chess {
 
 
 class GameManager : public GameSubject {

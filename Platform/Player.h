@@ -2,12 +2,13 @@
 
 #include <memory>
 #include "ChessEnums.h"
+
+namespace chess {
+
 class Board;
 class GameState;
 class PlayerAction;
 class Move;
-
-namespace chess {
 
 
 class Player {

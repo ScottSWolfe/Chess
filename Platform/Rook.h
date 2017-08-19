@@ -4,12 +4,12 @@
 #include <vector>
 #include "ChessEnums.h"
 #include "Piece.h"
+
+namespace chess {
+
 class GameState;
 class Move;
 struct Position;
-
-
-namespace chess {
 
 
 class Rook : public Piece {

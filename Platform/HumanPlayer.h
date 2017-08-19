@@ -6,10 +6,11 @@
 #include "MoveInputParser.h"
 #include "OtherActionSelector.h"
 #include "Player.h"
-class Board;
-class Move;
 
 namespace chess {
+
+class Board;
+class Move;
 
 
 class HumanPlayer : public Player {

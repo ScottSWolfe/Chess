@@ -1,8 +1,8 @@
 #pragma once
 
-class GameState;
-
 namespace chess {
+
+class GameState;
 
 
 class GameObserver {

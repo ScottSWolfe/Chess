@@ -8,23 +8,18 @@
 #include "GameManager.h"
 #include "ConsoleUI.h"
 
-namespace chess {
-
 
 int main() {
     #ifdef _DEBUG
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     #endif
 
-    GameManager manager;
-    ConsoleUI ui;
+    chess::GameManager manager;
+    chess::ConsoleUI ui;
     manager.registerObserver(&ui);
     manager.startGame();
 
     system("pause");
 
     return 0;
-}
-
-
 }
