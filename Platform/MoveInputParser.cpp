@@ -7,6 +7,8 @@
 #include "Position.h"
 using namespace std;
 
+namespace chess {
+
 
 shared_ptr<Move> MoveInputParser::parseMoveInput(string input) const {
     shared_ptr<Move> move(nullptr);
@@ -135,4 +137,7 @@ char MoveInputParser::uppercase(char c) const {
         c -= 32;
     }
     return c;
+}
+
+
 }

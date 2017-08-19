@@ -8,6 +8,8 @@
 #include "GameObserver.h"
 using namespace std;
 
+namespace chess {
+
 
 GameState::GameState(Board board, PieceColor beginning_player) : 
     board(board),
@@ -251,4 +253,7 @@ void GameState::incrementCaptureAndPawnCounter(const Move &move) {
     }
 
     turns_since_capture_or_pawn_push++;
+}
+
+
 }

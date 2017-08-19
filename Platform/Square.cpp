@@ -6,6 +6,8 @@
 #include "Square.h"
 using namespace std;
 
+namespace chess {
+
 
 Square::Square()
     : piece(nullptr)
@@ -72,4 +74,7 @@ void Square::throwExceptionIfPieceIsNull() const {
     if (piece == nullptr) {
         throw runtime_error("square does not contain a piece");
     }
+}
+
+
 }

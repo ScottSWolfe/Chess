@@ -7,6 +7,8 @@
 #include "Queen.h"
 using namespace std;
 
+namespace chess {
+
 
 Queen::Queen(PieceColor color) : Piece(color) {}
 
@@ -31,4 +33,7 @@ vector<Position> Queen::getSquaresAttacked(const Board &board, Position start) c
 
 void Queen::addMoveEffect(const GameState &state, Move &move) const {
     return;
+}
+
+
 }

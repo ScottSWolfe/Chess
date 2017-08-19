@@ -8,6 +8,8 @@
 #include "Position.h"
 using namespace std;
 
+namespace chess {
+
 
 HumanPlayer::HumanPlayer(PieceColor color)
     : Player(color)
@@ -80,4 +82,7 @@ PieceType HumanPlayer::parsePromotionPiece(string input) const {
     default:
         return getPromotionPiece();
     }
+}
+
+
 }

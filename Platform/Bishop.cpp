@@ -6,7 +6,6 @@
 #include "Position.h"
 using namespace std;
 
-
 namespace chess {
 
 

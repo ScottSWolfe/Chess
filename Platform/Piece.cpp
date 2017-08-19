@@ -15,6 +15,8 @@
 #include "Rook.h"
 using namespace std;
 
+namespace chess {
+
 
 const std::string Piece::PAWN_SYMBOL = "p";
 const std::string Piece::ROOK_SYMBOL = "R";
@@ -133,4 +135,7 @@ std::unique_ptr<Piece> Piece::createPiece(PieceType type, PieceColor color) {
     default:
         throw invalid_argument("invalid PieceType");
     }
+}
+
+
 }

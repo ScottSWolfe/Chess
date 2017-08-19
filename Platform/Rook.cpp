@@ -8,6 +8,8 @@
 #include "Rook.h"
 using namespace std;
 
+namespace chess {
+
 
 Rook::Rook(PieceColor color) : Piece(color) {}
 
@@ -31,4 +33,7 @@ vector<Position> Rook::getSquaresAttacked(const Board &board, Position start) co
 
 void Rook::addMoveEffect(const GameState &state, Move &move) const {
     return;
+}
+
+
 }

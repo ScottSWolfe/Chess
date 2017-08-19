@@ -8,6 +8,8 @@
 #include "RandomPlayer.h"
 using namespace std;
 
+namespace chess {
+
 
 RandomPlayer::RandomPlayer(PieceColor color)
     : Player(color)
@@ -52,4 +54,7 @@ int RandomPlayer::randomInteger(int max_int) const {
     std::default_random_engine generator;
     std::uniform_int_distribution<int> distribution(0, max_int);
     return distribution(generator);
+}
+
+
 }

@@ -4,6 +4,8 @@
 #include "Board.h"
 using namespace std;
 
+namespace chess {
+
 
 Promotion::Promotion(Position promotion_position, PieceType piece_type)
     : promotion_position(promotion_position), piece_type(piece_type)
@@ -38,4 +40,7 @@ MoveEffectType Promotion::getType() const {
 
 void Promotion::setPromotionPiece(PieceType type) {
     piece_type = type;
+}
+
+
 }

@@ -3,6 +3,8 @@
 #include "EnPassant.h"
 using namespace std;
 
+namespace chess {
+
 
 EnPassant::EnPassant(Position remove_position)
     : remove_position(remove_position)
@@ -31,4 +33,7 @@ void EnPassant::applyEffect(Board &board) const {
 
 MoveEffectType EnPassant::getType() const {
     return MoveEffectType::EN_PASSANT;
+}
+
+
 }

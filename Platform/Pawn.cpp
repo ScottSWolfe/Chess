@@ -9,6 +9,8 @@
 #include "Promotion.h"
 using namespace std;
 
+namespace chess {
+
 
 Pawn::Pawn(PieceColor color)
     : Piece(color)
@@ -169,4 +171,7 @@ int Pawn::promotionRow(int dimension) const {
         return 0;
     }
     return dimension - 1;
+}
+
+
 }

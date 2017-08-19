@@ -10,6 +10,8 @@
 #include "RandomPlayer.h"
 using namespace std;
 
+namespace chess {
+
 
 GameManager::GameManager() :
     current_state(BoardInitializer::initializeStandardSetup(), PieceColor::WHITE),
@@ -153,4 +155,7 @@ void GameManager::notifyObserversTurnEnded() const {
     for (auto observer : observers) {
         observer->turnEnded(current_state);
     }
+}
+
+
 }

@@ -1,6 +1,8 @@
 #include "ChessDebug.h"
 #include "Position.h"
 
+namespace chess {
+
 
 Position::Position()
     : x(-1), y(-1)
@@ -39,4 +41,7 @@ bool Position::empty() const {
         return true;
     }
     return false;
+}
+
+
 }

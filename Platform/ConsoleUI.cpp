@@ -5,6 +5,8 @@
 #include "GameState.h"
 using namespace std;
 
+namespace chess {
+
 
 void ConsoleUI::gameStarted(const GameState &state) {
     cout << "====  Game Started  ====" << endl << endl;
@@ -64,4 +66,7 @@ string ConsoleUI::getGameEndMessage(GameEndType end_type) const {
     default:
         throw invalid_argument("invalid GameEndType");
     }
+}
+
+
 }

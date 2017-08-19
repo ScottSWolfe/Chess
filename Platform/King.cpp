@@ -7,6 +7,8 @@
 #include "Position.h"
 using namespace std;
 
+namespace chess {
+
 
 King::King(PieceColor color)
     : Piece(color)
@@ -146,4 +148,7 @@ int King::castleDirection(int start, int end) const {
         return -1;
     }
     return 0;
+}
+
+
 }

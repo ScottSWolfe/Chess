@@ -3,6 +3,8 @@
 #include "ChessDebug.h"
 using namespace std;
 
+namespace chess {
+
 
 Castle::Castle(Position rook_start, Position rook_end)
     : rook_start(rook_start), rook_end(rook_end)
@@ -32,4 +34,7 @@ void Castle::applyEffect(Board &board) const {
 
 MoveEffectType Castle::getType() const {
     return MoveEffectType::CASTLE;
+}
+
+
 }

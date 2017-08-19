@@ -11,6 +11,8 @@
 #include "Rook.h"
 using namespace std;
 
+namespace chess {
+
 
 Board BoardInitializer::initializeStandardSetup() {
     Board board(8);
@@ -52,4 +54,7 @@ void BoardInitializer::addStandardRowOfPieces(Board &board, int row, PieceColor 
     board.addPieceToSquare(Position(5, row), bishop_b);
     board.addPieceToSquare(Position(3, row), queen);
     board.addPieceToSquare(Position(4, row), king);
+}
+
+
 }

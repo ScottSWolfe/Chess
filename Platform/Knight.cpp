@@ -7,6 +7,8 @@
 #include "Position.h"
 using namespace std;
 
+namespace chess {
+
 
 Knight::Knight(PieceColor color) : Piece(color) {}
 
@@ -41,4 +43,7 @@ vector<Position> Knight::getSquaresAttacked(const Board &board, Position start) 
 
 void Knight::addMoveEffect(const GameState &state, Move &move) const {
     return;
+}
+
+
 }

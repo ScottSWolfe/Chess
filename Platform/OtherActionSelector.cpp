@@ -7,6 +7,8 @@
 #include "Resignation.h"
 using namespace std;
 
+namespace chess {
+
 
 const string OtherActionSelector::resign = "A";
 const string OtherActionSelector::offer_draw = "B";
@@ -76,4 +78,7 @@ void OtherActionSelector::printOptions() const {
     cout << "C. Claim 50 Move Draw" << endl;
     cout << "D. Claim 3 Repetition Draw" << endl;
     cout << "E. Return to Make Move" << endl;
+}
+
+
 }

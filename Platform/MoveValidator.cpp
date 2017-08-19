@@ -4,6 +4,8 @@
 #include "Rook.h"
 #include "Position.h"
 
+namespace chess {
+
 
 MoveValidator::MoveValidator(const GameState &state, const Move &move)
     : state(state), move(move)
@@ -84,4 +86,7 @@ bool MoveValidator::isAvailableMove() const {
 
 bool MoveValidator::willKingBeInCheck() const {
     return state.willKingBeInCheck(move);
+}
+
+
 }

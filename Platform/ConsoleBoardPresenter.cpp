@@ -9,6 +9,8 @@
 #include "windows.h"
 using namespace std;
 
+namespace chess {
+
 
 void ConsoleBoardPresenter::displayBoard(const Board &board) const {
     int dimension = board.getDimension();
@@ -130,4 +132,7 @@ string ConsoleBoardPresenter::borderSpacing(int dimension) const {
         return "    ";
     }
     return "   ";
+}
+
+
 }

@@ -7,6 +7,8 @@
 #include "Promotion.h"
 using namespace std;
 
+namespace chess {
+
 
 Move::Move(Position start_coord, Position end_coord)
     : start(start_coord), end(end_coord), effect(nullptr)
@@ -90,4 +92,7 @@ unique_ptr<MoveEffect> Move::getCopyOfEffect() const {
         return nullptr;
     }
     return effect->getCopy();
+}
+
+
 }
