@@ -11,6 +11,8 @@
 #include "ChessEnums.h"
 using namespace std;
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using namespace chess;
+
 
 namespace PlatformTest
 {

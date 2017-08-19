@@ -3,8 +3,9 @@
 #include "Piece.h"
 #include "Rook.h"
 #include "ChessEnums.h"
-
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
+using namespace chess;
+
 
 namespace PlatformTest
 {		
