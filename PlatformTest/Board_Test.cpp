@@ -6,7 +6,6 @@
 #include "Rook.h"
 #include "ChessEnums.h"
 #include "Position.h"
-using namespace std;
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace chess;
 
@@ -25,7 +24,7 @@ namespace PlatformTest
 			Position pos11(1, 1);
 
 			Board board(6);
-			unique_ptr<Piece> rook = make_unique<Rook>(PieceColor::BLACK);
+            std::unique_ptr<Piece> rook = std::make_unique<Rook>(PieceColor::BLACK);
 			board.addPieceToSquare(Position(0, 1), rook);
 			Board copy_of_board(board);
 
@@ -44,11 +43,11 @@ namespace PlatformTest
 			Position pos11(1, 1);
 
 			Board board(6);
-			unique_ptr<Piece> black_rook = make_unique<Rook>(PieceColor::BLACK);
+			std::unique_ptr<Piece> black_rook = std::make_unique<Rook>(PieceColor::BLACK);
 			board.addPieceToSquare(pos00, black_rook);
 			Board copy_of_board(board);
 
-			unique_ptr<Piece> white_rook = make_unique<Rook>(PieceColor::WHITE);
+			std::unique_ptr<Piece> white_rook = std::make_unique<Rook>(PieceColor::WHITE);
 			copy_of_board.addPieceToSquare(pos11, white_rook);
 
 			// square without white rook

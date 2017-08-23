@@ -4,7 +4,6 @@
 #include "ChessEnums.h"
 #include "Piece.h"
 #include "Square.h"
-using namespace std;
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace chess;
 
@@ -193,7 +192,7 @@ namespace PlatformTest
         {
             Square square;
             auto function = [square] { square.getPieceType(); };
-            Assert::ExpectException<runtime_error>(function, L"getPieceType() should throw error when no piece", LINE_INFO());
+            Assert::ExpectException<std::runtime_error>(function, L"getPieceType() should throw error when no piece", LINE_INFO());
         }
 
         TEST_METHOD(Square_getPieceType_returnsCorrectPieceType)
