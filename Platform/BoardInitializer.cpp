@@ -1,14 +1,8 @@
 #include "Board.h"
 #include "BoardInitializer.h"
-#include "Bishop.h"
 #include "ChessDebug.h"
-#include "King.h"
-#include "Knight.h"
-#include "Pawn.h"
 #include "Piece.h"
 #include "Position.h"
-#include "Queen.h"
-#include "Rook.h"
 using namespace std;
 
 namespace chess {
@@ -30,21 +24,21 @@ void BoardInitializer::addStandardPieces(Board &board) {
 void BoardInitializer::addRowOfPawns(Board &board, int row, PieceColor color) {
     int dimension = board.getDimension();
     for (int i = 0; i < dimension; ++i) {
-        unique_ptr<Piece> pawn = make_unique<Pawn>(color);
+        auto pawn = Piece::createPiece(PieceType::PAWN, color);
         Position pos(i, row);
         board.addPieceToSquare(pos, pawn);
     }
 }
 
 void BoardInitializer::addStandardRowOfPieces(Board &board, int row, PieceColor color) {
-    unique_ptr<Piece> rook_a = make_unique<Rook>(color);
-    unique_ptr<Piece> rook_b = make_unique<Rook>(color);
-    unique_ptr<Piece> knight_a = make_unique<Knight>(color);
-    unique_ptr<Piece> knight_b = make_unique<Knight>(color);
-    unique_ptr<Piece> bishop_a = make_unique<Bishop>(color);
-    unique_ptr<Piece> bishop_b = make_unique<Bishop>(color);
-    unique_ptr<Piece> queen = make_unique<Queen>(color);
-    unique_ptr<Piece> king = make_unique<King>(color);
+    auto rook_a = Piece::createPiece(PieceType::ROOK, color);
+    auto rook_b = Piece::createPiece(PieceType::ROOK, color);
+    auto knight_a = Piece::createPiece(PieceType::KNIGHT, color);
+    auto knight_b = Piece::createPiece(PieceType::KNIGHT, color);
+    auto bishop_a = Piece::createPiece(PieceType::BISHOP, color);
+    auto bishop_b = Piece::createPiece(PieceType::BISHOP, color);
+    auto queen = Piece::createPiece(PieceType::QUEEN, color);
+    auto king = Piece::createPiece(PieceType::KING, color);
 
     board.addPieceToSquare(Position(0, row), rook_a);
     board.addPieceToSquare(Position(7, row), rook_b);
