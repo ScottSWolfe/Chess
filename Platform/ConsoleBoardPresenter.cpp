@@ -7,7 +7,6 @@
 #include "Position.h"
 #include "Square.h"
 #include "windows.h"
-using namespace std;
 
 namespace chess {
 
@@ -26,7 +25,7 @@ void ConsoleBoardPresenter::printRows(const Board &board) const {
         printLeftBorder(row, dimension);
         printRow(board, row);
         printRightBorder(row, dimension);
-        cout << endl;
+        std::cout << std::endl;
     }
 }
 
@@ -34,11 +33,11 @@ void ConsoleBoardPresenter::printRow(const Board &board, int row) const {
     int dimension = board.getDimension();
     for (int col = 0; col < dimension; ++col) {
         Position pos(col, row);
-        string symbol = board.getPieceSymbol(pos);
+        std::string symbol = board.getPieceSymbol(pos);
         PieceColor piece_color = board.getPieceColor(pos);
         SquareColor square_color = getSquareColor(pos);
         setTextColor(square_color, piece_color);
-        cout << " " << symbol << " ";
+        std::cout << " " << symbol << " ";
     }
 }
 
@@ -84,39 +83,39 @@ ConsoleColor ConsoleBoardPresenter::getConsoleSquareColor(SquareColor color) con
         return ConsoleBoardPresenter::DARK_SQUARE;
     }
     else {
-        throw invalid_argument("incorret color argument");
+        throw std::invalid_argument("incorret color argument");
     }
 }
 
 void ConsoleBoardPresenter::printHorizontalBorder(int dimension) const {
     setTextColor(BORDER_BACKGROUND, BORDER_TEXT);
-    cout << borderSpacing(dimension);
+    std::cout << borderSpacing(dimension);
     for (int i = 0; i < dimension; ++i) {
-        cout << getLetterForIndex(i) << " ";
+        std::cout << getLetterForIndex(i) << " ";
     }
-    cout << borderSpacing(dimension) << endl;
+    std::cout << borderSpacing(dimension) << std::endl;
 }
 
 void ConsoleBoardPresenter::printLeftBorder(int row, int dimension) const {
     setTextColor(BORDER_BACKGROUND, BORDER_TEXT);
     if (dimension < 10 || row >= 9) {
-        cout << " " << row + 1 << " ";
+        std::cout << " " << row + 1 << " ";
         return;
     }	
-    cout << "  " << row + 1 << " ";	
+    std::cout << "  " << row + 1 << " ";
 }
 
 void ConsoleBoardPresenter::printRightBorder(int row, int dimension) const {
     setTextColor(BORDER_BACKGROUND, BORDER_TEXT);
     if (dimension < 10 || row >= 9) {
-        cout << " " << row + 1 << " ";
+        std::cout << " " << row + 1 << " ";
         return;
     }
-    cout << " " << row + 1 << "  ";
+    std::cout << " " << row + 1 << "  ";
 }
 
-string ConsoleBoardPresenter::getLetterForIndex(int index) const {
-    string letters;
+std::string ConsoleBoardPresenter::getLetterForIndex(int index) const {
+    std::string letters;
     if (index > 25) {
         letters += index / 26 + 'A' - 1;
     }
@@ -127,7 +126,7 @@ string ConsoleBoardPresenter::getLetterForIndex(int index) const {
     return letters;
 }
 
-string ConsoleBoardPresenter::borderSpacing(int dimension) const {
+std::string ConsoleBoardPresenter::borderSpacing(int dimension) const {
     if (dimension > 9) {
         return "    ";
     }

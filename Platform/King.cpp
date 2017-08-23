@@ -5,7 +5,6 @@
 #include "King.h"
 #include "Move.h"
 #include "Position.h"
-using namespace std;
 
 namespace chess {
 
@@ -15,30 +14,30 @@ King::King(PieceColor color)
 {}
 
 std::unique_ptr<Piece> King::getCopy() const {
-    return make_unique<King>(*this);
+    return std::make_unique<King>(*this);
 }
 
 PieceType King::getType() const {
     return PieceType::KING;
 }
 
-const string King::getSymbol() const {
+const std::string King::getSymbol() const {
     return KING_SYMBOL;
 }
 
-vector<Move> King::getAvailableMoves(const GameState &state, Position start) const {
-    vector<Move> moves;
+std::vector<Move> King::getAvailableMoves(const GameState &state, Position start) const {
+    std::vector<Move> moves;
     addAdjacentMoves(moves, state, start);
     addCastleMoves(moves, state, start);
     return moves;
 }
 
-vector<Position> King::getSquaresAttacked(const Board &board, Position start) const {
+std::vector<Position> King::getSquaresAttacked(const Board &board, Position start) const {
     return getAdjacentSquaresAttacked(board, start);
 }
 
-vector<Position> King::getAdjacentSquaresAttacked(const Board &board, Position start) const {
-    vector<Position> positions;
+std::vector<Position> King::getAdjacentSquaresAttacked(const Board &board, Position start) const {
+    std::vector<Position> positions;
     for (int delta_y = -1; delta_y <= 1; delta_y++) {
         for (int delta_x = -1; delta_x <= 1; delta_x++) {
             Position end = start.add(delta_x, delta_y);
@@ -52,14 +51,14 @@ vector<Position> King::getAdjacentSquaresAttacked(const Board &board, Position s
     return positions;
 }
 
-void King::addAdjacentMoves(vector<Move> &moves, const GameState &state, Position start) const {
-    vector<Position> positions = getAdjacentSquaresAttacked(state.getBoard(), start);
+void King::addAdjacentMoves(std::vector<Move> &moves, const GameState &state, Position start) const {
+    std::vector<Position> positions = getAdjacentSquaresAttacked(state.getBoard(), start);
     for (Position end : positions) {
         moves.push_back(Move(start, end));
     }
 }
 
-void King::addCastleMoves(vector<Move> &moves, const GameState &state, Position start) const {
+void King::addCastleMoves(std::vector<Move> &moves, const GameState &state, Position start) const {
     if (hasMoved() == true) {
         return;
     }
@@ -68,7 +67,7 @@ void King::addCastleMoves(vector<Move> &moves, const GameState &state, Position 
     return;
 }
 
-void King::addCastleMove(vector<Move> &moves, const GameState &state, Position start, int delta_x) const {
+void King::addCastleMove(std::vector<Move> &moves, const GameState &state, Position start, int delta_x) const {
     int dimension = state.getBoardDimension();
     int castle_column = castleColumn(delta_x, dimension);
     Position rook_position;
@@ -97,7 +96,7 @@ void King::addMoveEffect(const GameState &state, Move &move) const {
 
 Move King::createMoveWithCastleEffect(Position king_start, Position king_end, Position rook_start, int delta_x) const {
     Position rook_end = king_end.add(-delta_x, 0);
-    unique_ptr<MoveEffect> effect = make_unique<Castle>(rook_start, rook_end);
+    std::unique_ptr<MoveEffect> effect = std::make_unique<Castle>(rook_start, rook_end);
     return Move(king_start, king_end, effect);
 }
 

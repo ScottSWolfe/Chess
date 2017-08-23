@@ -6,7 +6,6 @@
 #include "Piece.h"
 #include "Position.h"
 #include "GameObserver.h"
-using namespace std;
 
 namespace chess {
 
@@ -27,8 +26,8 @@ GameState::GameState(const GameState &other)
     }
 }
 
-shared_ptr<GameState> GameState::getCopy() const {
-    return make_shared<GameState>(*this);
+std::shared_ptr<GameState> GameState::getCopy() const {
+    return std::make_shared<GameState>(*this);
 }
 
 const Board &GameState::getBoard() const {
@@ -57,7 +56,7 @@ PieceType GameState::getPieceType(Position pos) const {
 
 bool GameState::isMoveAvailable(const Move &move) const {
     const Piece *piece = board.getPiece(move.getStart());
-    vector<Move> moves = piece->getAvailableMoves(*this, move.getStart());
+    std::vector<Move> moves = piece->getAvailableMoves(*this, move.getStart());
     for (Move curr_move : moves) {
         if (curr_move == move) {
             return true;
@@ -111,15 +110,15 @@ const Move *GameState::getLastMove() const {
     return &move_history.back();
 }
 
-vector<Move> GameState::getAvailableMoves() const {
-    vector<Move> moves;
+std::vector<Move> GameState::getAvailableMoves() const {
+    std::vector<Move> moves;
     PieceColor current_color = getCurrentPlayersTurn();
     int dimension = getBoardDimension();
     for (int j = 0; j < dimension; j++) {
         for (int i = 0; i < dimension; i++) {
             Position pos(i, j);
             if (board.isPiece(pos) && board.getPieceColor(pos) == current_color) {
-                vector<Move> pieces_moves = board.getPiece(pos)->getAvailableMoves(*this, pos);
+                std::vector<Move> pieces_moves = board.getPiece(pos)->getAvailableMoves(*this, pos);
                 moves.insert(moves.end(), pieces_moves.begin(), pieces_moves.end());
             }
         }

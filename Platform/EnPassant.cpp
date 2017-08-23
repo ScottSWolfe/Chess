@@ -1,7 +1,6 @@
 #include "Board.h"
 #include "ChessDebug.h"
 #include "EnPassant.h"
-using namespace std;
 
 namespace chess {
 
@@ -10,8 +9,8 @@ EnPassant::EnPassant(Position remove_position)
     : remove_position(remove_position)
 {}
 
-unique_ptr<MoveEffect> EnPassant::getCopy() const {
-    return make_unique<EnPassant>(*this);
+std::unique_ptr<MoveEffect> EnPassant::getCopy() const {
+    return std::make_unique<EnPassant>(*this);
 }
 
 bool EnPassant::operator==(const MoveEffect &other) const {
@@ -22,7 +21,7 @@ bool EnPassant::operator==(const MoveEffect &other) const {
         }
         return false;
     }
-    catch (bad_cast) {
+    catch (std::bad_cast) {
         return false;
     }
 }

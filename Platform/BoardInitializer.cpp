@@ -3,7 +3,6 @@
 #include "ChessDebug.h"
 #include "Piece.h"
 #include "Position.h"
-using namespace std;
 
 namespace chess {
 

@@ -6,7 +6,6 @@
 #include "MoveInputParser.h"
 #include "PlayerAction.h"
 #include "Position.h"
-using namespace std;
 
 namespace chess {
 
@@ -15,18 +14,18 @@ HumanPlayer::HumanPlayer(PieceColor color)
     : Player(color)
 {}
 
-shared_ptr<PlayerAction> HumanPlayer::getAction(const GameState &state) const {
-    shared_ptr<PlayerAction> action;
+std::shared_ptr<PlayerAction> HumanPlayer::getAction(const GameState &state) const {
+    std::shared_ptr<PlayerAction> action;
     while (action == nullptr) {
         action = getUserAction();
     }
     return action;
 }
 
-shared_ptr<PlayerAction> HumanPlayer::getUserAction() const {
-    cout << "Enter a move (O for other): ";
-    string input;
-    getline(cin, input);
+std::shared_ptr<PlayerAction> HumanPlayer::getUserAction() const {
+    std::cout << "Enter a move (O for other): ";
+    std::string input;
+    std::getline(std::cin, input);
 
     if (input == "O") {
         return getOther(input);
@@ -36,14 +35,14 @@ shared_ptr<PlayerAction> HumanPlayer::getUserAction() const {
     }
 }
 
-shared_ptr<PlayerAction> HumanPlayer::getOther(string input) const {
+std::shared_ptr<PlayerAction> HumanPlayer::getOther(std::string input) const {
     return selector.selectAction(input);
 }
 
-shared_ptr<Move> HumanPlayer::getMove(string input) const {
+std::shared_ptr<Move> HumanPlayer::getMove(std::string input) const {
     auto move = parser.parseMoveInput(input);
     if (move == nullptr) {
-        cout << "Move not entered correctly." << endl;
+        std::cout << "Move not entered correctly." << std::endl;
     }
     return move;
 }
@@ -53,13 +52,13 @@ PieceType HumanPlayer::getPromotionPiece(const GameState &state, const Move &mov
 }
 
 PieceType HumanPlayer::getPromotionPiece() const {
-    cout << "Choose a promotion piece (Q, R, B, N): ";
-    string input;
-    getline(cin, input);
+    std::cout << "Choose a promotion piece (Q, R, B, N): ";
+    std::string input;
+    std::getline(std::cin, input);
     return parsePromotionPiece(input);
 }
 
-PieceType HumanPlayer::parsePromotionPiece(string input) const {
+PieceType HumanPlayer::parsePromotionPiece(std::string input) const {
     if (input.size() != 1) {
         return getPromotionPiece();
     }

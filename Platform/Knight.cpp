@@ -5,7 +5,6 @@
 #include "Knight.h"
 #include "Move.h"
 #include "Position.h"
-using namespace std;
 
 namespace chess {
 
@@ -13,19 +12,19 @@ namespace chess {
 Knight::Knight(PieceColor color) : Piece(color) {}
 
 std::unique_ptr<Piece> Knight::getCopy() const {
-    return make_unique<Knight>(*this);
+    return std::make_unique<Knight>(*this);
 }
 
 PieceType Knight::getType() const {
     return PieceType::KNIGHT;
 }
 
-const string Knight::getSymbol() const {
+const std::string Knight::getSymbol() const {
     return KNIGHT_SYMBOL;
 }
 
-vector<Position> Knight::getSquaresAttacked(const Board &board, Position start) const {
-    vector<Position> positions;
+std::vector<Position> Knight::getSquaresAttacked(const Board &board, Position start) const {
+    std::vector<Position> positions;
     for (int delta_y = -2; delta_y <= 2; delta_y++) {
         for (int delta_x = -2; delta_x <= 2; delta_x++) {
             if (abs(delta_y) + abs(delta_x) == 3) {

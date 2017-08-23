@@ -1,7 +1,6 @@
 #include "Board.h"
 #include "Castle.h"
 #include "ChessDebug.h"
-using namespace std;
 
 namespace chess {
 
@@ -10,8 +9,8 @@ Castle::Castle(Position rook_start, Position rook_end)
     : rook_start(rook_start), rook_end(rook_end)
 {}
 
-unique_ptr<MoveEffect> Castle::getCopy() const {
-    return make_unique<Castle>(*this);
+std::unique_ptr<MoveEffect> Castle::getCopy() const {
+    return std::make_unique<Castle>(*this);
 }
 
 bool Castle::operator==(const MoveEffect &other) const {
@@ -22,7 +21,7 @@ bool Castle::operator==(const MoveEffect &other) const {
         }
         return false;
     }
-    catch (bad_cast) {
+    catch (std::bad_cast) {
         return false;
     }
 }
