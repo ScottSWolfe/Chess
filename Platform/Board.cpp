@@ -6,7 +6,6 @@
 #include "Move.h"
 #include "Piece.h"
 #include "Position.h"
-using namespace std;
 
 namespace chess {
 
@@ -15,7 +14,7 @@ Board::Board(int board_dimension)
     : dimension(board_dimension)
 {
     if (board_dimension < 6 || board_dimension > 99) {
-        throw invalid_argument("board dimension is out of range");
+        throw std::invalid_argument("board dimension is out of range");
     }
     squares.reserve(dimension * dimension);
     for (int i = 0; i < dimension * dimension; ++i) {
@@ -33,7 +32,7 @@ Board::Board(const Board &other_board) :
 }
 
 std::shared_ptr<Board> Board::getCopy() const {
-    return make_shared<Board>(*this);
+    return std::make_shared<Board>(*this);
 }
 
 Square &Board::getSquare(Position pos) {
@@ -59,16 +58,16 @@ bool Board::hasPieceMoved(Position pos) const {
 }
 
 void Board::makeMove(const Move &move) {
-    unique_ptr<Piece> piece = removePieceFromSquare(move.getStart());
+    auto piece = removePieceFromSquare(move.getStart());
     addPieceToSquare(move.getEnd(), piece);
     applyMoveEffect(move.getEffect());
 }
 
-void Board::addPieceToSquare(Position pos, unique_ptr<Piece> &piece) {
+void Board::addPieceToSquare(Position pos, std::unique_ptr<Piece> &piece) {
     getSquare(pos).setPiece(piece);
 }
 
-unique_ptr<Piece> Board::removePieceFromSquare(Position pos) {
+std::unique_ptr<Piece> Board::removePieceFromSquare(Position pos) {
     return getSquare(pos).removePiece();
 }
 
@@ -94,7 +93,7 @@ PieceColor Board::getPieceColor(Position pos) const {
     return Piece::getPieceColor(getPiece(pos));
 }
 
-string Board::getPieceSymbol(Position pos) const {
+std::string Board::getPieceSymbol(Position pos) const {
     return Piece::getPieceSymbol(getPiece(pos));
 }
 
@@ -124,14 +123,14 @@ Position Board::getKingPosition(PieceColor king_color) const {
             return getPosition(i);
         }
     }
-    throw runtime_error("no king found for given color");
+    throw std::runtime_error("no king found for given color");
 }
 
 bool Board::canPieceAttackSquare(Position pos, PieceColor color) const {
     for (int i = 0; i < dimension * dimension; i++) {
         const Piece *piece = squares[i].getPiece();
         if (piece != nullptr && piece->getColor() != color) {
-            vector<Position> attacks = piece->getSquaresAttacked(*this, getPosition(i));
+            std::vector<Position> attacks = piece->getSquaresAttacked(*this, getPosition(i));
             for (Position end : attacks) {
                 if (end == pos) {
                     return true;

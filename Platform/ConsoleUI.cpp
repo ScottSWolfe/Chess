@@ -3,31 +3,30 @@
 #include "ChessEnums.h"
 #include "ConsoleUI.h"
 #include "GameState.h"
-using namespace std;
 
 namespace chess {
 
 
 void ConsoleUI::gameStarted(const GameState &state) {
-    cout << "====  Game Started  ====" << endl << endl;
+    std::cout << "====  Game Started  ====" << std::endl << std::endl;
     presenter.displayBoard(state.getBoard());
-    cout << endl;
+    std::cout << std::endl;
 }
 
 void ConsoleUI::gameEnded(const GameState &state) {
-    cout << "====  Game Over  ====" << endl;
-    cout << getGameEndMessage(state.getGameOverState()) << endl << endl;
+    std::cout << "====  Game Over  ====" << std::endl;
+    std::cout << getGameEndMessage(state.getGameOverState()) << std::endl << std::endl;
 }
 
 void ConsoleUI::turnStarted(const GameState &newState) {
-    cout << currentTurnToString(newState) << "'s Turn" << endl;
+    std::cout << currentTurnToString(newState) << "'s Turn" << std::endl;
 }
 
 void ConsoleUI::turnEnded(const GameState &newState) {
     presenter.displayBoard(newState.getBoard());
 }
 
-string ConsoleUI::currentTurnToString(const GameState &newState) const {
+std::string ConsoleUI::currentTurnToString(const GameState &newState) const {
     if (newState.getCurrentPlayersTurn() == PieceColor::BLACK) {
         return "Black";
     }
@@ -36,35 +35,35 @@ string ConsoleUI::currentTurnToString(const GameState &newState) const {
     }
 }
 
-string ConsoleUI::getGameEndMessage(GameEndType end_type) const {
+std::string ConsoleUI::getGameEndMessage(GameEndType end_type) const {
     switch (end_type)
     {
     case GameEndType::WHITE_CHECKMATE:
-        return string("White wins by checkmate.");
+        return std::string("White wins by checkmate.");
 
     case GameEndType::BLACK_CHECKMATE:
-        return string("Black wins by checkmate.");
+        return std::string("Black wins by checkmate.");
 
     case GameEndType::WHITE_RESIGN:
-        return string("Black wins by resignation.");
+        return std::string("Black wins by resignation.");
 
     case GameEndType::BLACK_RESIGN:
-        return string("White wins by resignation.");
+        return std::string("White wins by resignation.");
 
     case GameEndType::DRAW_AGREEMENT:
-        return string("The players agreed to a draw.");
+        return std::string("The players agreed to a draw.");
 
     case GameEndType::DRAW_50_MOVES:
-        return string("Draw: 50 moves passed without a capture or pawn move.");
+        return std::string("Draw: 50 moves passed without a capture or pawn move.");
 
     case GameEndType::DRAW_3_REPITITIONS:
-        return string("Draw: The same position appeared 3 times.");
+        return std::string("Draw: The same position appeared 3 times.");
 
     case GameEndType::STALEMATE:
-        return string("Stalemate.");
+        return std::string("Stalemate.");
 
     default:
-        throw invalid_argument("invalid GameEndType");
+        throw std::invalid_argument("invalid GameEndType");
     }
 }
 

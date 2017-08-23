@@ -8,7 +8,6 @@
 #include "Move.h"
 #include "MoveValidator.h"
 #include "RandomPlayer.h"
-using namespace std;
 
 namespace chess {
 
@@ -43,7 +42,7 @@ bool GameManager::isGameOver() const {
 
 void GameManager::runPlayersTurn() {
     notifyObserversTurnStarted();
-    shared_ptr<PlayerAction> action = getPlayerAction();
+    auto action = getPlayerAction();
     while (action->enactAction(*this) == false) {
         // TODO notify observer that action failed
         action = getPlayerAction();
@@ -51,7 +50,7 @@ void GameManager::runPlayersTurn() {
     notifyObserversTurnEnded();
 }
 
-shared_ptr<PlayerAction> GameManager::getPlayerAction() const {
+std::shared_ptr<PlayerAction> GameManager::getPlayerAction() const {
     return currentPlayer()->getAction(current_state);
 }
 
