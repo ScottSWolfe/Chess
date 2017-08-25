@@ -13,7 +13,7 @@ Square::Square()
 {}
 
 Square::Square(std::unique_ptr<Piece> &piece)
-    : piece(piece.release())
+    : piece(std::move(piece))
 {}
 
 Square::Square(const Square &other_square)
@@ -25,7 +25,7 @@ const Piece *Square::getPiece() const {
 }
 
 void Square::setPiece(std::unique_ptr<Piece> &new_piece) {
-    piece.reset(new_piece.release());
+    piece = std::move(new_piece);
 }
 
 std::unique_ptr<Piece> Square::removePiece() {
