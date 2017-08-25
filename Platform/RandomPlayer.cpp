@@ -6,7 +6,6 @@
 #include "MoveValidator.h"
 #include "PlayerAction.h"
 #include "RandomPlayer.h"
-using namespace std;
 
 namespace chess {
 
@@ -15,14 +14,14 @@ RandomPlayer::RandomPlayer(PieceColor color)
     : Player(color)
 {}
 
-shared_ptr<PlayerAction> RandomPlayer::getAction(const GameState &state) const {
-    vector<Move> moves = state.getAvailableMoves();
+std::shared_ptr<PlayerAction> RandomPlayer::getAction(const GameState &state) const {
+    std::vector<Move> moves = state.getAvailableMoves();
     eliminateIllegalMoves(state, moves);
     if (moves.size() <= 0) {
         return nullptr;
     }
     int rand_num = randomInteger(moves.size() - 1);
-    return make_shared<Move>(moves[rand_num]);
+    return std::make_shared<Move>(moves[rand_num]);
 }
 
 PieceType RandomPlayer::getPromotionPiece(const GameState &state, const Move &move) const {
@@ -35,7 +34,7 @@ PieceType RandomPlayer::getPromotionPiece(const GameState &state, const Move &mo
     return piece_type;
 }
 
-void RandomPlayer::eliminateIllegalMoves(const GameState &state, vector<Move> &moves) const {
+void RandomPlayer::eliminateIllegalMoves(const GameState &state, std::vector<Move> &moves) const {
     for (size_t i = 0; i < moves.size(); i++) {
         Move move = moves[i];
         MoveValidator validator(state, move);

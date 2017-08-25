@@ -4,7 +4,6 @@
 #include "King.h"
 #include "Piece.h"
 #include "Square.h"
-using namespace std;
 
 namespace chess {
 
@@ -13,7 +12,7 @@ Square::Square()
     : piece(nullptr)
 {}
 
-Square::Square(unique_ptr<Piece> &piece)
+Square::Square(std::unique_ptr<Piece> &piece)
     : piece(piece.release())
 {}
 
@@ -25,11 +24,11 @@ const Piece *Square::getPiece() const {
     return piece.get();
 }
 
-void Square::setPiece(unique_ptr<Piece> &new_piece) {
+void Square::setPiece(std::unique_ptr<Piece> &new_piece) {
     piece.reset(new_piece.release());
 }
 
-unique_ptr<Piece> Square::removePiece() {
+std::unique_ptr<Piece> Square::removePiece() {
     throwExceptionIfPieceIsNull();
     return std::move(piece);
 }
@@ -61,7 +60,7 @@ bool Square::hasPieceMoved() const {
     return piece->hasMoved();
 }
 
-unique_ptr<Piece> Square::getCopyOfPiece() const {
+std::unique_ptr<Piece> Square::getCopyOfPiece() const {
     return Piece::copyPiece(piece.get());
 }
 
@@ -72,7 +71,7 @@ PieceType Square::getPieceType() const {
 
 void Square::throwExceptionIfPieceIsNull() const {
     if (piece == nullptr) {
-        throw runtime_error("square does not contain a piece");
+        throw std::runtime_error("square does not contain a piece");
     }
 }
 

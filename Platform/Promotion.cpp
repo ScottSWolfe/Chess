@@ -2,7 +2,6 @@
 #include "Piece.h"
 #include "Promotion.h"
 #include "Board.h"
-using namespace std;
 
 namespace chess {
 
@@ -11,8 +10,8 @@ Promotion::Promotion(Position promotion_position, PieceType piece_type)
     : promotion_position(promotion_position), piece_type(piece_type)
 {}
 
-unique_ptr<MoveEffect> Promotion::getCopy() const {
-    return make_unique<Promotion>(*this);
+std::unique_ptr<MoveEffect> Promotion::getCopy() const {
+    return std::make_unique<Promotion>(*this);
 }
 
 bool Promotion::operator==(const MoveEffect &other) const {
@@ -23,7 +22,7 @@ bool Promotion::operator==(const MoveEffect &other) const {
         }
         return false;
     }
-    catch (bad_cast) {
+    catch (std::bad_cast) {
         return false;
     }
 }

@@ -18,7 +18,7 @@ public:
 private:
     std::vector<std::string> parseInputIntoTokens(std::string input, char delimiter) const;
     Position convertTokensToCoords(std::string input) const;
-    bool readLettersAndNumbers(const std::string input, std::string &letters, std::string &numbers) const;
+    bool readLettersAndNumbers(const std::string &input, std::string &letters, std::string &numbers) const;
     int convertLettersToXCoord(std::string letters) const;
     int convertNumbersToYCoord(std::string numbers) const;
     bool isLetter(char c) const;

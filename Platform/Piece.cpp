@@ -13,7 +13,6 @@
 #include "Piece.h"
 #include "Queen.h"
 #include "Rook.h"
-using namespace std;
 
 namespace chess {
 
@@ -43,7 +42,7 @@ const std::string Piece::getPieceSymbol(const Piece *piece) {
 }
 
 bool Piece::canPieceMakeMove(const GameState &state, Position pos) const {
-    vector<Move> moves = this->getAvailableMoves(state, pos);
+    std::vector<Move> moves = this->getAvailableMoves(state, pos);
     for (Move move : moves) {
         if (state.willKingBeInCheck(move) == false) {
             return true;
@@ -70,37 +69,37 @@ PieceColor Piece::getPieceColor(const Piece *piece) {
     }
 }
 
-unique_ptr<Piece> Piece::copyPiece(const Piece *piece) {
+std::unique_ptr<Piece> Piece::copyPiece(const Piece *piece) {
     if (piece == nullptr) {
         return nullptr;
     }
     return piece->getCopy();
 }
 
-vector<Move> Piece::getAvailableMoves(const GameState &state, Position start) const {
-    vector<Move> moves;
-    vector<Position> positions = getSquaresAttacked(state.getBoard(), start);
+std::vector<Move> Piece::getAvailableMoves(const GameState &state, Position start) const {
+    std::vector<Move> moves;
+    std::vector<Position> positions = getSquaresAttacked(state.getBoard(), start);
     for (Position end : positions) {
         moves.push_back(Move(start, end));
     }
     return moves;
 }
 
-void Piece::getStraightSquaresAttacked(vector<Position> &positions, const Board &board, Position start) const {
+void Piece::getStraightSquaresAttacked(std::vector<Position> &positions, const Board &board, Position start) const {
     getSquaresAttackedInLine(positions, board, start,  1,  0);
     getSquaresAttackedInLine(positions, board, start, -1,  0);
     getSquaresAttackedInLine(positions, board, start,  0,  1);
     getSquaresAttackedInLine(positions, board, start,  0, -1);
 }
 
-void Piece::getDiagonalSquaresAttacked(vector<Position> &positions, const Board &board, Position start) const {
+void Piece::getDiagonalSquaresAttacked(std::vector<Position> &positions, const Board &board, Position start) const {
     getSquaresAttackedInLine(positions, board, start,  1,  1);
     getSquaresAttackedInLine(positions, board, start,  1, -1);
     getSquaresAttackedInLine(positions, board, start, -1,  1);
     getSquaresAttackedInLine(positions, board, start, -1, -1);
 }
 
-void Piece::getSquaresAttackedInLine(vector<Position> &positions, const Board &board, Position start, int delta_x, int delta_y) const {
+void Piece::getSquaresAttackedInLine(std::vector<Position> &positions, const Board &board, Position start, int delta_x, int delta_y) const {
     Position end = start.add(delta_x, delta_y);
     while (board.inBounds(end) && board.isPiece(end) == false) {
         positions.push_back(end);
@@ -115,25 +114,25 @@ std::unique_ptr<Piece> Piece::createPiece(PieceType type, PieceColor color) {
     switch (type)
     {
     case PieceType::PAWN:
-        return make_unique<Pawn>(color);
+        return std::make_unique<Pawn>(color);
 
     case PieceType::KNIGHT:
-        return make_unique<Knight>(color);
+        return std::make_unique<Knight>(color);
 
     case PieceType::BISHOP:
-        return make_unique<Bishop>(color);
+        return std::make_unique<Bishop>(color);
 
     case PieceType::ROOK:
-        return make_unique<Rook>(color);
+        return std::make_unique<Rook>(color);
 
     case PieceType::QUEEN:
-        return make_unique<Queen>(color);
+        return std::make_unique<Queen>(color);
 
     case PieceType::KING:
-        return make_unique<King>(color);
+        return std::make_unique<King>(color);
 
     default:
-        throw invalid_argument("invalid PieceType");
+        throw std::invalid_argument("invalid PieceType");
     }
 }
 

@@ -5,20 +5,19 @@
 #include "Move.h"
 #include "MoveInputParser.h"
 #include "Position.h"
-using namespace std;
 
 namespace chess {
 
 
-shared_ptr<Move> MoveInputParser::parseMoveInput(string input) const {
-    shared_ptr<Move> move(nullptr);
+std::shared_ptr<Move> MoveInputParser::parseMoveInput(std::string input) const {
+    std::shared_ptr<Move> move(nullptr);
 
-    vector<string> tokens = parseInputIntoTokens(input, ' ');
+    std::vector<std::string> tokens = parseInputIntoTokens(input, ' ');
     if (tokens.size() < 2) {
         return move;
     }
 
-    array<Position, 2> squares;
+    std::array<Position, 2> squares;
     for (int i = 0; i < 2; i++) {
         squares[i] = convertTokensToCoords(tokens[i]);
         if (squares[i].empty()) {
@@ -30,14 +29,14 @@ shared_ptr<Move> MoveInputParser::parseMoveInput(string input) const {
     return move;
 }
 
-vector<string> MoveInputParser::parseInputIntoTokens(string input, char delimiter) const {
-    vector<string> tokens;
+std::vector<std::string> MoveInputParser::parseInputIntoTokens(std::string input, char delimiter) const {
+    std::vector<std::string> tokens;
     input += delimiter;
     int i = 0;
     while (!input.empty()) {
         char c = input[i];
         if (c == delimiter) {
-            string token = input.substr(0, i);
+            std::string token = input.substr(0, i);
             if (!token.empty()) {
                 tokens.push_back(token);
             }
@@ -51,13 +50,13 @@ vector<string> MoveInputParser::parseInputIntoTokens(string input, char delimite
     return tokens;
 }
 
-Position MoveInputParser::convertTokensToCoords(string input) const {
+Position MoveInputParser::convertTokensToCoords(std::string input) const {
     Position coords;
     if (input.size() < 2) {
         return coords;
     }
-    string letters;
-    string numbers;
+    std::string letters;
+    std::string numbers;
     if (readLettersAndNumbers(input, letters, numbers) == false) {
         return coords;
     }
@@ -67,7 +66,7 @@ Position MoveInputParser::convertTokensToCoords(string input) const {
     return coords;
 }
 
-bool MoveInputParser::readLettersAndNumbers(const string input, string &letters, string &numbers) const {
+bool MoveInputParser::readLettersAndNumbers(const std::string &input, std::string &letters, std::string &numbers) const {
     
     for (size_t i = 0; i < input.size(); i++) {
         char c = input[i];
@@ -99,7 +98,7 @@ bool MoveInputParser::readLettersAndNumbers(const string input, string &letters,
     return true;
 }
 
-int MoveInputParser::convertLettersToXCoord(string letters) const {
+int MoveInputParser::convertLettersToXCoord(std::string letters) const {
     int sum = 0;
     for (size_t i = 0; i < letters.size(); i++) {
         char c = letters[i];
@@ -108,7 +107,7 @@ int MoveInputParser::convertLettersToXCoord(string letters) const {
     return sum - 1;
 }
 
-int MoveInputParser::convertNumbersToYCoord(string numbers) const {
+int MoveInputParser::convertNumbersToYCoord(std::string numbers) const {
     int sum = 0;
     for (size_t i = 0; i < numbers.size(); i++) {
         char c = numbers[i];

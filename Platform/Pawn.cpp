@@ -7,7 +7,6 @@
 #include "MoveEffect.h"
 #include "Position.h"
 #include "Promotion.h"
-using namespace std;
 
 namespace chess {
 
@@ -16,20 +15,20 @@ Pawn::Pawn(PieceColor color)
     : Piece(color)
 {}
 
-unique_ptr<Piece> Pawn::getCopy() const {
-    return make_unique<Pawn>(*this);
+std::unique_ptr<Piece> Pawn::getCopy() const {
+    return std::make_unique<Pawn>(*this);
 }
 
 PieceType Pawn::getType() const {
     return PieceType::PAWN;
 }
 
-const string Pawn::getSymbol() const {
+const std::string Pawn::getSymbol() const {
     return PAWN_SYMBOL;
 }
 
-vector<Move> Pawn::getAvailableMoves(const GameState &state, Position start) const {
-    vector<Move> moves;
+std::vector<Move> Pawn::getAvailableMoves(const GameState &state, Position start) const {
+    std::vector<Move> moves;
     addOneSquareMove(moves, state, start);
     addTwoSquareMove(moves, state, start);
     addDiagonalMoves(moves, state, start);
@@ -38,7 +37,7 @@ vector<Move> Pawn::getAvailableMoves(const GameState &state, Position start) con
 }
 
 std::vector<Position> Pawn::getSquaresAttacked(const Board &board, Position start) const {
-    vector<Position> positions;
+    std::vector<Position> positions;
     Position end = start.add(1, step());
     if (board.inBounds(end)) {
         positions.push_back(end);
@@ -50,7 +49,7 @@ std::vector<Position> Pawn::getSquaresAttacked(const Board &board, Position star
     return positions;
 }
 
-void Pawn::addOneSquareMove(vector<Move> &moves, const GameState &state, Position start) const {
+void Pawn::addOneSquareMove(std::vector<Move> &moves, const GameState &state, Position start) const {
     Position end = start.add(0, step());
     if (state.inBounds(end) == true && state.isPiece(end) == false) {
         Move move(start, end);
@@ -59,7 +58,7 @@ void Pawn::addOneSquareMove(vector<Move> &moves, const GameState &state, Positio
     }
 }
 
-void Pawn::addTwoSquareMove(vector<Move> &moves, const GameState &state, Position start) const {
+void Pawn::addTwoSquareMove(std::vector<Move> &moves, const GameState &state, Position start) const {
     if (start.y == startRow(state.getBoardDimension())) {
         Position step_1 = start.add(0, step());
         Position step_2 = start.add(0, 2 * step());
@@ -71,12 +70,12 @@ void Pawn::addTwoSquareMove(vector<Move> &moves, const GameState &state, Positio
     }
 }
 
-void Pawn::addDiagonalMoves(vector<Move> &moves, const GameState &state, Position start) const {
+void Pawn::addDiagonalMoves(std::vector<Move> &moves, const GameState &state, Position start) const {
     addDiagonalMove(moves, state, start, -1);
     addDiagonalMove(moves, state, start,  1);
 }
 
-void Pawn::addDiagonalMove(vector<Move> &moves, const GameState &state, Position start, int delta_x) const {
+void Pawn::addDiagonalMove(std::vector<Move> &moves, const GameState &state, Position start, int delta_x) const {
     Position end = start.add(delta_x, step());
     if (state.inBounds(end) && state.isPiece(end) && state.isOppPieceColor(end, color)) {
         Move move(start, end);
@@ -85,7 +84,7 @@ void Pawn::addDiagonalMove(vector<Move> &moves, const GameState &state, Position
     }
 }
 
-void Pawn::addEnPassantMove(vector<Move> &moves, const GameState state, Position start) const {
+void Pawn::addEnPassantMove(std::vector<Move> &moves, const GameState state, Position start) const {
     int delta_x = 0;
     if (isEnPassantAvailable(state, start, delta_x)) {
         Move move = createMoveWithEnPassant(start, delta_x);
@@ -130,14 +129,14 @@ bool Pawn::addEnPassantMoveEffect(const GameState &state, Move &move) const {
 Move Pawn::createMoveWithEnPassant(Position start, int delta_x) const {
     Position end = start.add(delta_x, step());
     Position piece_to_remove = start.add(delta_x, 0);
-    unique_ptr<MoveEffect> effect = make_unique<EnPassant>(piece_to_remove);
+    std::unique_ptr<MoveEffect> effect = std::make_unique<EnPassant>(piece_to_remove);
     return Move(start, end, effect);
 }
 
 bool Pawn::addPromotionMoveEffect(const GameState &state, Move &move) const {
     if (move.getEnd().y == promotionRow(state.getBoardDimension())) {
         if (state.inBounds(move.getEnd())) {
-            unique_ptr<MoveEffect> effect = make_unique<Promotion>(move.getEnd(), PieceType::QUEEN);
+            std::unique_ptr<MoveEffect> effect = std::make_unique<Promotion>(move.getEnd(), PieceType::QUEEN);
             move = Move(move.getStart(), move.getEnd(), effect);
             return true;
         }

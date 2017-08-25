@@ -5,7 +5,6 @@
 #include "MoveEffect.h"
 #include "Position.h"
 #include "Promotion.h"
-using namespace std;
 
 namespace chess {
 
@@ -14,7 +13,7 @@ Move::Move(Position start_coord, Position end_coord)
     : start(start_coord), end(end_coord), effect(nullptr)
 {}
 
-Move::Move(Position start, Position end, unique_ptr<MoveEffect> &effect)
+Move::Move(Position start, Position end, std::unique_ptr<MoveEffect> &effect)
     : start(start), end(end), effect(effect.release())
 {}
 
@@ -87,7 +86,7 @@ void Move::setPromotionPiece(PieceType type) {
     }
 }
 
-unique_ptr<MoveEffect> Move::getCopyOfEffect() const {
+std::unique_ptr<MoveEffect> Move::getCopyOfEffect() const {
     if (effect == nullptr) {
         return nullptr;
     }
