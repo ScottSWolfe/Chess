@@ -110,6 +110,36 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Platform\BoardPresenter.h" />
+    <ClInclude Include="..\Platform\ConsoleBoardPresenter.h" />
+    <ClInclude Include="..\Platform\ConsoleUI.h" />
+    <ClInclude Include="..\Platform\GameManager.h" />
+    <ClInclude Include="..\Platform\GameObserver.h" />
+    <ClInclude Include="..\Platform\GameSubject.h" />
+    <ClInclude Include="..\Platform\HumanPlayer.h" />
+    <ClInclude Include="..\Platform\MoveInputParser.h" />
+    <ClInclude Include="..\Platform\MoveValidator.h" />
+    <ClInclude Include="..\Platform\OtherActionSelector.h" />
+    <ClInclude Include="..\Platform\Player.h" />
+    <ClInclude Include="..\Platform\PlayerAction.h" />
+    <ClInclude Include="..\Platform\RandomPlayer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Platform\ConsoleBoardPresenter.cpp" />
+    <ClCompile Include="..\Platform\ConsoleUI.cpp" />
+    <ClCompile Include="..\Platform\GameManager.cpp" />
+    <ClCompile Include="..\Platform\HumanPlayer.cpp" />
+    <ClCompile Include="..\Platform\Main.cpp" />
+    <ClCompile Include="..\Platform\MoveInputParser.cpp" />
+    <ClCompile Include="..\Platform\MoveValidator.cpp" />
+    <ClCompile Include="..\Platform\OtherActionSelector.cpp" />
+    <ClCompile Include="..\Platform\Player.cpp" />
+    <ClCompile Include="..\Platform\RandomPlayer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Platform\Platform.vcxproj">
+      <Project>{4e5c3dcd-f2a1-4db2-9a18-fabb0d533299}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
