@@ -21,9 +21,6 @@
     <ClInclude Include="ConsoleBoardPresenter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="GameObserver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -48,15 +45,15 @@
     <ClInclude Include="RandomPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StandardGameManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Platform\ConsoleUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ConsoleBoardPresenter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HumanPlayer.cpp">
@@ -78,6 +75,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RandomPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="StandardGameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

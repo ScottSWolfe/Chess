@@ -135,6 +135,7 @@
     <ClCompile Include="Position.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MoveMaker.h" />
     <ClInclude Include="Claim50MoveDraw.h" />
     <ClInclude Include="DrawOffer.h" />
     <ClInclude Include="Bishop.h" />
