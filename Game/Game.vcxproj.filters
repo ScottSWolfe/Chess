@@ -15,75 +15,69 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Platform\BoardPresenter.h">
+    <ClInclude Include="BoardPresenter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Platform\ConsoleBoardPresenter.h">
+    <ClInclude Include="ConsoleBoardPresenter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Platform\ConsoleUI.h">
+    <ClInclude Include="GameManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Platform\GameManager.h">
+    <ClInclude Include="GameObserver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Platform\GameObserver.h">
+    <ClInclude Include="HumanPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Platform\GameSubject.h">
+    <ClInclude Include="GameSubject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Platform\HumanPlayer.h">
+    <ClInclude Include="MoveInputParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Platform\MoveInputParser.h">
+    <ClInclude Include="MoveValidator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Platform\MoveValidator.h">
+    <ClInclude Include="OtherActionSelector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Platform\OtherActionSelector.h">
+    <ClInclude Include="Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Platform\Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Platform\PlayerAction.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Platform\RandomPlayer.h">
+    <ClInclude Include="RandomPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Platform\ConsoleBoardPresenter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\Platform\ConsoleUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Platform\GameManager.cpp">
+    <ClCompile Include="ConsoleBoardPresenter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Platform\HumanPlayer.cpp">
+    <ClCompile Include="GameManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Platform\Main.cpp">
+    <ClCompile Include="HumanPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Platform\MoveInputParser.cpp">
+    <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Platform\MoveValidator.cpp">
+    <ClCompile Include="MoveInputParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Platform\OtherActionSelector.cpp">
+    <ClCompile Include="MoveValidator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Platform\Player.cpp">
+    <ClCompile Include="OtherActionSelector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Platform\RandomPlayer.cpp">
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
