@@ -16,10 +16,10 @@ class PlayerAction;
 enum class PieceType;
 
 
-class GameManager : public GameSubject {
+class StandardGameManager : public GameSubject {
     
 public:
-    GameManager();
+    StandardGameManager();
     void startGame();
     bool makeMove(Move move);
     bool resign();

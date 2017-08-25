@@ -5,7 +5,7 @@
 #include <stdlib.h>  
 #include <crtdbg.h> 
 #endif
-#include "GameManager.h"
+#include "StandardGameManager.h"
 #include "ConsoleUI.h"
 
 
@@ -14,7 +14,7 @@ int main() {
     _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
     #endif
 
-    chess::GameManager manager;
+    chess::StandardGameManager manager;
     chess::ConsoleUI ui;
     manager.registerObserver(&ui);
     manager.startGame();

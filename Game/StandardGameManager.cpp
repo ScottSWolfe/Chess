@@ -3,7 +3,7 @@
 #include "ChessDebug.h"
 #include "ChessEnums.h"
 #include "ConsoleBoardPresenter.h"
-#include "GameManager.h"
+#include "StandardGameManager.h"
 #include "HumanPlayer.h"
 #include "Move.h"
 #include "MoveValidator.h"
@@ -12,18 +12,18 @@
 namespace chess {
 
 
-GameManager::GameManager() :
+StandardGameManager::StandardGameManager() :
     current_state(BoardInitializer::initializeStandardSetup(), PieceColor::WHITE),
     white_player(new HumanPlayer(PieceColor::WHITE)),
     black_player(new HumanPlayer(PieceColor::BLACK))
 {}
 
-void GameManager::startGame() {
+void StandardGameManager::startGame() {
     notifyObserversGameStarted();
     runGameLoop();
 }
 
-void GameManager::runGameLoop() {
+void StandardGameManager::runGameLoop() {
     while (true) {
         if (isGameOver()) {
             break;
@@ -32,7 +32,7 @@ void GameManager::runGameLoop() {
     }
 }
 
-bool GameManager::isGameOver() const {
+bool StandardGameManager::isGameOver() const {
     if (current_state.isGameOver() == true) {
         notifyObserversGameEnded();
         return true;
@@ -40,7 +40,7 @@ bool GameManager::isGameOver() const {
     return false;
 }
 
-void GameManager::runPlayersTurn() {
+void StandardGameManager::runPlayersTurn() {
     notifyObserversTurnStarted();
     auto action = getPlayerAction();
     while (action->enactAction(*this) == false) {
@@ -50,11 +50,11 @@ void GameManager::runPlayersTurn() {
     notifyObserversTurnEnded();
 }
 
-std::shared_ptr<PlayerAction> GameManager::getPlayerAction() const {
+std::shared_ptr<PlayerAction> StandardGameManager::getPlayerAction() const {
     return currentPlayer()->getAction(current_state);
 }
 
-bool GameManager::makeMove(Move move) {
+bool StandardGameManager::makeMove(Move move) {
     if (validateMoveIsSafe(move) == false) {
         return false;
     }
@@ -66,12 +66,12 @@ bool GameManager::makeMove(Move move) {
     return true;
 }
 
-bool GameManager::resign() {
+bool StandardGameManager::resign() {
     current_state.resignation();
     return true;
 }
 
-bool GameManager::offerDraw() {
+bool StandardGameManager::offerDraw() {
     bool accepted = otherPlayer()->drawOffered(current_state);
     if (accepted == true) {
         current_state.drawByAgreement();
@@ -80,25 +80,25 @@ bool GameManager::offerDraw() {
     return false;
 }
 
-bool GameManager::claim50MoveDraw() {
+bool StandardGameManager::claim50MoveDraw() {
     return current_state.drawBy50Moves();
 }
 
-bool GameManager::claim3RepetionDraw() {
+bool StandardGameManager::claim3RepetionDraw() {
     return false;
 }
 
-bool GameManager::validateMoveIsSafe(const Move &move) const {
+bool StandardGameManager::validateMoveIsSafe(const Move &move) const {
     MoveValidator moveValidator(current_state, move);
     return moveValidator.validateMoveIsSafe();
 }
 
-bool GameManager::validateMoveIsLegal(const Move &move) const {
+bool StandardGameManager::validateMoveIsLegal(const Move &move) const {
     MoveValidator moveValidator(current_state, move);
     return moveValidator.validateMoveIsLegal();
 }
 
-void GameManager::addMoveEffect(Move &move) const {
+void StandardGameManager::addMoveEffect(Move &move) const {
     current_state.addMoveEffect(move);
     if (move.hasEffect() && move.getEffectType() == MoveEffectType::PROMOTION) {
         PieceType type = askPlayerForPromotionPiece(move);
@@ -106,11 +106,11 @@ void GameManager::addMoveEffect(Move &move) const {
     }
 }
 
-PieceType GameManager::askPlayerForPromotionPiece(const Move &move) const {
+PieceType StandardGameManager::askPlayerForPromotionPiece(const Move &move) const {
     return currentPlayer()->getPromotionPiece(current_state, move);
 }
 
-const Player *GameManager::currentPlayer() const {
+const Player *StandardGameManager::currentPlayer() const {
     if (current_state.getCurrentPlayersTurn() == PieceColor::WHITE) {
         return white_player.get();
     }
@@ -119,7 +119,7 @@ const Player *GameManager::currentPlayer() const {
     }
 }
 
-const Player *GameManager::otherPlayer() const {
+const Player *StandardGameManager::otherPlayer() const {
     if (current_state.getCurrentPlayersTurn() == PieceColor::WHITE) {
         return black_player.get();
     }
@@ -128,29 +128,29 @@ const Player *GameManager::otherPlayer() const {
     }
 }
 
-void GameManager::registerObserver(GameObserver *observer) {
+void StandardGameManager::registerObserver(GameObserver *observer) {
     observers.push_back(observer);
 }
 
-void GameManager::notifyObserversGameStarted() const {
+void StandardGameManager::notifyObserversGameStarted() const {
     for (auto observer : observers) {
         observer->gameStarted(current_state);
     }
 }
 
-void GameManager::notifyObserversGameEnded() const {
+void StandardGameManager::notifyObserversGameEnded() const {
     for (auto observer : observers) {
         observer->gameEnded(current_state);
     }
 }
 
-void GameManager::notifyObserversTurnStarted() const {
+void StandardGameManager::notifyObserversTurnStarted() const {
     for (auto observer : observers) {
         observer->turnStarted(current_state);
     }
 }
 
-void GameManager::notifyObserversTurnEnded() const {
+void StandardGameManager::notifyObserversTurnEnded() const {
     for (auto observer : observers) {
         observer->turnEnded(current_state);
     }
