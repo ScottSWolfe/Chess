@@ -7,7 +7,6 @@
 #include "Knight.h"
 #include "King.h"
 #include "Move.h"
-#include "MoveValidator.h"
 #include "Pawn.h"
 #include "Position.h"
 #include "Piece.h"

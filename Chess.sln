@@ -18,10 +18,19 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game", "Game\Game.vcxproj", "{EBA7DC34-8A5D-4F01-AF62-BA300D379E5C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameTest", "GameTest\GameTest.vcxproj", "{B8DBF101-10E1-489E-947F-9A88DA9D13E1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EBA7DC34-8A5D-4F01-AF62-BA300D379E5C} = {EBA7DC34-8A5D-4F01-AF62-BA300D379E5C}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Engine.vcxproj", "{2599C761-FE5E-4C65-9642-FC0C381F3E1C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4E5C3DCD-F2A1-4DB2-9A18-FABB0D533299} = {4E5C3DCD-F2A1-4DB2-9A18-FABB0D533299}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineTest", "EngineTest\EngineTest.vcxproj", "{1DCE2AA8-3070-4E03-AD43-BA5D98E86714}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2599C761-FE5E-4C65-9642-FC0C381F3E1C} = {2599C761-FE5E-4C65-9642-FC0C381F3E1C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

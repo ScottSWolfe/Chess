@@ -5,7 +5,6 @@
 #include "MoveEffect.h"
 #include "Piece.h"
 #include "Position.h"
-#include "GameObserver.h"
 
 namespace chess {
 

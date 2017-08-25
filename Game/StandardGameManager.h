@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <string>
+#include "GameManager.h"
 #include "GameObserver.h"
 #include "GameState.h"
 #include "GameSubject.h"
@@ -16,7 +17,7 @@ class PlayerAction;
 enum class PieceType;
 
 
-class StandardGameManager : public GameSubject {
+class StandardGameManager : public GameManager, public GameSubject {
     
 public:
     StandardGameManager();
