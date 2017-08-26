@@ -74,7 +74,11 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\Platform;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ProjectReference>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -110,6 +114,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Platform\Claim50MoveDraw.h" />
+    <ClInclude Include="..\Platform\DrawOffer.h" />
+    <ClInclude Include="..\Platform\Resignation.h" />
     <ClInclude Include="BoardPresenter.h" />
     <ClInclude Include="ConsoleBoardPresenter.h" />
     <ClInclude Include="StandardGameManager.h" />
@@ -123,8 +130,11 @@
     <ClInclude Include="RandomPlayer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Platform\ConsoleUI.cpp" />
+    <ClCompile Include="Claim50MoveDraw.cpp" />
     <ClCompile Include="ConsoleBoardPresenter.cpp" />
+    <ClCompile Include="ConsoleUI.cpp" />
+    <ClCompile Include="DrawOffer.cpp" />
+    <ClCompile Include="Resignation.cpp" />
     <ClCompile Include="StandardGameManager.cpp" />
     <ClCompile Include="HumanPlayer.cpp" />
     <ClCompile Include="Main.cpp" />

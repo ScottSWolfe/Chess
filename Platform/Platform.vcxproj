@@ -114,8 +114,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Claim50MoveDraw.cpp" />
-    <ClCompile Include="DrawOffer.cpp" />
     <ClCompile Include="Bishop.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="BoardInitializer.cpp" />
@@ -128,17 +126,12 @@
     <ClCompile Include="Piece.cpp" />
     <ClCompile Include="Promotion.cpp" />
     <ClCompile Include="Queen.cpp" />
-    <ClCompile Include="Resignation.cpp" />
     <ClCompile Include="Rook.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Square.cpp" />
     <ClCompile Include="Position.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameManager.h" />
-    <ClInclude Include="MoveMaker.h" />
-    <ClInclude Include="Claim50MoveDraw.h" />
-    <ClInclude Include="DrawOffer.h" />
     <ClInclude Include="Bishop.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="BoardInitializer.h" />
@@ -146,14 +139,15 @@
     <ClInclude Include="ChessDebug.h" />
     <ClInclude Include="ChessEnums.h" />
     <ClInclude Include="EnPassant.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameState.h" />
-    <ClInclude Include="Resignation.h" />
     <ClInclude Include="King.h" />
     <ClInclude Include="Knight.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="MoveEffect.h" />
     <ClInclude Include="Pawn.h" />
     <ClInclude Include="Piece.h" />
+    <ClInclude Include="PlayerAction.h" />
     <ClInclude Include="Promotion.h" />
     <ClInclude Include="Queen.h" />
     <ClInclude Include="Rook.h" />
