@@ -2,7 +2,6 @@
 
 #include <string>
 #include <vector>
-#include "ChessEnums.h"
 #include "Piece.h"
 
 namespace chess {

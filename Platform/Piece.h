@@ -3,7 +3,6 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include "ChessEnums.h"
 
 namespace chess {
 
@@ -12,6 +11,10 @@ class GameState;
 class Move;
 struct Position;
 
+
+enum class PieceType { PAWN, KNIGHT, BISHOP, ROOK, QUEEN, KING };
+
+enum class PieceColor { WHITE, BLACK, NO_PIECE };
 
 class Piece {
 

@@ -4,7 +4,6 @@
 #include "Board.h"
 #include "Piece.h"
 #include "Rook.h"
-#include "ChessEnums.h"
 #include "Position.h"
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace chess;

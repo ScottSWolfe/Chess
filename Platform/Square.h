@@ -1,7 +1,6 @@
 #pragma once
 
 #include <memory>
-#include "ChessEnums.h"
 #include "Piece.h"
 
 namespace chess {

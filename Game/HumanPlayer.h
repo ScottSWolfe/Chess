@@ -2,7 +2,6 @@
 
 #include <memory>
 #include <string>
-#include "ChessEnums.h"
 #include "MoveInputParser.h"
 #include "OtherActionSelector.h"
 #include "Player.h"

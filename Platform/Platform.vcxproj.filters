@@ -68,9 +68,6 @@
     <ClInclude Include="ChessDebug.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ChessEnums.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Bishop.h">
       <Filter>Header Files</Filter>
     </ClInclude>

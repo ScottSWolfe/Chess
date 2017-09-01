@@ -5,6 +5,8 @@ namespace chess {
 class Board;
 
 
+enum class SquareColor { LIGHT, DARK };
+
 class BoardPresenter {
 
 public:

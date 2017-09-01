@@ -3,7 +3,6 @@
 #include <memory>
 #include <string>
 #include <vector>
-#include "ChessEnums.h"
 #include "Square.h"
 
 namespace chess {

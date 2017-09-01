@@ -1,7 +1,6 @@
 #include <iostream>
 #include "BoardInitializer.h"
 #include "ChessDebug.h"
-#include "ChessEnums.h"
 #include "ConsoleBoardPresenter.h"
 #include "StandardGameManager.h"
 #include "HumanPlayer.h"

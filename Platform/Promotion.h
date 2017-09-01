@@ -1,8 +1,8 @@
 #pragma once
 
 #include <memory>
-#include "ChessEnums.h"
 #include "MoveEffect.h"
+#include "Piece.h"
 #include "Position.h"
 
 namespace chess {

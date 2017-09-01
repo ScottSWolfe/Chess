@@ -1,8 +1,8 @@
 #include <iostream>
 #include "ChessDebug.h"
-#include "ChessEnums.h"
 #include "ConsoleUI.h"
 #include "GameState.h"
+#include "Piece.h"
 
 namespace chess {
 

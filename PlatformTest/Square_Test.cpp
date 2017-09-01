@@ -1,7 +1,6 @@
 #include <memory>
 #include "stdafx.h"
 #include "CppUnitTest.h"
-#include "ChessEnums.h"
 #include "Piece.h"
 #include "Square.h"
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;

@@ -3,14 +3,20 @@
 #include <memory>
 #include <vector>
 #include "Board.h"
-#include "ChessEnums.h"
 #include "Move.h"
+#include "Piece.h"
 
 namespace chess {
 
 struct Position;
 class GameObserver;
 
+
+enum class GameEndType {
+    WHITE_CHECKMATE, BLACK_CHECKMATE, WHITE_RESIGN, BLACK_RESIGN,
+    DRAW_AGREEMENT, DRAW_50_MOVES, DRAW_3_REPITITIONS, STALEMATE,
+    NOT_OVER
+};
 
 class GameState {
 
