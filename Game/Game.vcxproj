@@ -68,19 +68,22 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ReferencePath>$(ReferencePath)</ReferencePath>
+    <LibraryPath>..\Debug;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>..\Platform;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Engine;..\Platform;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ProjectReference>
       <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
     </ProjectReference>
     <Link>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Engine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -127,7 +130,6 @@
     <ClInclude Include="GameSubject.h" />
     <ClInclude Include="HumanPlayer.h" />
     <ClInclude Include="MoveInputParser.h" />
-    <ClInclude Include="MoveValidator.h" />
     <ClInclude Include="OtherActionSelector.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="RandomPlayer.h" />
@@ -142,7 +144,6 @@
     <ClCompile Include="HumanPlayer.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MoveInputParser.cpp" />
-    <ClCompile Include="MoveValidator.cpp" />
     <ClCompile Include="OtherActionSelector.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="RandomPlayer.cpp" />

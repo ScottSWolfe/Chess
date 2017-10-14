@@ -123,6 +123,7 @@
     <ClCompile Include="King.cpp" />
     <ClCompile Include="Knight.cpp" />
     <ClCompile Include="Move.cpp" />
+    <ClCompile Include="MoveValidator.cpp" />
     <ClCompile Include="Piece.cpp" />
     <ClCompile Include="Promotion.cpp" />
     <ClCompile Include="Queen.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="Knight.h" />
     <ClInclude Include="Move.h" />
     <ClInclude Include="MoveEffect.h" />
+    <ClInclude Include="MoveValidator.h" />
     <ClInclude Include="Pawn.h" />
     <ClInclude Include="Piece.h" />
     <ClInclude Include="PlayerAction.h" />

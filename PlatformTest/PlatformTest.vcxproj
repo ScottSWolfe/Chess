@@ -75,8 +75,9 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\Scott\git\Chess\Platform;C:\Users\Scott\git\Chess\Platform\Debug;$(IncludePath)</IncludePath>
+    <IncludePath>..\Platform;C:\Users\Scott\git\Chess\Platform;C:\Users\Scott\git\Chess\Platform\Debug;$(IncludePath)</IncludePath>
     <IntDir>$(Configuration)\</IntDir>
+    <LibraryPath>../Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>

@@ -33,9 +33,6 @@
     <ClInclude Include="MoveInputParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MoveValidator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="OtherActionSelector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -69,9 +66,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MoveInputParser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveValidator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OtherActionSelector.cpp">
