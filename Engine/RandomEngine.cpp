@@ -1,4 +1,3 @@
-#include <random>
 #include "ChessDebug.h"
 #include "GameState.h"
 #include "Move.h"
@@ -16,7 +15,7 @@ RandomEngine::RandomEngine(PieceColor color)
 std::shared_ptr<PlayerAction> RandomEngine::getAction(const GameState &state) const {
     std::vector<Move> moves = state.getAvailableMoves();
     eliminateIllegalMoves(state, moves);
-    if (moves.size() <= 0) {
+    if (moves.size() < 1) {
         return nullptr;
     }
     int rand_num = randomInteger(moves.size() - 1);
@@ -49,9 +48,10 @@ void RandomEngine::eliminateIllegalMoves(const GameState &state, std::vector<Mov
 }
 
 int RandomEngine::randomInteger(int max_int) const {
-    std::default_random_engine generator;
-    std::uniform_int_distribution<int> distribution(0, max_int);
-    return distribution(generator);
+    if (max_int < 1) {
+        return 0;
+    }
+    return rand_int_device() % max_int;
 }
 
 

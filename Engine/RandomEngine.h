@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <random>
 #include <vector>
 #include "Engine.h"
 #include "Piece.h"
@@ -17,6 +18,7 @@ public:
 
 private:
     PieceColor color;
+    mutable std::random_device rand_int_device;
 
     void eliminateIllegalMoves(const GameState &state, std::vector<Move> &moves) const;
     int randomInteger(int max_int) const;
