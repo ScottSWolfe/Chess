@@ -19,8 +19,6 @@ public:
     Board(int board_dimension);
     Board(const Board &other_board);
     std::shared_ptr<Board> getCopy() const;
-    Square &getSquare(Position pos);
-    const Square &getSquare(Position pos) const;
     bool inBounds(Position pos) const;
     bool hasPieceMoved(Position pos) const;
     void makeMove(const Move &move);
@@ -41,6 +39,8 @@ private:
     const int dimension;
     std::vector<Square> squares;
 
+    Square &getSquare(Position pos);
+    const Square &getSquare(Position pos) const;
     int getIndex(Position pos) const;
     Position getPosition(int index) const;
     void applyMoveEffect(const MoveEffect *effect);

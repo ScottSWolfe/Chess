@@ -28,12 +28,12 @@ namespace PlatformTest
 			Board copy_of_board(board);
 
 			// square with a piece
-			Assert::IsNotNull(copy_of_board.getSquare(pos01).getPiece(), L"message", LINE_INFO());
+			Assert::IsNotNull(copy_of_board.getPiece(pos01), L"message", LINE_INFO());
 
 			// squares without a piece
-			Assert::IsNull(copy_of_board.getSquare(pos00).getPiece());
-            Assert::IsNull(copy_of_board.getSquare(pos10).getPiece());
-            Assert::IsNull(copy_of_board.getSquare(pos11).getPiece());
+			Assert::IsNull(copy_of_board.getPiece(pos00));
+            Assert::IsNull(copy_of_board.getPiece(pos10));
+            Assert::IsNull(copy_of_board.getPiece(pos11));
 		}
 
 		TEST_METHOD(copyConstructorMakesCopyAndNotReference)
@@ -50,10 +50,10 @@ namespace PlatformTest
 			copy_of_board.addPieceToSquare(pos11, white_rook);
 
 			// square without white rook
-			Assert::IsNull(board.getSquare(pos11).getPiece());
+			Assert::IsNull(board.getPiece(pos11));
 
 			// square with white rook
-			Assert::IsNotNull(copy_of_board.getSquare(pos11).getPiece());
+			Assert::IsNotNull(copy_of_board.getPiece(pos11));
 		}
 
 	};
