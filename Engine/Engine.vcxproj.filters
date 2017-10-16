@@ -24,12 +24,18 @@
     <ClInclude Include="BTREngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PositionRanker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RandomEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="BTREngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PositionRanker.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -118,10 +118,12 @@
   <ItemGroup>
     <ClInclude Include="BTREngine.h" />
     <ClInclude Include="Engine.h" />
+    <ClInclude Include="PositionRanker.h" />
     <ClInclude Include="RandomEngine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BTREngine.cpp" />
+    <ClCompile Include="PositionRanker.cpp" />
     <ClCompile Include="RandomEngine.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
