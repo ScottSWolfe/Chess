@@ -48,10 +48,10 @@
     <ClInclude Include="..\Platform\DrawOffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Platform\Claim50MoveDraw.h">
+    <ClInclude Include="..\Platform\Resignation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Platform\Resignation.h">
+    <ClInclude Include="ComputerPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -90,6 +90,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Claim50MoveDraw.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputerPlayer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

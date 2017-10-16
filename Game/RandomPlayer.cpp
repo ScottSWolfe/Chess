@@ -10,7 +10,7 @@ namespace chess {
 
 
 RandomPlayer::RandomPlayer(PieceColor color)
-    : Player(color), engine(color)
+    : Player(color)
 {}
 
 std::shared_ptr<PlayerAction> RandomPlayer::getAction(const GameState &state) const {

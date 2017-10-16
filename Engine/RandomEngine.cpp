@@ -8,9 +8,7 @@
 namespace chess {
 
 
-RandomEngine::RandomEngine(PieceColor color)
-    : color(color)
-{}
+RandomEngine::RandomEngine() {}
 
 std::shared_ptr<PlayerAction> RandomEngine::getAction(const GameState &state) const {
     std::vector<Move> moves = state.getAvailableMoves();

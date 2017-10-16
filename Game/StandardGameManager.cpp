@@ -1,6 +1,8 @@
 #include <iostream>
 #include "BoardInitializer.h"
+#include "BTREngine.h"
 #include "ChessDebug.h"
+#include "ComputerPlayer.h"
 #include "ConsoleBoardPresenter.h"
 #include "StandardGameManager.h"
 #include "HumanPlayer.h"
@@ -14,7 +16,7 @@ namespace chess {
 StandardGameManager::StandardGameManager() :
     current_state(BoardInitializer::initializeStandardSetup(), PieceColor::WHITE),
     white_player(new HumanPlayer(PieceColor::WHITE)),
-    black_player(new HumanPlayer(PieceColor::BLACK))
+    black_player(new ComputerPlayer(PieceColor::BLACK, new BTREngine))
 {}
 
 void StandardGameManager::startGame() {
