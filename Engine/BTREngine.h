@@ -3,6 +3,7 @@
 #include <memory>
 #include "Engine.h"
 #include "Piece.h"
+#include "PlayerAction.h"
 
 namespace chess {
 
