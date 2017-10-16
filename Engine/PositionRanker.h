@@ -10,6 +10,9 @@ class PositionRanker {
 public:
     static int rankPosition(const GameState &state);
 
+private:
+    static int sumPieceValues(const GameState &state, PieceColor color);
+
 };
 
 
