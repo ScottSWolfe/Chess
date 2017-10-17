@@ -8,8 +8,9 @@
 
 namespace chess {
 
-struct Position;
 class GameObserver;
+class PieceIterator;
+struct Position;
 
 
 enum class GameEndType {
@@ -45,6 +46,7 @@ public:
     const Move *getLastMove() const;
     bool canCurrentPlayerMakeMove() const;
     std::vector<Move> getAvailableMoves() const;
+    PieceIterator getPieceIterator(PieceColor color) const;
     bool isGameOver() const;
     void resignation();
     void drawByAgreement();

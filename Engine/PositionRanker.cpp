@@ -20,7 +20,7 @@ int PositionRanker::rankPosition(const GameState &state) {
 
 int PositionRanker::sumPieceValues(const GameState &state, PieceColor color) {
     int sum = 0;
-    PieceIterator pieces = state.getBoard().getPieceIterator(color);
+    PieceIterator pieces = state.getPieceIterator(color);
     while (pieces.hasNext()) {
         sum += pieceValues[pieces.next()->getType()];
     }

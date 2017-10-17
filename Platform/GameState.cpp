@@ -4,6 +4,7 @@
 #include "Move.h"
 #include "MoveEffect.h"
 #include "Piece.h"
+#include "PieceIterator.h"
 #include "Position.h"
 
 namespace chess {
@@ -138,6 +139,10 @@ bool GameState::canCurrentPlayerMakeMove() const {
         }
     }
     return false;
+}
+
+PieceIterator GameState::getPieceIterator(PieceColor color) const {
+    return board.getPieceIterator(color);
 }
 
 bool GameState::isOppPieceColor(Position pos, PieceColor color) const {
