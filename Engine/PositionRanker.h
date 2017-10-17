@@ -1,5 +1,8 @@
 #pragma once
 
+#include <map>
+#include "Piece.h"
+
 namespace chess {
 
 class GameState;
@@ -12,6 +15,7 @@ public:
 
 private:
     static int sumPieceValues(const GameState &state, PieceColor color);
+    static std::map<PieceType, int> pieceValues;
 
 };
 

@@ -5,6 +5,7 @@
 #include "GameState.h"
 #include "Move.h"
 #include "Piece.h"
+#include "PieceIterator.h"
 #include "Position.h"
 
 namespace chess {
@@ -139,6 +140,10 @@ bool Board::canPieceAttackSquare(Position pos, PieceColor color) const {
         }
     }
     return false;
+}
+
+PieceIterator Board::getPieceIterator(PieceColor color) const {
+    return PieceIterator(*this, color);
 }
 
 int Board::getDimension() const {

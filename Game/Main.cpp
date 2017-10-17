@@ -1,4 +1,3 @@
-#include <iostream>
 #include "ChessDebug.h"
 #ifdef _DEBUG
 #define _CRTDBG_MAP_ALLOC  

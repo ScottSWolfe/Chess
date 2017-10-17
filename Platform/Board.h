@@ -10,6 +10,7 @@ namespace chess {
 class GameState;
 class MoveEffect;
 class Piece;
+class PieceIterator;
 struct Position;
 
 
@@ -34,6 +35,8 @@ public:
     bool isKingInCheck(PieceColor king_color) const;
     bool canPieceAttackSquare(Position pos, PieceColor color) const;
     int getDimension() const;
+    PieceIterator getPieceIterator(PieceColor color) const;
+
 
 private:
     const int dimension;
