@@ -18,6 +18,9 @@ public:
 private:
     PositionRanker ranker;
 
+    std::shared_ptr<Move> getBestMove(const GameState &state) const;
+    int scoreMove(const GameState &state, const Move &move) const;
+
 };
 
 
