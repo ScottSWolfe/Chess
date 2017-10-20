@@ -26,8 +26,8 @@ GameState::GameState(const GameState &other)
     }
 }
 
-std::shared_ptr<GameState> GameState::getCopy() const {
-    return std::make_shared<GameState>(*this);
+GameState GameState::getCopy() const {
+    return GameState(*this);
 }
 
 const Board &GameState::getBoard() const {

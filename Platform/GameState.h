@@ -24,7 +24,7 @@ class GameState {
 public:
     GameState(Board board, PieceColor beginning_player);
     GameState(const GameState &other);
-    std::shared_ptr<GameState> getCopy() const;
+    GameState getCopy() const;
     const Board &getBoard() const;
     int getBoardDimension() const;
     bool isPiece(Position pos) const;
