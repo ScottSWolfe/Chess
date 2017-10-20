@@ -20,6 +20,7 @@ private:
 
     std::shared_ptr<Move> getBestMove(const GameState &state) const;
     int scoreMove(const GameState &state, const Move &move) const;
+    GameState makeMove(const GameState &state, const Move &move) const;
 
 };
 

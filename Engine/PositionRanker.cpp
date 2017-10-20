@@ -1,5 +1,6 @@
 #include "GameState.h"
 #include "PositionRanker.h"
+#include "Piece.h"
 #include "PieceIterator.h"
 
 namespace chess {
