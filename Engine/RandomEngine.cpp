@@ -12,7 +12,6 @@ RandomEngine::RandomEngine() {}
 
 std::shared_ptr<PlayerAction> RandomEngine::getAction(const GameState &state) const {
     std::vector<Move> moves = state.getAvailableMoves();
-    eliminateIllegalMoves(state, moves);
     if (moves.size() < 1) {
         return nullptr;
     }
@@ -28,21 +27,6 @@ PieceType RandomEngine::getPromotionPiece(const GameState &state, const Move &mo
         piece_type = getPromotionPiece(state, move);
     }
     return piece_type;
-}
-
-void RandomEngine::eliminateIllegalMoves(const GameState &state, std::vector<Move> &moves) const {
-    for (size_t i = 0; i < moves.size(); i++) {
-        Move move = moves[i];
-        MoveValidator validator(state, move);
-        if (validator.validateMoveIsSafe() == false) {
-            moves.erase(moves.begin() + i);
-            i--;
-        }
-        else if (validator.validateMoveIsLegal() == false) {
-            moves.erase(moves.begin() + i);
-            i--;
-        }
-    }
 }
 
 int RandomEngine::randomInteger(int max_int) const {

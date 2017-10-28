@@ -19,7 +19,6 @@ public:
 private:
     mutable std::random_device rand_int_device;
 
-    void eliminateIllegalMoves(const GameState &state, std::vector<Move> &moves) const;
     int randomInteger(int max_int) const;
 
 };
