@@ -12,7 +12,17 @@ std::map<PieceType, int> PositionRanker::pieceValues = { std::make_pair(PieceTyp
                                                          std::make_pair(PieceType::ROOK, 5),
                                                          std::make_pair(PieceType::QUEEN, 9), 
                                                          std::make_pair(PieceType::KING, 100) };
- 
+
+int PositionRanker::scorePosition(const GameState &state) {
+    int position_ranking = rankPosition(state);
+    if (state.getCurrentPlayersTurn() == PieceColor::WHITE) {
+        return -position_ranking;
+    }
+    else {
+        return position_ranking;
+    }
+}
+
 int PositionRanker::rankPosition(const GameState &state) {
     int white_val = sumPieceValues(state, PieceColor::WHITE);
     int black_val = sumPieceValues(state, PieceColor::BLACK);

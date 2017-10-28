@@ -29,13 +29,16 @@ std::shared_ptr<Move> BTREngine::getBestMove(const GameState &state) const {
 
 int BTREngine::scoreMove(const GameState &state, const Move &move) const {
     GameState new_state = makeMove(state, move);
-    int score = ranker.rankPosition(new_state);
-    if (state.getCurrentPlayersTurn() == PieceColor::WHITE) {
-        return score;
+    std::vector<Move> opponents_moves = new_state.getAvailableMoves();
+    int bestOpponentScore = std::numeric_limits<int>::min();
+    for (Move opp_move : opponents_moves) {
+        GameState temp_state = makeMove(new_state, opp_move);
+        int score = ranker.scorePosition(temp_state);
+        if (score > bestOpponentScore) {
+            bestOpponentScore = score;
+        }
     }
-    else {
-        return -score;
-    }
+    return -bestOpponentScore;
 }
 
 GameState BTREngine::makeMove(const GameState &state, const Move &move) const {

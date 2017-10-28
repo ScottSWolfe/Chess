@@ -11,6 +11,7 @@ class GameState;
 class PositionRanker {
 
 public:
+    static int scorePosition(const GameState &state);
     static int rankPosition(const GameState &state);
 
 private:
