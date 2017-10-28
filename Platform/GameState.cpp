@@ -3,6 +3,7 @@
 #include "GameState.h"
 #include "Move.h"
 #include "MoveEffect.h"
+#include "MoveValidator.h"
 #include "Piece.h"
 #include "PieceIterator.h"
 #include "Position.h"
@@ -111,6 +112,12 @@ const Move *GameState::getLastMove() const {
 }
 
 std::vector<Move> GameState::getAvailableMoves() const {
+    std::vector<Move> moves = collectMoves();
+    eliminateIllegalMoves(moves);
+    return moves;
+}
+
+std::vector<Move> GameState::collectMoves() const {
     std::vector<Move> moves;
     PieceColor current_color = getCurrentPlayersTurn();
     int dimension = getBoardDimension();
@@ -124,6 +131,17 @@ std::vector<Move> GameState::getAvailableMoves() const {
         }
     }
     return moves;
+}
+
+void GameState::eliminateIllegalMoves(std::vector<Move> &moves) const {
+    for (size_t i = 0; i < moves.size(); i++) {
+        Move move = moves[i];
+        MoveValidator validator(*this, move);
+        if (validator.validateMoveIsLegal() == false) {
+            moves.erase(moves.begin() + i);
+            i--;
+        }
+    }
 }
 
 bool GameState::canCurrentPlayerMakeMove() const {

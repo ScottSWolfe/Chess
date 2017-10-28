@@ -69,6 +69,9 @@ private:
     bool have50MovesPassed() const;
     void mate();
 
+    std::vector<Move> collectMoves() const;
+    void eliminateIllegalMoves(std::vector<Move> &moves) const;
+
 };
 
 
