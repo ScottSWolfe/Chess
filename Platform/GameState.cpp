@@ -82,6 +82,7 @@ bool GameState::isSquareAttacked(Position pos, PieceColor color) const {
 
 void GameState::makeMove(const Move &move) {
     incrementCaptureAndPawnCounter(move);
+    // TODO set piece's hasMoved to true (either here or in board's makeMove)
     board.makeMove(move);
     move_history.push_back(move);
     changePlayersTurn();

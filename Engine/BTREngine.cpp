@@ -28,17 +28,30 @@ std::shared_ptr<Move> BTREngine::getBestMove(const GameState &state) const {
 }
 
 int BTREngine::scoreMove(const GameState &state, const Move &move) const {
+    return scoreMove(state, move, 0, 0);
+}
+
+int BTREngine::scoreMove(const GameState &state, const Move &move, int max_depth, int depth) const {
     GameState new_state = makeMove(state, move);
     std::vector<Move> opponents_moves = new_state.getAvailableMoves();
     int bestOpponentScore = std::numeric_limits<int>::min();
     for (Move opp_move : opponents_moves) {
-        GameState temp_state = makeMove(new_state, opp_move);
-        int score = ranker.scorePosition(temp_state);
+        int score = getScore(new_state, opp_move, max_depth, depth);
         if (score > bestOpponentScore) {
             bestOpponentScore = score;
         }
     }
     return -bestOpponentScore;
+}
+
+int BTREngine::getScore(const GameState &state, const Move &move, int max_depth, int depth) const {
+    if (depth < max_depth) {
+        return scoreMove(state, move, max_depth, depth + 1);
+    }
+    else {
+        GameState new_state = makeMove(state, move);
+        return ranker.scorePosition(new_state);
+    }
 }
 
 GameState BTREngine::makeMove(const GameState &state, const Move &move) const {

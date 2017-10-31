@@ -15,8 +15,8 @@ namespace chess {
 
 StandardGameManager::StandardGameManager() :
     current_state(BoardInitializer::initializeStandardSetup(), PieceColor::WHITE),
-    white_player(new ComputerPlayer(PieceColor::WHITE, new BTREngine)),
-    black_player(new ComputerPlayer(PieceColor::BLACK, new RandomEngine))
+    white_player(new ComputerPlayer(PieceColor::WHITE, new RandomEngine)),
+    black_player(new ComputerPlayer(PieceColor::BLACK, new BTREngine))
 {}
 
 void StandardGameManager::startGame() {
