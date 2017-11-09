@@ -20,6 +20,10 @@ Square::Square(const Square &other_square)
     : piece(other_square.getCopyOfPiece())
 {}
 
+Square& Square::operator=(const Square &other) {
+    return Square(other);
+}
+
 const Piece *Square::getPiece() const {
     return piece.get();
 }

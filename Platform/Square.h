@@ -12,6 +12,7 @@ public:
     Square();
     Square(std::unique_ptr<Piece> &piece);
     Square(const Square &other_square);
+    Square& operator = (const Square &other);
     bool isPiece() const;
     const Piece *getPiece() const;
     void setPiece(std::unique_ptr<Piece> &new_piece);

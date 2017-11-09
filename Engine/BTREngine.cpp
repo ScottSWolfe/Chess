@@ -55,7 +55,7 @@ int BTREngine::getScore(const GameState &state, const Move &move, int max_depth,
 }
 
 GameState BTREngine::makeMove(const GameState &state, const Move &move) const {
-    GameState new_state = state.getCopy();
+    GameState new_state(state);
     new_state.makeMove(move);
     return new_state;
 }
