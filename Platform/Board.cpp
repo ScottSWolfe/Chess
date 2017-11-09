@@ -17,18 +17,20 @@ Board::Board(int board_dimension)
     if (board_dimension < 6 || board_dimension > 99) {
         throw std::invalid_argument("board dimension is out of range");
     }
-    squares.reserve(dimension * dimension);
-    for (int i = 0; i < dimension * dimension; ++i) {
-        Square square;
-        squares.push_back(square);
+    const int num_squares = dimension * dimension;
+    squares.reserve(num_squares);
+    for (int i = 0; i < num_squares; ++i) {
+        squares.push_back(Square());
     }
 }
 
 Board::Board(const Board &other_board) :
     dimension(other_board.getDimension())
 {
-    for (int i = 0; i < dimension * dimension; ++i) {
-        squares.emplace_back(other_board.squares[i]);
+    const int num_squares = dimension * dimension;
+    squares.reserve(num_squares);
+    for (int i = 0; i < num_squares; ++i) {
+        squares.push_back(other_board.squares[i]);
     }
 }
 

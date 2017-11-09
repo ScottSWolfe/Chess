@@ -22,6 +22,7 @@ GameState::GameState(const GameState &other)
     : board(other.board), current_turn(other.current_turn), game_over_state(other.game_over_state),
     turns_since_capture_or_pawn_push(other.turns_since_capture_or_pawn_push)
 {
+    move_history.reserve(other.move_history.size());
     for (Move move : other.move_history) {
         move_history.push_back(move);
     }

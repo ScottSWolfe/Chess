@@ -28,7 +28,7 @@ std::shared_ptr<Move> BTREngine::getBestMove(const GameState &state) const {
 }
 
 int BTREngine::scoreMove(const GameState &state, const Move &move) const {
-    return scoreMove(state, move, 0, 0);
+    return scoreMove(state, move, 1, 0);
 }
 
 int BTREngine::scoreMove(const GameState &state, const Move &move, int max_depth, int depth) const {
