@@ -27,11 +27,7 @@ Board::Board(int board_dimension)
 Board::Board(const Board &other_board) :
     dimension(other_board.getDimension())
 {
-    const int num_squares = dimension * dimension;
-    squares.reserve(num_squares);
-    for (int i = 0; i < num_squares; ++i) {
-        squares.push_back(other_board.squares[i]);
-    }
+    squares = other_board.squares;
 }
 
 std::shared_ptr<Board> Board::getCopy() const {
