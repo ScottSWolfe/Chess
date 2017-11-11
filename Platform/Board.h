@@ -56,6 +56,7 @@ private:
                         bool doesPieceAttackCorrectly(const Piece *piece)) const;
     bool isKingAttacked(const Position &king_position, const Move &move, int x_delta, int y_delta,
                         bool doesPieceAttackCorrectly(const Piece *piece)) const;
+    bool isKingAttackedAfterKingMoves(const Move &move, PieceColor king_color) const;
     bool isPieceThreatToKing(const Piece *piece, PieceColor king_color,
                              bool doesPieceAttackCorrectly(const Piece *piece)) const;
     static void getLineDeltas(const Position &pos_a, const Position &pos_b, int &x_delta, int &y_delta);

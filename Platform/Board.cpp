@@ -120,6 +120,9 @@ bool Board::isKingInCheck(PieceColor king_color) const {
 bool Board::willKingBeInCheck(PieceColor king_color, const Move &move) const {
     Position king_position = getKingPosition(king_color);
     Position move_position = move.getStart();
+    if (king_position == move_position) {
+        return isKingAttackedAfterKingMoves(move, king_color);
+    }
     if (areCellsInSameLine(king_position, move_position)) {
         if (isKingAttacked(king_position, move, getLineDeltas, Piece::doesPieceAttackInLine)) {
             return true;
@@ -194,6 +197,12 @@ bool Board::isPieceThreatToKing(const Piece *piece, PieceColor king_color,
         }
     }
     return false;
+}
+
+bool Board::isKingAttackedAfterKingMoves(const Move &move, PieceColor king_color) const {
+    Board copy_of_board(*this);
+    copy_of_board.makeMove(move);
+    return copy_of_board.canPieceAttackSquare(move.getEnd(), king_color);
 }
 
 void Board::getLineDeltas(const Position &pos_a, const Position &pos_b, int &x_delta, int &y_delta) {
