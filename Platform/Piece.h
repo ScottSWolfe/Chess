@@ -35,6 +35,8 @@ public:
     static std::unique_ptr<Piece> copyPiece(const Piece *piece);
     static const std::string getPieceSymbol(const Piece *piece);
     static PieceColor getPieceColor(const Piece *piece);
+    static bool doesPieceAttackInLine(const Piece *piece);
+    static bool doesPieceAttackInDiagonal(const Piece *piece);
 
     static const std::string PAWN_SYMBOL;
     static const std::string ROOK_SYMBOL;

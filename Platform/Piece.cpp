@@ -68,6 +68,20 @@ PieceColor Piece::getPieceColor(const Piece *piece) {
     }
 }
 
+bool Piece::doesPieceAttackInLine(const Piece *piece) {
+    if (piece->getType() == PieceType::QUEEN || piece->getType() == PieceType::ROOK) {
+        return true;
+    }
+    return false;
+}
+
+bool Piece::doesPieceAttackInDiagonal(const Piece *piece) {
+    if (piece->getType() == PieceType::QUEEN || piece->getType() == PieceType::BISHOP) {
+        return true;
+    }
+    return false;
+}
+
 std::unique_ptr<Piece> Piece::copyPiece(const Piece *piece) {
     if (piece == nullptr) {
         return nullptr;

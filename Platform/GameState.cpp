@@ -68,9 +68,7 @@ bool GameState::isMoveAvailable(const Move &move) const {
 }
 
 bool GameState::willKingBeInCheck(const Move &move) const {
-    Board board_after_move(board);
-    board_after_move.makeMove(move);
-    return board_after_move.isKingInCheck(current_turn);
+    return board.willKingBeInCheck(current_turn, move);
 }
 
 bool GameState::isKingInCheck() const {

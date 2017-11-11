@@ -1,3 +1,4 @@
+#include <cmath>
 #include <iostream>
 #include <vector>
 #include "Board.h"
@@ -114,6 +115,125 @@ void Board::setPiece(Position pos, std::unique_ptr<Piece> &piece) {
 bool Board::isKingInCheck(PieceColor king_color) const {
     Position king_position = getKingPosition(king_color);
     return canPieceAttackSquare(king_position, king_color);
+}
+
+bool Board::willKingBeInCheck(PieceColor king_color, const Move &move) const {
+    Position king_position = getKingPosition(king_color);
+    Position move_position = move.getStart();
+    if (areCellsInSameLine(king_position, move_position)) {
+        if (isKingAttacked(king_position, move, getLineDeltas, Piece::doesPieceAttackInLine)) {
+            return true;
+        }
+    }
+    else if (areCellsInSameDiagonal(king_position, move_position)) {
+        if (isKingAttacked(king_position, move, getDiagonalDeltas, Piece::doesPieceAttackInDiagonal)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Board::areCellsInSameLine(const Position &pos1, const Position &pos2) const {
+    if (pos1.x == pos2.x) {
+        return true;
+    }
+    if (pos1.y == pos2.y) {
+        return true;
+    }
+    return false;
+}
+
+bool Board::areCellsInSameDiagonal(const Position &pos1, const Position &pos2) const {
+    int x_diff = std::abs(pos1.x - pos2.x);
+    int y_diff = std::abs(pos1.y - pos2.y);
+    if (x_diff == y_diff) {
+        return true;
+    }
+    return false;
+}
+
+bool Board::isKingAttacked(const Position &king_position, const Move &move,
+                           void getDeltas(const Position &pos_a, const Position &pos_b, int &x_delta, int &y_delta),
+                           bool doesPieceAttackCorrectly(const Piece *piece)) const
+{
+    Position move_start = move.getStart();
+    int x_delta, y_delta;
+    getDeltas(king_position, move_start, x_delta, y_delta);
+    return isKingAttacked(king_position, move, x_delta, y_delta, doesPieceAttackCorrectly);
+}
+
+bool Board::isKingAttacked(const Position &king_position, const Move &move, int x_delta, int y_delta,
+                           bool doesPieceAttackCorrectly(const Piece *piece)) const
+{
+    Position move_start = move.getStart();
+    Position move_end = move.getStart();
+    Position current = king_position;
+    while (inBounds(current)) {
+        if (isPiece(current) && current != move_start) {
+            if (isPieceThreatToKing(getPiece(current), getPieceColor(king_position), doesPieceAttackCorrectly)) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else if (current == move_end) {
+            return false;
+        }
+        current.add(x_delta, y_delta);
+    }
+    return false;
+}
+
+bool Board::isPieceThreatToKing(const Piece *piece, PieceColor king_color,
+                                bool doesPieceAttackCorrectly(const Piece *piece)) const
+{
+    if (doesPieceAttackCorrectly(piece)) {
+        if (piece->getColor() != king_color) {
+            return true;
+        }
+    }
+    return false;
+}
+
+void Board::getLineDeltas(const Position &pos_a, const Position &pos_b, int &x_delta, int &y_delta) {
+    x_delta = 0;
+    y_delta = 0;
+    if (pos_a.x == pos_b.x) {
+        if (pos_a.y < pos_b.y) {
+            y_delta = 1;
+        }
+        else {
+            y_delta = -1;
+        }
+    }
+    else if (pos_a.y == pos_b.y) {
+        if (pos_a.x < pos_b.x) {
+            x_delta = 1;
+        }
+        else {
+            x_delta = -1;
+        }
+    }
+}
+
+void Board::getDiagonalDeltas(const Position &pos_a, const Position &pos_b, int &x_delta, int &y_delta) {
+    x_delta = 0;
+    y_delta = 0;
+    
+    if (pos_a.y < pos_b.y) {
+        y_delta = 1;
+    }
+    else {
+        y_delta = -1;
+    }
+    
+    if (pos_a.x < pos_b.x) {
+        x_delta = 1;
+    }
+    else {
+        x_delta = -1;
+    }
 }
 
 Position Board::getKingPosition(PieceColor king_color) const {
