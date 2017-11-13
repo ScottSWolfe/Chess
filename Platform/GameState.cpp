@@ -28,10 +28,6 @@ GameState::GameState(const GameState &other)
     }
 }
 
-GameState GameState::getCopy() const {
-    return GameState(*this);
-}
-
 const Board &GameState::getBoard() const {
     return board;
 }

@@ -31,10 +31,6 @@ Board::Board(const Board &other_board) :
     squares = other_board.squares;
 }
 
-std::shared_ptr<Board> Board::getCopy() const {
-    return std::make_shared<Board>(*this);
-}
-
 Square &Board::getSquare(Position pos) {
     return squares[getIndex(pos)];
 }

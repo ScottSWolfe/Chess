@@ -19,7 +19,6 @@ class Board {
 public:
     Board(int board_dimension);
     Board(const Board &other_board);
-    std::shared_ptr<Board> getCopy() const;
     bool inBounds(Position pos) const;
     bool hasPieceMoved(Position pos) const;
     void makeMove(const Move &move);
