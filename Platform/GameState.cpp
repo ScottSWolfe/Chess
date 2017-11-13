@@ -113,7 +113,7 @@ const Move *GameState::getLastMove() const {
 
 std::vector<Move> GameState::getAvailableMoves() const {
     std::vector<Move> moves = collectMoves();
-    eliminateIllegalMoves(moves);
+    eliminateMovesThatPutKingInCheck(moves);
     return moves;
 }
 
@@ -133,11 +133,10 @@ std::vector<Move> GameState::collectMoves() const {
     return moves;
 }
 
-void GameState::eliminateIllegalMoves(std::vector<Move> &moves) const {
+void GameState::eliminateMovesThatPutKingInCheck(std::vector<Move> &moves) const {
     for (size_t i = 0; i < moves.size(); i++) {
         Move move = moves[i];
-        MoveValidator validator(*this, move);
-        if (validator.validateMoveIsLegal() == false) {
+        if (willKingBeInCheck(move) == true) {
             moves.erase(moves.begin() + i);
             i--;
         }

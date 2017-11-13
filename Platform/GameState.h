@@ -70,7 +70,7 @@ private:
     void mate();
 
     std::vector<Move> collectMoves() const;
-    void eliminateIllegalMoves(std::vector<Move> &moves) const;
+    void eliminateMovesThatPutKingInCheck(std::vector<Move> &moves) const;
 
 };
 
