@@ -6,7 +6,7 @@ namespace chess {
 
 
 std::shared_ptr<PlayerAction> BTREngine::getAction(const GameState &state) const {
-    return getBestMove(state);
+    return getBestMoveUsingThreads(state);
 }
 
 PieceType BTREngine::getPromotionPiece(const GameState &state, const Move &move) const {
@@ -25,6 +25,47 @@ std::shared_ptr<Move> BTREngine::getBestMove(const GameState &state) const {
         }
     }
     return bestMove;
+}
+
+std::shared_ptr<Move> BTREngine::getBestMoveUsingThreads(const GameState &state) const {
+    std::vector<Move> moves = state.getAvailableMoves();
+    int num_moves = moves.size();
+    std::vector<int> scores(num_moves);
+    std::vector<std::thread> threads(num_moves);
+    launch_threads(state, moves, threads, scores);
+    join_threads(threads);
+    return chooseBestMoveUsingScores(moves, scores);
+}
+
+void BTREngine::launch_threads(const GameState &state, const std::vector<Move> &moves, std::vector<std::thread> &threads, std::vector<int> &scores) const {
+    int size = moves.size();
+    for (int i = 0; i < size; i++) {
+        threads[i] = std::thread(&BTREngine::scoreMoveThreadingWrapper, this, state, moves[i], std::ref(scores[i]));
+    }
+}
+
+void BTREngine::join_threads(std::vector<std::thread> &threads) const {
+    int size = threads.size();
+    for (int i = 0; i < size; i++) {
+        threads[i].join();
+    }
+}
+
+std::shared_ptr<Move> BTREngine::chooseBestMoveUsingScores(const std::vector<Move> &moves, const std::vector<int> &scores) const {
+    int bestScore = std::numeric_limits<int>::min();
+    std::shared_ptr<Move> bestMove(nullptr);
+    int size = moves.size();
+    for (int i = 0; i < size; i++) {
+        if (bestScore < scores[i]) {
+            bestScore = scores[i];
+            bestMove = std::make_shared<Move>(moves[i]);
+        }
+    }
+    return bestMove;
+}
+
+void BTREngine::scoreMoveThreadingWrapper(const GameState &state, const Move &move, int &result) const {
+    result = scoreMove(state, move);
 }
 
 int BTREngine::scoreMove(const GameState &state, const Move &move) const {
