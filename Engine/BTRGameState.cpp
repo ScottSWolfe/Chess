@@ -22,7 +22,8 @@ void BTRGameState::makeMove(const Move &move) {
 }
 
 void BTRGameState::updateRelativePieceValue(const Move &move) {
-    
+    PositionRanker ranker;
+    relative_piece_value += ranker.getRelativePieceValueChange(*this, move);
 }
 
 
