@@ -9,6 +9,7 @@ namespace chess {
 class BTRGameState : public GameState {
 
 public:
+    BTRGameState(const BTRGameState &state);
     BTRGameState(const GameState &state);
     int getRelativePieceValue() const;
     void makeMove(const Move &move);

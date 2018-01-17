@@ -5,6 +5,10 @@
 namespace chess {
 
 
+BTRGameState::BTRGameState(const BTRGameState &other)
+    : GameState(other), relative_piece_value(other.relative_piece_value)
+{}
+
 BTRGameState::BTRGameState(const GameState &state) 
     : GameState(state)
 {

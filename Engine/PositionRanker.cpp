@@ -1,4 +1,4 @@
-#include "GameState.h"
+#include "BTRGameState.h"
 #include "PositionRanker.h"
 #include "Piece.h"
 #include "PieceIterator.h"
@@ -13,7 +13,7 @@ std::map<PieceType, int> PositionRanker::pieceValues = { std::make_pair(PieceTyp
                                                          std::make_pair(PieceType::QUEEN, 9), 
                                                          std::make_pair(PieceType::KING, 100) };
 
-int PositionRanker::scorePosition(const GameState &state) {
+int PositionRanker::scorePosition(const BTRGameState &state) {
     int position_ranking = rankPosition(state);
     if (state.getCurrentPlayersTurn() == PieceColor::WHITE) {
         return -position_ranking;

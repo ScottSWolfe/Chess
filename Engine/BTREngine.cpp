@@ -1,6 +1,6 @@
 #include <limits>
 #include "BTREngine.h"
-#include "GameState.h"
+#include "BTRGameState.h"
 #include "BTRGameState.h"
 
 namespace chess {
@@ -15,7 +15,7 @@ PieceType BTREngine::getPromotionPiece(const GameState &state, const Move &move)
     return PieceType::QUEEN;
 }
 
-std::shared_ptr<Move> BTREngine::getBestMove(const GameState &state) const {
+std::shared_ptr<Move> BTREngine::getBestMove(const BTRGameState &state) const {
     int bestScore = std::numeric_limits<int>::min();
     std::shared_ptr<Move> bestMove(nullptr);
     std::vector<Move> moves = state.getAvailableMoves();
@@ -29,7 +29,7 @@ std::shared_ptr<Move> BTREngine::getBestMove(const GameState &state) const {
     return bestMove;
 }
 
-std::shared_ptr<Move> BTREngine::getBestMoveUsingThreads(const GameState &state) const {
+std::shared_ptr<Move> BTREngine::getBestMoveUsingThreads(const BTRGameState &state) const {
     std::vector<Move> moves = state.getAvailableMoves();
     int num_moves = moves.size();
     std::vector<int> scores(num_moves);
@@ -39,7 +39,7 @@ std::shared_ptr<Move> BTREngine::getBestMoveUsingThreads(const GameState &state)
     return chooseBestMoveUsingScores(moves, scores);
 }
 
-void BTREngine::launch_threads(const GameState &state, const std::vector<Move> &moves, std::vector<std::thread> &threads, std::vector<int> &scores) const {
+void BTREngine::launch_threads(const BTRGameState &state, const std::vector<Move> &moves, std::vector<std::thread> &threads, std::vector<int> &scores) const {
     int size = moves.size();
     for (int i = 0; i < size; i++) {
         threads[i] = std::thread(&BTREngine::scoreMoveThreadingWrapper, this, state, moves[i], std::ref(scores[i]));
@@ -66,16 +66,16 @@ std::shared_ptr<Move> BTREngine::chooseBestMoveUsingScores(const std::vector<Mov
     return bestMove;
 }
 
-void BTREngine::scoreMoveThreadingWrapper(const GameState &state, const Move &move, int &result) const {
+void BTREngine::scoreMoveThreadingWrapper(const BTRGameState &state, const Move &move, int &result) const {
     result = scoreMove(state, move);
 }
 
-int BTREngine::scoreMove(const GameState &state, const Move &move) const {
+int BTREngine::scoreMove(const BTRGameState &state, const Move &move) const {
     return scoreMove(state, move, 1, 0);
 }
 
-int BTREngine::scoreMove(const GameState &state, const Move &move, int max_depth, int depth) const {
-    GameState new_state = makeMove(state, move);
+int BTREngine::scoreMove(const BTRGameState &state, const Move &move, int max_depth, int depth) const {
+    BTRGameState new_state = makeMove(state, move);
     std::vector<Move> opponents_moves = new_state.getAvailableMoves();
     int bestOpponentScore = std::numeric_limits<int>::min();
     for (Move opp_move : opponents_moves) {
@@ -87,18 +87,18 @@ int BTREngine::scoreMove(const GameState &state, const Move &move, int max_depth
     return -bestOpponentScore;
 }
 
-int BTREngine::getScore(const GameState &state, const Move &move, int max_depth, int depth) const {
+int BTREngine::getScore(const BTRGameState &state, const Move &move, int max_depth, int depth) const {
     if (depth < max_depth) {
         return scoreMove(state, move, max_depth, depth + 1);
     }
     else {
-        GameState new_state = makeMove(state, move);
+        BTRGameState new_state = makeMove(state, move);
         return ranker.scorePosition(new_state);
     }
 }
 
-GameState BTREngine::makeMove(const GameState &state, const Move &move) const {
-    GameState new_state(state);
+BTRGameState BTREngine::makeMove(const BTRGameState &state, const Move &move) const {
+    BTRGameState new_state(state);
     new_state.makeMove(move);
     return new_state;
 }
