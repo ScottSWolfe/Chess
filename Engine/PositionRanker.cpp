@@ -14,7 +14,7 @@ std::map<PieceType, int> PositionRanker::pieceValues = { std::make_pair(PieceTyp
                                                          std::make_pair(PieceType::KING, 100) };
 
 int PositionRanker::scorePosition(const BTRGameState &state) {
-    int position_ranking = rankPosition(state);
+    int position_ranking = state.getRelativePieceValue();
     if (state.getCurrentPlayersTurn() == PieceColor::WHITE) {
         return -position_ranking;
     }
