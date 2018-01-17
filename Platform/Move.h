@@ -24,7 +24,8 @@ public:
     Position getEnd() const;
     bool hasEffect() const;
     const MoveEffect *getEffect() const;
-    MoveEffectType getEffectType() const;
+    bool isPromotionType() const;
+    bool isEnPassantType() const;
     void setPromotionPiece(PieceType type);
     std::unique_ptr<MoveEffect> getCopyOfEffect() const;
 
@@ -32,6 +33,8 @@ private:
     Position start;
     Position end;
     std::unique_ptr<MoveEffect> effect;
+
+    MoveEffectType getEffectType() const;
 
 };
 

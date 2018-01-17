@@ -76,6 +76,20 @@ MoveEffectType Move::getEffectType() const {
     return effect->getType();
 }
 
+bool Move::isPromotionType() const {
+    if (hasEffect()) {
+        return effect->getType() == MoveEffectType::PROMOTION;
+    }
+    return false;
+}
+
+bool Move::isEnPassantType() const {
+    if (hasEffect()) {
+        return effect->getType() == MoveEffectType::EN_PASSANT;
+    }
+    return false;
+}
+
 void Move::setPromotionPiece(PieceType type) {
     if (effect == nullptr) {
         return;

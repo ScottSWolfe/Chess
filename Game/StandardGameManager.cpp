@@ -101,7 +101,7 @@ bool StandardGameManager::validateMoveIsLegal(const Move &move) const {
 
 void StandardGameManager::addMoveEffect(Move &move) const {
     current_state.addMoveEffect(move);
-    if (move.hasEffect() && move.getEffectType() == MoveEffectType::PROMOTION) {
+    if (move.isPromotionType()) {
         PieceType type = askPlayerForPromotionPiece(move);
         move.setPromotionPiece(type);
     }
