@@ -28,7 +28,11 @@ Piece::Piece(PieceColor piece_color)
 {}
 
 PieceColor Piece::getColor() const {
-    return Piece::color;
+    return color;
+}
+
+bool Piece::isWhiteColor() const {
+    return color == PieceColor::WHITE;
 }
 
 const std::string Piece::getPieceSymbol(const Piece *piece) {

@@ -118,11 +118,13 @@
   <ItemGroup>
     <ClInclude Include="BTREngine.h" />
     <ClInclude Include="Engine.h" />
+    <ClInclude Include="BTRGameState.h" />
     <ClInclude Include="PositionRanker.h" />
     <ClInclude Include="RandomEngine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BTREngine.cpp" />
+    <ClCompile Include="BTRGameState.cpp" />
     <ClCompile Include="PositionRanker.cpp" />
     <ClCompile Include="RandomEngine.cpp" />
   </ItemGroup>
