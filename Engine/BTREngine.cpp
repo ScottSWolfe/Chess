@@ -1,12 +1,14 @@
 #include <limits>
 #include "BTREngine.h"
 #include "GameState.h"
+#include "BTRGameState.h"
 
 namespace chess {
 
 
 std::shared_ptr<PlayerAction> BTREngine::getAction(const GameState &state) const {
-    return getBestMoveUsingThreads(state);
+    BTRGameState btr_state(state);
+    return getBestMoveUsingThreads(btr_state);
 }
 
 PieceType BTREngine::getPromotionPiece(const GameState &state, const Move &move) const {
