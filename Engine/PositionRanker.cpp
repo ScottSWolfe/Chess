@@ -29,6 +29,39 @@ int PositionRanker::rankPosition(const GameState &state) {
     return white_val - black_val;
 }
 
+int PositionRanker::getRelativePieceValueChange(const GameState &state, const Move &move) {
+    int change = 0;
+
+    auto piece = state.getPiece(move.getEnd());
+    if (piece) {
+        if (piece->isWhiteColor()) {
+            change -= pieceValues[piece->getType()];
+        }
+        else {
+            change += pieceValues[piece->getType()];
+        }
+    }
+
+    if (move.isPromotionType()) {
+        if (piece->isWhiteColor()) {
+            change += pieceValues[piece->getType()];
+        }
+        else {
+            change -= pieceValues[piece->getType()];
+        }
+    }
+    else if (move.isEnPassantType()) {
+        if (state.getCurrentPlayersTurn() == PieceColor::WHITE) {
+            change += 1;
+        }
+        else {
+            change -= 1;
+        }
+    }
+
+    return change;
+}
+
 int PositionRanker::sumPieceValues(const GameState &state, PieceColor color) {
     int sum = 0;
     PieceIterator pieces = state.getPieceIterator(color);
