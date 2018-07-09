@@ -8,7 +8,8 @@ namespace chess {
 
 std::shared_ptr<PlayerAction> BTREngine::getAction(const GameState &state) const {
     BTRGameState btr_state(state);
-    return getBestMoveUsingThreads(btr_state);
+    //return getBestMoveUsingThreads(btr_state);
+    return getBestMove(btr_state);
 }
 
 PieceType BTREngine::getPromotionPiece(const GameState &state, const Move &move) const {
@@ -71,19 +72,21 @@ void BTREngine::scoreMoveThreadingWrapper(const BTRGameState &state, const Move 
 }
 
 int BTREngine::scoreMove(const BTRGameState &state, const Move &move) const {
-    return scoreMove(state, move, 1, 0);
+    int current_depth = 1;
+    return getScore(state, move, MAX_DEPTH, current_depth);
 }
 
 int BTREngine::scoreMove(const BTRGameState &state, const Move &move, int max_depth, int depth) const {
-    BTRGameState new_state = makeMove(state, move);
-    std::vector<Move> opponents_moves = new_state.getAvailableMoves();
+    const_cast<BTRGameState&>(state).makeMove(move);
+    std::vector<Move> opponents_moves = state.getAvailableMoves();
     int bestOpponentScore = std::numeric_limits<int>::min();
     for (Move opp_move : opponents_moves) {
-        int score = getScore(new_state, opp_move, max_depth, depth);
+        int score = getScore(state, opp_move, max_depth, depth);
         if (score > bestOpponentScore) {
             bestOpponentScore = score;
         }
     }
+    const_cast<BTRGameState&>(state).undoLastMove();
     return -bestOpponentScore;
 }
 
@@ -92,15 +95,11 @@ int BTREngine::getScore(const BTRGameState &state, const Move &move, int max_dep
         return scoreMove(state, move, max_depth, depth + 1);
     }
     else {
-        BTRGameState new_state = makeMove(state, move);
-        return ranker.scorePosition(new_state);
+        const_cast<BTRGameState&>(state).makeMove(move);
+        int score = ranker.scorePosition(state);
+        const_cast<BTRGameState&>(state).undoLastMove();
+        return score;
     }
-}
-
-BTRGameState BTREngine::makeMove(const BTRGameState &state, const Move &move) const {
-    BTRGameState new_state(state);
-    new_state.makeMove(move);
-    return new_state;
 }
 
 

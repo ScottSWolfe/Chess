@@ -27,6 +27,7 @@ public:
     bool isPromotionType() const;
     bool isEnPassantType() const;
     void setPromotionPiece(PieceType type);
+    PieceType getPromotionPieceType() const;
     std::unique_ptr<MoveEffect> getCopyOfEffect() const;
 
 private:

@@ -99,6 +99,13 @@ void Move::setPromotionPiece(PieceType type) {
     }
 }
 
+PieceType Move::getPromotionPieceType() const {
+    if (effect->getType() != MoveEffectType::PROMOTION) {
+        throw std::runtime_error("incorrect move effect type");
+    }
+    return dynamic_cast<Promotion*>(effect.get())->getPromotionPieceType();
+}
+
 std::unique_ptr<MoveEffect> Move::getCopyOfEffect() const {
     if (effect == nullptr) {
         return nullptr;

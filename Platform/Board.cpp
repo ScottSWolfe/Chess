@@ -53,10 +53,40 @@ bool Board::hasPieceMoved(Position pos) const {
     return getSquare(pos).hasPieceMoved();
 }
 
-void Board::makeMove(const Move &move) {
+std::unique_ptr<Piece> Board::makeMove(const Move &move, int turn_number = -1) {
     auto piece = removePieceFromSquare(move.getStart());
-    addPieceToSquare(move.getEnd(), piece);
-    applyMoveEffect(move.getEffect());
+    piece->moved(turn_number);
+    auto captured_piece = applyMoveAndReturnCapture(move, piece);
+    return std::move(captured_piece);
+}
+
+void Board::undoMove(const Move &move, std::unique_ptr<Piece> &captured_piece, int turn_number = -1) {
+    undoMoveEffect(move.getEffect(), captured_piece);
+    auto piece = removePieceFromSquare(move.getEnd());
+    piece->undoMove(turn_number);
+    addPieceToSquare(move.getStart(), piece);
+    addPieceToSquare(move.getEnd(), captured_piece);
+}
+
+std::unique_ptr<Piece> Board::applyMoveAndReturnCapture(const Move &move, std::unique_ptr<Piece> &piece) {
+    auto captured_piece_from_move = addPieceToSquareAndReturnCapture(move.getEnd(), piece);
+    auto captured_piece_from_effect = applyMoveEffect(move.getEffect());
+    if (captured_piece_from_move.get()) {
+        return std::move(captured_piece_from_move);
+    }
+    else {
+        return std::move(captured_piece_from_effect);
+    }
+}
+
+std::unique_ptr<Piece> Board::addPieceToSquareAndReturnCapture(Position pos, std::unique_ptr<Piece> &piece) {
+    Square &square = getSquare(pos);
+    std::unique_ptr<Piece> captured_piece;
+    if (square.isPiece()) {
+        captured_piece = square.removePiece();
+    }
+    square.setPiece(piece);
+    return captured_piece;
 }
 
 void Board::addPieceToSquare(Position pos, std::unique_ptr<Piece> &piece) {
@@ -67,11 +97,20 @@ std::unique_ptr<Piece> Board::removePieceFromSquare(Position pos) {
     return getSquare(pos).removePiece();
 }
 
-void Board::applyMoveEffect(const MoveEffect *effect) {
+std::unique_ptr<Piece> Board::applyMoveEffect(const MoveEffect *effect) {
+    std::unique_ptr<Piece> piece;
+    if (effect == nullptr) {
+        return std::move(piece);
+    }
+    piece = effect->applyEffect(*this);
+    return std::move(piece);
+}
+
+void Board::undoMoveEffect(const MoveEffect *effect, std::unique_ptr<Piece> &piece) {
     if (effect == nullptr) {
         return;
     }
-    effect->applyEffect(*this);
+    effect->undoEffect(*this, piece);
 }
 
 bool Board::isPiece(Position pos) const {

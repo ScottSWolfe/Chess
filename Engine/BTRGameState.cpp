@@ -6,28 +6,31 @@ namespace chess {
 
 
 BTRGameState::BTRGameState(const BTRGameState &other)
-    : GameState(other), relative_piece_value(other.relative_piece_value)
+    : GameState(other), relative_piece_value_stack(other.relative_piece_value_stack)
 {}
 
 BTRGameState::BTRGameState(const GameState &state) 
     : GameState(state)
 {
-    PositionRanker ranker;
-    relative_piece_value = ranker.rankPosition(state);
+    relative_piece_value_stack.push_back(ranker.rankPosition(state));
 }
 
 int BTRGameState::getRelativePieceValue() const {
-    return relative_piece_value;
+    return relative_piece_value_stack.back();
 }
 
 void BTRGameState::makeMove(const Move &move) {
-    updateRelativePieceValue(move);
+    updateRelativePieceValueStack(move);
     GameState::makeMove(move);
 }
 
-void BTRGameState::updateRelativePieceValue(const Move &move) {
-    PositionRanker ranker;
-    relative_piece_value += ranker.getRelativePieceValueChange(*this, move);
+void BTRGameState::undoLastMove() {
+    relative_piece_value_stack.pop_back();
+    GameState::undoLastMove();
+}
+
+void BTRGameState::updateRelativePieceValueStack(const Move &move) {
+    relative_piece_value_stack.push_back(getRelativePieceValue() + ranker.getRelativePieceValueChange(*this, move));
 }
 
 

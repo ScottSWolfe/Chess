@@ -26,8 +26,12 @@ bool EnPassant::operator==(const MoveEffect &other) const {
     }
 }
 
-void EnPassant::applyEffect(Board &board) const {
-    board.removePieceFromSquare(remove_position);
+std::unique_ptr<Piece> EnPassant::applyEffect(Board &board) const {
+    return std::move(board.removePieceFromSquare(remove_position));
+}
+
+void EnPassant::undoEffect(Board &board, std::unique_ptr<Piece> &piece) const {
+    board.setPiece(remove_position, piece);
 }
 
 MoveEffectType EnPassant::getType() const {

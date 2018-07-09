@@ -14,18 +14,21 @@ namespace chess {
 GameState::GameState(Board board, PieceColor beginning_player) : 
     board(board),
     current_turn(beginning_player),
-    game_over_state(GameEndType::NOT_OVER),
-    turns_since_capture_or_pawn_push(0)
+    game_over_state(GameEndType::NOT_OVER)
 {}
 
 GameState::GameState(const GameState &other)
     : board(other.board), current_turn(other.current_turn), game_over_state(other.game_over_state),
-    turns_since_capture_or_pawn_push(other.turns_since_capture_or_pawn_push)
+    move_history(other.move_history),
+    turns_with_capture_or_pawn_push(other.turns_with_capture_or_pawn_push)//,
+    //captured_pieces(other.captured_pieces)
 {
+    /*
     move_history.reserve(other.move_history.size());
     for (Move move : other.move_history) {
         move_history.push_back(move);
     }
+    */
 }
 
 const Board &GameState::getBoard() const {
@@ -76,12 +79,26 @@ bool GameState::isSquareAttacked(Position pos, PieceColor color) const {
 }
 
 void GameState::makeMove(const Move &move) {
-    incrementCaptureAndPawnCounter(move);
-    // TODO set piece's hasMoved to true (either here or in board's makeMove)
-    board.makeMove(move);
+    updateCaptureAndPawnPushTurns(move);
+    auto captured_piece = board.makeMove(move, getCurrentTurnNumber());
+    if (captured_piece.get()) {
+        captured_pieces[getCurrentTurnNumber()] = std::move(captured_piece);
+    }
     move_history.push_back(move);
     changePlayersTurn();
     updateGameOverState();
+}
+
+void GameState::undoLastMove() {
+    if (move_history.empty()) {
+        throw std::runtime_error("no moves to undo");
+    }
+    game_over_state = GameEndType::NOT_OVER;
+    changePlayersTurn();
+    Move move = move_history.back();
+    move_history.pop_back();
+    board.undoMove(move, getAndRemoveCapturedPiece(getCurrentTurnNumber()), getCurrentTurnNumber());
+    undoCaptureAndPawnPushTurnsUpdate();
 }
 
 std::unique_ptr<Piece> GameState::removePieceFromSquare(Position pos) {
@@ -195,6 +212,11 @@ bool GameState::isMate() const {
 }
 
 bool GameState::have50MovesPassed() const {
+    if (turns_with_capture_or_pawn_push.empty()) {
+        return false;
+    }
+    int last_capture_or_pawn_push_turn = turns_with_capture_or_pawn_push.back();
+    int turns_since_capture_or_pawn_push = getCurrentTurnNumber() - last_capture_or_pawn_push_turn;
     if (turns_since_capture_or_pawn_push >= 50 * 2) {
         return true;
     }
@@ -252,11 +274,11 @@ void GameState::changePlayersTurn() {
     }
 }
 
-void GameState::incrementCaptureAndPawnCounter(const Move &move) {
+void GameState::updateCaptureAndPawnPushTurns(const Move &move) {
     // if pawn is being moved
     Position start = move.getStart();
     if (board.isPiece(start) && board.getPieceSymbol(start) == Piece::PAWN_SYMBOL) {
-        turns_since_capture_or_pawn_push = 0;
+        turns_with_capture_or_pawn_push.push_back(getCurrentTurnNumber());
         return;
     }
 
@@ -264,11 +286,32 @@ void GameState::incrementCaptureAndPawnCounter(const Move &move) {
     Position end = move.getEnd();
     const MoveEffect *effect = move.getEffect();
     if (board.isPiece(end) && (effect == nullptr || effect->getType() != MoveEffectType::CASTLE)) {
-        turns_since_capture_or_pawn_push = 0;
+        turns_with_capture_or_pawn_push.push_back(getCurrentTurnNumber());
         return;
     }
+}
 
-    turns_since_capture_or_pawn_push++;
+void GameState::undoCaptureAndPawnPushTurnsUpdate() {
+    if (turns_with_capture_or_pawn_push.empty()) {
+        return;
+    }
+    if (turns_with_capture_or_pawn_push.back() == getCurrentTurnNumber()) {
+        turns_with_capture_or_pawn_push.pop_back();
+    }
+}
+
+int GameState::getCurrentTurnNumber() const {
+    return move_history.size() + 1;
+}
+
+std::unique_ptr<Piece> GameState::getAndRemoveCapturedPiece(int turn_number) {
+    std::unique_ptr<Piece> piece;
+    auto map_iter = captured_pieces.find(turn_number);
+    if (map_iter != captured_pieces.end()) {
+        piece = std::move(map_iter->second);
+        captured_pieces.erase(map_iter);
+    }
+    return std::move(piece);
 }
 
 

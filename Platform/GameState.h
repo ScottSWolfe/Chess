@@ -1,5 +1,6 @@
 #pragma once
 
+#include <unordered_map>
 #include <memory>
 #include <vector>
 #include "Board.h"
@@ -35,6 +36,7 @@ public:
     bool isKingInCheck() const;
     bool isSquareAttacked(Position pos, PieceColor color) const;
     void makeMove(const Move &move);
+    void undoLastMove();
     std::unique_ptr<Piece> removePieceFromSquare(Position pos);
     void addPieceToSquare(Position pos, std::unique_ptr<Piece> &piece);
     void addMoveEffect(Move &move) const;
@@ -58,10 +60,14 @@ private:
     PieceColor current_turn;
     GameEndType game_over_state;
     std::vector<Move> move_history;
-    int turns_since_capture_or_pawn_push;
+    std::unordered_map<int, std::unique_ptr<Piece>> captured_pieces;
+    std::vector<int> turns_with_capture_or_pawn_push;
 
     void changePlayersTurn();
-    void incrementCaptureAndPawnCounter(const Move &move);
+    void updateCaptureAndPawnPushTurns(const Move &move);
+    void undoCaptureAndPawnPushTurnsUpdate();
+    int getCurrentTurnNumber() const;
+    std::unique_ptr<Piece> getAndRemoveCapturedPiece(int turn_number);
     void updateGameOverState();
 
     bool isMate() const;

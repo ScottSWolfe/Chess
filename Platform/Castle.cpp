@@ -26,9 +26,15 @@ bool Castle::operator==(const MoveEffect &other) const {
     }
 }
 
-void Castle::applyEffect(Board &board) const {
+std::unique_ptr<Piece> Castle::applyEffect(Board &board) const {
     auto rook = board.removePieceFromSquare(rook_start);
     board.addPieceToSquare(rook_end, rook);
+    return nullptr;
+}
+
+void Castle::undoEffect(Board &board, std::unique_ptr<Piece> & piece) const {
+    auto rook = board.removePieceFromSquare(rook_end);
+    board.addPieceToSquare(rook_start, rook);
 }
 
 MoveEffectType Castle::getType() const {

@@ -21,7 +21,8 @@ Square::Square(const Square &other_square)
 {}
 
 Square& Square::operator=(const Square &other) {
-    return Square(other);
+    this->piece = other.getCopyOfPiece();
+    return *this;
 }
 
 const Piece *Square::getPiece() const {

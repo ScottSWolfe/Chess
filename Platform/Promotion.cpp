@@ -27,10 +27,23 @@ bool Promotion::operator==(const MoveEffect &other) const {
     }
 }
 
-void Promotion::applyEffect(Board &board) const {
+std::unique_ptr<Piece> Promotion::applyEffect(Board &board) const {
     auto old_piece = board.removePieceFromSquare(promotion_position);
-    auto new_piece = Piece::createPiece(piece_type, old_piece->getColor());
+    auto new_piece = createNewPiece(old_piece);
     board.addPieceToSquare(promotion_position, new_piece);
+    return old_piece;
+}
+
+void Promotion::undoEffect(Board &board, std::unique_ptr<Piece> &piece) const {
+    board.removePieceFromSquare(promotion_position);
+    board.addPieceToSquare(promotion_position, piece);
+}
+
+std::unique_ptr<Piece> Promotion::createNewPiece(const std::unique_ptr<Piece> &old_piece) const {
+    auto new_piece = Piece::createPiece(piece_type, old_piece->getColor());
+    new_piece->setTurnFirstMoved(old_piece->getTurnFirstMoved());
+    new_piece->setHasMoved(true);
+    return std::move(new_piece);
 }
 
 MoveEffectType Promotion::getType() const {
@@ -39,6 +52,10 @@ MoveEffectType Promotion::getType() const {
 
 void Promotion::setPromotionPiece(PieceType type) {
     piece_type = type;
+}
+
+PieceType Promotion::getPromotionPieceType() const {
+    return piece_type;
 }
 
 

@@ -21,7 +21,8 @@ public:
     Board(const Board &other_board);
     bool inBounds(Position pos) const;
     bool hasPieceMoved(Position pos) const;
-    void makeMove(const Move &move);
+    std::unique_ptr<Piece> makeMove(const Move &move, int turn_number);
+    void undoMove(const Move &move, std::unique_ptr<Piece> &captured_piece, int turn_number);
     void addPieceToSquare(Position pos, std::unique_ptr<Piece> &piece);
     std::unique_ptr<Piece> removePieceFromSquare(Position pos);
     bool isPiece(Position pos) const;
@@ -46,7 +47,10 @@ private:
     const Square &getSquare(Position pos) const;
     int getIndex(Position pos) const;
     Position getPosition(int index) const;
-    void applyMoveEffect(const MoveEffect *effect);
+    std::unique_ptr<Piece> applyMoveAndReturnCapture(const Move &move, std::unique_ptr<Piece> &piece);
+    std::unique_ptr<Piece> addPieceToSquareAndReturnCapture(Position pos, std::unique_ptr<Piece> &piece);
+    std::unique_ptr<Piece> applyMoveEffect(const MoveEffect *effect);
+    void undoMoveEffect(const MoveEffect *effect, std::unique_ptr<Piece> &piece);
     Position getKingPosition(PieceColor king_color) const;
     bool areCellsInSameLine(const Position &pos1, const Position &pos2) const;
     bool areCellsInSameDiagonal(const Position &pos1, const Position &pos2) const;

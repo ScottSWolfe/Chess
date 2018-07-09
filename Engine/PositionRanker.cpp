@@ -2,6 +2,7 @@
 #include "PositionRanker.h"
 #include "Piece.h"
 #include "PieceIterator.h"
+#include "Promotion.h"
 
 namespace chess {
 
@@ -44,10 +45,10 @@ int PositionRanker::getRelativePieceValueChange(const GameState &state, const Mo
 
     if (move.isPromotionType()) {
         if (piece->isWhiteColor()) {
-            change += pieceValues[piece->getType()];
+            change += pieceValues[move.getPromotionPieceType()] - pieceValues[piece->getType()];
         }
         else {
-            change -= pieceValues[piece->getType()];
+            change -= pieceValues[move.getPromotionPieceType()] - pieceValues[piece->getType()];
         }
     }
     else if (move.isEnPassantType()) {

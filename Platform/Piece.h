@@ -29,8 +29,12 @@ public:
     virtual std::vector<Position> getSquaresAttacked(const Board &board, Position pos) const = 0;
     bool canPieceMakeMove(const GameState &state, Position pos) const;
     virtual void addMoveEffect(const GameState &state, Move &move) const = 0;
+    void moved(int turn_number);
+    void undoMove(int turn_number);
     void setHasMoved(bool has_moved);
     bool hasMoved() const;
+    void setTurnFirstMoved(int turn);
+    int getTurnFirstMoved() const;
 
     static std::unique_ptr<Piece> createPiece(PieceType type, PieceColor color);
     static std::unique_ptr<Piece> copyPiece(const Piece *piece);
@@ -49,6 +53,7 @@ public:
 protected:
     const PieceColor color;
     bool has_moved;
+    int turn_first_moved;
 
     void getStraightSquaresAttacked(std::vector<Position> &positions, const Board &board, Position start) const;
     void getDiagonalSquaresAttacked(std::vector<Position> &positions, const Board &board, Position start) const;

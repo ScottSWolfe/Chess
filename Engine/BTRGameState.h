@@ -1,9 +1,12 @@
 #pragma once
 
+#include <vector>
 #include "GameState.h"
-#include "Move.h"
+#include "PositionRanker.h"
 
 namespace chess {
+
+class Move;
 
 
 class BTRGameState : public GameState {
@@ -13,11 +16,14 @@ public:
     BTRGameState(const GameState &state);
     int getRelativePieceValue() const;
     void makeMove(const Move &move);
+    void undoLastMove();
+
 
 private:
-    int relative_piece_value;
+    PositionRanker ranker;
+    std::vector<int> relative_piece_value_stack;
 
-    void updateRelativePieceValue(const Move &move);
+    void updateRelativePieceValueStack(const Move &move);
 
 };
 
