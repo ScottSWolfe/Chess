@@ -39,6 +39,10 @@ ipch/
 *.sdf
 *.cachefile
 
+# Visual Studio solution and project files
+*.vcxproj
+*.vcxproj.filters
+
 # Visual Studio profiler
 *.psess
 *.vsp
