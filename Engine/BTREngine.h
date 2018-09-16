@@ -19,7 +19,7 @@ public:
 private:
     PositionRanker ranker;
 
-    const int MAX_DEPTH = 3; // odd: scores after player's turn | even: scores after opponent's turn
+    const int MAX_DEPTH = 4; // odd: scores after player's turn | even: scores after opponent's turn
 
     std::shared_ptr<Move> getBestMove(const BTRGameState &state) const;
     std::shared_ptr<Move> getBestMoveUsingThreads(const BTRGameState &state) const;

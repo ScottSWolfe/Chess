@@ -8,8 +8,7 @@ namespace chess {
 
 std::shared_ptr<PlayerAction> BTREngine::getAction(const GameState &state) const {
     BTRGameState btr_state(state);
-    //return getBestMoveUsingThreads(btr_state);
-    return getBestMove(btr_state);
+    return getBestMoveUsingThreads(btr_state);
 }
 
 PieceType BTREngine::getPromotionPiece(const GameState &state, const Move &move) const {
