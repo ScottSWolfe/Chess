@@ -84,7 +84,7 @@ void Pawn::addDiagonalMove(std::vector<Move> &moves, const GameState &state, Pos
     }
 }
 
-void Pawn::addEnPassantMove(std::vector<Move> &moves, const GameState state, Position start) const {
+void Pawn::addEnPassantMove(std::vector<Move> &moves, const GameState &state, Position start) const {
     int delta_x = 0;
     if (isEnPassantAvailable(state, start, delta_x)) {
         Move move = createMoveWithEnPassant(start, delta_x);

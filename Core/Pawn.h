@@ -28,7 +28,7 @@ private:
     void addTwoSquareMove(std::vector<Move> &moves, const GameState &state, Position start) const;
     void addDiagonalMoves(std::vector<Move> &moves, const GameState &state, Position start) const;
     void addDiagonalMove(std::vector<Move> &moves, const GameState &state, Position start, int delta_x) const;
-    void addEnPassantMove(std::vector<Move> &moves, const GameState state, Position start) const;
+    void addEnPassantMove(std::vector<Move> &moves, const GameState &state, Position start) const;
     bool isEnPassantAvailable(const GameState &state, Position start, int &dst_delta_x) const;
     bool addEnPassantMoveEffect(const GameState &state, Move &move) const;
     bool addPromotionMoveEffect(const GameState &state, Move &move) const;
