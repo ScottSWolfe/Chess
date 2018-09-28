@@ -31,6 +31,25 @@ Board::Board(const Board &other_board) :
     squares = other_board.squares;
 }
 
+bool Board::operator==(const Board &other) const {
+    if (dimension != other.dimension) {
+        return false;
+    }
+    const int num_squares = dimension * dimension;
+    for (int i = 0; i < num_squares; i++) {
+        const Piece *thisPiece = squares[i].getPiece();
+        const Piece *otherPiece = other.squares[i].getPiece();
+        if (!Piece::areEqual(thisPiece, otherPiece)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool Board::operator!=(const Board &other) const {
+    return !(*this == other);
+}
+
 Square &Board::getSquare(Position pos) {
     return squares[getIndex(pos)];
 }

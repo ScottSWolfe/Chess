@@ -148,6 +148,30 @@ void Piece::getSquaresAttackedInLine(std::vector<Position> &positions, const Boa
     }
 }
 
+bool Piece::areEqual (const Piece *left, const Piece *right) {
+    if (left == nullptr && right == nullptr) {
+        return true;
+    }
+    else if (left == nullptr || right == nullptr) {
+        return false;
+    }
+
+    if (left->color != right->color) {
+        return false;
+    }
+    if (left->has_moved != right->has_moved) {
+        return false;
+    }
+    if (left->turn_first_moved != right->turn_first_moved) {
+        return false;
+    }
+    if (left->getType() != right->getType()) {
+        return false;
+    }
+
+    return true;
+}
+
 std::unique_ptr<Piece> Piece::createPiece(PieceType type, PieceColor color) {
     switch (type)
     {

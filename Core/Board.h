@@ -19,6 +19,8 @@ class Board {
 public:
     Board(int board_dimension);
     Board(const Board &other_board);
+    bool operator==(const Board &other) const;
+    bool operator!=(const Board &other) const;
     bool inBounds(Position pos) const;
     bool hasPieceMoved(Position pos) const;
     std::unique_ptr<Piece> makeMove(const Move &move, int turn_number);

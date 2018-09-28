@@ -42,6 +42,7 @@ public:
     static PieceColor getPieceColor(const Piece *piece);
     static bool doesPieceAttackInLine(const Piece *piece);
     static bool doesPieceAttackInDiagonal(const Piece *piece);
+    static bool areEqual(const Piece *left, const Piece *right);
 
     static const std::string PAWN_SYMBOL;
     static const std::string ROOK_SYMBOL;
