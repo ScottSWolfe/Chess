@@ -125,6 +125,9 @@ const Move *GameState::getLastMove() const {
 }
 
 std::vector<Move> GameState::getAvailableMoves() const {
+    if (isGameOver()) {
+        return std::vector<Move>();
+    }
     std::vector<Move> moves = collectMoves();
     eliminateMovesThatPutKingInCheck(moves);
     return moves;
@@ -263,6 +266,31 @@ void GameState::drawByRepetition() {
 
 GameEndType GameState::getGameOverState() const {
     return game_over_state;
+}
+
+bool GameState::didWhiteWin() const {
+    if (game_over_state == GameEndType::WHITE_CHECKMATE || game_over_state == GameEndType::BLACK_RESIGN) {
+        return true;
+    }
+    return false;
+}
+
+bool GameState::didBlackWin() const {
+    if (game_over_state == GameEndType::BLACK_CHECKMATE || game_over_state == GameEndType::WHITE_RESIGN) {
+        return true;
+    }
+    return false;
+}
+
+bool GameState::isDraw() const {
+    if (game_over_state == GameEndType::DRAW_3_REPITITIONS || 
+        game_over_state == GameEndType::DRAW_50_MOVES || 
+        game_over_state == GameEndType::DRAW_AGREEMENT || 
+        game_over_state == GameEndType::STALEMATE)
+    {
+        return true;
+    }
+    return false;
 }
 
 void GameState::changePlayersTurn() {

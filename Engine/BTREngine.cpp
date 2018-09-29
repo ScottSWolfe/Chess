@@ -34,19 +34,19 @@ std::shared_ptr<Move> BTREngine::getBestMoveUsingThreads(const BTRGameState &sta
     int num_moves = moves.size();
     std::vector<int> scores(num_moves);
     std::vector<std::thread> threads(num_moves);
-    launch_threads(state, moves, threads, scores);
-    join_threads(threads);
+    launchThreads(state, moves, threads, scores);
+    joinThreads(threads);
     return chooseBestMoveUsingScores(moves, scores);
 }
 
-void BTREngine::launch_threads(const BTRGameState &state, const std::vector<Move> &moves, std::vector<std::thread> &threads, std::vector<int> &scores) const {
+void BTREngine::launchThreads(const BTRGameState &state, const std::vector<Move> &moves, std::vector<std::thread> &threads, std::vector<int> &scores) const {
     int size = moves.size();
     for (int i = 0; i < size; i++) {
         threads[i] = std::thread(&BTREngine::scoreMoveThreadingWrapper, this, state, moves[i], std::ref(scores[i]));
     }
 }
 
-void BTREngine::join_threads(std::vector<std::thread> &threads) const {
+void BTREngine::joinThreads(std::vector<std::thread> &threads) const {
     int size = threads.size();
     for (int i = 0; i < size; i++) {
         threads[i].join();
@@ -72,33 +72,26 @@ void BTREngine::scoreMoveThreadingWrapper(const BTRGameState &state, const Move 
 
 int BTREngine::scoreMove(const BTRGameState &state, const Move &move) const {
     int current_depth = 1;
-    return getScore(state, move, MAX_DEPTH, current_depth);
+    return scoreMove(state, move, MAX_DEPTH, current_depth);
 }
 
 int BTREngine::scoreMove(const BTRGameState &state, const Move &move, int max_depth, int depth) const {
+    int opponents_best_score = std::numeric_limits<int>::min();
     const_cast<BTRGameState&>(state).makeMove(move);
-    std::vector<Move> opponents_moves = state.getAvailableMoves();
-    int bestOpponentScore = std::numeric_limits<int>::min();
-    for (Move opp_move : opponents_moves) {
-        int score = getScore(state, opp_move, max_depth, depth);
-        if (score > bestOpponentScore) {
-            bestOpponentScore = score;
+    if (state.isGameOver() || depth >= max_depth) {
+        opponents_best_score = ranker.scorePosition(state);
+    }
+    else {
+        std::vector<Move> opponents_moves = state.getAvailableMoves();
+        for (Move opp_move : opponents_moves) {
+            int opponents_score = scoreMove(state, opp_move, max_depth, depth + 1);
+            if (opponents_score > opponents_best_score) {
+                opponents_best_score = opponents_score;
+            }
         }
     }
     const_cast<BTRGameState&>(state).undoLastMove();
-    return -bestOpponentScore;
-}
-
-int BTREngine::getScore(const BTRGameState &state, const Move &move, int max_depth, int depth) const {
-    if (depth < max_depth) {
-        return scoreMove(state, move, max_depth, depth + 1);
-    }
-    else {
-        const_cast<BTRGameState&>(state).makeMove(move);
-        int score = ranker.scorePosition(state);
-        const_cast<BTRGameState&>(state).undoLastMove();
-        return score;
-    }
+    return -opponents_best_score;
 }
 
 

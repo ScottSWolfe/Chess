@@ -54,6 +54,9 @@ public:
     bool drawBy50Moves();
     void drawByRepetition();
     GameEndType getGameOverState() const;
+    bool didWhiteWin() const;
+    bool didBlackWin() const;
+    bool isDraw() const;
 
 private:
     Board board;
