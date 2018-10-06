@@ -16,12 +16,12 @@
 namespace chess {
 
 
-const std::string Piece::PAWN_SYMBOL = "p";
-const std::string Piece::ROOK_SYMBOL = "R";
-const std::string Piece::BISHOP_SYMBOL = "B";
-const std::string Piece::KNIGHT_SYMBOL = "N";
-const std::string Piece::QUEEN_SYMBOL = "Q";
-const std::string Piece::KING_SYMBOL = "K";
+const std::string Piece::PAWN_SYMBOL = std::string(1, PAWN_CHAR);
+const std::string Piece::ROOK_SYMBOL = std::string(1, ROOK_CHAR);
+const std::string Piece::BISHOP_SYMBOL = std::string(1, BISHOP_CHAR);
+const std::string Piece::KNIGHT_SYMBOL = std::string(1, KNIGHT_CHAR);
+const std::string Piece::QUEEN_SYMBOL = std::string(1, QUEEN_CHAR);
+const std::string Piece::KING_SYMBOL = std::string(1, KING_CHAR);
 
 Piece::Piece(PieceColor piece_color)
     : color(piece_color), has_moved(false), turn_first_moved(0)
@@ -173,28 +173,65 @@ bool Piece::areEqual (const Piece *left, const Piece *right) {
 }
 
 std::unique_ptr<Piece> Piece::createPiece(PieceType type, PieceColor color) {
-    switch (type)
-    {
-    case PieceType::PAWN:
-        return std::make_unique<Pawn>(color);
+    switch (type) {
+        case PieceType::PAWN:
+            return std::make_unique<Pawn>(color);
 
-    case PieceType::KNIGHT:
-        return std::make_unique<Knight>(color);
+        case PieceType::KNIGHT:
+            return std::make_unique<Knight>(color);
 
-    case PieceType::BISHOP:
-        return std::make_unique<Bishop>(color);
+        case PieceType::BISHOP:
+            return std::make_unique<Bishop>(color);
 
-    case PieceType::ROOK:
-        return std::make_unique<Rook>(color);
+        case PieceType::ROOK:
+            return std::make_unique<Rook>(color);
 
-    case PieceType::QUEEN:
-        return std::make_unique<Queen>(color);
+        case PieceType::QUEEN:
+            return std::make_unique<Queen>(color);
 
-    case PieceType::KING:
-        return std::make_unique<King>(color);
+        case PieceType::KING:
+            return std::make_unique<King>(color);
 
-    default:
-        throw std::invalid_argument("invalid PieceType");
+        default:
+            throw std::invalid_argument("invalid PieceType");
+    }
+}
+
+std::unique_ptr<Piece> Piece::createPiece(char fen_char) {
+    // validate that character is a letter
+    if (!isalpha(fen_char)) {
+        throw std::invalid_argument("invalid character");
+    }
+
+    // set color based on letter case
+    PieceColor color = PieceColor::WHITE;
+    if (islower(fen_char)) {
+        color = PieceColor::BLACK;
+        fen_char = toupper(fen_char);
+    }
+
+    // create piece based on character
+    switch (fen_char) {
+        case PAWN_CHAR:
+            return createPiece(PieceType::PAWN, color);
+
+        case ROOK_CHAR:
+            return createPiece(PieceType::ROOK, color);
+
+        case KNIGHT_CHAR:
+            return createPiece(PieceType::KNIGHT, color);
+
+        case BISHOP_CHAR:
+            return createPiece(PieceType::BISHOP, color);
+
+        case QUEEN_CHAR:
+            return createPiece(PieceType::QUEEN, color);
+
+        case KING_CHAR:
+            return createPiece(PieceType::KING, color);
+
+        default:
+            throw std::invalid_argument("invalid character");
     }
 }
 

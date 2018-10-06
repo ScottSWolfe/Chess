@@ -37,12 +37,20 @@ public:
     int getTurnFirstMoved() const;
 
     static std::unique_ptr<Piece> createPiece(PieceType type, PieceColor color);
+    static std::unique_ptr<Piece> createPiece(char fen_char);
     static std::unique_ptr<Piece> copyPiece(const Piece *piece);
     static const std::string getPieceSymbol(const Piece *piece);
     static PieceColor getPieceColor(const Piece *piece);
     static bool doesPieceAttackInLine(const Piece *piece);
     static bool doesPieceAttackInDiagonal(const Piece *piece);
     static bool areEqual(const Piece *left, const Piece *right);
+
+    static const char PAWN_CHAR = 'P';
+    static const char ROOK_CHAR = 'R';
+    static const char BISHOP_CHAR = 'B';
+    static const char KNIGHT_CHAR = 'N';
+    static const char QUEEN_CHAR = 'Q';
+    static const char KING_CHAR = 'K';
 
     static const std::string PAWN_SYMBOL;
     static const std::string ROOK_SYMBOL;
