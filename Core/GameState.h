@@ -48,15 +48,15 @@ public:
     bool canCurrentPlayerMakeMove() const;
     std::vector<Move> getAvailableMoves() const;
     PieceIterator getPieceIterator(PieceColor color) const;
+    GameEndType getGameOverState() const;
+    bool didWhiteWin() const;
+    bool didBlackWin() const;
+    bool isDraw() const;
     bool isGameOver() const;
     void resignation();
     void drawByAgreement();
     bool drawBy50Moves();
     void drawByRepetition();
-    GameEndType getGameOverState() const;
-    bool didWhiteWin() const;
-    bool didBlackWin() const;
-    bool isDraw() const;
 
 private:
     Board board;
