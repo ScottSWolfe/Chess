@@ -15,20 +15,24 @@ GameState::GameState(Board board, PieceColor beginning_player) :
     board(board),
     current_turn(beginning_player),
     game_over_state(GameEndType::NOT_OVER)
+    // TODO: get all the optimized positions and stuff
 {}
 
-GameState::GameState(const GameState &other)
-    : board(other.board), current_turn(other.current_turn), game_over_state(other.game_over_state),
+GameState::GameState(const GameState &other) :
+    board(other.board), 
+    current_turn(other.current_turn), 
+    castling_availability(other.castling_availability),
+    game_over_state(other.game_over_state),
     move_history(other.move_history),
-    turns_with_capture_or_pawn_push(other.turns_with_capture_or_pawn_push)//,
-    //captured_pieces(other.captured_pieces)
+    turns_with_capture_or_pawn_push(other.turns_with_capture_or_pawn_push),
+    castling_ability_changes(other.castling_ability_changes),
+    white_king_pos(other.white_king_pos),
+    black_king_pos(other.black_king_pos)
 {
-    /*
-    move_history.reserve(other.move_history.size());
-    for (Move move : other.move_history) {
-        move_history.push_back(move);
+    // copy captured pieces
+    for (auto iterator = other.captured_pieces.begin(); iterator != other.captured_pieces.end(); ++iterator) {
+        captured_pieces[iterator->first] = Piece::copyPiece(iterator->second.get());
     }
-    */
 }
 
 const Board &GameState::getBoard() const {
@@ -74,13 +78,27 @@ bool GameState::isKingInCheck() const {
     return board.isKingInCheck(current_turn);
 }
 
+bool GameState::isCastlingAvailable() const {
+    return castling_availability.canCastle(current_turn);
+}
+
+bool GameState::isCastlingAvailableKingside() const {
+    return castling_availability.canCastleKingside(current_turn);
+}
+
+bool GameState::isCastlingAvailableQueenside() const {
+    return castling_availability.canCastleQueenside(current_turn);
+}
+
 bool GameState::isSquareAttacked(Position pos, PieceColor color) const {
     return board.canPieceAttackSquare(pos, color);
 }
 
 void GameState::makeMove(const Move &move) {
     updateCaptureAndPawnPushTurns(move);
-    auto captured_piece = board.makeMove(move, getCurrentTurnNumber());
+    updateCastlingAvailability(move);
+    updateKingPosition(move);
+    auto captured_piece = board.makeMove(move);
     if (captured_piece.get()) {
         captured_pieces[getCurrentTurnNumber()] = std::move(captured_piece);
     }
@@ -97,7 +115,9 @@ void GameState::undoLastMove() {
     changePlayersTurn();
     Move move = move_history.back();
     move_history.pop_back();
-    board.undoMove(move, getAndRemoveCapturedPiece(getCurrentTurnNumber()), getCurrentTurnNumber());
+    board.undoMove(move, getAndRemoveCapturedPiece(getCurrentTurnNumber()));
+    undoKingPositionUpdate(move);
+    undoCastlingAvailabilityUpdate();
     undoCaptureAndPawnPushTurnsUpdate();
 }
 
@@ -184,10 +204,6 @@ bool GameState::isOppPieceColor(Position pos, PieceColor color) const {
 
 bool GameState::inBounds(Position pos) const {
     return board.inBounds(pos);
-}
-
-bool GameState::hasPieceMoved(Position pos) const {
-    return board.hasPieceMoved(pos);
 }
 
 PieceColor GameState::getCurrentPlayersTurn() const {
@@ -328,8 +344,78 @@ void GameState::undoCaptureAndPawnPushTurnsUpdate() {
     }
 }
 
+void GameState::updateCastlingAvailability(const Move &move) {
+    // if castling is already unavailable
+    if (castling_availability.canCastle(current_turn) == false) {
+        return;
+    }
+
+    // if the piece being moved is the king
+    if (board.getPieceType(move.getStart()) == PieceType::KING) {
+        castling_ability_changes.push_back(std::make_pair(getCurrentTurnNumber(), castling_availability));
+        castling_availability.setCanCastle(current_turn, false);
+        return;
+    }
+
+    // if the piece being moved is a rook
+    if (board.getPieceType(move.getStart()) == PieceType::ROOK) {
+        Position king_pos = getActiveColorKingPosition();
+        if (move.getStart().y != king_pos.y) {
+            return;
+        }
+
+        Position kingside_rook_start = castling_availability.getKingsideRookStartPosition(current_turn);
+        if (move.getStart() == kingside_rook_start && castling_availability.canCastleKingside(current_turn)) {
+            castling_ability_changes.push_back(std::make_pair(getCurrentTurnNumber(), castling_availability));
+            castling_availability.setCanCastleKingside(current_turn, false);
+            return;
+        }
+
+        Position queenside_rook_start = castling_availability.getQueensideRookStartPosition(current_turn);
+        if (move.getStart() == queenside_rook_start && castling_availability.canCastleQueenside(current_turn)) {
+            castling_ability_changes.push_back(std::make_pair(getCurrentTurnNumber(), castling_availability));
+            castling_availability.setCanCastleQueenside(current_turn, false);
+            return;
+        }
+    }
+}
+
+void GameState::undoCastlingAvailabilityUpdate() {
+    if (castling_ability_changes.size() > 0 && castling_ability_changes.back().first == getCurrentTurnNumber()) {
+        castling_availability = castling_ability_changes.back().second;
+        castling_ability_changes.pop_back();
+    }
+}
+
+void GameState::updateKingPosition(const Move &move) {
+    if (move.getStart() == white_king_pos) {
+        white_king_pos = move.getEnd();
+    }
+    else if (move.getStart() == black_king_pos) {
+        black_king_pos = move.getEnd();
+    }
+}
+
+void GameState::undoKingPositionUpdate(const Move &move) {
+    if (move.getEnd() == white_king_pos) {
+        white_king_pos = move.getStart();
+    }
+    else if (move.getEnd() == black_king_pos) {
+        black_king_pos = move.getStart();
+    }
+}
+
 int GameState::getCurrentTurnNumber() const {
-    return move_history.size() + 1;
+    return static_cast<int>(move_history.size()) + 1;
+}
+
+Position GameState::getActiveColorKingPosition() const {
+    if (current_turn == PieceColor::WHITE) {
+        return white_king_pos;
+    }
+    else {
+        return black_king_pos;
+    }
 }
 
 std::unique_ptr<Piece> GameState::getAndRemoveCapturedPiece(int turn_number) {

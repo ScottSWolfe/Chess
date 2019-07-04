@@ -22,9 +22,8 @@ public:
     bool operator==(const Board &other) const;
     bool operator!=(const Board &other) const;
     bool inBounds(Position pos) const;
-    bool hasPieceMoved(Position pos) const;
-    std::unique_ptr<Piece> makeMove(const Move &move, int turn_number);
-    void undoMove(const Move &move, std::unique_ptr<Piece> &captured_piece, int turn_number);
+    std::unique_ptr<Piece> makeMove(const Move &move);
+    void undoMove(const Move &move, std::unique_ptr<Piece> &captured_piece);
     void addPieceToSquare(Position pos, std::unique_ptr<Piece> &piece);
     std::unique_ptr<Piece> removePieceFromSquare(Position pos);
     bool isPiece(Position pos) const;

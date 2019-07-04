@@ -165,28 +165,6 @@ namespace PlatformTest
             Assert::IsTrue(square.containsKing(PieceColor::WHITE), L"containsKing() should return true when square contains a king of given color", LINE_INFO());
         }
 
-        TEST_METHOD(Square_hasPieceMoved_returnsFalseIfNoPiece)
-        {
-            Square square;
-            Assert::IsFalse(square.hasPieceMoved(), L"hasPieceMoved() should return false when no piece", LINE_INFO());
-        }
-
-        TEST_METHOD(Square_hasPieceMoved_returnsFalseIfPieceHasNotMoved)
-        {
-            auto piece = createPiece();
-            piece->setHasMoved(false);
-            Square square(piece);
-            Assert::IsFalse(square.hasPieceMoved(), L"hasPieceMoved() should return false when piece has not moved", LINE_INFO());
-        }
-
-        TEST_METHOD(Square_hasPieceMoved_returnsFalseIfPieceHasMoved)
-        {
-            auto piece = createPiece();
-            piece->setHasMoved(true);
-            Square square(piece);
-            Assert::IsTrue(square.hasPieceMoved(), L"hasPieceMoved() should return true when piece has moved", LINE_INFO());
-        }
-
         TEST_METHOD(Square_getPieceType_throwsErrorWhenNoPiece)
         {
             Square square;

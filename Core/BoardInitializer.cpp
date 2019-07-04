@@ -60,7 +60,7 @@ void BoardInitializer::addStandardRowOfPieces(Board &board, int row, PieceColor 
 }
 
 int BoardInitializer::getBoardSizeFromFEN(const std::string &fen) {
-    int fen_size = fen.size();
+    int fen_size = static_cast<int>(fen.size());
     
     int counter = 0;
     for (int i = 0; i < fen_size; i++) {
@@ -91,7 +91,7 @@ void BoardInitializer::addPiecesToBoardFromFEN(Board &board, const std::string &
     }
 
     // iterate through the rows, last to first, adding pieces to the board
-    for (int board_row = rows.size() - 1; board_row >= 0; board_row--) {
+    for (int board_row = static_cast<int>(rows.size()) - 1; board_row >= 0; board_row--) {
         int board_column = 0;
         for (int fen_index = 0; fen_index < rows[board_row].size(); fen_index++) {
             char c = rows[board_row][fen_index];
@@ -139,7 +139,7 @@ int BoardInitializer::getFullIntegerAtIndex(const std::string &str, int index, i
 }
 
 void BoardInitializer::updateCastlingAbility(Board &board, const std::string &fen_castle) {
-    // implement this
+    // TODO: implement this
 }
 
 

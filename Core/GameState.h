@@ -2,8 +2,10 @@
 
 #include <unordered_map>
 #include <memory>
+#include <utility>
 #include <vector>
 #include "Board.h"
+#include "CastlingAvailability.h"
 #include "Move.h"
 #include "Piece.h"
 
@@ -22,6 +24,21 @@ enum class GameEndType {
 
 class GameState {
 
+private:
+    // Necessary for maintaining complete game state history
+    Board board;
+    PieceColor current_turn;
+    std::vector<Move> move_history;
+    std::unordered_map<int, std::unique_ptr<Piece>> captured_pieces; // map from half-move number to captured piece
+
+    // Helpful for optimizing processing
+    GameEndType game_over_state;
+    CastlingAvailability castling_availability;
+    std::vector<std::pair<int, CastlingAvailability>> castling_ability_changes; // stack with half-move number to castling ability for half-moves just before castling availability changed
+    std::vector<int> turns_with_capture_or_pawn_push;
+    Position white_king_pos;
+    Position black_king_pos;
+
 public:
     GameState(Board board, PieceColor beginning_player);
     GameState(const GameState &other);
@@ -34,6 +51,9 @@ public:
     bool isMoveAvailable(const Move &move) const;
     bool willKingBeInCheck(const Move &move) const;
     bool isKingInCheck() const;
+    bool isCastlingAvailable() const;
+    bool isCastlingAvailableKingside() const;
+    bool isCastlingAvailableQueenside() const;
     bool isSquareAttacked(Position pos, PieceColor color) const;
     void makeMove(const Move &move);
     void undoLastMove();
@@ -42,7 +62,6 @@ public:
     void addMoveEffect(Move &move) const;
     bool isOppPieceColor(Position pos, PieceColor color) const;
     bool inBounds(Position pos) const;
-    bool hasPieceMoved(Position pos) const;
     PieceColor getCurrentPlayersTurn() const;
     const Move *getLastMove() const;
     bool canCurrentPlayerMakeMove() const;
@@ -59,17 +78,15 @@ public:
     void drawByRepetition();
 
 private:
-    Board board;
-    PieceColor current_turn;
-    GameEndType game_over_state;
-    std::vector<Move> move_history;
-    std::unordered_map<int, std::unique_ptr<Piece>> captured_pieces;
-    std::vector<int> turns_with_capture_or_pawn_push;
-
     void changePlayersTurn();
     void updateCaptureAndPawnPushTurns(const Move &move);
     void undoCaptureAndPawnPushTurnsUpdate();
+    void updateCastlingAvailability(const Move &move);
+    void undoCastlingAvailabilityUpdate();
+    void updateKingPosition(const Move &move);
+    void undoKingPositionUpdate(const Move &move);
     int getCurrentTurnNumber() const;
+    Position getActiveColorKingPosition() const;
     std::unique_ptr<Piece> getAndRemoveCapturedPiece(int turn_number);
     void updateGameOverState();
 

@@ -58,13 +58,6 @@ bool Square::containsKing(PieceColor king_color) const {
     return true;
 }
 
-bool Square::hasPieceMoved() const {
-    if (piece == nullptr) {
-        return false;
-    }
-    return piece->hasMoved();
-}
-
 std::unique_ptr<Piece> Square::getCopyOfPiece() const {
     return Piece::copyPiece(piece.get());
 }

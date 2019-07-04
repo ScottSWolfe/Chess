@@ -40,10 +40,7 @@ void Promotion::undoEffect(Board &board, std::unique_ptr<Piece> &piece) const {
 }
 
 std::unique_ptr<Piece> Promotion::createNewPiece(const std::unique_ptr<Piece> &old_piece) const {
-    auto new_piece = Piece::createPiece(piece_type, old_piece->getColor());
-    new_piece->setTurnFirstMoved(old_piece->getTurnFirstMoved());
-    new_piece->setHasMoved(true);
-    return std::move(new_piece);
+    return std::move(Piece::createPiece(piece_type, old_piece->getColor()));
 }
 
 MoveEffectType Promotion::getType() const {

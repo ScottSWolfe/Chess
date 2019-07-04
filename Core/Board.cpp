@@ -68,21 +68,15 @@ bool Board::inBounds(Position pos) const {
     return true;
 }
 
-bool Board::hasPieceMoved(Position pos) const {
-    return getSquare(pos).hasPieceMoved();
-}
-
-std::unique_ptr<Piece> Board::makeMove(const Move &move, int turn_number = -1) {
+std::unique_ptr<Piece> Board::makeMove(const Move &move) {
     auto piece = removePieceFromSquare(move.getStart());
-    piece->moved(turn_number);
     auto captured_piece = applyMoveAndReturnCapture(move, piece);
     return std::move(captured_piece);
 }
 
-void Board::undoMove(const Move &move, std::unique_ptr<Piece> &captured_piece, int turn_number = -1) {
+void Board::undoMove(const Move &move, std::unique_ptr<Piece> &captured_piece) {
     undoMoveEffect(move.getEffect(), captured_piece);
     auto piece = removePieceFromSquare(move.getEnd());
-    piece->undoMove(turn_number);
     addPieceToSquare(move.getStart(), piece);
     addPieceToSquare(move.getEnd(), captured_piece);
 }

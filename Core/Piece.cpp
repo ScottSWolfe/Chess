@@ -24,7 +24,7 @@ const std::string Piece::QUEEN_SYMBOL = std::string(1, QUEEN_CHAR);
 const std::string Piece::KING_SYMBOL = std::string(1, KING_CHAR);
 
 Piece::Piece(PieceColor piece_color)
-    : color(piece_color), has_moved(false), turn_first_moved(0)
+    : color(piece_color)
 {}
 
 PieceColor Piece::getColor() const {
@@ -52,36 +52,6 @@ bool Piece::canPieceMakeMove(const GameState &state, Position pos) const {
         }
     }
     return false;
-}
-
-void Piece::moved(int turn_number) {
-    if (hasMoved() == false) {
-        setHasMoved(true);
-        setTurnFirstMoved(turn_number);
-    }
-}
-
-void Piece::undoMove(int turn_number) {
-    if (turn_number == getTurnFirstMoved()) {
-        setHasMoved(false);
-        setTurnFirstMoved(0);
-    }
-}
-
-void Piece::setHasMoved(bool has_moved) {
-    this->has_moved = has_moved;
-}
-
-bool Piece::hasMoved() const {
-    return has_moved;
-}
-
-void Piece::setTurnFirstMoved(int turn) {
-    turn_first_moved = turn;
-}
-
-int Piece::getTurnFirstMoved() const {
-    return turn_first_moved;
 }
 
 PieceColor Piece::getPieceColor(const Piece *piece) {
@@ -157,12 +127,6 @@ bool Piece::areEqual (const Piece *left, const Piece *right) {
     }
 
     if (left->color != right->color) {
-        return false;
-    }
-    if (left->has_moved != right->has_moved) {
-        return false;
-    }
-    if (left->turn_first_moved != right->turn_first_moved) {
         return false;
     }
     if (left->getType() != right->getType()) {

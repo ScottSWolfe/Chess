@@ -59,9 +59,6 @@ void King::addAdjacentMoves(std::vector<Move> &moves, const GameState &state, Po
 }
 
 void King::addCastleMoves(std::vector<Move> &moves, const GameState &state, Position start) const {
-    if (hasMoved() == true) {
-        return;
-    }
     addCastleMove(moves, state, start, -1);
     addCastleMove(moves, state, start, 1);
     return;
@@ -79,15 +76,9 @@ void King::addCastleMove(std::vector<Move> &moves, const GameState &state, Posit
 }
 
 void King::addMoveEffect(const GameState &state, Move &move) const {
-    if (hasMoved() == true) {
-        return;
-    }
     Position start = move.getStart();
     Position end = move.getEnd();
     int delta_x = castleDirection(start.x, end.x);
-    if (delta_x == 0) {
-        return;
-    }
     Position rook_position;
     if (canCastle(state, start, delta_x, rook_position)) {
         move = createMoveWithCastleEffect(start, end, rook_position, delta_x);
@@ -101,16 +92,22 @@ Move King::createMoveWithCastleEffect(Position king_start, Position king_end, Po
 }
 
 bool King::canCastle(const GameState &state, Position start, int delta_x, Position &rook_position) const {
-    int dimension = state.getBoardDimension();
-    int castle_column = castleColumn(delta_x, dimension);
+    if (delta_x == 0) {
+        return false;
+    }
+    if (delta_x < 0 && !state.isCastlingAvailableKingside()) {
+        return false;
+    }
+    if (delta_x > 0 && !state.isCastlingAvailableQueenside()) {
+        return false;
+    }
+
+    const int castle_column = castleColumn(delta_x, state.getBoardDimension());
     Position pos = start.add(delta_x, 0);
     int dist = (castle_column - pos.x) * delta_x;
     while ((dist >= 0 || rook_position.empty()) && state.inBounds(pos)) {
         if (state.isPiece(pos)) {
             if (state.getPieceType(pos) != PieceType::ROOK) {
-                return false;
-            }
-            else if (state.hasPieceMoved(pos)) {
                 return false;
             }
             else if (rook_position.empty() == false) {

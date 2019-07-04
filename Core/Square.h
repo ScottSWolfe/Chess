@@ -8,6 +8,9 @@ namespace chess {
 
 class Square {
 
+private:
+    std::unique_ptr<Piece> piece;
+
 public:
     Square();
     Square(std::unique_ptr<Piece> &piece);
@@ -18,11 +21,9 @@ public:
     void setPiece(std::unique_ptr<Piece> &new_piece);
     std::unique_ptr<Piece> removePiece();
     bool containsKing(PieceColor king_color) const;
-    bool hasPieceMoved() const;
     PieceType getPieceType() const;
 
 private:
-    std::unique_ptr<Piece> piece;
     std::unique_ptr<Piece> getCopyOfPiece() const;
     void throwExceptionIfPieceIsNull() const;
 
