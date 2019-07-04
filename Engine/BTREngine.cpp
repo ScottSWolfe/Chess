@@ -31,7 +31,7 @@ std::shared_ptr<Move> BTREngine::getBestMove(const BTRGameState &state) const {
 
 std::shared_ptr<Move> BTREngine::getBestMoveUsingThreads(const BTRGameState &state) const {
     std::vector<Move> moves = state.getAvailableMoves();
-    int num_moves = moves.size();
+    int num_moves = static_cast<int>(moves.size());
     std::vector<int> scores(num_moves);
     std::vector<std::thread> threads(num_moves);
     launchThreads(state, moves, threads, scores);
@@ -40,14 +40,14 @@ std::shared_ptr<Move> BTREngine::getBestMoveUsingThreads(const BTRGameState &sta
 }
 
 void BTREngine::launchThreads(const BTRGameState &state, const std::vector<Move> &moves, std::vector<std::thread> &threads, std::vector<int> &scores) const {
-    int size = moves.size();
+    int size = static_cast<int>(moves.size());
     for (int i = 0; i < size; i++) {
         threads[i] = std::thread(&BTREngine::scoreMoveThreadingWrapper, this, state, moves[i], std::ref(scores[i]));
     }
 }
 
 void BTREngine::joinThreads(std::vector<std::thread> &threads) const {
-    int size = threads.size();
+    int size = static_cast<int>(threads.size());
     for (int i = 0; i < size; i++) {
         threads[i].join();
     }
@@ -56,7 +56,7 @@ void BTREngine::joinThreads(std::vector<std::thread> &threads) const {
 std::shared_ptr<Move> BTREngine::chooseBestMoveUsingScores(const std::vector<Move> &moves, const std::vector<int> &scores) const {
     int bestScore = std::numeric_limits<int>::min();
     std::shared_ptr<Move> bestMove(nullptr);
-    int size = moves.size();
+    int size = static_cast<int>(moves.size());
     for (int i = 0; i < size; i++) {
         if (bestScore < scores[i]) {
             bestScore = scores[i];

@@ -15,7 +15,7 @@ std::shared_ptr<PlayerAction> RandomEngine::getAction(const GameState &state) co
     if (moves.size() < 1) {
         return nullptr;
     }
-    int rand_num = randomInteger(moves.size() - 1);
+    int rand_num = randomInteger(static_cast<int>(moves.size()) - 1);
     return std::make_shared<Move>(moves[rand_num]);
 }
 
