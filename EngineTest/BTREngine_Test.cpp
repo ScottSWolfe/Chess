@@ -11,7 +11,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace chess;
 
 
-namespace PlatformTest
+namespace EngineTest
 {
     TEST_CLASS(BTREngine_Test)
     {

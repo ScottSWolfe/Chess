@@ -6,7 +6,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace chess;
 
 
-namespace PlatformTest
+namespace CoreTest
 {		
 	TEST_CLASS(Rook_Test)
 	{

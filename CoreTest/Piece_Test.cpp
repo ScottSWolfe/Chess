@@ -12,7 +12,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace chess;
 
 
-namespace PlatformTest
+namespace CoreTest
 {
 	TEST_CLASS(Piece_Test)
 	{
@@ -30,7 +30,7 @@ namespace PlatformTest
 		TEST_METHOD(piecesReturnCorrectSymbols)
 		{
 			auto pawn = std::make_unique<const Pawn>(PieceColor::WHITE);
-			Assert::AreEqual(std::string("p"), pawn->getSymbol());
+			Assert::AreEqual(std::string("P"), pawn->getSymbol());
 
             auto rook = std::make_unique<const Rook>(PieceColor::WHITE);
 			Assert::AreEqual(std::string("R"), rook->getSymbol());

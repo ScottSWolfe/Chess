@@ -10,7 +10,7 @@ using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace chess;
 
 
-namespace PlatformTest
+namespace GameTest
 {
 	TEST_CLASS(MoveInputParser_Test)
 	{
@@ -55,7 +55,7 @@ namespace PlatformTest
 			Assert::IsTrue(move == *parser.parseMoveInput("AD1 BH1").get());
 		}
 
-		TEST_METHOD(badInputReturnsNull)
+        TEST_METHOD(badInputReturnsNull)
 		{
 			// when only one square is given
 			Assert::IsNull(parser.parseMoveInput("A1").get());
@@ -83,6 +83,5 @@ namespace PlatformTest
 			Move move(Position(0, 0), Position(1, 1));
 			Assert::IsTrue(move == *parser.parseMoveInput("a1 B2"));
 		}
-
 	};
 }
