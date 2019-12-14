@@ -12,6 +12,7 @@ class PieceIterator {
 public:
     PieceIterator(const Board &board, PieceColor color);
     const Piece *next();
+    const std::pair<const Piece *, const Position> nextWithPosition();
     bool hasNext();
     
 private:
